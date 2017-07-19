@@ -161,7 +161,7 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 		Double valor = 0.0;
-		String sql = "select v.id, (v.valor - sum(p.valor_pago)) as em_aberto "
+		String sql = "select v.id, (v.valor - sum(coalesce(p.valor_pago, 0))) as em_aberto "
 				+ "from vendas.venda v "
 				+ "left join vendas.pagamentos p on (v.id = p.id_venda) "
 				+ "where v.id = ? group by v.id ";

@@ -50,8 +50,8 @@ public class VendaController {
 	}
 
 	public void limparCampos() {
-		venda.setQtd(0);
-		venda.setValor(0.0);
+		venda.setQtd(null);
+		venda.setValor(null);
 		listaVendas = null;
 		getListaVendas();
 	}
@@ -126,7 +126,14 @@ public class VendaController {
 		emAberto = pd.valorEmAberto(venda.getId());
 		System.out.println("ABERTO: " + emAberto);
 		System.out.println("QTD PAGAMENTOS: " + pagamentoVenda);
-		if (emAberto > 0 || pagamentoVenda == 0) {
+		if (pagamento.getValor() > emAberto) {
+			System.out.println("Entrou aqui");
+			FacesMessage msg = new FacesMessage(
+					"Pagamento maior que a venda não é permitido!");
+			FacesContext ct = FacesContext.getCurrentInstance();
+			ct.addMessage(null, msg);
+
+		} else if (emAberto > 0 || pagamentoVenda == 0) {
 			boolean cadastrou = pd.inserePagamento(venda, pagamento);
 
 			if (cadastrou) {
@@ -137,6 +144,7 @@ public class VendaController {
 				FacesMessage msg = new FacesMessage("Pagamento Realizado");
 				FacesContext ct = FacesContext.getCurrentInstance();
 				ct.addMessage(null, msg);
+				pagamento.setValor(null);
 			} else {
 				FacesMessage msg = new FacesMessage(
 						"Erro ao realizar Pagamento");
@@ -252,7 +260,7 @@ public class VendaController {
 
 		if (listaVendasEmAberto == null) {
 			listaVendasEmAberto = pd.aReceber();
-			
+
 		}
 		return listaVendasEmAberto;
 	}

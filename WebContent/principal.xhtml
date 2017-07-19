@@ -13,7 +13,7 @@
 </h:head>
 <h:body>
 
-	<p:idleMonitor timeout="600000"> 
+	<p:idleMonitor timeout="600000">
 		<p:ajax event="idle" listener="#{usuarioSessionController.timeOut}" />
 	</p:idleMonitor>
 
@@ -123,7 +123,7 @@
 		<p:commandButton value="Sair" icon="cancelar"
 			action="#{usuarioSessionController.logout()}" style="float:right;" />
 
-		<p:commandButton value="Relatórios"
+		<p:commandButton value="Relatórios" icon="ui-icon-document"
 			onclick="PF('dlgRelatorios').show();"
 			style="float:right;margin-left:10px;" />
 
@@ -168,7 +168,7 @@
 			</p:column>
 
 			<p:column headerText="Nome" width="40%">
-					<p:outputLabel value="#{tabela.nome}" />
+				<p:outputLabel value="#{tabela.nome}" />
 			</p:column>
 
 			<p:column headerText="Telefone1" width="15%">
@@ -219,7 +219,7 @@
 		width="auto" draggable="true" resizable="false" modal="true"
 		position="top">
 		<h:form id="formVender">
-			<p:panelGrid columns="2" styleClass="semBorda">
+			<p:panelGrid columns="2" styleClass="semBorda" id="pnlgridVender">
 				<p:outputLabel value="Valor: " />
 				<p:inputText value="#{vendaController.venda.valor}" maxlength="30"
 					size="15" required="true" requiredMessage="Insira o valor" />
@@ -240,7 +240,8 @@
 				<p:panelGrid columns="2" styleClass="semBorda">
 					<p:commandButton value="Vender"
 						action="#{vendaController.insereVenda()}"
-						update=":formCad, :formTab" icon="confirmar" />
+						update=":formCad, :formTab, :formVender:pnlgridVender"
+						icon="confirmar" />
 					<p:commandButton value="Fechar" onclick="PF('dlgVender').hide();"
 						icon="cancelar" />
 				</p:panelGrid>
@@ -322,7 +323,7 @@
 		modal="true">
 		<h:form id="formPagamentos">
 			<p:growl id="msg2" />
-			<p:panelGrid columns="2" styleClass="semBorda">
+			<p:panelGrid columns="2" styleClass="semBorda" id="pnlgridPagamentos">
 				<p:outputLabel value="Valor: " />
 				<p:inputText value="#{vendaController.pagamento.valor}"
 					maxlength="30" size="15" required="true"
@@ -341,7 +342,7 @@
 				<p:panelGrid columns="2" styleClass="semBorda">
 					<p:commandButton value="Pagar"
 						action="#{vendaController.inserePagamento()}"
-						update=":formPagamentos:tabPagamentos, msg2, :formVender:tabVendas"
+						update=":formPagamentos:tabPagamentos, msg2, :formVender:tabVendas, :formPagamentos:pnlgridPagamentos"
 						icon="confirmar" />
 					<p:commandButton value="Fechar"
 						onclick="PF('dlgPagamentos').hide();" icon="cancelar" />
