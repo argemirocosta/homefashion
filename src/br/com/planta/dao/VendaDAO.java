@@ -280,6 +280,63 @@ public class VendaDAO {
 		return valor;
 	}
 	
+	public Double vendasTotal() {
+
+		conexao = ConnectionFactory.getConnection();
+		String sql = "select sum(valor) as soma from vendas.venda";
+		Double valor = 0.0;
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				VendaBean p = new VendaBean();
+				p.setSoma_total(rs.getDouble("soma"));
+				valor = p.getSoma_total();
+
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return valor;
+	}
+	
+	
+	public Double receberGeral() {
+
+		conexao = ConnectionFactory.getConnection();
+		String sql = "select sum(valor_pago) as valor from vendas.pagamentos";
+		Double valor = 0.0;
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				VendaBean p = new VendaBean();
+				p.setReceber_geral(rs.getDouble("valor"));
+				valor = p.getReceber_geral();
+
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return valor;
+	}
+	
 
 	public List<VendaBean> aReceber() {
 

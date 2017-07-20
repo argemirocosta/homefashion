@@ -388,22 +388,27 @@
 	</p:dialog>
 
 
-	<p:dialog widgetVar="dlgRelatorios" header="Relatórios" height="auto"
+	<p:dialog widgetVar="dlgRelatorios" header="Relatórios" height="70"
 		width="auto" draggable="true" resizable="false" modal="true">
 		<h:form id="formRel">
-			<p:panelGrid columns="3" styleClass="semBorda">
-				<p:commandButton value="Vendas por Cliente"
+			<p:panelGrid columns="4" styleClass="semBorda">
+				<p:commandButton value="Ranking por Cliente"
 					action="#{vendaController.limparRelatorios}"
 					update=":formRel1:tabRel1" onclick="PF('dlgRelatorio1').show();"
 					icon="confirmar" />
 
-				<p:commandButton value="Dinheiro a receber"
+				<p:commandButton value="A receber por Pessoa"
 					action="#{vendaController.limparRelatorios}"
 					update=":formRel2:tabRel2" onclick="PF('dlgRelatorio2').show();"
 					icon="confirmar" />
 
+				<p:commandButton value="A receber Geral"
+				action="#{vendaController.recebidoGeral}" update=":formRel4"
+					onclick="PF('dlgRelatorio4').show();" icon="confirmar" />
+
 				<p:commandButton value="Venda por Período"
 					onclick="PF('dlgRelatorio3').show();" icon="confirmar" />
+
 
 			</p:panelGrid>
 
@@ -517,6 +522,42 @@
 				<f:convertNumber type="currency" currencySymbol="R$" />
 			</h:outputLabel>
 
+		</h:form>
+	</p:dialog>
+
+
+	<p:dialog widgetVar="dlgRelatorio4" header="Total a Receber"
+		height="140" width="500" draggable="true" resizable="false"
+		modal="true">
+		<h:form id="formRel4">
+			<p:panelGrid columns="2" styleClass="semBorda">
+
+				<h:outputLabel value="TOTAL VENDIDO ATÉ HOJE: "
+					style="font-size: 14px;margin-left:20px"></h:outputLabel>
+
+				<h:outputLabel value="#{vendaController.soma_geral}"
+					style="font-size: 14px;color:red;margin-left:10px">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputLabel>
+
+				<h:outputLabel value="TOTAL RECEBIDO ATÉ HOJE: "
+					style="font-size: 14px;margin-left:20px"></h:outputLabel>
+
+				<h:outputLabel value="#{vendaController.receber_geral}"
+					style="font-size: 14px;color:red;margin-left:10px">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputLabel>
+
+				<h:outputLabel value="VALOR TOTAL A RECEBER: "
+					style="font-size: 20px;margin-left:20px"></h:outputLabel>
+
+				<h:outputLabel value="#{vendaController.receber_geral_total}"
+					style="font-size: 20px;color:red;margin-left:10px">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputLabel>
+
+
+			</p:panelGrid>
 
 
 

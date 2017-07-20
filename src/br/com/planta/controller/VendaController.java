@@ -32,6 +32,8 @@ public class VendaController {
 	private List<VendaBean> listaVendasEmAberto;
 	private BuscaRelatorioBean busca;
 	private Double soma_geral;
+	private Double receber_geral;
+	private Double receber_geral_total;
 
 	public VendaController() {
 		p = new ClienteBean();
@@ -165,6 +167,20 @@ public class VendaController {
 		VendaDAO pd = new VendaDAO();
 		soma_geral = pd.vendasPorPeriodo(busca);
 	}
+	
+	public void somaGeralTotal() {
+		VendaDAO pd = new VendaDAO();
+		soma_geral = pd.vendasTotal();
+		
+		receber_geral_total = soma_geral - receber_geral;
+	}
+	
+	public void recebidoGeral() {
+		VendaDAO pd = new VendaDAO();
+		receber_geral = pd.receberGeral();
+		
+		somaGeralTotal();
+	}
 
 	public ClienteBean getP() {
 		return p;
@@ -267,6 +283,22 @@ public class VendaController {
 
 	public void setListaVendasEmAberto(List<VendaBean> listaVendasEmAberto) {
 		this.listaVendasEmAberto = listaVendasEmAberto;
+	}
+
+	public Double getReceber_geral() {
+		return receber_geral;
+	}
+
+	public void setReceber_geral(Double receber_geral) {
+		this.receber_geral = receber_geral;
+	}
+
+	public Double getReceber_geral_total() {
+		return receber_geral_total;
+	}
+
+	public void setReceber_geral_total(Double receber_geral_total) {
+		this.receber_geral_total = receber_geral_total;
 	}
 
 }

@@ -13,6 +13,7 @@ public class VendaBean {
     private Double total_pago;
     private Double em_aberto;
     private Double soma_total;
+    private Double receber_geral;
     
     public VendaBean() {
 		cliente = new ClienteBean();
@@ -73,6 +74,14 @@ public class VendaBean {
 
 	public void setSoma_total(Double soma_total) {
 		this.soma_total = soma_total;
+	}
+
+	public Double getReceber_geral() {
+		return receber_geral;
+	}
+
+	public void setReceber_geral(Double receber_geral) {
+		this.receber_geral = receber_geral;
 	}
     
 	
