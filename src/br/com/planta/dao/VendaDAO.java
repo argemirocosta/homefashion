@@ -50,7 +50,10 @@ public class VendaDAO {
 		conexao = ConnectionFactory.getConnection();
 
 		String sql = "select v.id, v.id_cliente, c.nome, v.data, v.valor, v.qtd, "
-				+ "coalesce(sum(p.valor_pago),0) as total_pago, coalesce((v.valor - sum(p.valor_pago)),v.valor) as em_aberto "
+				+ "coalesce(sum(p.valor_pago),0) as total_pago, coalesce((v.valor - sum(p.valor_pago)),v.valor) as em_aberto, "
+				+ "case when coalesce((v.valor - sum(p.valor_pago)),v.valor) = 0 then 'PAGO' "
+				+ "when coalesce((v.valor - sum(p.valor_pago)),v.valor) > 0 then 'ABERTO' "
+				+ "end as situacao "
 				+ "from vendas.venda v "
 				+ "left join vendas.clientes c on (v.id_cliente = c.id) "
 				+ "left join vendas.pagamentos p on (v.id = p.id_venda) "
@@ -76,6 +79,7 @@ public class VendaDAO {
 				p.getCliente().setId(rs.getInt("id_cliente"));
 				p.setTotal_pago(rs.getDouble("total_pago"));
 				p.setEm_aberto(rs.getDouble("em_aberto"));
+				p.setSituacao(rs.getString("situacao"));
 
 				lista.add(p);
 			}

@@ -43,7 +43,7 @@
 				<p:panelGrid columns="2" styleClass="semBorda">
 					<p:commandButton value="Cadastrar"
 						action="#{clienteController.insereCliente()}"
-						update=":formCad, :formTab" icon="confirmar" />
+						update=":formCad, :formTab2" icon="confirmar" />
 					<p:commandButton value="Fechar"
 						onclick="PF('dlgCadPlanta').hide();" icon="cancelar" />
 				</p:panelGrid>
@@ -81,7 +81,7 @@
 				<p:panelGrid columns="2" styleClass="semBorda">
 					<p:commandButton value="Alterar"
 						action="#{clienteController.editeCliente()}"
-						update=":formAlt, :formTab" icon="confirmar" />
+						update=":formAlt, :formTab2" icon="confirmar" />
 					<p:commandButton value="Fechar"
 						onclick="PF('dlgAltPlanta').hide();" icon="cancelar" />
 				</p:panelGrid>
@@ -106,7 +106,7 @@
 				<p:panelGrid columns="2" styleClass="semBorda">
 					<p:commandButton value="Sim"
 						action="#{clienteController.deleteCliente()}"
-						update=":formAlt, :formTab" icon="confirmar" />
+						update=":formAlt, :formTab2" icon="confirmar" />
 					<p:commandButton value="Fechar"
 						onclick="PF('dlgDeleteCliente').hide();" icon="cancelar" />
 				</p:panelGrid>
@@ -123,7 +123,7 @@
 		<p:commandButton value="Sair" icon="cancelar"
 			action="#{usuarioSessionController.logout()}" style="float:right;" />
 
-		<p:commandButton value="Relatórios" icon="ui-icon-document"
+		<p:commandButton value="Relatórios" icon="financeiro"
 			onclick="PF('dlgRelatorios').show();"
 			style="float:right;margin-left:10px;" />
 
@@ -132,26 +132,26 @@
 		<p:separator />
 
 		<br />
-
-
+	</h:form>
+	<h:form id="formTab2">
+	<p:growl id="msg2" />
 		<p:panelGrid columns="7" styleClass="semBorda">
-			<p:commandButton value="Novo" onclick="PF('dlgCadPlanta').show();"
-				icon="novo" />
+
 			<p:outputLabel value="Buscar por: " />
 
 			<p:inputText id="cpBuscaNome" value="#{clienteController.campoBusca}"
 				maxlength="30" size="25">
-
-				<p:watermark for="cpBuscaNome" value="Digite o nome." />
-
+				<p:watermark for="cpBuscaNome" value="Digite o nome do cliente..." />
 			</p:inputText>
 
-
 			<p:commandButton value="Buscar" action="#{clienteController.busca()}"
-				update=":formTab" icon="buscar" />
+				update=":formTab2" icon="buscar" />
 			<p:commandButton value="Limpar"
-				action="#{clienteController.limparBusca()}" update=":formTab"
+				action="#{clienteController.limparBusca()}" update=":formTab2"
 				icon="limpar" />
+
+			<p:commandButton value="Novo Cliente" onclick="PF('dlgCadPlanta').show();"
+				icon="novo" />
 
 
 		</p:panelGrid>
@@ -190,13 +190,13 @@
 				<center>
 
 					<p:commandButton onclick="PF('dlgAltPlanta').show();"
-						update=":formTab, :formAlt" icon="alterar">
+						update=":formTab2, :formAlt" icon="alterar">
 						<f:setPropertyActionListener value="#{tabela}"
 							target="#{clienteController.p}" />
 					</p:commandButton>
 
 					<p:commandButton onclick="PF('dlgDeleteCliente').show();"
-						update=":formTab" icon="cancelar">
+						update=":formTab2" icon="cancelar">
 						<f:setPropertyActionListener value="#{tabela}"
 							target="#{clienteController.p}" />
 					</p:commandButton>
@@ -240,7 +240,7 @@
 				<p:panelGrid columns="2" styleClass="semBorda">
 					<p:commandButton value="Vender"
 						action="#{vendaController.insereVenda()}"
-						update=":formCad, :formTab, :formVender:pnlgridVender"
+						update=":formCad, :formTab2, :formVender:pnlgridVender"
 						icon="confirmar" />
 					<p:commandButton value="Fechar" onclick="PF('dlgVender').hide();"
 						icon="cancelar" />
@@ -254,9 +254,10 @@
 			<p:dataTable id="tabVendas" value="#{vendaController.listaVendas}"
 				var="tabela"
 				emptyMessage="Nenhuma venda realizada para esse cliente" rows="10"
-				paginator="true" paginatorPosition="bottom">
+				paginator="true" paginatorPosition="bottom"
+				rowStyleClass="#{tabela.situacao == 'ABERTO' ? 'rowRed' : null} ">
 
-				<p:column headerText="Nome" width="40%">
+				<p:column headerText="Nome" width="30%">
 					<center>
 						<p:outputLabel value="#{tabela.cliente.nome}" />
 					</center>
@@ -294,6 +295,12 @@
 					</center>
 				</p:column>
 
+				<p:column headerText="Situação" width="10%">
+					<center>
+						<p:outputLabel value="#{tabela.situacao}">
+						</p:outputLabel>
+					</center>
+				</p:column>
 
 				<p:column headerText="Quantidade" width="10%">
 					<center>
@@ -403,7 +410,7 @@
 					icon="confirmar" />
 
 				<p:commandButton value="A receber Geral"
-				action="#{vendaController.recebidoGeral}" update=":formRel4"
+					action="#{vendaController.recebidoGeral}" update=":formRel4"
 					onclick="PF('dlgRelatorio4').show();" icon="confirmar" />
 
 				<p:commandButton value="Venda por Período"
@@ -455,14 +462,14 @@
 				emptyMessage="Nenhuma venda registrada" rows="20" paginator="true"
 				paginatorPosition="bottom">
 
-				<p:column headerText="Cliente">
+				<p:column headerText="Cliente" sortBy="#{tabela.cliente.nome}" filterBy="#{tabela.cliente.nome}">
 					<center>
 						<p:outputLabel value="#{tabela.cliente.nome}">
 						</p:outputLabel>
 					</center>
 				</p:column>
 
-				<p:column headerText="Valor">
+				<p:column headerText="Valor" sortBy="#{tabela.valor}">
 					<center>
 						<p:outputLabel value="#{tabela.valor}">
 							<f:convertNumber type="currency" currencySymbol="R$" />
@@ -470,7 +477,7 @@
 					</center>
 				</p:column>
 
-				<p:column headerText="Em Aberto">
+				<p:column headerText="Em Aberto" sortBy="#{tabela.em_aberto}">
 					<center>
 						<p:outputLabel value="#{tabela.em_aberto}">
 							<f:convertNumber type="currency" currencySymbol="R$" />
@@ -478,7 +485,7 @@
 					</center>
 				</p:column>
 
-				<p:column headerText="Data Compra">
+				<p:column headerText="Data Compra" sortBy="#{tabela.data}">
 					<center>
 						<p:outputLabel value="#{tabela.data}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />

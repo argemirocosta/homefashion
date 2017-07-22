@@ -14,6 +14,7 @@ public class VendaBean {
     private Double em_aberto;
     private Double soma_total;
     private Double receber_geral;
+    private String situacao;
     
     public VendaBean() {
 		cliente = new ClienteBean();
@@ -82,6 +83,14 @@ public class VendaBean {
 
 	public void setReceber_geral(Double receber_geral) {
 		this.receber_geral = receber_geral;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
     
 	

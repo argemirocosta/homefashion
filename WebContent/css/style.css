@@ -35,3 +35,16 @@ body {
 .ui-icon.limpar {
     background-image: url("../imgs/limpar.png") !important;
 }
+
+.ui-icon.financeiro {
+    background-image: url("../imgs/financeiro.png") !important;
+    size: 1;
+}
+
+.rowRed td {
+	background-color: rgba(218, 79, 73, 0.3);;
+}
+
+.rowRed td:hover {
+	background-color: rgba(218, 79, 73, 0.8);;
+}
