@@ -41,10 +41,6 @@ public class ReportController implements Serializable{
 
 	}
     
-	public void sergio(){
-		System.out.println("oi");
-	}
-    
     public void gerarRelatorioPlantas(ActionEvent action) throws IOException, ParseException {
         
         //String caminho = "WEB-INF/relatorios/plantan.jasper";

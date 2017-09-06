@@ -72,10 +72,8 @@ public class VendaController {
 	}
 
 	public void verificarVendaPaga() {
-		System.out.println("CODVENDA: " + venda.getId());
 		VendaDAO vdao = new VendaDAO();
 		emAberto = vdao.valorEmAberto(venda.getId());
-		System.out.println("aberto final: " + emAberto);
 		if (emAberto > 0) {
 			RequestContext.getCurrentInstance().execute(
 					"PF('dlgPagamentos').show();");
@@ -87,11 +85,6 @@ public class VendaController {
 	}
 
 	public void insereVenda() {
-		System.out.println("ID CLIENTE: " + venda.getCliente().getId());
-		System.out.println("VALOR: " + venda.getValor());
-		System.out.println("DATA: "
-				+ new java.sql.Date(venda.getData().getTime()));
-		System.out.println("QUANTIDADE: " + venda.getQtd());
 
 		VendaDAO pd = new VendaDAO();
 		boolean cadastrou = pd.insereVenda(venda);
@@ -115,21 +108,11 @@ public class VendaController {
 	}
 
 	public void inserePagamento() {
-		System.out.println("ID VENDA: " + venda.getId());
-		System.out.println("VALOR VENDA: " + venda.getValor());
-		System.out.println("DATA VENDA: "
-				+ new java.sql.Date(venda.getData().getTime()));
-		System.out.println("QUANTIDADE VENDA: " + venda.getQtd());
-		System.out.println("VALOR PAGAMENTO: " + pagamento.getValor());
-		System.out.println("DATA VENDA: " + pagamento.getData());
-
 		VendaDAO pd = new VendaDAO();
 		int pagamentoVenda = pd.semPagamentos(venda.getId());
 		emAberto = pd.valorEmAberto(venda.getId());
-		System.out.println("ABERTO: " + emAberto);
-		System.out.println("QTD PAGAMENTOS: " + pagamentoVenda);
+
 		if (pagamento.getValor() > emAberto) {
-			System.out.println("Entrou aqui");
 			FacesMessage msg = new FacesMessage(
 					"Pagamento maior que a venda não é permitido!");
 			FacesContext ct = FacesContext.getCurrentInstance();
@@ -167,18 +150,18 @@ public class VendaController {
 		VendaDAO pd = new VendaDAO();
 		soma_geral = pd.vendasPorPeriodo(busca);
 	}
-	
+
 	public void somaGeralTotal() {
 		VendaDAO pd = new VendaDAO();
 		soma_geral = pd.vendasTotal();
-		
+
 		receber_geral_total = soma_geral - receber_geral;
 	}
-	
+
 	public void recebidoGeral() {
 		VendaDAO pd = new VendaDAO();
 		receber_geral = pd.receberGeral();
-		
+
 		somaGeralTotal();
 	}
 
@@ -199,7 +182,6 @@ public class VendaController {
 	}
 
 	public List<VendaBean> getListaVendas() {
-		System.out.println("LISTA DE VENDAS: " + listaVendas);
 		VendaDAO pd = new VendaDAO();
 		if (listaVendas == null) {
 			listaVendas = pd.listarVendas(venda);
@@ -223,8 +205,6 @@ public class VendaController {
 		VendaDAO pd = new VendaDAO();
 
 		if (listaPagamentos == null) {
-			System.out.println("ID DA VENDA: " + venda.getId());
-			System.out.println("ID DO CLIENTE: " + venda.getCliente().getId());
 			listaPagamentos = pd.listarPagamentos(venda.getId());
 		}
 		return listaPagamentos;
