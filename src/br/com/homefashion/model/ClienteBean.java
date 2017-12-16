@@ -1,4 +1,4 @@
-package br.com.planta.model;
+package br.com.homefashion.model;
 
 public class ClienteBean {
     

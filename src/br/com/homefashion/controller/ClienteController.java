@@ -1,9 +1,9 @@
-package br.com.planta.controller;
+package br.com.homefashion.controller;
 
-import br.com.planta.dao.ClienteDAO;
-import br.com.planta.dao.UsuarioDAO;
-import br.com.planta.model.ClienteBean;
-import br.com.planta.model.VendaBean;
+import br.com.homefashion.dao.ClienteDAO;
+import br.com.homefashion.dao.UsuarioDAO;
+import br.com.homefashion.model.ClienteBean;
+import br.com.homefashion.model.VendaBean;
 
 import java.util.List;
 

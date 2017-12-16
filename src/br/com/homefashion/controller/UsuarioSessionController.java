@@ -1,9 +1,11 @@
-package br.com.planta.controller;
+package br.com.homefashion.controller;
 
-import br.com.planta.dao.UsuarioDAO;
-import br.com.planta.model.Usuario;
-import br.com.planta.util.SessionUtil;
+import br.com.homefashion.dao.UsuarioDAO;
+import br.com.homefashion.model.Usuario;
+import br.com.homefashion.util.SessionUtil;
+
 import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

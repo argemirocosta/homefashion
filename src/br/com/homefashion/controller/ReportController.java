@@ -1,4 +1,4 @@
-package br.com.planta.controller;
+package br.com.homefashion.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,8 +22,8 @@ import net.sf.jasperreports.engine.JasperRunManager;
 
 import org.primefaces.component.api.UIData;
 
-import br.com.planta.factory.ConnectionFactory;
-import br.com.planta.model.ClienteBean;
+import br.com.homefashion.factory.ConnectionFactory;
+import br.com.homefashion.model.ClienteBean;
 
 @ManagedBean
 @ViewScoped

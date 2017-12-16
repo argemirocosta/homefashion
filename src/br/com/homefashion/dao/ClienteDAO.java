@@ -1,7 +1,7 @@
-package br.com.planta.dao;
+package br.com.homefashion.dao;
 
-import br.com.planta.factory.ConnectionFactory;
-import br.com.planta.model.ClienteBean;
+import br.com.homefashion.factory.ConnectionFactory;
+import br.com.homefashion.model.ClienteBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

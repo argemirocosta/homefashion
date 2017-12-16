@@ -1,4 +1,4 @@
-package br.com.planta.util;
+package br.com.homefashion.util;
     
 import java.io.IOException;
 import javax.servlet.Filter;

@@ -1,4 +1,4 @@
-package br.com.planta.util;
+package br.com.homefashion.util;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;

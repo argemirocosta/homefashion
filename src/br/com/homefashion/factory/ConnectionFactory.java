@@ -1,4 +1,4 @@
-package br.com.planta.factory;
+package br.com.homefashion.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,12 +1,12 @@
-package br.com.planta.controller;
+package br.com.homefashion.controller;
 
-import br.com.planta.dao.ClienteDAO;
-import br.com.planta.dao.UsuarioDAO;
-import br.com.planta.dao.VendaDAO;
-import br.com.planta.model.BuscaRelatorioBean;
-import br.com.planta.model.ClienteBean;
-import br.com.planta.model.PagamentoBean;
-import br.com.planta.model.VendaBean;
+import br.com.homefashion.dao.ClienteDAO;
+import br.com.homefashion.dao.UsuarioDAO;
+import br.com.homefashion.dao.VendaDAO;
+import br.com.homefashion.model.BuscaRelatorioBean;
+import br.com.homefashion.model.ClienteBean;
+import br.com.homefashion.model.PagamentoBean;
+import br.com.homefashion.model.VendaBean;
 
 import java.util.ArrayList;
 import java.util.List;
