@@ -65,8 +65,7 @@ public class VendaDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			System.out.println("ID CLIENTE NO DAO: "
-					+ venda.getCliente().getId());
+			
 			ps.setInt(1, venda.getCliente().getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -136,7 +135,6 @@ public class VendaDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			System.out.println("ID CLIENTE NO DAO: " + codcliente);
 			ps.setInt(1, codcliente);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -283,7 +281,7 @@ public class VendaDAO {
 		}
 		return valor;
 	}
-	
+
 	public Double vendasTotal() {
 
 		conexao = ConnectionFactory.getConnection();
@@ -311,8 +309,7 @@ public class VendaDAO {
 		}
 		return valor;
 	}
-	
-	
+
 	public Double receberGeral() {
 
 		conexao = ConnectionFactory.getConnection();
@@ -340,7 +337,6 @@ public class VendaDAO {
 		}
 		return valor;
 	}
-	
 
 	public List<VendaBean> aReceber() {
 

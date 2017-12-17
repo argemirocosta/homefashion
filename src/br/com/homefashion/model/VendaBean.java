@@ -2,45 +2,51 @@ package br.com.homefashion.model;
 
 import java.util.Date;
 
-
 public class VendaBean {
-    
-    private Integer id;
-    private Double valor;
-    private Date data;
-    private Integer qtd;
-    private ClienteBean cliente;
-    private Double total_pago;
-    private Double em_aberto;
-    private Double soma_total;
-    private Double receber_geral;
-    private String situacao;
-    
-    public VendaBean() {
+
+	private Integer id;
+	private Double valor;
+	private Date data;
+	private Integer qtd;
+	private ClienteBean cliente;
+	private Double total_pago;
+	private Double em_aberto;
+	private Double soma_total;
+	private Double receber_geral;
+	private String situacao;
+
+	public VendaBean() {
 		cliente = new ClienteBean();
 	}
-    
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Double getValor() {
 		return valor;
 	}
+
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
+
 	public Date getData() {
 		return data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
+
 	public Integer getQtd() {
 		return qtd;
 	}
+
 	public void setQtd(Integer qtd) {
 		this.qtd = qtd;
 	}
@@ -92,7 +98,5 @@ public class VendaBean {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
-    
-	
-    
+
 }

@@ -2,7 +2,6 @@ package br.com.homefashion.model;
 
 import java.util.Date;
 
-
 public class BuscaRelatorioBean {
 
 	private Date periodoinicial, periodofinal;

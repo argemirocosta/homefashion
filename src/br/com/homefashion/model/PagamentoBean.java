@@ -3,13 +3,13 @@ package br.com.homefashion.model;
 import java.util.Date;
 
 public class PagamentoBean {
-    
-    private Integer id;
-    private Double valor;
-    private Date data;
-    private VendaBean venda;
-    
-    public PagamentoBean() {
+
+	private Integer id;
+	private Double valor;
+	private Date data;
+	private VendaBean venda;
+
+	public PagamentoBean() {
 		venda = new VendaBean();
 	}
 
@@ -44,5 +44,5 @@ public class PagamentoBean {
 	public void setVenda(VendaBean venda) {
 		this.venda = venda;
 	}
-       
+
 }
