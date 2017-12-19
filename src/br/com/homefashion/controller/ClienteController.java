@@ -77,7 +77,7 @@ public class ClienteController {
 			limparCampos();
 
 			RequestContext.getCurrentInstance().execute(
-					"PF('dlgAltPlanta').hide();");
+					"PF('dlgAltCliente').hide();");
 
 			FacesMessage msg = new FacesMessage("Cliente Alterado");
 			FacesContext ct = FacesContext.getCurrentInstance();
@@ -99,7 +99,7 @@ public class ClienteController {
 			limparCampos();
 
 			RequestContext.getCurrentInstance().execute(
-					"PF('dlgCadPlanta').hide();");
+					"PF('dlgCadCliente').hide();");
 
 			FacesMessage msg = new FacesMessage("Cliente cadastrado");
 			FacesContext ct = FacesContext.getCurrentInstance();

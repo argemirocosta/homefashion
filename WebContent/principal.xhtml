@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Principal</title>
+	<title>Home Fashion</title>
 
 	<link href="css/style.css" type="text/css" rel="stylesheet" />
 
@@ -17,7 +17,7 @@
 		<p:ajax event="idle" listener="#{usuarioSessionController.timeOut}" />
 	</p:idleMonitor>
 
-	<p:dialog widgetVar="dlgCadPlanta" header="Cadastrar Cliente"
+	<p:dialog widgetVar="dlgCadCliente" header="Cadastrar Cliente"
 		height="auto" width="auto" draggable="true" resizable="false"
 		modal="true">
 		<h:form id="formCad">
@@ -45,7 +45,7 @@
 						action="#{clienteController.insereCliente()}"
 						update=":formCad, :formTab2" icon="confirmar" />
 					<p:commandButton value="Fechar"
-						onclick="PF('dlgCadPlanta').hide();" icon="cancelar" />
+						onclick="PF('dlgCadCliente').hide();" icon="cancelar" />
 				</p:panelGrid>
 			</center>
 
@@ -54,7 +54,7 @@
 		</h:form>
 	</p:dialog>
 
-	<p:dialog widgetVar="dlgAltPlanta" header="Alterar Cliente"
+	<p:dialog widgetVar="dlgAltCliente" header="Alterar Cliente"
 		height="auto" width="auto" draggable="true" resizable="false"
 		modal="true">
 		<h:form id="formAlt">
@@ -83,7 +83,7 @@
 						action="#{clienteController.editeCliente()}"
 						update=":formAlt, :formTab2" icon="confirmar" />
 					<p:commandButton value="Fechar"
-						onclick="PF('dlgAltPlanta').hide();" icon="cancelar" />
+						onclick="PF('dlgAltCliente').hide();" icon="cancelar" />
 				</p:panelGrid>
 			</center>
 
@@ -120,21 +120,21 @@
 		<p:growl id="msg" />
 
 
-		<p:commandButton value="Sair" icon="cancelar"
+		<p:commandButton value="Sair do Sistema" icon="cancelar"
 			action="#{usuarioSessionController.logout()}" style="float:right;" />
 
-		<p:commandButton value="Relatórios" icon="financeiro"
+		<p:commandButton value="Relatórios" icon="buscar"
 			onclick="PF('dlgRelatorios').show();"
-			style="float:right;margin-left:10px;" />
+			style="float:right;margin-left:10px;margin-right:20px" />
 
-		<h1>Clientes</h1>
+		<h1>Home Fashion</h1>
 
 		<p:separator />
 
 		<br />
 	</h:form>
 	<h:form id="formTab2">
-	<p:growl id="msg2" />
+		<p:growl id="msg2" />
 		<p:panelGrid columns="7" styleClass="semBorda">
 
 			<p:outputLabel value="Buscar por: " />
@@ -150,8 +150,8 @@
 				action="#{clienteController.limparBusca()}" update=":formTab2"
 				icon="limpar" />
 
-			<p:commandButton value="Novo Cliente" onclick="PF('dlgCadPlanta').show();"
-				icon="novo" />
+			<p:commandButton value="Novo Cliente"
+				onclick="PF('dlgCadCliente').show();" icon="novo" />
 
 
 		</p:panelGrid>
@@ -167,17 +167,17 @@
 				</center>
 			</p:column>
 
-			<p:column headerText="Nome" width="40%">
+			<p:column headerText="Cliente" width="40%">
 				<p:outputLabel value="#{tabela.nome}" />
 			</p:column>
 
-			<p:column headerText="Telefone1" width="15%">
+			<p:column headerText="Telefone 1" width="15%">
 				<center>
 					<p:outputLabel value="#{tabela.telefone1}" />
 				</center>
 			</p:column>
 
-			<p:column headerText="Telefone2" width="15%">
+			<p:column headerText="Telefone 2" width="15%">
 				<center>
 					<p:outputLabel value="#{tabela.telefone2}" />
 				</center>
@@ -189,7 +189,7 @@
 
 				<center>
 
-					<p:commandButton onclick="PF('dlgAltPlanta').show();"
+					<p:commandButton onclick="PF('dlgAltCliente').show();"
 						update=":formTab2, :formAlt" icon="alterar">
 						<f:setPropertyActionListener value="#{tabela}"
 							target="#{clienteController.p}" />
@@ -257,7 +257,7 @@
 				paginator="true" paginatorPosition="bottom"
 				rowStyleClass="#{tabela.situacao == 'ABERTO' ? 'rowRed' : null} ">
 
-				<p:column headerText="Nome" width="30%">
+				<p:column headerText="Cliente" width="30%">
 					<center>
 						<p:outputLabel value="#{tabela.cliente.nome}" />
 					</center>
@@ -395,8 +395,9 @@
 	</p:dialog>
 
 
-	<p:dialog widgetVar="dlgRelatorios" header="Relatórios" height="70"
-		width="auto" draggable="true" resizable="false" modal="true">
+	<p:dialog widgetVar="dlgRelatorios" header="Tela de Relatórios"
+		height="auto" width="auto" draggable="true" resizable="false"
+		modal="true">
 		<h:form id="formRel">
 			<p:panelGrid columns="4" styleClass="semBorda">
 				<p:commandButton value="Ranking por Cliente"
@@ -416,15 +417,23 @@
 				<p:commandButton value="Venda por Período"
 					onclick="PF('dlgRelatorio3').show();" icon="confirmar" />
 
-
 			</p:panelGrid>
+
+			<br></br>
+
+			<center>
+				<p:commandButton value="Fechar"
+					onclick="PF('dlgRelatorios').hide();" icon="cancelar" />
+			</center>
+
+			<br></br>
 
 		</h:form>
 	</p:dialog>
 
-	<p:dialog widgetVar="dlgRelatorio1" header="Vendas por Cliente"
-		position="top" height="auto" width="auto" draggable="true"
-		resizable="false" modal="true">
+	<p:dialog widgetVar="dlgRelatorio1"
+		header="Ranking de Vendas por Cliente" position="top" height="auto"
+		width="auto" draggable="true" resizable="false" modal="true">
 		<h:form id="formRel1">
 
 			<p:dataTable id="tabRel1"
@@ -462,7 +471,8 @@
 				emptyMessage="Nenhuma venda registrada" rows="20" paginator="true"
 				paginatorPosition="bottom">
 
-				<p:column headerText="Cliente" sortBy="#{tabela.cliente.nome}" filterBy="#{tabela.cliente.nome}">
+				<p:column headerText="Cliente" sortBy="#{tabela.cliente.nome}"
+					filterBy="#{tabela.cliente.nome}">
 					<center>
 						<p:outputLabel value="#{tabela.cliente.nome}">
 						</p:outputLabel>
@@ -503,6 +513,7 @@
 		modal="true">
 		<h:form id="formRel3">
 			<p:panelGrid columns="3" styleClass="semBorda">
+
 				<p:calendar id="button"
 					value="#{vendaController.busca.periodoinicial}" size="8"
 					pattern="dd/MM/yyyy" showOn="button" />
@@ -519,7 +530,7 @@
 			</p:panelGrid>
 
 			<p:commandButton value="Buscar" action="#{vendaController.somaGeral}"
-				update=":formRel3" icon="financeiro" />
+				update=":formRel3" icon="buscar" />
 
 			<h:outputLabel value="TOTAL VENDIDO NO PERÍODO: "
 				style="font-size: 14px;margin-left:20px"></h:outputLabel>
