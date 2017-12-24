@@ -1,4 +1,4 @@
-package br.com.homefashion.factory;
+package br.com.homefashion.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
