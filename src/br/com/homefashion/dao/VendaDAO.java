@@ -1,6 +1,6 @@
 package br.com.homefashion.dao;
 
-import br.com.homefashion.factory.ConnectionFactory;
+import br.com.homefashion.connection.ConnectionFactory;
 import br.com.homefashion.model.BuscaRelatorioBean;
 import br.com.homefashion.model.ClienteBean;
 import br.com.homefashion.model.PagamentoBean;

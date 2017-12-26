@@ -1,6 +1,6 @@
 package br.com.homefashion.dao;
 
-import br.com.homefashion.factory.ConnectionFactory;
+import br.com.homefashion.connection.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
 
 import java.sql.Connection;
