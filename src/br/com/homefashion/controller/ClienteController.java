@@ -18,13 +18,13 @@ import org.primefaces.context.RequestContext;
 @ManagedBean
 public class ClienteController {
 
-	private ClienteBean p;
+	private ClienteBean cliente;
 	private List<ClienteBean> listaCliente;
 	private String campoBusca;
 	private VendaBean venda;
 
 	public ClienteController() {
-		p = new ClienteBean();
+		cliente = new ClienteBean();
 		venda = new VendaBean();
 		campoBusca = "";
 	}
@@ -36,22 +36,18 @@ public class ClienteController {
 
 	public void limparCampos() {
 		listaCliente = null;
-		p = new ClienteBean();
+		cliente = new ClienteBean();
 	}
 
-	public void busca() {
-		buscaNome();
-	}
-
-	private void buscaNome() {
-		ClienteDAO pd = new ClienteDAO();
-		listaCliente = pd.buscaNome(campoBusca);
+	public void buscaNome() {
+		ClienteDAO cDao = new ClienteDAO();
+		listaCliente = cDao.buscaNome(campoBusca);
 	}
 
 	public void deleteCliente() {
 
-		ClienteDAO pd = new ClienteDAO();
-		boolean deletou = pd.deleteCliente(p);
+		ClienteDAO cDao = new ClienteDAO();
+		boolean deletou = cDao.deleteCliente(cliente);
 
 		if (deletou) {
 			limparCampos();
@@ -70,8 +66,8 @@ public class ClienteController {
 
 	public void editeCliente() {
 
-		ClienteDAO pd = new ClienteDAO();
-		boolean alterou = pd.editeCliente(p);
+		ClienteDAO cDao = new ClienteDAO();
+		boolean alterou = cDao.editeCliente(cliente);
 
 		if (alterou) {
 			limparCampos();
@@ -91,8 +87,8 @@ public class ClienteController {
 
 	public void insereCliente() {
 
-		ClienteDAO pd = new ClienteDAO();
-		boolean cadastrou = pd.insereCliente(p);
+		ClienteDAO cDao = new ClienteDAO();
+		boolean cadastrou = cDao.insereCliente(cliente);
 
 		if (cadastrou) {
 
@@ -111,18 +107,18 @@ public class ClienteController {
 		}
 	}
 
-	public ClienteBean getP() {
-		return p;
+	public ClienteBean getCliente() {
+		return cliente;
 	}
 
-	public void setP(ClienteBean p) {
-		this.p = p;
+	public void setP(ClienteBean cliente) {
+		this.cliente = cliente;
 	}
 
 	public List<ClienteBean> getListaCliente() {
-		ClienteDAO pd = new ClienteDAO();
+		ClienteDAO cDao = new ClienteDAO();
 		if (listaCliente == null) {
-			listaCliente = pd.listarClientes();
+			listaCliente = cDao.listarClientes();
 		}
 		return listaCliente;
 	}

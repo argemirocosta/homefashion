@@ -22,7 +22,6 @@ import org.primefaces.context.RequestContext;
 @ManagedBean
 public class VendaController {
 
-	private ClienteBean p;
 	private VendaBean venda;
 	private List<VendaBean> listaVendas;
 	private PagamentoBean pagamento;
@@ -36,7 +35,6 @@ public class VendaController {
 	private Double receber_geral_total;
 
 	public VendaController() {
-		p = new ClienteBean();
 		venda = new VendaBean();
 		pagamento = new PagamentoBean();
 		listaVendas = new ArrayList<VendaBean>();
@@ -72,8 +70,8 @@ public class VendaController {
 	}
 
 	public void verificarVendaPaga() {
-		VendaDAO vdao = new VendaDAO();
-		emAberto = vdao.valorEmAberto(venda.getId());
+		VendaDAO vDao = new VendaDAO();
+		emAberto = vDao.valorEmAberto(venda.getId());
 		if (emAberto > 0) {
 			RequestContext.getCurrentInstance().execute(
 					"PF('dlgPagamentos').show();");
@@ -86,8 +84,8 @@ public class VendaController {
 
 	public void insereVenda() {
 
-		VendaDAO pd = new VendaDAO();
-		boolean cadastrou = pd.insereVenda(venda);
+		VendaDAO vDao = new VendaDAO();
+		boolean cadastrou = vDao.insereVenda(venda);
 
 		if (cadastrou) {
 
@@ -108,9 +106,9 @@ public class VendaController {
 	}
 
 	public void inserePagamento() {
-		VendaDAO pd = new VendaDAO();
-		int pagamentoVenda = pd.semPagamentos(venda.getId());
-		emAberto = pd.valorEmAberto(venda.getId());
+		VendaDAO vDao = new VendaDAO();
+		int pagamentoVenda = vDao.semPagamentos(venda.getId());
+		emAberto = vDao.valorEmAberto(venda.getId());
 
 		if (pagamento.getValor() > emAberto) {
 			FacesMessage msg = new FacesMessage(
@@ -119,7 +117,7 @@ public class VendaController {
 			ct.addMessage(null, msg);
 
 		} else if (emAberto > 0 || pagamentoVenda == 0) {
-			boolean cadastrou = pd.inserePagamento(venda, pagamento);
+			boolean cadastrou = vDao.inserePagamento(venda, pagamento);
 
 			if (cadastrou) {
 				listaPagamentos = null;
@@ -147,30 +145,22 @@ public class VendaController {
 	}
 
 	public void somaGeral() {
-		VendaDAO pd = new VendaDAO();
-		soma_geral = pd.vendasPorPeriodo(busca);
+		VendaDAO vDao = new VendaDAO();
+		soma_geral = vDao.vendasPorPeriodo(busca);
 	}
 
 	public void somaGeralTotal() {
-		VendaDAO pd = new VendaDAO();
-		soma_geral = pd.vendasTotal();
+		VendaDAO vDao = new VendaDAO();
+		soma_geral = vDao.vendasTotal();
 
 		receber_geral_total = soma_geral - receber_geral;
 	}
 
 	public void recebidoGeral() {
-		VendaDAO pd = new VendaDAO();
-		receber_geral = pd.receberGeral();
+		VendaDAO vDao = new VendaDAO();
+		receber_geral = vDao.receberGeral();
 
 		somaGeralTotal();
-	}
-
-	public ClienteBean getP() {
-		return p;
-	}
-
-	public void setP(ClienteBean p) {
-		this.p = p;
 	}
 
 	public VendaBean getVenda() {
@@ -182,9 +172,9 @@ public class VendaController {
 	}
 
 	public List<VendaBean> getListaVendas() {
-		VendaDAO pd = new VendaDAO();
+		VendaDAO vDao = new VendaDAO();
 		if (listaVendas == null) {
-			listaVendas = pd.listarVendas(venda);
+			listaVendas = vDao.listarVendas(venda);
 		}
 		return listaVendas;
 	}
@@ -202,10 +192,10 @@ public class VendaController {
 	}
 
 	public List<PagamentoBean> getListaPagamentos() {
-		VendaDAO pd = new VendaDAO();
+		VendaDAO vDao = new VendaDAO();
 
 		if (listaPagamentos == null) {
-			listaPagamentos = pd.listarPagamentos(venda.getId());
+			listaPagamentos = vDao.listarPagamentos(venda.getId());
 		}
 		return listaPagamentos;
 	}
@@ -223,10 +213,10 @@ public class VendaController {
 	}
 
 	public List<VendaBean> getListaVendasPorCliente() {
-		VendaDAO pd = new VendaDAO();
+		VendaDAO vDao = new VendaDAO();
 
 		if (listaVendasPorCliente == null) {
-			listaVendasPorCliente = pd.vendasPorCliente();
+			listaVendasPorCliente = vDao.vendasPorCliente();
 		}
 		return listaVendasPorCliente;
 	}
@@ -252,10 +242,10 @@ public class VendaController {
 	}
 
 	public List<VendaBean> getListaVendasEmAberto() {
-		VendaDAO pd = new VendaDAO();
+		VendaDAO vDao = new VendaDAO();
 
 		if (listaVendasEmAberto == null) {
-			listaVendasEmAberto = pd.aReceber();
+			listaVendasEmAberto = vDao.aReceber();
 
 		}
 		return listaVendasEmAberto;

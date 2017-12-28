@@ -23,17 +23,19 @@
 		<h:form id="formCad">
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Nome: " />
-				<p:inputText value="#{clienteController.p.nome}" maxlength="30"
-					size="25" required="true" requiredMessage="Insira o nome" />
+				<p:inputText value="#{clienteController.cliente.nome}"
+					maxlength="30" size="25" required="true"
+					requiredMessage="Insira o nome" />
 
 				<p:outputLabel value="Telefone 1: " />
-				<p:inputText value="#{clienteController.p.telefone1}" maxlength="30"
-					size="25" required="false"
+				<p:inputText value="#{clienteController.cliente.telefone1}"
+					maxlength="30" size="25" required="false"
 					requiredMessage="Insira ao menos 1 telefone" />
 
 				<p:outputLabel value="Telefone 2: " />
-				<p:inputText value="#{clienteController.p.telefone2}" maxlength="30"
-					size="25" required="false" requiredMessage="insira o nome" />
+				<p:inputText value="#{clienteController.cliente.telefone2}"
+					maxlength="30" size="25" required="false"
+					requiredMessage="insira o nome" />
 
 			</p:panelGrid>
 
@@ -60,17 +62,18 @@
 		<h:form id="formAlt">
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Nome: " />
-				<p:inputText value="#{clienteController.p.nome}" maxlength="30"
-					size="25" required="true" requiredMessage="insira o nome" />
+				<p:inputText value="#{clienteController.cliente.nome}"
+					maxlength="30" size="25" required="true"
+					requiredMessage="insira o nome" />
 
 				<p:outputLabel value="Telefone 1: " />
-				<p:inputText value="#{clienteController.p.telefone1}" maxlength="30"
-					size="25" required="true"
+				<p:inputText value="#{clienteController.cliente.telefone1}"
+					maxlength="30" size="25" required="true"
 					requiredMessage="Insira ao menos 1 telefone" />
 
 				<p:outputLabel value="Telefone 2: " />
-				<p:inputText value="#{clienteController.p.telefone2}" maxlength="30"
-					size="25" required="false"
+				<p:inputText value="#{clienteController.cliente.telefone2}"
+					maxlength="30" size="25" required="false"
 					requiredMessage="Insira ao menos 1 telefone" />
 
 			</p:panelGrid>
@@ -144,8 +147,9 @@
 				<p:watermark for="cpBuscaNome" value="Digite o nome do cliente..." />
 			</p:inputText>
 
-			<p:commandButton value="Buscar" action="#{clienteController.busca()}"
-				update=":formTab2" icon="buscar" />
+			<p:commandButton value="Buscar"
+				action="#{clienteController.buscaNome()}" update=":formTab2"
+				icon="buscar" />
 			<p:commandButton value="Limpar"
 				action="#{clienteController.limparBusca()}" update=":formTab2"
 				icon="limpar" />
