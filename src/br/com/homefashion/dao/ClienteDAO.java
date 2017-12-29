@@ -2,7 +2,6 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.connection.ConnectionFactory;
 import br.com.homefashion.model.ClienteBean;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +18,7 @@ public class ClienteDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select * from vendas.clientes where upper(nome) like upper(?) order by nome";
+		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where upper(nome) like upper(?) order by nome";
 
 		List<ClienteBean> lista = new ArrayList<>();
 
@@ -28,13 +27,13 @@ public class ClienteDAO {
 			ps.setString(1, "%" + nome + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ClienteBean p = new ClienteBean();
-				p.setId(rs.getInt("id"));
-				p.setNome(rs.getString("nome").toUpperCase());
-				p.setTelefone1(rs.getInt("telefone1"));
-				p.setTelefone2(rs.getInt("telefone2"));
+				ClienteBean cliente = new ClienteBean();
+				cliente.setId(rs.getInt("id"));
+				cliente.setNome(rs.getString("nome").toUpperCase());
+				cliente.setTelefone1(rs.getInt("telefone1"));
+				cliente.setTelefone2(rs.getInt("telefone2"));
 
-				lista.add(p);
+				lista.add(cliente);
 			}
 
 		} catch (SQLException ex) {
@@ -49,7 +48,7 @@ public class ClienteDAO {
 		return lista;
 	}
 
-	public boolean deleteCliente(ClienteBean p) {
+	public boolean deleteCliente(ClienteBean cliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -58,7 +57,7 @@ public class ClienteDAO {
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
-			ps.setInt(1, p.getId());
+			ps.setInt(1, cliente.getId());
 
 			ps.execute();
 
@@ -75,7 +74,7 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public boolean editeCliente(ClienteBean p) {
+	public boolean editeCliente(ClienteBean cliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -83,10 +82,10 @@ public class ClienteDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, p.getNome().toUpperCase());
-			ps.setInt(2, p.getTelefone1());
-			ps.setInt(3, p.getTelefone2());
-			ps.setInt(4, p.getId());
+			ps.setString(1, cliente.getNome().toUpperCase());
+			ps.setInt(2, cliente.getTelefone1());
+			ps.setInt(3, cliente.getTelefone2());
+			ps.setInt(4, cliente.getId());
 
 			ps.executeUpdate();
 
@@ -104,7 +103,7 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public boolean insereCliente(ClienteBean p) {
+	public boolean insereCliente(ClienteBean cliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -112,18 +111,18 @@ public class ClienteDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, p.getNome().toUpperCase());
+			ps.setString(1, cliente.getNome().toUpperCase());
 
-			if (p.getTelefone1() == null) {
+			if (cliente.getTelefone1() == null) {
 				ps.setNull(2, Types.NULL);
 			} else {
-				ps.setInt(2, p.getTelefone1());
+				ps.setInt(2, cliente.getTelefone1());
 			}
 
-			if (p.getTelefone2() == null) {
+			if (cliente.getTelefone2() == null) {
 				ps.setNull(3, Types.NULL);
 			} else {
-				ps.setInt(3, p.getTelefone2());
+				ps.setInt(3, cliente.getTelefone2());
 			}
 
 			ps.execute();
@@ -145,7 +144,7 @@ public class ClienteDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select * from vendas.clientes order by nome";
+		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes order by nome";
 
 		List<ClienteBean> lista = new ArrayList<>();
 
@@ -153,13 +152,13 @@ public class ClienteDAO {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ClienteBean p = new ClienteBean();
-				p.setId(rs.getInt("id"));
-				p.setNome(rs.getString("nome"));
-				p.setTelefone1(rs.getInt("telefone1"));
-				p.setTelefone2(rs.getInt("telefone2"));
+				ClienteBean cliente = new ClienteBean();
+				cliente.setId(rs.getInt("id"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setTelefone1(rs.getInt("telefone1"));
+				cliente.setTelefone2(rs.getInt("telefone2"));
 
-				lista.add(p);
+				lista.add(cliente);
 			}
 
 		} catch (SQLException ex) {

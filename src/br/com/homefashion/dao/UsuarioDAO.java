@@ -2,7 +2,6 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.connection.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ public class UsuarioDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select * from vendas.usuario where login = ? and senha = ?";
+		String sql = "select id, nome, login, senha, ativo from vendas.usuario where login = ? and senha = ?";
 
 		Usuario u = null;
 

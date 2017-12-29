@@ -2,10 +2,8 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.connection.ConnectionFactory;
 import br.com.homefashion.model.BuscaRelatorioBean;
-import br.com.homefashion.model.ClienteBean;
 import br.com.homefashion.model.PagamentoBean;
 import br.com.homefashion.model.VendaBean;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +15,7 @@ public class VendaDAO {
 
 	Connection conexao = null;
 
-	public boolean insereVenda(VendaBean p) {
+	public boolean insereVenda(VendaBean venda) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -25,10 +23,10 @@ public class VendaDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setInt(1, p.getCliente().getId());
-			ps.setDouble(2, p.getValor());
-			ps.setInt(3, p.getQtd());
-			ps.setDate(4, new java.sql.Date(p.getData().getTime()));
+			ps.setInt(1, venda.getCliente().getId());
+			ps.setDouble(2, venda.getValor());
+			ps.setInt(3, venda.getQtd());
+			ps.setDate(4, new java.sql.Date(venda.getData().getTime()));
 
 			ps.execute();
 
@@ -45,7 +43,7 @@ public class VendaDAO {
 		return false;
 	}
 
-	public List<VendaBean> listarVendas(VendaBean venda) {
+	public List<VendaBean> listarVendas(VendaBean vendaB) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -65,22 +63,22 @@ public class VendaDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			
-			ps.setInt(1, venda.getCliente().getId());
+
+			ps.setInt(1, vendaB.getCliente().getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean p = new VendaBean();
-				p.setId(rs.getInt("id"));
-				p.getCliente().setNome(rs.getString("nome"));
-				p.setData(rs.getDate("data"));
-				p.setValor(rs.getDouble("valor"));
-				p.setQtd(rs.getInt("qtd"));
-				p.getCliente().setId(rs.getInt("id_cliente"));
-				p.setTotal_pago(rs.getDouble("total_pago"));
-				p.setEm_aberto(rs.getDouble("em_aberto"));
-				p.setSituacao(rs.getString("situacao"));
+				VendaBean venda = new VendaBean();
+				venda.setId(rs.getInt("id"));
+				venda.getCliente().setNome(rs.getString("nome"));
+				venda.setData(rs.getDate("data"));
+				venda.setValor(rs.getDouble("valor"));
+				venda.setQtd(rs.getInt("qtd"));
+				venda.getCliente().setId(rs.getInt("id_cliente"));
+				venda.setTotal_pago(rs.getDouble("total_pago"));
+				venda.setEm_aberto(rs.getDouble("em_aberto"));
+				venda.setSituacao(rs.getString("situacao"));
 
-				lista.add(p);
+				lista.add(venda);
 			}
 
 		} catch (SQLException ex) {
@@ -95,7 +93,7 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public boolean inserePagamento(VendaBean v, PagamentoBean p) {
+	public boolean inserePagamento(VendaBean venda, PagamentoBean pagamento) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -103,9 +101,9 @@ public class VendaDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setInt(1, v.getId());
-			ps.setDouble(2, p.getValor());
-			ps.setDate(3, new java.sql.Date(p.getData().getTime()));
+			ps.setInt(1, venda.getId());
+			ps.setDouble(2, pagamento.getValor());
+			ps.setDate(3, new java.sql.Date(pagamento.getData().getTime()));
 
 			ps.execute();
 
@@ -173,9 +171,7 @@ public class VendaDAO {
 			ps.setInt(1, codvenda);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean p = new VendaBean();
-				p.setEm_aberto(rs.getDouble("em_aberto"));
-				valor = p.getEm_aberto();
+				valor = rs.getDouble("em_aberto");
 			}
 
 		} catch (SQLException ex) {
@@ -201,9 +197,7 @@ public class VendaDAO {
 			ps.setInt(1, codvenda);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				PagamentoBean p = new PagamentoBean();
-				p.getVenda().setId(rs.getInt("qtd"));
-				valor = p.getVenda().getId();
+				valor = rs.getInt("qtd");
 			}
 
 		} catch (SQLException ex) {
@@ -232,11 +226,11 @@ public class VendaDAO {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean p = new VendaBean();
-				p.getCliente().setNome(rs.getString("nome"));
-				p.setValor(rs.getDouble("total"));
+				VendaBean venda = new VendaBean();
+				venda.getCliente().setNome(rs.getString("nome"));
+				venda.setValor(rs.getDouble("total"));
 
-				lista.add(p);
+				lista.add(venda);
 			}
 
 		} catch (SQLException ex) {
@@ -264,9 +258,8 @@ public class VendaDAO {
 			ps.setDate(2, new java.sql.Date(busca.getPeriodofinal().getTime()));
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean p = new VendaBean();
-				p.setSoma_total(rs.getDouble("soma"));
-				valor = p.getSoma_total();
+
+				valor = rs.getDouble("soma");
 
 			}
 
@@ -292,9 +285,8 @@ public class VendaDAO {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean p = new VendaBean();
-				p.setSoma_total(rs.getDouble("soma"));
-				valor = p.getSoma_total();
+
+				valor = rs.getDouble("soma");
 
 			}
 
@@ -320,9 +312,8 @@ public class VendaDAO {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean p = new VendaBean();
-				p.setReceber_geral(rs.getDouble("valor"));
-				valor = p.getReceber_geral();
+
+				valor = rs.getDouble("valor");
 
 			}
 
@@ -356,13 +347,13 @@ public class VendaDAO {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean p = new VendaBean();
-				p.getCliente().setNome(rs.getString("nome"));
-				p.setEm_aberto(rs.getDouble("em_aberto"));
-				p.setData(rs.getDate("data"));
-				p.setValor(rs.getDouble("valor"));
+				VendaBean venda = new VendaBean();
+				venda.getCliente().setNome(rs.getString("nome"));
+				venda.setEm_aberto(rs.getDouble("em_aberto"));
+				venda.setData(rs.getDate("data"));
+				venda.setValor(rs.getDouble("valor"));
 
-				lista.add(p);
+				lista.add(venda);
 			}
 
 		} catch (SQLException ex) {
