@@ -1,7 +1,6 @@
 package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.ClienteDAO;
-import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.ClienteBean;
 import br.com.homefashion.model.VendaBean;
 
