@@ -21,11 +21,17 @@ public class ClienteController {
 	private List<ClienteBean> listaCliente;
 	private String campoBusca;
 	private VendaBean venda;
+	private int codUsuario;
 
 	public ClienteController() {
 		cliente = new ClienteBean();
 		venda = new VendaBean();
 		campoBusca = "";
+
+		// Recuperar id da sessão
+		FacesContext fc = FacesContext.getCurrentInstance();
+		codUsuario = Integer.parseInt(fc.getExternalContext().getSessionMap()
+				.get("usuario").toString());
 	}
 
 	public void limparBusca() {
