@@ -6,6 +6,11 @@ public class ClienteBean {
 	private String nome;
 	private Integer telefone1;
 	private Integer telefone2;
+	private Usuario usuario;
+	
+	public ClienteBean(){
+		usuario = new Usuario();
+	}
 
 	public Integer getId() {
 		return id;
@@ -37,6 +42,14 @@ public class ClienteBean {
 
 	public void setTelefone2(Integer telefone2) {
 		this.telefone2 = telefone2;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
