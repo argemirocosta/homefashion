@@ -1,12 +1,14 @@
 package br.com.homefashion.dao;
 
 import br.com.homefashion.connection.ConnectionFactory;
+import br.com.homefashion.model.ClienteBean;
 import br.com.homefashion.model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import javax.faces.context.FacesContext;
 
@@ -47,5 +49,32 @@ public class UsuarioDAO {
 			ex.printStackTrace();
 		}
 		return u;
+	}
+	
+	public boolean insereUsuario(Usuario usuario) {
+
+		conexao = ConnectionFactory.getConnection();
+
+		String sql = "insert into vendas.usuario (nome, login, senha, ativo) values (?,?,?,true)";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setString(1, usuario.getNome().toUpperCase());
+			ps.setString(2, usuario.getLogin().toUpperCase());
+			ps.setString(3, usuario.getSenha().toUpperCase());
+
+			ps.execute();
+
+			return true;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return false;
 	}
 }

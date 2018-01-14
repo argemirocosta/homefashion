@@ -10,8 +10,7 @@
 	<title>Home Fashion - Sistema de Vendas</title>
 	<center>
 		<p:outputLabel value="Home Fashion"
-			style="font-size: 60px;font-family:Arial;font-weight: bold">
-		</p:outputLabel>
+			style="font-size: 60px;font-family:Arial;font-weight: bold"/>
 	</center>
 
 	<link href="css/style.css" type="text/css" rel="stylesheet" />
@@ -42,11 +41,65 @@
 
 				<p:separator />
 				<p:commandButton value="Entrar" icon="confirmar"
-					action="#{usuarioSessionController.login()}" update=":form:growl" />
+					action="#{usuarioSessionController.login()}" />
 			</p:panel>
 
 		</center>
 	</h:form>
+
+	<br></br>
+	<br></br>
+	<br></br>
+
+	<h:form id="formBtnCadastro">
+
+		<center>
+			<h3>Não é cadastrado? Clique abaixo!</h3>
+			<p:commandButton value="Cadastrar" icon="alterar"
+				onclick="PF('dlgCadastro').show();" />
+		</center>
+
+	</h:form>
+
+	<p:dialog widgetVar="dlgCadastro" header="Cadastro de Usuário"
+		height="auto" width="auto" resizable="false" modal="true">
+		<h:form id="formCadastro">
+
+			<p:panelGrid columns="2" styleClass="semBorda">
+				<p:outputLabel value="Nome:" />
+				<p:inputText value="#{usuarioSessionController.usuario.nome}"
+					required="true" requiredMessage="Informe o usuário." />
+
+				<p:outputLabel value="Login:" />
+				<p:inputText value="#{usuarioSessionController.usuario.login}"
+					required="true" requiredMessage="Informe o usuário." />
+
+				<p:outputLabel value="Senha:" />
+				<p:password value="#{usuarioSessionController.usuario.senha}"
+					required="true" requiredMessage="Informe a senha." />
+			</p:panelGrid>
+
+			<br></br>
+
+			<p:separator />
+
+			<br></br>
+
+			<center>
+				<p:commandButton value="Cadastrar" icon="confirmar"
+					action="#{usuarioSessionController.insereUsuario()}"
+					update=":form:growl, :formCadastro" />
+
+				<p:commandButton value="Fechar" icon="cancelar"
+					style="margin-left:10px" onclick="PF('dlgCadastro').hide();" />
+			</center>
+
+			<br></br>
+
+		</h:form>
+
+	</p:dialog>
+
 </h:body>
 </html>
 

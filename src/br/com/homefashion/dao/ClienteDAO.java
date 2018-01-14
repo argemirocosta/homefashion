@@ -2,6 +2,7 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.connection.ConnectionFactory;
 import br.com.homefashion.model.ClienteBean;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.context.FacesContext;
 
 public class ClienteDAO {
 
