@@ -130,7 +130,8 @@
 			onclick="PF('dlgRelatorios').show();"
 			style="float:right;margin-left:10px;margin-right:20px" />
 
-		<h1>Home Fashion</h1>
+		<p:outputLabel value="Home Fashion"
+			style="font-size: 30px;font-family:Arial;font-weight: bold" />
 
 		<p:separator />
 
@@ -140,14 +141,14 @@
 		<p:growl id="msg2" />
 		<p:panelGrid columns="7" styleClass="semBorda">
 
-			<p:outputLabel value="Buscar por: " />
+			<p:outputLabel value="Buscar: " />
 
 			<p:inputText id="cpBuscaNome" value="#{clienteController.campoBusca}"
 				maxlength="30" size="25">
-				<p:watermark for="cpBuscaNome" value="Digite o nome do cliente..." />
+				<p:watermark for="cpBuscaNome" value="Digite o nome do cliente" />
 			</p:inputText>
 
-			<p:commandButton value="Buscar"
+			<p:commandButton value="Pesquisar"
 				action="#{clienteController.buscaNome()}" update=":formTab2"
 				icon="buscar" />
 			<p:commandButton value="Limpar"
@@ -442,25 +443,40 @@
 
 			<p:dataTable id="tabRel1"
 				value="#{vendaController.listaVendasPorCliente}" var="tabela"
-				emptyMessage="Nenhuma venda registrada" rows="20" paginator="true"
+				emptyMessage="Nenhuma venda registrada" rows="18" paginator="true"
 				paginatorPosition="bottom">
+				<center>
+					<p:column headerText="Cliente">
+						<p:outputLabel value="#{tabela.cliente.nome}" />
+					</p:column>
 
-				<p:column headerText="Cliente">
-					<center>
-						<p:outputLabel value="#{tabela.cliente.nome}">
-						</p:outputLabel>
-					</center>
-				</p:column>
-
-				<p:column headerText="Valor">
-					<center>
+					<p:column headerText="Valor">
 						<p:outputLabel value="#{tabela.valor}">
 							<f:convertNumber type="currency" currencySymbol="R$" />
 						</p:outputLabel>
-					</center>
-				</p:column>
+					</p:column>
+
+				</center>
 
 			</p:dataTable>
+
+			<p:panelGrid columns="3">
+				<center>
+					<h3>Opções para Exportar:</h3>
+
+					<h:commandLink>
+						<p:graphicImage value="imgs/csv.png" width="24" />
+						<p:dataExporter type="csv" target="tabRel1" fileName="ranking" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="imgs/pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="tabRel1" fileName="ranking" />
+					</h:commandLink>
+
+				</center>
+
+			</p:panelGrid>
 
 		</h:form>
 	</p:dialog>
@@ -472,42 +488,51 @@
 
 			<p:dataTable id="tabRel2"
 				value="#{vendaController.listaVendasEmAberto}" var="tabela"
-				emptyMessage="Nenhuma venda registrada" rows="20" paginator="true"
+				emptyMessage="Nenhuma venda registrada" rows="18" paginator="true"
 				paginatorPosition="bottom">
 
 				<p:column headerText="Cliente" sortBy="#{tabela.cliente.nome}"
 					filterBy="#{tabela.cliente.nome}">
-					<center>
-						<p:outputLabel value="#{tabela.cliente.nome}">
-						</p:outputLabel>
-					</center>
+					<p:outputLabel value="#{tabela.cliente.nome}" />
 				</p:column>
 
 				<p:column headerText="Valor" sortBy="#{tabela.valor}">
-					<center>
-						<p:outputLabel value="#{tabela.valor}">
-							<f:convertNumber type="currency" currencySymbol="R$" />
-						</p:outputLabel>
-					</center>
+					<p:outputLabel value="#{tabela.valor}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</p:outputLabel>
 				</p:column>
 
 				<p:column headerText="Em Aberto" sortBy="#{tabela.em_aberto}">
-					<center>
-						<p:outputLabel value="#{tabela.em_aberto}">
-							<f:convertNumber type="currency" currencySymbol="R$" />
-						</p:outputLabel>
-					</center>
+					<p:outputLabel value="#{tabela.em_aberto}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</p:outputLabel>
 				</p:column>
 
 				<p:column headerText="Data Compra" sortBy="#{tabela.data}">
-					<center>
-						<p:outputLabel value="#{tabela.data}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</p:outputLabel>
-					</center>
+					<p:outputLabel value="#{tabela.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:outputLabel>
 				</p:column>
 
 			</p:dataTable>
+
+			<p:panelGrid columns="3">
+				<center>
+					<h3>Opções para Exportar:</h3>
+
+					<h:commandLink>
+						<p:graphicImage value="imgs/csv.png" width="24" />
+						<p:dataExporter type="csv" target="tabRel2" fileName="pendentes" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="imgs/pdf.png" width="24" />
+						<p:dataExporter type="pdf" target="tabRel2" fileName="pendentes" />
+					</h:commandLink>
+
+				</center>
+
+			</p:panelGrid>
 
 		</h:form>
 	</p:dialog>
