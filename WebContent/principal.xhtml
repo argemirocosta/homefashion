@@ -123,10 +123,10 @@
 		<p:growl id="msg" />
 
 
-		<p:commandButton value="Sair do Sistema" icon="cancelar"
+		<p:commandButton value="Sair do Sistema" icon="sair"
 			action="#{usuarioSessionController.logout()}" style="float:right;" />
 
-		<p:commandButton value="Relatórios" icon="buscar"
+		<p:commandButton value="Relatórios" icon="relatorios"
 			onclick="PF('dlgRelatorios').show();"
 			style="float:right;margin-left:10px;margin-right:20px" />
 
@@ -206,7 +206,7 @@
 							target="#{clienteController.p}" />
 					</p:commandButton>
 
-					<p:commandButton onclick="PF('dlgVender').show();" icon="novo"
+					<p:commandButton onclick="PF('dlgVender').show();" icon="sifrao"
 						action="#{vendaController.limparCampos}"
 						update=":formVender:tabVendas">
 						<f:setPropertyActionListener value="#{tabela}"
@@ -246,7 +246,7 @@
 					<p:commandButton value="Vender"
 						action="#{vendaController.insereVenda()}"
 						update=":formCad, :formTab2, :formVender:pnlgridVender"
-						icon="confirmar" />
+						icon="carrinho" />
 					<p:commandButton value="Fechar" onclick="PF('dlgVender').hide();"
 						icon="cancelar" />
 				</p:panelGrid>
@@ -315,7 +315,8 @@
 
 				<p:column headerText="Pagar" width="10%">
 					<center>
-						<p:commandButton icon="confirmar" process="@this" immediate="true"
+						<p:commandButton icon="calculadora" process="@this"
+							immediate="true"
 							action="#{vendaController.limparListaPagamentos}"
 							onclick="PF('dlgPagamentos').show();"
 							update=":formPagamentos:tabPagamentos">
@@ -355,7 +356,7 @@
 					<p:commandButton value="Pagar"
 						action="#{vendaController.inserePagamento()}"
 						update=":formPagamentos:tabPagamentos, msg2, :formVender:tabVendas, :formPagamentos:pnlgridPagamentos"
-						icon="confirmar" />
+						icon="calculadorasifrao" />
 					<p:commandButton value="Fechar"
 						onclick="PF('dlgPagamentos').hide();" icon="cancelar" />
 				</p:panelGrid>

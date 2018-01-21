@@ -2,43 +2,77 @@
     Created on : 27/10/2015, 10:04:47
     Author     : emerson
 */
-
 body {
-    font-size: 12px;
-    font-family: sans-serif;
+	font-size: 12px;
+	font-family: sans-serif;
 }
 
 .semBorda tr, semBorda row, .semBorda td {
-    border: none !important;
+	border: none !important;
 }
 
 .ui-icon.novo {
-    background-image: url("../imgs/novo.png") !important;
+	background-image: url("../imgs/novo.png") !important;
 }
 
 .ui-icon.buscar {
-    background-image: url("../imgs/buscar.png") !important;
+	background-image: url("../imgs/buscar.png") !important;
 }
 
 .ui-icon.cancelar {
-    background-image: url("../imgs/cancelar.png") !important;
+	background-image: url("../imgs/cancelar.png") !important;
 }
 
 .ui-icon.confirmar {
-    background-image: url("../imgs/confirmar.png") !important;
+	background-image: url("../imgs/confirmar.png") !important;
 }
 
 .ui-icon.alterar {
-    background-image: url("../imgs/alterar.png") !important;
+	background-image: url("../imgs/alterar.png") !important;
 }
 
 .ui-icon.limpar {
-    background-image: url("../imgs/limpar.png") !important;
+	background-image: url("../imgs/limpar.png") !important;
 }
 
 .ui-icon.financeiro {
-    background-image: url("../imgs/financeiro.png") !important;
-    size: 1;
+	background-image: url("../imgs/financeiro.png") !important;
+	size: 1;
+}
+
+.ui-icon.relatorios {
+	background-image: url("../imgs/relatorios.png") !important;
+	size: 1;
+}
+
+.ui-icon.sifrao {
+	background-image: url("../imgs/sifrao.png") !important;
+	size: 1;
+}
+
+.ui-icon.sair {
+	background-image: url("../imgs/sair.png") !important;
+	size: 1;
+}
+
+.ui-icon.carrinho {
+	background-image: url("../imgs/carrinho.png") !important;
+	size: 1;
+}
+
+.ui-icon.calculadora {
+	background-image: url("../imgs/calculadora.png") !important;
+	size: 1;
+}
+
+.ui-icon.calculadorasifrao {
+	background-image: url("../imgs/calculadorasifrao.png") !important;
+	size: 1;
+}
+
+.ui-icon.pessoa {
+	background-image: url("../imgs/pessoa.png") !important;
+	size: 1;
 }
 
 .rowRed td {
