@@ -38,14 +38,8 @@ public class UsuarioSessionController {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.getSessionMap().put("usuario_session", usuarioLogado);
 
-			// Usuario us = (Usuario)
-			// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario_session");
-
 			return "principal.faces?faces-redirect=true";
 		} else {
-			// FacesContext.getCurrentInstance().addMessage(null, new
-			// FacesMessage(FacesMessage.SEVERITY_WARN,
-			// "Email ou senha inválidos!", "Aviso"));
 
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
 					"Aviso", "Login ou senha inválidos!");
@@ -83,7 +77,7 @@ public class UsuarioSessionController {
 					"Usuario cadastrado com sucesso!");
 			FacesContext ct = FacesContext.getCurrentInstance();
 			ct.addMessage(null, msg);
-			
+
 			RequestContext.getCurrentInstance().execute(
 					"PF('dlgCadastro').hide();");
 
