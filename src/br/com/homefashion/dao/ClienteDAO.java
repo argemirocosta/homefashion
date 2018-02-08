@@ -1,7 +1,8 @@
 package br.com.homefashion.dao;
 
-import br.com.homefashion.connection.ConnectionFactory;
+import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.ClienteBean;
+import br.com.homefashion.model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,17 +18,22 @@ public class ClienteDAO {
 
 	Connection conexao = null;
 
+	// PEGA O ID DO USUÁRIO LOGADO
+	Usuario us = (Usuario) FacesContext.getCurrentInstance()
+			.getExternalContext().getSessionMap().get("usuario_session");
+
 	public List<ClienteBean> buscaNome(String nome) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where upper(nome) like upper(?) order by nome";
+		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where upper(nome) like upper(?) and usuario = ? order by nome";
 
 		List<ClienteBean> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, "%" + nome + "%");
+			ps.setInt(2, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ClienteBean cliente = new ClienteBean();
@@ -110,7 +116,7 @@ public class ClienteDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "insert into vendas.clientes (nome, telefone1, telefone2) values (?,?,?)";
+		String sql = "insert into vendas.clientes (nome, telefone1, telefone2, usuario) values (?,?,?,?)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -127,6 +133,8 @@ public class ClienteDAO {
 			} else {
 				ps.setInt(3, cliente.getTelefone2());
 			}
+
+			ps.setInt(4, us.getId());
 
 			ps.execute();
 
@@ -147,12 +155,13 @@ public class ClienteDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes order by nome";
+		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where usuario = ? order by nome";
 
 		List<ClienteBean> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ClienteBean cliente = new ClienteBean();

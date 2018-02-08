@@ -1,9 +1,11 @@
 package br.com.homefashion.dao;
 
-import br.com.homefashion.connection.ConnectionFactory;
+import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.BuscaRelatorioBean;
 import br.com.homefashion.model.PagamentoBean;
+import br.com.homefashion.model.Usuario;
 import br.com.homefashion.model.VendaBean;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,15 +13,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 public class VendaDAO {
 
 	Connection conexao = null;
+
+	// PEGA O ID DO USUÁRIO LOGADO
+	Usuario us = (Usuario) FacesContext.getCurrentInstance()
+			.getExternalContext().getSessionMap().get("usuario_session");
 
 	public boolean insereVenda(VendaBean venda) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "insert into vendas.venda (id_cliente, valor, qtd, data) values (?,?,?,?)";
+		String sql = "insert into vendas.venda (id_cliente, valor, qtd, data, usuario) values (?,?,?,?,?)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -27,6 +35,7 @@ public class VendaDAO {
 			ps.setDouble(2, venda.getValor());
 			ps.setInt(3, venda.getQtd());
 			ps.setDate(4, new java.sql.Date(venda.getData().getTime()));
+			ps.setInt(5, us.getId());
 
 			ps.execute();
 
@@ -97,13 +106,14 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "insert into vendas.pagamentos (id_venda, valor_pago, data_pagamento) values (?,?,?)";
+		String sql = "insert into vendas.pagamentos (id_venda, valor_pago, data_pagamento, usuario) values (?,?,?,?)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, venda.getId());
 			ps.setDouble(2, pagamento.getValor());
 			ps.setDate(3, new java.sql.Date(pagamento.getData().getTime()));
+			ps.setInt(4, us.getId());
 
 			ps.execute();
 
@@ -164,11 +174,12 @@ public class VendaDAO {
 		String sql = "select v.id, (v.valor - sum(coalesce(p.valor_pago, 0))) as em_aberto "
 				+ "from vendas.venda v "
 				+ "left join vendas.pagamentos p on (v.id = p.id_venda) "
-				+ "where v.id = ? group by v.id ";
+				+ "where v.id = ? and v.usuario = ? group by v.id ";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, codvenda);
+			ps.setInt(2, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				valor = rs.getDouble("em_aberto");
@@ -218,12 +229,14 @@ public class VendaDAO {
 		String sql = "select v.id_cliente, c.nome, sum(v.valor) as total "
 				+ "from vendas.venda v "
 				+ "left join vendas.clientes c on (v.id_cliente = c.id) "
+				+ "where v.usuario = ?"
 				+ "group by v.id_cliente, c.nome order by total desc";
 
 		List<VendaBean> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				VendaBean venda = new VendaBean();
@@ -248,7 +261,7 @@ public class VendaDAO {
 	public Double vendasPorPeriodo(BuscaRelatorioBean busca) {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select sum(valor) as soma from vendas.venda where data between ? and ?";
+		String sql = "select sum(valor) as soma from vendas.venda where data between ? and ? and usuario = ?";
 		Double valor = 0.0;
 
 		try {
@@ -256,6 +269,7 @@ public class VendaDAO {
 			ps.setDate(1,
 					new java.sql.Date(busca.getPeriodoinicial().getTime()));
 			ps.setDate(2, new java.sql.Date(busca.getPeriodofinal().getTime()));
+			ps.setInt(3, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -278,11 +292,12 @@ public class VendaDAO {
 	public Double vendasTotal() {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select sum(valor) as soma from vendas.venda";
+		String sql = "select sum(valor) as soma from vendas.venda where usuario = ?";
 		Double valor = 0.0;
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -305,11 +320,12 @@ public class VendaDAO {
 	public Double receberGeral() {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select sum(valor_pago) as valor from vendas.pagamentos";
+		String sql = "select sum(valor_pago) as valor from vendas.pagamentos where usuario = ?";
 		Double valor = 0.0;
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -338,13 +354,14 @@ public class VendaDAO {
 				+ "left join vendas.clientes c on (v.id_cliente = c.id) "
 				+ "left join vendas.pagamentos p on (v.id = p.id_venda) "
 				+ "group by v.id, v.id_cliente, c.nome, v.valor, v.data "
-				+ "having coalesce(v.valor - sum(p.valor_pago), v.valor) > 0 "
+				+ "having coalesce(v.valor - sum(p.valor_pago), v.valor) > 0 and v.usuario = ? "
 				+ "order by em_aberto desc ";
 
 		List<VendaBean> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				VendaBean venda = new VendaBean();
