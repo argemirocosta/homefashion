@@ -137,7 +137,7 @@ public class VendaDAO {
 		String sql = "select p.id_venda, p.valor_pago, p.data_pagamento, v.data "
 				+ "from vendas.pagamentos p "
 				+ "left join vendas.venda v on (p.id_venda = v.id) "
-				+ "where v.id = ? " + "order by v.data";
+				+ "where v.id = ? " + "order by v.data desc, p.data_pagamento desc";
 
 		List<PagamentoBean> lista = new ArrayList<>();
 
