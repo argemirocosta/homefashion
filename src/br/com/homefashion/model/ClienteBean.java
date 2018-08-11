@@ -51,5 +51,5 @@ public class ClienteBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
+	
 }
