@@ -20,8 +20,7 @@ public class VendaDAO {
 	Connection conexao = null;
 
 	// PEGA O ID DO USUÁRIO LOGADO
-	Usuario us = (Usuario) FacesContext.getCurrentInstance()
-			.getExternalContext().getSessionMap().get("usuario_session");
+	Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario_session");
 
 	public boolean insereVenda(VendaBean venda) {
 
@@ -83,8 +82,8 @@ public class VendaDAO {
 				venda.setValor(rs.getDouble("valor"));
 				venda.setQtd(rs.getInt("qtd"));
 				venda.getCliente().setId(rs.getInt("id_cliente"));
-				venda.setTotal_pago(rs.getDouble("total_pago"));
-				venda.setEm_aberto(rs.getDouble("em_aberto"));
+				venda.setTotalPago(rs.getDouble("total_pago"));
+				venda.setEmAberto(rs.getDouble("em_aberto"));
 				venda.setSituacao(rs.getString("situacao"));
 
 				lista.add(venda);
@@ -366,7 +365,7 @@ public class VendaDAO {
 			while (rs.next()) {
 				VendaBean venda = new VendaBean();
 				venda.getCliente().setNome(rs.getString("nome"));
-				venda.setEm_aberto(rs.getDouble("em_aberto"));
+				venda.setEmAberto(rs.getDouble("em_aberto"));
 				venda.setData(rs.getDate("data"));
 				venda.setValor(rs.getDouble("valor"));
 

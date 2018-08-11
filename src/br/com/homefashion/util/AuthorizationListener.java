@@ -45,10 +45,6 @@ public class AuthorizationListener implements PhaseListener {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-		} else {
-			if (isLoginPage) {
-			} else {
-			}
 		}
 	}
 

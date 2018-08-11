@@ -1,6 +1,5 @@
 package br.com.homefashion.controller;
 
-import br.com.homefashion.dao.ClienteDAO;
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.util.SessionUtil;
@@ -21,6 +20,7 @@ public class UsuarioSessionController {
 	private Usuario usuario;
 	private Usuario usuarioLogado;
 	private String sessaoExpirada;
+	private UsuarioDAO uDao = new UsuarioDAO();
 
 	public UsuarioSessionController() {
 		usuario = new Usuario();
@@ -29,14 +29,11 @@ public class UsuarioSessionController {
 	}
 
 	public String login() {
-
-		UsuarioDAO udao = new UsuarioDAO();
-		usuarioLogado = udao.login(usuario);
+		usuarioLogado = uDao.login(usuario);
 
 		if (usuarioLogado != null) {
 
-			FacesContext.getCurrentInstance().getExternalContext()
-					.getSessionMap().put("usuario_session", usuarioLogado);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario_session", usuarioLogado);
 
 			return "principal.faces?faces-redirect=true";
 		} else {
@@ -67,19 +64,15 @@ public class UsuarioSessionController {
 	}
 
 	public void insereUsuario() {
-
-		UsuarioDAO uDao = new UsuarioDAO();
 		boolean cadastrou = uDao.insereUsuario(usuario);
 
 		if (cadastrou) {
 
-			FacesMessage msg = new FacesMessage(
-					"Usuario cadastrado com sucesso!");
+			FacesMessage msg = new FacesMessage("Usuario cadastrado com sucesso!");
 			FacesContext ct = FacesContext.getCurrentInstance();
 			ct.addMessage(null, msg);
 
-			RequestContext.getCurrentInstance().execute(
-					"PF('dlgCadastro').hide();");
+			RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide();");
 
 			usuario.setLogin("");
 			usuario.setNome("");
@@ -109,8 +102,7 @@ public class UsuarioSessionController {
 	}
 
 	public String getSessaoExpirada() {
-		sessaoExpirada = (String) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("sessaoExpirada");
+		sessaoExpirada = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessaoExpirada");
 		return sessaoExpirada;
 	}
 }

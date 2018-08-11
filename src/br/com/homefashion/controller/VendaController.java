@@ -27,9 +27,10 @@ public class VendaController {
 	private List<VendaBean> listaVendasPorCliente;
 	private List<VendaBean> listaVendasEmAberto;
 	private BuscaRelatorioBean busca;
-	private Double soma_geral;
-	private Double receber_geral;
-	private Double receber_geral_total;
+	private Double somaGeral;
+	private Double receberGeral;
+	private Double receberGeralTotal;
+	private VendaDAO vDao = new VendaDAO();
 
 	public VendaController() {
 		venda = new VendaBean();
@@ -42,7 +43,7 @@ public class VendaController {
 		busca = new BuscaRelatorioBean();
 		busca.setPeriodoinicial(new java.util.Date(System.currentTimeMillis()));
 		busca.setPeriodofinal(new java.util.Date(System.currentTimeMillis()));
-		soma_geral = 0.0;
+		somaGeral = 0.0;
 		listaVendasEmAberto = new ArrayList<VendaBean>();
 	}
 
@@ -66,8 +67,7 @@ public class VendaController {
 
 	}
 
-	public void verificarVendaPaga() {
-		VendaDAO vDao = new VendaDAO();
+	public void verificarVendaPaga() {	
 		emAberto = vDao.valorEmAberto(venda.getId());
 		if (emAberto > 0) {
 			RequestContext.getCurrentInstance().execute(
@@ -80,16 +80,11 @@ public class VendaController {
 	}
 
 	public void insereVenda() {
-
-		VendaDAO vDao = new VendaDAO();
 		boolean cadastrou = vDao.insereVenda(venda);
 
 		if (cadastrou) {
-
 			limparCampos();
-
-			RequestContext.getCurrentInstance().execute(
-					"PF('dlgVender').hide();");
+			RequestContext.getCurrentInstance().execute("PF('dlgVender').hide();");
 
 			FacesMessage msg = new FacesMessage("Venda Realizada");
 			FacesContext ct = FacesContext.getCurrentInstance();
@@ -103,13 +98,11 @@ public class VendaController {
 	}
 
 	public void inserePagamento() {
-		VendaDAO vDao = new VendaDAO();
 		int pagamentoVenda = vDao.semPagamentos(venda.getId());
 		emAberto = vDao.valorEmAberto(venda.getId());
 
 		if (pagamento.getValor() > emAberto) {
-			FacesMessage msg = new FacesMessage(
-					"Pagamento maior que a venda não é permitido!");
+			FacesMessage msg = new FacesMessage("Pagamento maior que a venda não é permitido!");
 			FacesContext ct = FacesContext.getCurrentInstance();
 			ct.addMessage(null, msg);
 
@@ -121,13 +114,13 @@ public class VendaController {
 				getListaPagamentos();
 				listaVendas = null;
 				getListaVendas();
+				
 				FacesMessage msg = new FacesMessage("Pagamento Realizado");
 				FacesContext ct = FacesContext.getCurrentInstance();
 				ct.addMessage(null, msg);
 				pagamento.setValor(null);
 			} else {
-				FacesMessage msg = new FacesMessage(
-						"Erro ao realizar Pagamento");
+				FacesMessage msg = new FacesMessage("Erro ao realizar Pagamento");
 				FacesContext ct = FacesContext.getCurrentInstance();
 				ct.addMessage(null, msg);
 			}
@@ -142,21 +135,16 @@ public class VendaController {
 	}
 
 	public void somaGeral() {
-		VendaDAO vDao = new VendaDAO();
-		soma_geral = vDao.vendasPorPeriodo(busca);
+		somaGeral = vDao.vendasPorPeriodo(busca);
 	}
 
 	public void somaGeralTotal() {
-		VendaDAO vDao = new VendaDAO();
-		soma_geral = vDao.vendasTotal();
-
-		receber_geral_total = soma_geral - receber_geral;
+		somaGeral = vDao.vendasTotal();
+		receberGeralTotal = somaGeral - receberGeral;
 	}
 
 	public void recebidoGeral() {
-		VendaDAO vDao = new VendaDAO();
-		receber_geral = vDao.receberGeral();
-
+		receberGeral = vDao.receberGeral();
 		somaGeralTotal();
 	}
 
@@ -169,7 +157,6 @@ public class VendaController {
 	}
 
 	public List<VendaBean> getListaVendas() {
-		VendaDAO vDao = new VendaDAO();
 		if (listaVendas == null) {
 			listaVendas = vDao.listarVendas(venda);
 		}
@@ -189,8 +176,6 @@ public class VendaController {
 	}
 
 	public List<PagamentoBean> getListaPagamentos() {
-		VendaDAO vDao = new VendaDAO();
-
 		if (listaPagamentos == null) {
 			listaPagamentos = vDao.listarPagamentos(venda.getId());
 		}
@@ -210,8 +195,6 @@ public class VendaController {
 	}
 
 	public List<VendaBean> getListaVendasPorCliente() {
-		VendaDAO vDao = new VendaDAO();
-
 		if (listaVendasPorCliente == null) {
 			listaVendasPorCliente = vDao.vendasPorCliente();
 		}
@@ -230,17 +213,15 @@ public class VendaController {
 		this.busca = busca;
 	}
 
-	public Double getSoma_geral() {
-		return soma_geral;
+	public Double getSomaGeral() {
+		return somaGeral;
 	}
 
-	public void setSoma_geral(Double soma_geral) {
-		this.soma_geral = soma_geral;
+	public void setSomaGeral(Double somaGeral) {
+		this.somaGeral = somaGeral;
 	}
 
 	public List<VendaBean> getListaVendasEmAberto() {
-		VendaDAO vDao = new VendaDAO();
-
 		if (listaVendasEmAberto == null) {
 			listaVendasEmAberto = vDao.aReceber();
 
@@ -252,20 +233,19 @@ public class VendaController {
 		this.listaVendasEmAberto = listaVendasEmAberto;
 	}
 
-	public Double getReceber_geral() {
-		return receber_geral;
+	public Double getReceberGeral() {
+		return receberGeral;
 	}
 
-	public void setReceber_geral(Double receber_geral) {
-		this.receber_geral = receber_geral;
+	public void setReceberGeral(Double receberGeral) {
+		this.receberGeral = receberGeral;
 	}
 
-	public Double getReceber_geral_total() {
-		return receber_geral_total;
+	public Double getReceberGeralTotal() {
+		return receberGeralTotal;
 	}
 
-	public void setReceber_geral_total(Double receber_geral_total) {
-		this.receber_geral_total = receber_geral_total;
+	public void setReceberGeralTotal(Double receberGeralTotal) {
+		this.receberGeralTotal = receberGeralTotal;
 	}
-
 }

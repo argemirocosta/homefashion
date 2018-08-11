@@ -21,17 +21,12 @@ public class ClienteController {
 	private List<ClienteBean> listaCliente;
 	private String campoBusca;
 	private VendaBean venda;
-	private int codUsuario;
+	private ClienteDAO cDao = new ClienteDAO();
 
 	public ClienteController() {
 		cliente = new ClienteBean();
 		venda = new VendaBean();
-		campoBusca = "";
-
-		// Recuperar id da sessão
-		FacesContext fc = FacesContext.getCurrentInstance();
-		codUsuario = Integer.parseInt(fc.getExternalContext().getSessionMap()
-				.get("usuario").toString());
+		campoBusca = "";		
 	}
 
 	public void limparBusca() {
@@ -45,22 +40,18 @@ public class ClienteController {
 	}
 
 	public void buscaNome() {
-		ClienteDAO cDao = new ClienteDAO();
 		listaCliente = cDao.buscaNome(campoBusca);
 	}
 
 	public void deleteCliente() {
-
-		ClienteDAO cDao = new ClienteDAO();
 		boolean deletou = cDao.deleteCliente(cliente);
 
 		if (deletou) {
 			limparCampos();
-			RequestContext.getCurrentInstance().execute(
-					"PF('dlgDeleteCliente').hide();");
+			RequestContext.getCurrentInstance().execute("PF('dlgDeleteCliente').hide();");
+			
 			FacesMessage msg = new FacesMessage("Cliente deletado");
 			FacesContext ct = FacesContext.getCurrentInstance();
-
 			ct.addMessage(null, msg);
 		} else {
 			FacesMessage msg = new FacesMessage("erro ao deletar");
@@ -70,15 +61,12 @@ public class ClienteController {
 	}
 
 	public void editeCliente() {
-
-		ClienteDAO cDao = new ClienteDAO();
 		boolean alterou = cDao.editeCliente(cliente);
 
 		if (alterou) {
 			limparCampos();
 
-			RequestContext.getCurrentInstance().execute(
-					"PF('dlgAltCliente').hide();");
+			RequestContext.getCurrentInstance().execute("PF('dlgAltCliente').hide();");
 
 			FacesMessage msg = new FacesMessage("Cliente Alterado");
 			FacesContext ct = FacesContext.getCurrentInstance();
@@ -91,16 +79,12 @@ public class ClienteController {
 	}
 
 	public void insereCliente() {
-
-		ClienteDAO cDao = new ClienteDAO();
 		boolean cadastrou = cDao.insereCliente(cliente);
 
 		if (cadastrou) {
-
 			limparCampos();
-
-			RequestContext.getCurrentInstance().execute(
-					"PF('dlgCadCliente').hide();");
+			
+			RequestContext.getCurrentInstance().execute("PF('dlgCadCliente').hide();");
 
 			FacesMessage msg = new FacesMessage("Cliente cadastrado");
 			FacesContext ct = FacesContext.getCurrentInstance();
@@ -121,7 +105,6 @@ public class ClienteController {
 	}
 
 	public List<ClienteBean> getListaCliente() {
-		ClienteDAO cDao = new ClienteDAO();
 		if (listaCliente == null) {
 			listaCliente = cDao.listarClientes();
 		}

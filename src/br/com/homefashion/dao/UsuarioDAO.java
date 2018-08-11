@@ -1,14 +1,12 @@
 package br.com.homefashion.dao;
 
 import br.com.homefashion.factory.ConnectionFactory;
-import br.com.homefashion.model.ClienteBean;
 import br.com.homefashion.model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.faces.context.FacesContext;
 
@@ -47,6 +45,12 @@ public class UsuarioDAO {
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
 		}
 		return u;
 	}

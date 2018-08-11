@@ -286,7 +286,7 @@
 
 				<p:column headerText="Total Pago" width="10%">
 					<center>
-						<p:outputLabel value="#{tabela.total_pago}">
+						<p:outputLabel value="#{tabela.totalPago}">
 							<f:convertNumber type="currency" currencySymbol="R$" />
 						</p:outputLabel>
 					</center>
@@ -294,7 +294,7 @@
 
 				<p:column headerText="Em Aberto" width="10%">
 					<center>
-						<p:outputLabel value="#{tabela.em_aberto}">
+						<p:outputLabel value="#{tabela.emAberto}">
 							<f:convertNumber type="currency" currencySymbol="R$" />
 						</p:outputLabel>
 					</center>
@@ -503,8 +503,8 @@
 					</p:outputLabel>
 				</p:column>
 
-				<p:column headerText="Em Aberto" sortBy="#{tabela.em_aberto}">
-					<p:outputLabel value="#{tabela.em_aberto}">
+				<p:column headerText="Em Aberto" sortBy="#{tabela.emAberto}">
+					<p:outputLabel value="#{tabela.emAberto}">
 						<f:convertNumber type="currency" currencySymbol="R$" />
 					</p:outputLabel>
 				</p:column>
@@ -565,7 +565,7 @@
 			<h:outputLabel value="TOTAL VENDIDO NO PERÍODO: "
 				style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-			<h:outputLabel value="#{vendaController.soma_geral}"
+			<h:outputLabel value="#{vendaController.somaGeral}"
 				style="font-size: 14px;color:red;margin-left:10px">
 				<f:convertNumber type="currency" currencySymbol="R$" />
 			</h:outputLabel>
@@ -583,7 +583,7 @@
 				<h:outputLabel value="TOTAL VENDIDO ATÉ HOJE: "
 					style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-				<h:outputLabel value="#{vendaController.soma_geral}"
+				<h:outputLabel value="#{vendaController.somaGeral}"
 					style="font-size: 14px;color:red;margin-left:10px">
 					<f:convertNumber type="currency" currencySymbol="R$" />
 				</h:outputLabel>
@@ -591,7 +591,7 @@
 				<h:outputLabel value="TOTAL RECEBIDO ATÉ HOJE: "
 					style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-				<h:outputLabel value="#{vendaController.receber_geral}"
+				<h:outputLabel value="#{vendaController.receberGeral}"
 					style="font-size: 14px;color:red;margin-left:10px">
 					<f:convertNumber type="currency" currencySymbol="R$" />
 				</h:outputLabel>
@@ -599,7 +599,7 @@
 				<h:outputLabel value="VALOR TOTAL A RECEBER: "
 					style="font-size: 20px;margin-left:20px"></h:outputLabel>
 
-				<h:outputLabel value="#{vendaController.receber_geral_total}"
+				<h:outputLabel value="#{vendaController.receberGeralTotal}"
 					style="font-size: 20px;color:red;margin-left:10px">
 					<f:convertNumber type="currency" currencySymbol="R$" />
 				</h:outputLabel>

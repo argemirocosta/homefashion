@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class BuscaRelatorioBean {
 
-	private Date periodoinicial, periodofinal;
+	private Date periodoinicial;
+	private Date periodofinal;
 	private ClienteBean cliente;
 
 	public Date getPeriodoinicial() {
@@ -30,5 +31,4 @@ public class BuscaRelatorioBean {
 	public void setCliente(ClienteBean cliente) {
 		this.cliente = cliente;
 	}
-
 }

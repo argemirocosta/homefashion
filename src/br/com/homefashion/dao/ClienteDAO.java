@@ -19,8 +19,7 @@ public class ClienteDAO {
 	Connection conexao = null;
 
 	// PEGA O ID DO USUÁRIO LOGADO
-	Usuario us = (Usuario) FacesContext.getCurrentInstance()
-			.getExternalContext().getSessionMap().get("usuario_session");
+	Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario_session");
 
 	public List<ClienteBean> buscaNome(String nome) {
 

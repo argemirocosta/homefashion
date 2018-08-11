@@ -7,9 +7,7 @@ import javax.servlet.http.HttpSession;
 public class SessionUtil {
 
 	public static HttpSession getSession() {
-		ExternalContext extCon = FacesContext.getCurrentInstance()
-				.getExternalContext();
-		HttpSession session = (HttpSession) extCon.getSession(true);
-		return session;
+		ExternalContext extCon = FacesContext.getCurrentInstance().getExternalContext();
+		return (HttpSession) extCon.getSession(true);
 	}
 }

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionTimeoutFilter implements Filter {
 
 	private String timeoutPage = "index.faces";
-	private Object alerta;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -29,18 +28,15 @@ public class SessionTimeoutFilter implements Filter {
 			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 			HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
-			// is session expire control required for this request?
-			if (isSessionControlRequiredForThisResource(httpServletRequest)) {
+			// is session expire control required for this request and is session invalid??
+			if (isSessionControlRequiredForThisResource(httpServletRequest) && isSessionInvalid(httpServletRequest)) {
 
-				// is session invalid?
-				if (isSessionInvalid(httpServletRequest)) {
 					String timeoutUrl = httpServletRequest.getContextPath()
 							+ "/" + getTimeoutPage();
 
 					httpServletResponse.sendRedirect(timeoutUrl);
 
 					return;
-				}
 			}
 		}
 		filterChain.doFilter(request, response);
@@ -56,16 +52,14 @@ public class SessionTimeoutFilter implements Filter {
 			HttpServletRequest httpServletRequest) {
 
 		String requestPath = httpServletRequest.getRequestURI();
-		boolean controlRequired = !org.apache.commons.lang3.StringUtils
-				.contains(requestPath, getTimeoutPage());
 
-		return controlRequired;
+		return !org.apache.commons.lang3.StringUtils
+				.contains(requestPath, getTimeoutPage());
 	}
 
 	private boolean isSessionInvalid(HttpServletRequest httpServletRequest) {
-		boolean sessionInValid = (httpServletRequest.getRequestedSessionId() != null)
+		return (httpServletRequest.getRequestedSessionId() != null)
 				&& !httpServletRequest.isRequestedSessionIdValid();
-		return sessionInValid;
 	}
 
 	@Override
@@ -79,13 +73,5 @@ public class SessionTimeoutFilter implements Filter {
 
 	public void setTimeoutPage(String timeoutPage) {
 		this.timeoutPage = timeoutPage;
-	}
-
-	public Object getAlerta() {
-		return alerta;
-	}
-
-	public void setAlerta(Object alerta) {
-		this.alerta = alerta;
 	}
 }

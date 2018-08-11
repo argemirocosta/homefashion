@@ -8,10 +8,6 @@ public class Usuario {
 	private String senha;
 	private Boolean ativo;
 
-	public Usuario() {
-
-	}
-
 	public Integer getId() {
 		return id;
 	}
