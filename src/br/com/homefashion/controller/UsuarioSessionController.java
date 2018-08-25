@@ -39,7 +39,7 @@ public class UsuarioSessionController {
 		} else {
 
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"Aviso", "Login ou senha inválidos!");
+					"Aviso", "Login e/ou senha inválidos!");
 			FacesContext ct = FacesContext.getCurrentInstance();
 			ct.addMessage(null, msg);
 

@@ -40,8 +40,10 @@ public class UsuarioDAO {
 				
 			}
 			
-			//Armazenar id na sessão
-			fc.getExternalContext().getSessionMap().put("usuario",u.getId());
+			if(u != null){
+				//Armazenar id na sessão
+				fc.getExternalContext().getSessionMap().put("usuario",u.getId());
+			}
 			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
