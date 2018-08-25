@@ -15,7 +15,7 @@ public class AuthorizationListener implements PhaseListener {
 
 	@Override
 	public void afterPhase(PhaseEvent event) {
-		// Adiquirindo o FacesContext.
+		// Adquirindo o FacesContext.
 		FacesContext facesContext = event.getFacesContext();
 
 		// Página Atual.
@@ -25,8 +25,7 @@ public class AuthorizationListener implements PhaseListener {
 		boolean isLoginPage = (currentPage.lastIndexOf("index") > -1);
 
 		// Recuperando objetos da sessão.
-		HttpSession session = (HttpSession) facesContext.getExternalContext()
-				.getSession(true);
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
 		Usuario usuario = (Usuario) session.getAttribute("usuario_session");
 
@@ -37,13 +36,15 @@ public class AuthorizationListener implements PhaseListener {
 				if (SessionUtil.getSession() != null) {
 					SessionUtil.getSession().invalidate();
 
-					FacesContext.getCurrentInstance().getExternalContext()
-							.getSessionMap().put("sessaoExpirada", "S");
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessaoExpirada", "S");
 				}
-				FacesContext.getCurrentInstance().getExternalContext()
-						.redirect("index.faces");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.faces");
 			} catch (IOException ex) {
 				ex.printStackTrace();
+			}
+		} else {
+			if (isLoginPage) {
+			} else {
 			}
 		}
 	}
