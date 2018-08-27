@@ -1,0 +1,36 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="home_fashion:Web exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/home_fashion_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="home_fashion/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="home_fashion" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="bootstrap-1.0.10" />
+          <element id="library" level="project" name="common-annotations" />
+          <element id="library" level="project" name="commons-beanutils" />
+          <element id="library" level="project" name="commons-collections-3.2.1" />
+          <element id="library" level="project" name="commons-collections" />
+          <element id="library" level="project" name="commons-digester" />
+          <element id="library" level="project" name="commons-fileupload-1.2.2" />
+          <element id="library" level="project" name="commons-io-2.3" />
+          <element id="library" level="project" name="commons-lang3-3.5" />
+          <element id="library" level="project" name="commons-logging-1.0.4" />
+          <element id="library" level="project" name="commons-logging" />
+          <element id="library" level="project" name="dom4j-1.6.1" />
+          <element id="library" level="project" name="gson-2.8.2" />
+          <element id="library" level="project" name="javax.faces" />
+          <element id="library" level="project" name="jstl-api-1.2" />
+          <element id="library" level="project" name="jstl-impl-1.2" />
+          <element id="library" level="project" name="jstl" />
+          <element id="library" level="project" name="log4j-1.2.17" />
+          <element id="library" level="project" name="postgresql-9.4-1206-jdbc4" />
+          <element id="library" level="project" name="primefaces-6.2" />
+          <element id="library" level="project" name="primefaces-extensions-6.2.1" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
