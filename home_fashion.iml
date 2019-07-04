@@ -79,5 +79,8 @@
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.1" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.extensions:primefaces-extensions:3.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-api:2.1.7" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-impl:2.1.7" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces.themes:bootstrap:1.0.10" level="project" />
   </component>
 </module>

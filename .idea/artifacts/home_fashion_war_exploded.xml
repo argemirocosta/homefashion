@@ -61,6 +61,9 @@
           <element id="library" level="project" name="Maven: postgresql:postgresql:8.3-606.jdbc4" />
           <element id="library" level="project" name="Maven: org.primefaces:primefaces:6.1" />
           <element id="library" level="project" name="Maven: org.primefaces.extensions:primefaces-extensions:3.1.0" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-api:2.1.7" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-impl:2.1.7" />
+          <element id="library" level="project" name="Maven: org.primefaces.themes:bootstrap:1.0.10" />
         </element>
       </element>
       <element id="directory" name="META-INF">

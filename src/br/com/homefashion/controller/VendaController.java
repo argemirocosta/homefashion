@@ -8,12 +8,10 @@ import br.com.homefashion.model.VendaBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
-import org.primefaces.context.RequestContext;
+import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
 @ManagedBean
@@ -70,12 +68,9 @@ public class VendaController {
 	public void verificarVendaPaga() {	
 		emAberto = vDao.valorEmAberto(venda.getId());
 		if (emAberto > 0) {
-			RequestContext.getCurrentInstance().execute(
-					"PF('dlgPagamentos').show();");
+			JSFUtil.abrirDialog("dlgPagamentos");
 		} else {
-			FacesMessage msg = new FacesMessage("Essa venda já foi paga!");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.adicionarMensagemAdvertencia("Essa venda já foi paga!", "Aviso");
 		}
 	}
 
@@ -84,15 +79,10 @@ public class VendaController {
 
 		if (cadastrou) {
 			limparCampos();
-			RequestContext.getCurrentInstance().execute("PF('dlgVender').hide();");
-
-			FacesMessage msg = new FacesMessage("Venda Realizada");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.fecharDialog("dlgVender");
+			JSFUtil.adicionarMensagemSucesso("Venda realizada com sucesso!", "Sucesso");
 		} else {
-			FacesMessage msg = new FacesMessage("Erro ao realizar Venda");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.adicionarMensagemErro("Erro ao realizar Venda", "Erro");
 		}
 
 	}
@@ -102,10 +92,7 @@ public class VendaController {
 		emAberto = vDao.valorEmAberto(venda.getId());
 
 		if (pagamento.getValor() > emAberto) {
-			FacesMessage msg = new FacesMessage("Pagamento maior que a venda não é permitido!");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
-
+			JSFUtil.adicionarMensagemAdvertencia("Pagamento maior que a venda não é permitido!", "Aviso");
 		} else if (emAberto > 0 || pagamentoVenda == 0) {
 			boolean cadastrou = vDao.inserePagamento(venda, pagamento);
 
@@ -114,21 +101,15 @@ public class VendaController {
 				getListaPagamentos();
 				listaVendas = null;
 				getListaVendas();
-				
-				FacesMessage msg = new FacesMessage("Pagamento Realizado");
-				FacesContext ct = FacesContext.getCurrentInstance();
-				ct.addMessage(null, msg);
+
+				JSFUtil.adicionarMensagemSucesso("Pagamento realizado com sucesso", "Sucesso");
 				pagamento.setValor(null);
 			} else {
-				FacesMessage msg = new FacesMessage("Erro ao realizar Pagamento");
-				FacesContext ct = FacesContext.getCurrentInstance();
-				ct.addMessage(null, msg);
+				JSFUtil.adicionarMensagemErro("Erro ao realizar pagamento!", "Erro");
 			}
 
 		} else {
-			FacesMessage msg = new FacesMessage("Essa venda já foi paga!");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.adicionarMensagemAdvertencia("Essa venda já foi paga!", "Aviso");
 
 		}
 

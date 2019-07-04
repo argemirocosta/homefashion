@@ -6,12 +6,10 @@ import br.com.homefashion.model.VendaBean;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
-import org.primefaces.context.RequestContext;
+import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
 @ManagedBean
@@ -48,15 +46,10 @@ public class ClienteController {
 
 		if (deletou) {
 			limparCampos();
-			RequestContext.getCurrentInstance().execute("PF('dlgDeleteCliente').hide();");
-			
-			FacesMessage msg = new FacesMessage("Cliente deletado");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.fecharDialog("dlgDeleteCliente");
+			JSFUtil.adicionarMensagemSucesso("Cliente deletado com sucesso!", "Sucesso");
 		} else {
-			FacesMessage msg = new FacesMessage("erro ao deletar");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.adicionarMensagemErro("Erro ao deletar o cliente!", "Erro");
 		}
 	}
 
@@ -65,16 +58,10 @@ public class ClienteController {
 
 		if (alterou) {
 			limparCampos();
-
-			RequestContext.getCurrentInstance().execute("PF('dlgAltCliente').hide();");
-
-			FacesMessage msg = new FacesMessage("Cliente Alterado");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.fecharDialog("dlgAltCliente");
+			JSFUtil.adicionarMensagemSucesso("Cliente alterado com sucesso!", "Sucesso");
 		} else {
-			FacesMessage msg = new FacesMessage("erro ao alterar");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.adicionarMensagemErro("Erro ao alterar o cliente!", "Erro");
 		}
 	}
 
@@ -83,16 +70,10 @@ public class ClienteController {
 
 		if (cadastrou) {
 			limparCampos();
-
-			RequestContext.getCurrentInstance().execute("PF('dlgCadCliente').hide();");
-
-			FacesMessage msg = new FacesMessage("Cliente cadastrado");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.fecharDialog("dlgCadCliente");
+			JSFUtil.adicionarMensagemSucesso("Cliente cadastrado com sucesso!", "Sucesso");
 		} else {
-			FacesMessage msg = new FacesMessage("erro ao cadastrar");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.adicionarMensagemErro("Erro ao cadastrar o cliente!", "Erro");
 		}
 	}
 

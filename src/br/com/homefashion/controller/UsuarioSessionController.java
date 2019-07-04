@@ -2,16 +2,15 @@ package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.SessionUtil;
 
 import java.io.IOException;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.context.RequestContext;
 
 @SessionScoped
 @ManagedBean
@@ -37,12 +36,7 @@ public class UsuarioSessionController {
 
 			return "principal.faces?faces-redirect=true";
 		} else {
-
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"Aviso", "Login e/ou senha inválidos!");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
-
+			JSFUtil.adicionarMensagemAdvertencia("Login e/ou senha inválidos!", "Aviso");
 			return "";
 		}
 	}
@@ -67,21 +61,15 @@ public class UsuarioSessionController {
 		boolean cadastrou = uDao.insereUsuario(usuario);
 
 		if (cadastrou) {
-
-			FacesMessage msg = new FacesMessage("Usuario cadastrado com sucesso!");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
-
-			RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide();");
+			JSFUtil.adicionarMensagemSucesso("Usuário cadastrado com sucesso!", "Sucesso");
+			JSFUtil.fecharDialog("dlgCadastro");
 
 			usuario.setLogin("");
 			usuario.setNome("");
 			usuario.setSenha("");
 
 		} else {
-			FacesMessage msg = new FacesMessage("erro ao cadastrar");
-			FacesContext ct = FacesContext.getCurrentInstance();
-			ct.addMessage(null, msg);
+			JSFUtil.adicionarMensagemErro("Erro ao cadastrar!", "Erro");
 		}
 	}
 
