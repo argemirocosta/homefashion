@@ -31,9 +31,7 @@ public class UsuarioSessionController {
 		usuarioLogado = uDao.login(usuario);
 
 		if (usuarioLogado != null) {
-
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario_session", usuarioLogado);
-
+			SessionUtil.adicionarNaSessao(usuarioLogado, "usuario_session");
 			return "principal.faces?faces-redirect=true";
 		} else {
 			JSFUtil.adicionarMensagemAdvertencia("Login e/ou senha inválidos!", "Aviso");
@@ -44,8 +42,7 @@ public class UsuarioSessionController {
 	public static void timeOut() throws IOException {
 		if (SessionUtil.getSession() != null) {
 			SessionUtil.getSession().invalidate();
-			FacesContext.getCurrentInstance().getExternalContext()
-					.getSessionMap().put("sessaoExpirada", "S");
+			SessionUtil.adicionarNaSessao("S", "sessaoExpirada");
 		} else {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("/index.faces");
@@ -90,7 +87,7 @@ public class UsuarioSessionController {
 	}
 
 	public String getSessaoExpirada() {
-		sessaoExpirada = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessaoExpirada");
+		sessaoExpirada = (String) SessionUtil.resgatarDaSessao("sessaoExpirada");
 		return sessaoExpirada;
 	}
 }

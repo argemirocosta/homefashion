@@ -10,4 +10,16 @@ public class SessionUtil {
 		ExternalContext extCon = FacesContext.getCurrentInstance().getExternalContext();
 		return (HttpSession) extCon.getSession(true);
 	}
+
+	public static void adicionarNaSessao(Object objeto, String nomeObjetoSessao){
+		FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().put(nomeObjetoSessao, objeto);
+	}
+
+	public static Object resgatarDaSessao(String nomeObjetoSessao){
+		Object objeto = (Object) FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get(nomeObjetoSessao);
+
+		return objeto;
+	}
 }

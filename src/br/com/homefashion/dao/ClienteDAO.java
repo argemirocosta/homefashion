@@ -3,6 +3,7 @@ package br.com.homefashion.dao;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.ClienteBean;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.util.SessionUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,14 +13,13 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
 
 public class ClienteDAO {
 
 	Connection conexao = null;
 
 	// PEGA O ID DO USUÁRIO LOGADO
-	Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario_session");
+	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
 	public List<ClienteBean> buscaNome(String nome) {
 

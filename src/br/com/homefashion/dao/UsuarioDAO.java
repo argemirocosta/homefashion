@@ -2,22 +2,20 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.util.SessionUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.faces.context.FacesContext;
 
 public class UsuarioDAO {
 
 	private Connection conexao;
 
 	public Usuario login(Usuario usuario) {
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		
+
 		conexao = ConnectionFactory.getConnection();
 		
 		String sql = "select id, nome, login, senha, ativo from vendas.usuario where login = ? and senha = ?";
@@ -42,7 +40,7 @@ public class UsuarioDAO {
 			
 			if(u != null){
 				//Armazenar id na sessão
-				fc.getExternalContext().getSessionMap().put("usuario",u.getId());
+				SessionUtil.adicionarNaSessao(u.getId(), "usuario");
 			}
 			
 		} catch (SQLException ex) {

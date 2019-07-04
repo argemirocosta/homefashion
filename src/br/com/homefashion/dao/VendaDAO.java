@@ -5,6 +5,7 @@ import br.com.homefashion.model.BuscaRelatorioBean;
 import br.com.homefashion.model.PagamentoBean;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.model.VendaBean;
+import br.com.homefashion.util.SessionUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +14,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
-
 public class VendaDAO {
 
 	Connection conexao = null;
 
 	// PEGA O ID DO USUÁRIO LOGADO
-	Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario_session");
+	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
 	public boolean insereVenda(VendaBean venda) {
 
