@@ -2,11 +2,11 @@ package br.com.homefashion.model;
 
 import java.util.Date;
 
-public class BuscaRelatorioBean {
+public class BuscaRelatorio {
 
 	private Date periodoinicial;
 	private Date periodofinal;
-	private ClienteBean cliente;
+	private Cliente cliente;
 
 	public Date getPeriodoinicial() {
 		return periodoinicial;
@@ -24,11 +24,11 @@ public class BuscaRelatorioBean {
 		this.periodofinal = periodofinal;
 	}
 
-	public ClienteBean getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(ClienteBean cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 }

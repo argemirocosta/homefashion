@@ -1,7 +1,7 @@
 package br.com.homefashion.dao;
 
 import br.com.homefashion.factory.ConnectionFactory;
-import br.com.homefashion.model.ClienteBean;
+import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.util.SessionUtil;
 
@@ -21,13 +21,13 @@ public class ClienteDAO {
 	// PEGA O ID DO USUÁRIO LOGADO
 	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
-	public List<ClienteBean> buscaNome(String nome) {
+	public List<Cliente> buscaNome(String nome) {
 
 		conexao = ConnectionFactory.getConnection();
 
 		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where upper(nome) like upper(?) and usuario = ? order by nome";
 
-		List<ClienteBean> lista = new ArrayList<>();
+		List<Cliente> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class ClienteDAO {
 			ps.setInt(2, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ClienteBean cliente = new ClienteBean();
+				Cliente cliente = new Cliente();
 				cliente.setId(rs.getInt("id"));
 				cliente.setNome(rs.getString("nome").toUpperCase());
 				cliente.setTelefone1(rs.getInt("telefone1"));
@@ -56,7 +56,7 @@ public class ClienteDAO {
 		return lista;
 	}
 
-	public boolean deleteCliente(ClienteBean cliente) {
+	public boolean deleteCliente(Cliente cliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -82,7 +82,7 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public boolean editeCliente(ClienteBean cliente) {
+	public boolean editeCliente(Cliente cliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -111,7 +111,7 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public boolean insereCliente(ClienteBean cliente) {
+	public boolean insereCliente(Cliente cliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -150,20 +150,20 @@ public class ClienteDAO {
 		return false;
 	}
 
-	public List<ClienteBean> listarClientes() {
+	public List<Cliente> listarClientes() {
 
 		conexao = ConnectionFactory.getConnection();
 
 		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where usuario = ? order by nome";
 
-		List<ClienteBean> lista = new ArrayList<>();
+		List<Cliente> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ClienteBean cliente = new ClienteBean();
+				Cliente cliente = new Cliente();
 				cliente.setId(rs.getInt("id"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setTelefone1(rs.getInt("telefone1"));

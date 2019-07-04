@@ -8,7 +8,7 @@ public class VendaBean {
 	private Double valor;
 	private Date data;
 	private Integer qtd;
-	private ClienteBean cliente;
+	private Cliente cliente;
 	private Double totalPago;
 	private Double emAberto;
 	private Double somaTotal;
@@ -16,7 +16,7 @@ public class VendaBean {
 	private String situacao;
 
 	public VendaBean() {
-		cliente = new ClienteBean();
+		cliente = new Cliente();
 	}
 
 	public Integer getId() {
@@ -51,11 +51,11 @@ public class VendaBean {
 		this.qtd = qtd;
 	}
 
-	public ClienteBean getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(ClienteBean cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 

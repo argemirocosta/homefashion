@@ -1,7 +1,7 @@
 package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.ClienteDAO;
-import br.com.homefashion.model.ClienteBean;
+import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.VendaBean;
 
 import java.util.List;
@@ -15,14 +15,14 @@ import br.com.homefashion.util.JSFUtil;
 @ManagedBean
 public class ClienteController {
 
-	private ClienteBean cliente;
-	private List<ClienteBean> listaCliente;
+	private Cliente cliente;
+	private List<Cliente> listaCliente;
 	private String campoBusca;
 	private VendaBean venda;
 	private ClienteDAO cDao = new ClienteDAO();
 
 	public ClienteController() {
-		cliente = new ClienteBean();
+		cliente = new Cliente();
 		venda = new VendaBean();
 		campoBusca = "";		
 	}
@@ -34,7 +34,7 @@ public class ClienteController {
 
 	public void limparCampos() {
 		listaCliente = null;
-		cliente = new ClienteBean();
+		cliente = new Cliente();
 	}
 
 	public void buscaNome() {
@@ -77,22 +77,22 @@ public class ClienteController {
 		}
 	}
 
-	public ClienteBean getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setP(ClienteBean cliente) {
+	public void setP(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-	public List<ClienteBean> getListaCliente() {
+	public List<Cliente> getListaCliente() {
 		if (listaCliente == null) {
 			listaCliente = cDao.listarClientes();
 		}
 		return listaCliente;
 	}
 
-	public void setListaCliente(List<ClienteBean> listaCliente) {
+	public void setListaCliente(List<Cliente> listaCliente) {
 		this.listaCliente = listaCliente;
 	}
 

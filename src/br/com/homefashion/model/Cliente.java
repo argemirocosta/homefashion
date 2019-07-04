@@ -1,6 +1,6 @@
 package br.com.homefashion.model;
 
-public class ClienteBean {
+public class Cliente {
 
 	private Integer id;
 	private String nome;
@@ -8,7 +8,7 @@ public class ClienteBean {
 	private Integer telefone2;
 	private Usuario usuario;
 	
-	public ClienteBean(){
+	public Cliente(){
 		usuario = new Usuario();
 	}
 

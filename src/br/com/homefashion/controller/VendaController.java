@@ -1,8 +1,8 @@
 package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.VendaDAO;
-import br.com.homefashion.model.BuscaRelatorioBean;
-import br.com.homefashion.model.PagamentoBean;
+import br.com.homefashion.model.BuscaRelatorio;
+import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.VendaBean;
 
 import java.util.ArrayList;
@@ -19,12 +19,12 @@ public class VendaController {
 
 	private VendaBean venda;
 	private List<VendaBean> listaVendas;
-	private PagamentoBean pagamento;
-	private List<PagamentoBean> listaPagamentos;
+	private Pagamento pagamento;
+	private List<Pagamento> listaPagamentos;
 	private Double emAberto;
 	private List<VendaBean> listaVendasPorCliente;
 	private List<VendaBean> listaVendasEmAberto;
-	private BuscaRelatorioBean busca;
+	private BuscaRelatorio busca;
 	private Double somaGeral;
 	private Double receberGeral;
 	private Double receberGeralTotal;
@@ -32,13 +32,13 @@ public class VendaController {
 
 	public VendaController() {
 		venda = new VendaBean();
-		pagamento = new PagamentoBean();
+		pagamento = new Pagamento();
 		listaVendas = new ArrayList<VendaBean>();
 		venda.getCliente().setId(0);
 		venda.setId(0);
 		emAberto = 0.0;
 		listaVendasPorCliente = new ArrayList<VendaBean>();
-		busca = new BuscaRelatorioBean();
+		busca = new BuscaRelatorio();
 		busca.setPeriodoinicial(new java.util.Date(System.currentTimeMillis()));
 		busca.setPeriodofinal(new java.util.Date(System.currentTimeMillis()));
 		somaGeral = 0.0;
@@ -148,22 +148,22 @@ public class VendaController {
 		this.listaVendas = listaVendas;
 	}
 
-	public PagamentoBean getPagamento() {
+	public Pagamento getPagamento() {
 		return pagamento;
 	}
 
-	public void setPagamento(PagamentoBean pagamento) {
+	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
 
-	public List<PagamentoBean> getListaPagamentos() {
+	public List<Pagamento> getListaPagamentos() {
 		if (listaPagamentos == null) {
 			listaPagamentos = vDao.listarPagamentos(venda.getId());
 		}
 		return listaPagamentos;
 	}
 
-	public void setListaPagamentos(List<PagamentoBean> listaPagamentos) {
+	public void setListaPagamentos(List<Pagamento> listaPagamentos) {
 		this.listaPagamentos = listaPagamentos;
 	}
 
@@ -186,11 +186,11 @@ public class VendaController {
 		this.listaVendasPorCliente = listaVendasPorCliente;
 	}
 
-	public BuscaRelatorioBean getBusca() {
+	public BuscaRelatorio getBusca() {
 		return busca;
 	}
 
-	public void setBusca(BuscaRelatorioBean busca) {
+	public void setBusca(BuscaRelatorio busca) {
 		this.busca = busca;
 	}
 

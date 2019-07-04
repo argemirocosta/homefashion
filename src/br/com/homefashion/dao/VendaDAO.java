@@ -1,8 +1,8 @@
 package br.com.homefashion.dao;
 
 import br.com.homefashion.factory.ConnectionFactory;
-import br.com.homefashion.model.BuscaRelatorioBean;
-import br.com.homefashion.model.PagamentoBean;
+import br.com.homefashion.model.BuscaRelatorio;
+import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.model.VendaBean;
 import br.com.homefashion.util.SessionUtil;
@@ -100,7 +100,7 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public boolean inserePagamento(VendaBean venda, PagamentoBean pagamento) {
+	public boolean inserePagamento(VendaBean venda, Pagamento pagamento) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -128,7 +128,7 @@ public class VendaDAO {
 		return false;
 	}
 
-	public List<PagamentoBean> listarPagamentos(Integer codcliente) {
+	public List<Pagamento> listarPagamentos(Integer codcliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -137,14 +137,14 @@ public class VendaDAO {
 				+ "left join vendas.venda v on (p.id_venda = v.id) "
 				+ "where v.id = ? " + "order by v.data desc, p.data_pagamento desc";
 
-		List<PagamentoBean> lista = new ArrayList<>();
+		List<Pagamento> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, codcliente);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				PagamentoBean p = new PagamentoBean();
+				Pagamento p = new Pagamento();
 				p.getVenda().setId(rs.getInt("id_venda"));
 				p.setData(rs.getDate("data_pagamento"));
 				p.setValor(rs.getDouble("valor_pago"));
@@ -256,7 +256,7 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public Double vendasPorPeriodo(BuscaRelatorioBean busca) {
+	public Double vendasPorPeriodo(BuscaRelatorio busca) {
 
 		conexao = ConnectionFactory.getConnection();
 		String sql = "select sum(valor) as soma from vendas.venda where data between ? and ? and usuario = ?";

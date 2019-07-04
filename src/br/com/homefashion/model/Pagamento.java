@@ -2,14 +2,14 @@ package br.com.homefashion.model;
 
 import java.util.Date;
 
-public class PagamentoBean {
+public class Pagamento {
 
 	private Integer id;
 	private Double valor;
 	private Date data;
 	private VendaBean venda;
 
-	public PagamentoBean() {
+	public Pagamento() {
 		venda = new VendaBean();
 	}
 
