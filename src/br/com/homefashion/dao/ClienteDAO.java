@@ -18,14 +18,13 @@ public class ClienteDAO {
 
 	Connection conexao = null;
 
-	// PEGA O ID DO USUÁRIO LOGADO
 	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
 	public List<Cliente> buscaNome(String nome) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where upper(nome) like upper(?) and usuario = ? order by nome";
+		String sql = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE upper(nome) LIKE upper(?) AND usuario = ? ORDER BY nome";
 
 		List<Cliente> lista = new ArrayList<>();
 
@@ -56,11 +55,13 @@ public class ClienteDAO {
 		return lista;
 	}
 
-	public boolean deleteCliente(Cliente cliente) {
+	public Boolean deleteCliente(Cliente cliente) {
+
+		Boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "delete from vendas.clientes where id=?";
+		String sql = "DELETE FROM vendas.clientes WHERE id=?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -69,7 +70,7 @@ public class ClienteDAO {
 
 			ps.execute();
 
-			return true;
+			retorno = true;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -79,14 +80,16 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return false;
+		return retorno;
 	}
 
-	public boolean editeCliente(Cliente cliente) {
+	public Boolean editeCliente(Cliente cliente) {
+
+		Boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "update vendas.clientes set nome=?, telefone1=?, telefone2=? where id=?";
+		String sql = "UPDATE vendas.clientes SET nome=?, telefone1=?, telefone2=? WHERE id=?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -97,7 +100,7 @@ public class ClienteDAO {
 
 			ps.executeUpdate();
 
-			return true;
+			retorno = true;
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -108,14 +111,16 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return false;
+		return retorno;
 	}
 
-	public boolean insereCliente(Cliente cliente) {
+	public Boolean insereCliente(Cliente cliente) {
+
+		Boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "insert into vendas.clientes (nome, telefone1, telefone2, usuario) values (?,?,?,?)";
+		String sql = "INSERT INTO vendas.clientes (nome, telefone1, telefone2, usuario) VALUES (?,?,?,?)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -137,7 +142,8 @@ public class ClienteDAO {
 
 			ps.execute();
 
-			return true;
+			retorno = true;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -147,14 +153,14 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return false;
+		return retorno;
 	}
 
 	public List<Cliente> listarClientes() {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select id, nome, telefone1, telefone2 from vendas.clientes where usuario = ? order by nome";
+		String sql = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE usuario = ? ORDER BY nome";
 
 		List<Cliente> lista = new ArrayList<>();
 

@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class UsuarioDAO {
 
 	private Connection conexao;
@@ -18,7 +17,7 @@ public class UsuarioDAO {
 
 		conexao = ConnectionFactory.getConnection();
 		
-		String sql = "select id, nome, login, senha, ativo from vendas.usuario where login = ? and senha = ?";
+		String sql = "SELECT id, nome, login, senha, ativo FROM vendas.usuario WHERE login = ? AND senha = ?";
 
 		Usuario u = null;
 
@@ -39,7 +38,6 @@ public class UsuarioDAO {
 			}
 			
 			if(u != null){
-				//Armazenar id na sessão
 				SessionUtil.adicionarNaSessao(u.getId(), "usuario");
 			}
 			
@@ -55,11 +53,13 @@ public class UsuarioDAO {
 		return u;
 	}
 	
-	public boolean insereUsuario(Usuario usuario) {
+	public Boolean insereUsuario(Usuario usuario) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "insert into vendas.usuario (nome, login, senha, ativo) values (?,?,?,true)";
+		Boolean retorno = false;
+
+		String sql = "INSERT INTO vendas.usuario (nome, login, senha, ativo) VALUES (?,?,?,TRUE)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -69,7 +69,8 @@ public class UsuarioDAO {
 
 			ps.execute();
 
-			return true;
+			retorno = true;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -79,6 +80,6 @@ public class UsuarioDAO {
 				ex.printStackTrace();
 			}
 		}
-		return false;
+		return retorno;
 	}
 }

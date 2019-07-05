@@ -18,14 +18,15 @@ public class VendaDAO {
 
 	Connection conexao = null;
 
-	// PEGA O ID DO USUÁRIO LOGADO
 	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
-	public boolean insereVenda(VendaBean venda) {
+	public Boolean insereVenda(VendaBean venda) {
+
+		Boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "insert into vendas.venda (id_cliente, valor, qtd, data, usuario) values (?,?,?,?,?)";
+		String sql = "INSERT INTO vendas.venda (id_cliente, valor, qtd, data, usuario) VALUES (?,?,?,?,?)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -37,7 +38,8 @@ public class VendaDAO {
 
 			ps.execute();
 
-			return true;
+			retorno =  true;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -47,24 +49,24 @@ public class VendaDAO {
 				ex.printStackTrace();
 			}
 		}
-		return false;
+		return retorno;
 	}
 
 	public List<VendaBean> listarVendas(VendaBean vendaB) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select v.id, v.id_cliente, c.nome, v.data, v.valor, v.qtd, "
-				+ "coalesce(sum(p.valor_pago),0) as total_pago, coalesce((v.valor - sum(p.valor_pago)),v.valor) as em_aberto, "
-				+ "case when coalesce((v.valor - sum(p.valor_pago)),v.valor) = 0 then 'PAGO' "
-				+ "when coalesce((v.valor - sum(p.valor_pago)),v.valor) > 0 then 'ABERTO' "
-				+ "end as situacao "
-				+ "from vendas.venda v "
-				+ "left join vendas.clientes c on (v.id_cliente = c.id) "
-				+ "left join vendas.pagamentos p on (v.id = p.id_venda) "
-				+ "where v.id_cliente = ? "
-				+ "group by v.id, v.id_cliente, c.nome, v.valor, v.qtd, v.data "
-				+ "order by v.data desc";
+		String sql = "SELECT v.id, v.id_cliente, c.nome, v.data, v.valor, v.qtd, "
+				+ "COALESCE(sum(p.valor_pago),0) AS total_pago, COALESCE((v.valor - sum(p.valor_pago)),v.valor) AS em_aberto, "
+				+ "CASE WHEN COALESCE((v.valor - sum(p.valor_pago)),v.valor) = 0 THEN 'PAGO' "
+				+ "WHEN COALESCE((v.valor - sum(p.valor_pago)),v.valor) > 0 THEN 'ABERTO' "
+				+ "END AS situacao "
+				+ "FROM vendas.venda v "
+				+ "LEFT JOIN vendas.clientes c ON (v.id_cliente = c.id) "
+				+ "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
+				+ "WHERE v.id_cliente = ? "
+				+ "GROUP BY v.id, v.id_cliente, c.nome, v.valor, v.qtd, v.data "
+				+ "ORDER BY v.data DESC";
 
 		List<VendaBean> lista = new ArrayList<>();
 
@@ -100,11 +102,13 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public boolean inserePagamento(VendaBean venda, Pagamento pagamento) {
+	public Boolean inserePagamento(VendaBean venda, Pagamento pagamento) {
+
+		Boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "insert into vendas.pagamentos (id_venda, valor_pago, data_pagamento, usuario) values (?,?,?,?)";
+		String sql = "INSERT INTO vendas.pagamentos (id_venda, valor_pago, data_pagamento, usuario) VALUES (?,?,?,?)";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -115,7 +119,7 @@ public class VendaDAO {
 
 			ps.execute();
 
-			return true;
+			retorno = true;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -125,17 +129,18 @@ public class VendaDAO {
 				ex.printStackTrace();
 			}
 		}
-		return false;
+		return retorno;
 	}
 
 	public List<Pagamento> listarPagamentos(Integer codcliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "select p.id_venda, p.valor_pago, p.data_pagamento, v.data "
-				+ "from vendas.pagamentos p "
-				+ "left join vendas.venda v on (p.id_venda = v.id) "
-				+ "where v.id = ? " + "order by v.data desc, p.data_pagamento desc";
+		String sql = "SELECT p.id_venda, p.valor_pago, p.data_pagamento, v.data "
+				+ "FROM vendas.pagamentos p "
+				+ "LEFT JOIN vendas.venda v ON (p.id_venda = v.id) "
+				+ "WHERE v.id = ? "
+				+ "ORDER BY v.data DESC, p.data_pagamento DESC";
 
 		List<Pagamento> lista = new ArrayList<>();
 
@@ -168,11 +173,13 @@ public class VendaDAO {
 	public Double valorEmAberto(Integer codvenda) {
 
 		conexao = ConnectionFactory.getConnection();
+
 		Double valor = 0.0;
-		String sql = "select v.id, (v.valor - sum(coalesce(p.valor_pago, 0))) as em_aberto "
-				+ "from vendas.venda v "
-				+ "left join vendas.pagamentos p on (v.id = p.id_venda) "
-				+ "where v.id = ? and v.usuario = ? group by v.id ";
+
+		String sql = "SELECT v.id, (v.valor - sum(COALESCE(p.valor_pago, 0))) AS em_aberto "
+				+ "FROM vendas.venda v "
+				+ "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
+				+ "WHERE v.id = ? AND v.usuario = ? GROUP BY v.id ";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -198,8 +205,10 @@ public class VendaDAO {
 	public Integer semPagamentos(Integer codvenda) {
 
 		conexao = ConnectionFactory.getConnection();
+
 		Integer valor = 0;
-		String sql = "select count(id_venda) as qtd from vendas.pagamentos where id_venda = ?";
+
+		String sql = "SELECT count(id_venda) AS qtd FROM vendas.pagamentos WHERE id_venda = ?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -224,11 +233,13 @@ public class VendaDAO {
 	public List<VendaBean> vendasPorCliente() {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select v.id_cliente, c.nome, sum(v.valor) as total "
-				+ "from vendas.venda v "
-				+ "left join vendas.clientes c on (v.id_cliente = c.id) "
-				+ "where v.usuario = ?"
-				+ "group by v.id_cliente, c.nome order by total desc";
+
+		String sql = "SELECT v.id_cliente, c.nome, sum(v.valor) AS total "
+				+ "FROM vendas.venda v "
+				+ "LEFT JOIN vendas.clientes c ON (v.id_cliente = c.id) "
+				+ "WHERE v.usuario = ?"
+				+ "GROUP BY v.id_cliente, c.nome "
+				+ "ORDER BY total DESC";
 
 		List<VendaBean> lista = new ArrayList<>();
 
@@ -259,8 +270,10 @@ public class VendaDAO {
 	public Double vendasPorPeriodo(BuscaRelatorio busca) {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select sum(valor) as soma from vendas.venda where data between ? and ? and usuario = ?";
+
 		Double valor = 0.0;
+
+		String sql = "SELECT sum(valor) AS soma FROM vendas.venda WHERE DATA BETWEEN ? AND ? AND usuario = ?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -290,8 +303,10 @@ public class VendaDAO {
 	public Double vendasTotal() {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select sum(valor) as soma from vendas.venda where usuario = ?";
+
 		Double valor = 0.0;
+
+		String sql = "SELECT sum(valor) AS soma FROM vendas.venda WHERE usuario = ?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -318,8 +333,10 @@ public class VendaDAO {
 	public Double receberGeral() {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select sum(valor_pago) as valor from vendas.pagamentos where usuario = ?";
+
 		Double valor = 0.0;
+
+		String sql = "SELECT sum(valor_pago) AS valor FROM vendas.pagamentos WHERE usuario = ?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -346,14 +363,15 @@ public class VendaDAO {
 	public List<VendaBean> aReceber() {
 
 		conexao = ConnectionFactory.getConnection();
-		String sql = "select v.id, v.data, v.id_cliente, c.nome, v.valor, "
-				+ "coalesce((v.valor - sum(p.valor_pago)), v.valor) as em_aberto "
-				+ "from vendas.venda v "
-				+ "left join vendas.clientes c on (v.id_cliente = c.id) "
-				+ "left join vendas.pagamentos p on (v.id = p.id_venda) "
-				+ "group by v.id, v.id_cliente, c.nome, v.valor, v.data "
-				+ "having coalesce(v.valor - sum(p.valor_pago), v.valor) > 0 and v.usuario = ? "
-				+ "order by em_aberto desc ";
+
+		String sql = "SELECT v.id, v.data, v.id_cliente, c.nome, v.valor, "
+				+ "COALESCE((v.valor - sum(p.valor_pago)), v.valor) AS em_aberto "
+				+ "FROM vendas.venda v "
+				+ "LEFT JOIN vendas.clientes c ON (v.id_cliente = c.id) "
+				+ "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
+				+ "GROUP BY v.id, v.id_cliente, c.nome, v.valor, v.data "
+				+ "HAVING COALESCE(v.valor - sum(p.valor_pago), v.valor) > 0 AND v.usuario = ? "
+				+ "ORDER BY em_aberto DESC ";
 
 		List<VendaBean> lista = new ArrayList<>();
 
