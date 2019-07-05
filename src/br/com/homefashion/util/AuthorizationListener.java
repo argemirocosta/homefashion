@@ -38,7 +38,7 @@ public class AuthorizationListener implements PhaseListener {
 
 					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessaoExpirada", "S");
 				}
-				FacesContext.getCurrentInstance().getExternalContext().redirect("index.faces");
+				RedirecionarUtil.redirectPagina("/index.faces");
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

@@ -3,13 +3,13 @@ package br.com.homefashion.controller;
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.util.JSFUtil;
+import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessionUtil;
 
 import java.io.IOException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 
 @SessionScoped
@@ -32,7 +32,7 @@ public class UsuarioSessionController {
 
 		if (usuarioLogado != null) {
 			SessionUtil.adicionarNaSessao(usuarioLogado, "usuario_session");
-			return "principal.faces?faces-redirect=true";
+			return RedirecionarUtil.redirectPagina("principal.faces");
 		} else {
 			JSFUtil.adicionarMensagemAdvertencia("Login e/ou senha inválidos!", "Aviso");
 			return "";
@@ -44,14 +44,13 @@ public class UsuarioSessionController {
 			SessionUtil.getSession().invalidate();
 			SessionUtil.adicionarNaSessao("S", "sessaoExpirada");
 		} else {
-			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("/index.faces");
+			RedirecionarUtil.redirectPagina("/index.faces");
 		}
 	}
 
 	public String logout() {
 		SessionUtil.getSession().invalidate();
-		return "/index.faces?faces-redirect=true";
+		return RedirecionarUtil.redirectPagina("/index.faces");
 	}
 
 	public void insereUsuario() {
