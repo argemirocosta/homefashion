@@ -20,7 +20,7 @@ public class ClienteDAO {
 
 	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
-	public List<Cliente> buscaNome(String nome) {
+	public List<Cliente> buscaClientePorNome(String nome) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -55,7 +55,7 @@ public class ClienteDAO {
 		return lista;
 	}
 
-	public Boolean deleteCliente(Cliente cliente) {
+	public Boolean deletarCliente(Cliente cliente) {
 
 		Boolean retorno = false;
 
@@ -83,7 +83,7 @@ public class ClienteDAO {
 		return retorno;
 	}
 
-	public Boolean editeCliente(Cliente cliente) {
+	public Boolean alterarCliente(Cliente cliente) {
 
 		Boolean retorno = false;
 
@@ -114,7 +114,7 @@ public class ClienteDAO {
 		return retorno;
 	}
 
-	public Boolean insereCliente(Cliente cliente) {
+	public Boolean inserirCliente(Cliente cliente) {
 
 		Boolean retorno = false;
 
