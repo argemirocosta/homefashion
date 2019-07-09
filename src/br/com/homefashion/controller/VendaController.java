@@ -75,7 +75,7 @@ public class VendaController extends Dialogs {
 		}
 	}
 
-	public void insereVenda() {
+	public void inserirVenda() {
 		boolean cadastrou = vDao.insereVenda(venda);
 
 		if (cadastrou) {
@@ -88,7 +88,7 @@ public class VendaController extends Dialogs {
 
 	}
 
-	public void inserePagamento() {
+	public void inserirPagamento() {
 		int pagamentoVenda = vDao.semPagamentos(venda.getId());
 		emAberto = vDao.valorEmAberto(venda.getId());
 
@@ -116,18 +116,18 @@ public class VendaController extends Dialogs {
 
 	}
 
-	public void somaGeral() {
+	public void somarGeral() {
 		somaGeral = vDao.vendasPorPeriodo(busca);
 	}
 
-	public void somaGeralTotal() {
+	public void somarGeralTotal() {
 		somaGeral = vDao.vendasTotal();
 		receberGeralTotal = somaGeral - receberGeral;
 	}
 
-	public void recebidoGeral() {
+	public void calcularRecebidoGeral() {
 		receberGeral = vDao.receberGeral();
-		somaGeralTotal();
+		somarGeralTotal();
 	}
 
 	public VendaBean getVenda() {

@@ -242,7 +242,7 @@
                 <center>
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Vender"
-                                         action="#{vendaController.insereVenda()}"
+                                         action="#{vendaController.inserirVenda()}"
                                          update=":formCad, :formTab2, :formVender:pnlgridVender"
                                          icon="carrinho"/>
                         <p:commandButton value="Fechar" onclick="PF('dlgVender').hide();"
@@ -352,7 +352,7 @@
                 <center>
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Pagar"
-                                         action="#{vendaController.inserePagamento()}"
+                                         action="#{vendaController.inserirPagamento()}"
                                          update=":formPagamentos:tabPagamentos, msg3, :formVender:tabVendas, :formPagamentos:pnlgridPagamentos"
                                          icon="calculadorasifrao"/>
                         <p:commandButton value="Fechar"
@@ -415,7 +415,7 @@
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber Geral"
-                                     action="#{vendaController.recebidoGeral}" update=":formRel4"
+                                     action="#{vendaController.calcularRecebidoGeral}" update=":formRel4"
                                      onclick="PF('dlgRelatorio4').show();" icon="confirmar"/>
 
                     <p:commandButton value="Venda por Período"
@@ -557,13 +557,13 @@
                     <br></br>
                 </p:panelGrid>
 
-                <p:commandButton value="Buscar" action="#{vendaController.somaGeral}"
+                <p:commandButton value="Buscar" action="#{vendaController.somarGeral}"
                                  update=":formRel3" icon="buscar"/>
 
                 <h:outputLabel value="TOTAL VENDIDO NO PERÍODO: "
                                style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-                <h:outputLabel value="#{vendaController.somaGeral}"
+                <h:outputLabel value="#{vendaController.somarGeral}"
                                style="font-size: 14px;color:red;margin-left:10px">
                     <f:convertNumber type="currency" currencySymbol="R$"/>
                 </h:outputLabel>
@@ -581,7 +581,7 @@
                     <h:outputLabel value="TOTAL VENDIDO ATÉ HOJE: "
                                    style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-                    <h:outputLabel value="#{vendaController.somaGeral}"
+                    <h:outputLabel value="#{vendaController.somarGeral}"
                                    style="font-size: 14px;color:red;margin-left:10px">
                         <f:convertNumber type="currency" currencySymbol="R$"/>
                     </h:outputLabel>
