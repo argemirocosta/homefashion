@@ -116,7 +116,7 @@ public class VendaController extends Dialogs {
 
 	}
 
-	public void somarGeral() {
+	public void somaGeral() {
 		somaGeral = vDao.vendasPorPeriodo(busca);
 	}
 
