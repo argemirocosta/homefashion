@@ -32,7 +32,7 @@ public class UsuarioSessionController {
 
 		if (usuarioLogado != null) {
 			SessionUtil.adicionarNaSessao(usuarioLogado, "usuario_session");
-			return RedirecionarUtil.redirectPagina("principal.faces");
+			return RedirecionarUtil.redirectPagina("/pages/principal.faces");
 		} else {
 			JSFUtil.adicionarMensagemAdvertencia("Login e/ou senha inválidos!", "Aviso");
 			return "";
