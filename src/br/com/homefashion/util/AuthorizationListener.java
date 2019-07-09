@@ -1,6 +1,6 @@
 package br.com.homefashion.util;
 
-import br.com.homefashion.controller.UsuarioSessionController;
+import br.com.homefashion.controller.UsuarioController;
 import br.com.homefashion.model.Usuario;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class AuthorizationListener implements PhaseListener {
 		// Redireciona para a página de login quando a sessão expira.
 		if (!isLoginPage && usuario == null) {
 			try {
-				UsuarioSessionController.timeOut();
+				UsuarioController.timeOut();
 				if (SessionUtil.getSession() != null) {
 					SessionUtil.getSession().invalidate();
 

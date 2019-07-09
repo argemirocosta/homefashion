@@ -15,14 +15,14 @@ import javax.faces.bean.SessionScoped;
 
 @SessionScoped
 @ManagedBean
-public class UsuarioSessionController extends Dialogs {
+public class UsuarioController extends Dialogs {
 
 	private Usuario usuario;
 	private Usuario usuarioLogado;
 	private String sessaoExpirada;
 	private UsuarioDAO uDao = new UsuarioDAO();
 
-	public UsuarioSessionController() {
+	public UsuarioController() {
 		usuario = new Usuario();
 		usuarioLogado = null;
 		sessaoExpirada = "N";

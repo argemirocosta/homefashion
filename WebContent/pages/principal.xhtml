@@ -8,7 +8,7 @@
     <ui:define name="content">
 
         <p:idleMonitor timeout="600000">
-            <p:ajax event="idle" listener="#{usuarioSessionController.timeOut}"/>
+            <p:ajax event="idle" listener="#{usuarioController.timeOut}"/>
         </p:idleMonitor>
 
         <f:metadata>
@@ -22,7 +22,7 @@
 
 
             <p:commandButton value="Sair do Sistema" icon="sair"
-                             action="#{usuarioSessionController.logout()}" style="float:right;"/>
+                             action="#{usuarioController.logout()}" style="float:right;"/>
 
             <p:commandButton value="Relatórios" icon="relatorios"
                              onclick="PF('dlgRelatorios').show();"
