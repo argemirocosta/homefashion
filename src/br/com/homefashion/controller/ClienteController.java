@@ -8,11 +8,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.homefashion.shared.Dialogs;
 import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
 @ManagedBean
-public class ClienteController {
+public class ClienteController extends Dialogs {
 
     private Cliente cliente;
     private List<Cliente> listaCliente;
@@ -43,7 +44,7 @@ public class ClienteController {
 
         if (deletou) {
             limparCampos();
-            JSFUtil.fecharDialog("dlgDeleteCliente");
+            JSFUtil.fecharDialog(DIALOG_DELETAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso("Cliente deletado com sucesso!", "Sucesso");
         } else {
             JSFUtil.adicionarMensagemErro("Erro ao deletar o cliente!", "Erro");
@@ -55,7 +56,7 @@ public class ClienteController {
 
         if (alterou) {
             limparCampos();
-            JSFUtil.fecharDialog("dlgAltCliente");
+            JSFUtil.fecharDialog(DIALOG_ALTERAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso("Cliente alterado com sucesso!", "Sucesso");
         } else {
             JSFUtil.adicionarMensagemErro("Erro ao alterar o cliente!", "Erro");
@@ -67,7 +68,7 @@ public class ClienteController {
 
         if (cadastrou) {
             limparCampos();
-            JSFUtil.fecharDialog("dlgCadCliente");
+            JSFUtil.fecharDialog(DIALOG_CADASTRAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso("Cliente cadastrado com sucesso!", "Sucesso");
         } else {
             JSFUtil.adicionarMensagemErro("Erro ao cadastrar o cliente!", "Erro");

@@ -11,11 +11,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.homefashion.shared.Dialogs;
 import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
 @ManagedBean
-public class VendaController {
+public class VendaController extends Dialogs {
 
 	private VendaBean venda;
 	private List<VendaBean> listaVendas;
@@ -68,7 +69,7 @@ public class VendaController {
 	public void verificarVendaPaga() {	
 		emAberto = vDao.valorEmAberto(venda.getId());
 		if (emAberto > 0) {
-			JSFUtil.abrirDialog("dlgPagamentos");
+			JSFUtil.abrirDialog(DIALOG_PAGAMENTOS);
 		} else {
 			JSFUtil.adicionarMensagemAdvertencia("Essa venda já foi paga!", "Aviso");
 		}
@@ -79,7 +80,7 @@ public class VendaController {
 
 		if (cadastrou) {
 			limparCampos();
-			JSFUtil.fecharDialog("dlgVender");
+			JSFUtil.fecharDialog(DIALOG_VENDER);
 			JSFUtil.adicionarMensagemSucesso("Venda realizada com sucesso!", "Sucesso");
 		} else {
 			JSFUtil.adicionarMensagemErro("Erro ao realizar Venda", "Erro");

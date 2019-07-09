@@ -2,6 +2,7 @@ package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.shared.Dialogs;
 import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessionUtil;
@@ -14,7 +15,7 @@ import javax.faces.bean.SessionScoped;
 
 @SessionScoped
 @ManagedBean
-public class UsuarioSessionController {
+public class UsuarioSessionController extends Dialogs {
 
 	private Usuario usuario;
 	private Usuario usuarioLogado;
@@ -58,7 +59,7 @@ public class UsuarioSessionController {
 
 		if (cadastrou) {
 			JSFUtil.adicionarMensagemSucesso("Usuário cadastrado com sucesso!", "Sucesso");
-			JSFUtil.fecharDialog("dlgCadastro");
+			JSFUtil.fecharDialog(DIALOG_CADASTRO_USUARIO);
 
 			usuario.setLogin("");
 			usuario.setNome("");
