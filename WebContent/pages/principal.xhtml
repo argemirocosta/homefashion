@@ -13,13 +13,12 @@
 
         <f:metadata>
             <f:viewAction
-                    action="#{clienteController.listarClientes()}" />
+                    action="#{clienteController.listarClientes()}"/>
         </f:metadata>
 
         <h:form id="formTab">
 
             <p:growl id="msg"/>
-
 
             <p:commandButton value="Sair do Sistema" icon="sair"
                              action="#{usuarioController.logout()}" style="float:right;"/>
@@ -66,9 +65,9 @@
                          var="tabela" emptyMessage="Nenhum Cliente encontrado" rows="20"
                          paginator="true" paginatorPosition="bottom">
                 <p:column headerText="Código" width="15%">
-                    <center>
+                    <div align="center">
                         <p:outputLabel value="#{tabela.id}"/>
-                    </center>
+                    </div>
                 </p:column>
 
                 <p:column headerText="Cliente" width="40%">
@@ -76,21 +75,21 @@
                 </p:column>
 
                 <p:column headerText="Telefone 1" width="15%">
-                    <center>
+                    <div align="center">
                         <p:outputLabel value="#{tabela.telefone1}"/>
-                    </center>
+                    </div>
                 </p:column>
 
                 <p:column headerText="Telefone 2" width="15%">
-                    <center>
+                    <div align="center">
                         <p:outputLabel value="#{tabela.telefone2}"/>
-                    </center>
+                    </div>
                 </p:column>
 
 
                 <p:column headerText="Ações" width="15%">
 
-                    <center>
+                    <div align="center">
 
                         <p:commandButton onclick="PF('dlgAltCliente').show();"
                                          update=":formTab2, :formAlt" icon="alterar">
@@ -111,7 +110,8 @@
                                                          target="#{vendaController.venda.cliente}"/>
                         </p:commandButton>
 
-                    </center>
+                    </div>
+
                 </p:column>
 
             </p:dataTable>
@@ -142,7 +142,7 @@
 
                 <p:separator/>
 
-                <center>
+                <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Cadastrar"
                                          action="#{clienteController.inserirCliente()}"
@@ -150,7 +150,7 @@
                         <p:commandButton value="Fechar"
                                          onclick="PF('dlgCadCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
-                </center>
+                </div>
 
 
             </h:form>
@@ -180,7 +180,7 @@
 
                 <p:separator/>
 
-                <center>
+                <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Alterar"
                                          action="#{clienteController.alterarCliente()}"
@@ -188,7 +188,7 @@
                         <p:commandButton value="Fechar"
                                          onclick="PF('dlgAltCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
-                </center>
+                </div>
 
 
             </h:form>
@@ -205,7 +205,7 @@
 
                 <p:separator/>
 
-                <center>
+                <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Sim"
                                          action="#{clienteController.deletarCliente()}"
@@ -213,7 +213,7 @@
                         <p:commandButton value="Fechar"
                                          onclick="PF('dlgDeleteCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
-                </center>
+                </div>
 
             </h:form>
         </p:dialog>
@@ -239,7 +239,7 @@
 
                 <p:separator/>
 
-                <center>
+                <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Vender"
                                          action="#{vendaController.inserirVenda()}"
@@ -248,7 +248,7 @@
                         <p:commandButton value="Fechar" onclick="PF('dlgVender').hide();"
                                          icon="cancelar"/>
                     </p:panelGrid>
-                </center>
+                </div>
 
                 <p:separator/>
 
@@ -261,58 +261,58 @@
                              rowStyleClass="#{tabela.situacao == 'ABERTO' ? 'rowRed' : null} ">
 
                     <p:column headerText="Cliente" width="30%">
-                        <center>
+                        <div align="center">
                             <p:outputLabel value="#{tabela.cliente.nome}"/>
-                        </center>
+                        </div>
                     </p:column>
 
                     <p:column headerText="Data" width="10%">
-                        <center>
+                        <div align="center">
                             <p:outputLabel value="#{tabela.data}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </p:outputLabel>
-                        </center>
+                        </div>
                     </p:column>
 
                     <p:column headerText="Valor Venda" width="10%">
-                        <center>
+                        <div align="center">
                             <p:outputLabel value="#{tabela.valor}">
                                 <f:convertNumber type="currency" currencySymbol="R$"/>
                             </p:outputLabel>
-                        </center>
+                        </div>
                     </p:column>
 
                     <p:column headerText="Total Pago" width="10%">
-                        <center>
+                        <div align="center">
                             <p:outputLabel value="#{tabela.totalPago}">
                                 <f:convertNumber type="currency" currencySymbol="R$"/>
                             </p:outputLabel>
-                        </center>
+                        </div>
                     </p:column>
 
                     <p:column headerText="Em Aberto" width="10%">
-                        <center>
+                        <div align="center">
                             <p:outputLabel value="#{tabela.emAberto}">
                                 <f:convertNumber type="currency" currencySymbol="R$"/>
                             </p:outputLabel>
-                        </center>
+                        </div>
                     </p:column>
 
                     <p:column headerText="Situação" width="10%">
-                        <center>
+                        <div align="center">
                             <p:outputLabel value="#{tabela.situacao}">
                             </p:outputLabel>
-                        </center>
+                        </div>
                     </p:column>
 
                     <p:column headerText="Quantidade" width="10%">
-                        <center>
+                        <div align="center">
                             <p:outputLabel value="#{tabela.qtd}"/>
-                        </center>
+                        </div>
                     </p:column>
 
                     <p:column headerText="Pagar" width="10%">
-                        <center>
+                        <div align="center">
                             <p:commandButton icon="calculadora" process="@this"
                                              immediate="true"
                                              action="#{vendaController.limparListaPagamentos}"
@@ -321,7 +321,7 @@
                                 <f:setPropertyActionListener value="#{tabela}"
                                                              target="#{vendaController.venda}"/>
                             </p:commandButton>
-                        </center>
+                        </div>
                     </p:column>
 
                 </p:dataTable>
@@ -349,7 +349,7 @@
 
                 <p:separator/>
 
-                <center>
+                <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Pagar"
                                          action="#{vendaController.inserirPagamento()}"
@@ -358,7 +358,7 @@
                         <p:commandButton value="Fechar"
                                          onclick="PF('dlgPagamentos').hide();" icon="cancelar"/>
                     </p:panelGrid>
-                </center>
+                </div>
 
                 <p:separator/>
 
@@ -369,27 +369,27 @@
                                  emptyMessage="Nenhum Pagamento efetuado" rows="10" paginator="true"
                                  paginatorPosition="bottom">
                         <p:column headerText="Valor">
-                            <center>
+                            <div align="center">
                                 <p:outputLabel value="#{tabela.valor}">
                                     <f:convertNumber type="currency" currencySymbol="R$"/>
                                 </p:outputLabel>
-                            </center>
+                            </div>
                         </p:column>
 
                         <p:column headerText="Data Pagamento">
-                            <center>
+                            <div align="center">
                                 <p:outputLabel value="#{tabela.data}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </p:outputLabel>
-                            </center>
+                            </div>
                         </p:column>
 
                         <p:column headerText="Data Compra">
-                            <center>
+                            <div align="center">
                                 <p:outputLabel value="#{tabela.venda.data}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </p:outputLabel>
-                            </center>
+                            </div>
                         </p:column>
 
                     </p:dataTable>
@@ -425,10 +425,10 @@
 
                 <br></br>
 
-                <center>
+                <div align="center">
                     <p:commandButton value="Fechar"
                                      onclick="PF('dlgRelatorios').hide();" icon="cancelar"/>
-                </center>
+                </div>
 
                 <br></br>
 
@@ -444,7 +444,7 @@
                              value="#{vendaController.listaVendasPorCliente}" var="tabela"
                              emptyMessage="Nenhuma venda registrada" rows="18" paginator="true"
                              paginatorPosition="bottom">
-                    <center>
+                    <div align="center">
                         <p:column headerText="Cliente">
                             <p:outputLabel value="#{tabela.cliente.nome}"/>
                         </p:column>
@@ -455,12 +455,12 @@
                             </p:outputLabel>
                         </p:column>
 
-                    </center>
+                    </div>
 
                 </p:dataTable>
 
                 <p:panelGrid columns="3">
-                    <center>
+                    <div align="center">
                         <h3>Opções para Exportar:</h3>
 
                         <h:commandLink>
@@ -473,7 +473,7 @@
                             <p:dataExporter type="pdf" target="tabRel1" fileName="ranking"/>
                         </h:commandLink>
 
-                    </center>
+                    </div>
 
                 </p:panelGrid>
 
@@ -516,7 +516,8 @@
                 </p:dataTable>
 
                 <p:panelGrid columns="3">
-                    <center>
+
+                    <div align="center">
                         <h3>Opções para Exportar:</h3>
 
                         <h:commandLink>
@@ -529,7 +530,7 @@
                             <p:dataExporter type="pdf" target="tabRel2" fileName="pendentes"/>
                         </h:commandLink>
 
-                    </center>
+                    </div>
 
                 </p:panelGrid>
 
@@ -602,13 +603,12 @@
                         <f:convertNumber type="currency" currencySymbol="R$"/>
                     </h:outputLabel>
 
-
                 </p:panelGrid>
-
 
             </h:form>
         </p:dialog>
 
     </ui:define>
+
 </ui:composition>
 

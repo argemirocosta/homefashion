@@ -27,6 +27,7 @@ public class ClienteController {
 
     public void limparBusca() {
         listaClientes = null;
+        campoBusca = null;
         listarClientes();
     }
 
