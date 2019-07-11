@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import static br.com.homefashion.shared.Dialogs.*;
+import static br.com.homefashion.shared.Mensagens.*;
 import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
@@ -34,16 +35,16 @@ public class VendaController {
 	public VendaController() {
 		venda = new Venda();
 		pagamento = new Pagamento();
-		listaVendas = new ArrayList<Venda>();
+		listaVendas = new ArrayList<>();
 		venda.getCliente().setId(0);
 		venda.setId(0);
 		valorEmAberto = 0.0;
-		listaVendasPorCliente = new ArrayList<Venda>();
+		listaVendasPorCliente = new ArrayList<>();
 		busca = new BuscaRelatorio();
 		busca.setPeriodoinicial(new java.util.Date(System.currentTimeMillis()));
 		busca.setPeriodofinal(new java.util.Date(System.currentTimeMillis()));
 		somaGeral = 0.0;
-		listaVendasEmAberto = new ArrayList<Venda>();
+		listaVendasEmAberto = new ArrayList<>();
 	}
 
 	public void limparCampos() {
@@ -71,7 +72,7 @@ public class VendaController {
 		if (valorEmAberto > 0) {
 			JSFUtil.abrirDialog(DIALOG_PAGAMENTOS);
 		} else {
-			JSFUtil.adicionarMensagemAdvertencia("Essa venda já foi paga!", "Aviso");
+			JSFUtil.adicionarMensagemAdvertencia(VENDA_JA_PAGA, AVISO);
 		}
 	}
 
@@ -81,9 +82,9 @@ public class VendaController {
 		if (cadastrou) {
 			limparCampos();
 			JSFUtil.fecharDialog(DIALOG_VENDER);
-			JSFUtil.adicionarMensagemSucesso("Venda realizada com sucesso!", "Sucesso");
+			JSFUtil.adicionarMensagemSucesso(VENDA_SUCESSO, SUCESSO);
 		} else {
-			JSFUtil.adicionarMensagemErro("Erro ao realizar Venda", "Erro");
+			JSFUtil.adicionarMensagemErro(VENDA_ERRO, ERRO);
 		}
 
 	}
@@ -93,7 +94,7 @@ public class VendaController {
 		valorEmAberto = vendaDAO.calcularValorEmAberto(venda.getId());
 
 		if (pagamento.getValor() > valorEmAberto) {
-			JSFUtil.adicionarMensagemAdvertencia("Pagamento maior que a venda não é permitido!", "Aviso");
+			JSFUtil.adicionarMensagemAdvertencia(PAGAMENTO_MAIOR_QUE_VENDA, AVISO);
 		} else if (valorEmAberto > 0 || pagamentoVenda == 0) {
 			boolean cadastrou = vendaDAO.inserirPagamento(venda, pagamento);
 
@@ -103,14 +104,14 @@ public class VendaController {
 				listaVendas = null;
 				getListaVendas();
 
-				JSFUtil.adicionarMensagemSucesso("Pagamento realizado com sucesso", "Sucesso");
+				JSFUtil.adicionarMensagemSucesso(PAGAMENTO_SUCESSO, SUCESSO);
 				pagamento.setValor(null);
 			} else {
-				JSFUtil.adicionarMensagemErro("Erro ao realizar pagamento!", "Erro");
+				JSFUtil.adicionarMensagemErro(PAGAMENTO_ERRO, ERRO);
 			}
 
 		} else {
-			JSFUtil.adicionarMensagemAdvertencia("Essa venda já foi paga!", "Aviso");
+			JSFUtil.adicionarMensagemAdvertencia(VENDA_JA_PAGA, AVISO);
 
 		}
 

@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import br.com.homefashion.util.JSFUtil;
 
 import static br.com.homefashion.shared.Dialogs.*;
+import static br.com.homefashion.shared.Mensagens.*;
 
 @ViewScoped
 @ManagedBean
@@ -40,15 +41,15 @@ public class ClienteController {
         listaClientes = clienteDAO.buscarClientePorNome(campoBusca);
     }
 
-    public void deletarCliente() {
-        Boolean deletou = clienteDAO.deletarCliente(cliente);
+    public void inserirCliente() {
+        Boolean cadastrou = clienteDAO.inserirCliente(cliente);
 
-        if (deletou) {
+        if (cadastrou) {
             limparCampos();
-            JSFUtil.fecharDialog(DIALOG_DELETAR_CLIENTE);
-            JSFUtil.adicionarMensagemSucesso("Cliente deletado com sucesso!", "Sucesso");
+            JSFUtil.fecharDialog(DIALOG_CADASTRAR_CLIENTE);
+            JSFUtil.adicionarMensagemSucesso(CLIENTE_CADASTRADO_SUCESSO, SUCESSO);
         } else {
-            JSFUtil.adicionarMensagemErro("Erro ao deletar o cliente!", "Erro");
+            JSFUtil.adicionarMensagemErro(CLIENTE_CADASTRADO_ERRO, ERRO);
         }
     }
 
@@ -58,21 +59,21 @@ public class ClienteController {
         if (alterou) {
             limparCampos();
             JSFUtil.fecharDialog(DIALOG_ALTERAR_CLIENTE);
-            JSFUtil.adicionarMensagemSucesso("Cliente alterado com sucesso!", "Sucesso");
+            JSFUtil.adicionarMensagemSucesso(CLIENTE_ALTERADO_SUCESSO, SUCESSO);
         } else {
-            JSFUtil.adicionarMensagemErro("Erro ao alterar o cliente!", "Erro");
+            JSFUtil.adicionarMensagemErro(CLIENTE_ALTERADO_ERRO, ERRO);
         }
     }
 
-    public void inserirCliente() {
-        Boolean cadastrou = clienteDAO.inserirCliente(cliente);
+    public void deletarCliente() {
+        Boolean deletou = clienteDAO.deletarCliente(cliente);
 
-        if (cadastrou) {
+        if (deletou) {
             limparCampos();
-            JSFUtil.fecharDialog(DIALOG_CADASTRAR_CLIENTE);
-            JSFUtil.adicionarMensagemSucesso("Cliente cadastrado com sucesso!", "Sucesso");
+            JSFUtil.fecharDialog(DIALOG_DELETAR_CLIENTE);
+            JSFUtil.adicionarMensagemSucesso(CLIENTE_EXCLUIDO_SUCESSO, SUCESSO);
         } else {
-            JSFUtil.adicionarMensagemErro("Erro ao cadastrar o cliente!", "Erro");
+            JSFUtil.adicionarMensagemErro(CLIENTE_EXCLUIDO_ERRO, ERRO);
         }
     }
 

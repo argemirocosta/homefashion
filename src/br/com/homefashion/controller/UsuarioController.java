@@ -7,6 +7,7 @@ import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessionUtil;
 
 import static br.com.homefashion.shared.Dialogs.*;
+import static br.com.homefashion.shared.Mensagens.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -34,7 +35,7 @@ public class UsuarioController {
 			SessionUtil.adicionarNaSessao(usuarioLogado, "usuario_session");
 			return RedirecionarUtil.redirectPagina("/pages/principal.faces");
 		} else {
-			JSFUtil.adicionarMensagemAdvertencia("Login e/ou senha inválidos!", "Aviso");
+			JSFUtil.adicionarMensagemAdvertencia(LOGIN_SENHA_INVALIDO, AVISO);
 			return "";
 		}
 	}
@@ -57,7 +58,7 @@ public class UsuarioController {
 		boolean cadastrou = usuarioDAO.inserirUsuario(usuario);
 
 		if (cadastrou) {
-			JSFUtil.adicionarMensagemSucesso("Usuário cadastrado com sucesso!", "Sucesso");
+			JSFUtil.adicionarMensagemSucesso(USUARIO_CADASTRADO_SUCESSO, SUCESSO);
 			JSFUtil.fecharDialog(DIALOG_CADASTRO_USUARIO);
 
 			usuario.setLogin("");
@@ -65,7 +66,7 @@ public class UsuarioController {
 			usuario.setSenha("");
 
 		} else {
-			JSFUtil.adicionarMensagemErro("Erro ao cadastrar!", "Erro");
+			JSFUtil.adicionarMensagemErro(USUARIO_CADASTRADO_ERRO, ERRO);
 		}
 	}
 
