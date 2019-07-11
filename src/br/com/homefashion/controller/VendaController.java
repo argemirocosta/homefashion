@@ -3,7 +3,7 @@ package br.com.homefashion.controller;
 import br.com.homefashion.dao.VendaDAO;
 import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
-import br.com.homefashion.model.VendaBean;
+import br.com.homefashion.model.Venda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +18,13 @@ import br.com.homefashion.util.JSFUtil;
 @ManagedBean
 public class VendaController {
 
-	private VendaBean venda;
-	private List<VendaBean> listaVendas;
+	private Venda venda;
+	private List<Venda> listaVendas;
 	private Pagamento pagamento;
 	private List<Pagamento> listaPagamentos;
 	private Double valorEmAberto;
-	private List<VendaBean> listaVendasPorCliente;
-	private List<VendaBean> listaVendasEmAberto;
+	private List<Venda> listaVendasPorCliente;
+	private List<Venda> listaVendasEmAberto;
 	private BuscaRelatorio busca;
 	private Double somaGeral;
 	private Double valorReceberGeral;
@@ -32,18 +32,18 @@ public class VendaController {
 	private VendaDAO vendaDAO = new VendaDAO();
 
 	public VendaController() {
-		venda = new VendaBean();
+		venda = new Venda();
 		pagamento = new Pagamento();
-		listaVendas = new ArrayList<VendaBean>();
+		listaVendas = new ArrayList<Venda>();
 		venda.getCliente().setId(0);
 		venda.setId(0);
 		valorEmAberto = 0.0;
-		listaVendasPorCliente = new ArrayList<VendaBean>();
+		listaVendasPorCliente = new ArrayList<Venda>();
 		busca = new BuscaRelatorio();
 		busca.setPeriodoinicial(new java.util.Date(System.currentTimeMillis()));
 		busca.setPeriodofinal(new java.util.Date(System.currentTimeMillis()));
 		somaGeral = 0.0;
-		listaVendasEmAberto = new ArrayList<VendaBean>();
+		listaVendasEmAberto = new ArrayList<Venda>();
 	}
 
 	public void limparCampos() {
@@ -130,22 +130,22 @@ public class VendaController {
 		somarGeralTotal();
 	}
 
-	public VendaBean getVenda() {
+	public Venda getVenda() {
 		return venda;
 	}
 
-	public void setVenda(VendaBean venda) {
+	public void setVenda(Venda venda) {
 		this.venda = venda;
 	}
 
-	public List<VendaBean> getListaVendas() {
+	public List<Venda> getListaVendas() {
 		if (listaVendas == null) {
 			listaVendas = vendaDAO.listarVendas(venda);
 		}
 		return listaVendas;
 	}
 
-	public void setListaVendas(List<VendaBean> listaVendas) {
+	public void setListaVendas(List<Venda> listaVendas) {
 		this.listaVendas = listaVendas;
 	}
 
@@ -176,14 +176,14 @@ public class VendaController {
 		this.valorEmAberto = valorEmAberto;
 	}
 
-	public List<VendaBean> getListaVendasPorCliente() {
+	public List<Venda> getListaVendasPorCliente() {
 		if (listaVendasPorCliente == null) {
 			listaVendasPorCliente = vendaDAO.listarVendasPorCliente();
 		}
 		return listaVendasPorCliente;
 	}
 
-	public void setListaVendasPorCliente(List<VendaBean> listaVendasPorCliente) {
+	public void setListaVendasPorCliente(List<Venda> listaVendasPorCliente) {
 		this.listaVendasPorCliente = listaVendasPorCliente;
 	}
 
@@ -203,7 +203,7 @@ public class VendaController {
 		this.somaGeral = somaGeral;
 	}
 
-	public List<VendaBean> getListaVendasEmAberto() {
+	public List<Venda> getListaVendasEmAberto() {
 		if (listaVendasEmAberto == null) {
 			listaVendasEmAberto = vendaDAO.listarValorAReceber();
 
@@ -211,7 +211,7 @@ public class VendaController {
 		return listaVendasEmAberto;
 	}
 
-	public void setListaVendasEmAberto(List<VendaBean> listaVendasEmAberto) {
+	public void setListaVendasEmAberto(List<Venda> listaVendasEmAberto) {
 		this.listaVendasEmAberto = listaVendasEmAberto;
 	}
 

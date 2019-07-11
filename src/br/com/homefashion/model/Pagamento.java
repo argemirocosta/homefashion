@@ -7,10 +7,10 @@ public class Pagamento {
 	private Integer id;
 	private Double valor;
 	private Date data;
-	private VendaBean venda;
+	private Venda venda;
 
 	public Pagamento() {
-		venda = new VendaBean();
+		venda = new Venda();
 	}
 
 	public Integer getId() {
@@ -37,11 +37,11 @@ public class Pagamento {
 		this.data = data;
 	}
 
-	public VendaBean getVenda() {
+	public Venda getVenda() {
 		return venda;
 	}
 
-	public void setVenda(VendaBean venda) {
+	public void setVenda(Venda venda) {
 		this.venda = venda;
 	}
 

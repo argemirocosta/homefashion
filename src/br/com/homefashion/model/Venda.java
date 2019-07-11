@@ -2,7 +2,7 @@ package br.com.homefashion.model;
 
 import java.util.Date;
 
-public class VendaBean {
+public class Venda {
 
 	private Integer id;
 	private Double valor;
@@ -11,11 +11,9 @@ public class VendaBean {
 	private Cliente cliente;
 	private Double totalPago;
 	private Double emAberto;
-	private Double somaTotal;
-	private Double receberGeral;
 	private String situacao;
 
-	public VendaBean() {
+	public Venda() {
 		cliente = new Cliente();
 	}
 
@@ -73,22 +71,6 @@ public class VendaBean {
 
 	public void setEmAberto(Double emAberto) {
 		this.emAberto = emAberto;
-	}
-
-	public Double getSomaTotal() {
-		return somaTotal;
-	}
-
-	public void setSomaTotal(Double somaTotal) {
-		this.somaTotal = somaTotal;
-	}
-
-	public Double getReceberGeral() {
-		return receberGeral;
-	}
-
-	public void setReceberGeral(Double receberGeral) {
-		this.receberGeral = receberGeral;
 	}
 
 	public String getSituacao() {

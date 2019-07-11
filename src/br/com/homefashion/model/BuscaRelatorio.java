@@ -6,7 +6,6 @@ public class BuscaRelatorio {
 
 	private Date periodoinicial;
 	private Date periodofinal;
-	private Cliente cliente;
 
 	public Date getPeriodoinicial() {
 		return periodoinicial;
@@ -24,11 +23,4 @@ public class BuscaRelatorio {
 		this.periodofinal = periodofinal;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 }

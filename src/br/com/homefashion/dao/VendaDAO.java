@@ -4,7 +4,7 @@ import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.model.VendaBean;
+import br.com.homefashion.model.Venda;
 import br.com.homefashion.util.SessionUtil;
 
 import java.sql.Connection;
@@ -20,7 +20,7 @@ public class VendaDAO {
 
 	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
-	public Boolean inserirVenda(VendaBean venda) {
+	public Boolean inserirVenda(Venda venda) {
 
 		Boolean retorno = false;
 
@@ -52,7 +52,7 @@ public class VendaDAO {
 		return retorno;
 	}
 
-	public List<VendaBean> listarVendas(VendaBean vendaB) {
+	public List<Venda> listarVendas(Venda vendaB) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -68,7 +68,7 @@ public class VendaDAO {
 				+ "GROUP BY v.id, v.id_cliente, c.nome, v.valor, v.qtd, v.data "
 				+ "ORDER BY v.data DESC";
 
-		List<VendaBean> lista = new ArrayList<>();
+		List<Venda> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -76,7 +76,7 @@ public class VendaDAO {
 			ps.setInt(1, vendaB.getCliente().getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean venda = new VendaBean();
+				Venda venda = new Venda();
 				venda.setId(rs.getInt("id"));
 				venda.getCliente().setNome(rs.getString("nome"));
 				venda.setData(rs.getDate("data"));
@@ -102,7 +102,7 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public Boolean inserirPagamento(VendaBean venda, Pagamento pagamento) {
+	public Boolean inserirPagamento(Venda venda, Pagamento pagamento) {
 
 		Boolean retorno = false;
 
@@ -230,7 +230,7 @@ public class VendaDAO {
 		return valor;
 	}
 
-	public List<VendaBean> listarVendasPorCliente() {
+	public List<Venda> listarVendasPorCliente() {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -241,14 +241,14 @@ public class VendaDAO {
 				+ "GROUP BY v.id_cliente, c.nome "
 				+ "ORDER BY total DESC";
 
-		List<VendaBean> lista = new ArrayList<>();
+		List<Venda> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean venda = new VendaBean();
+				Venda venda = new Venda();
 				venda.getCliente().setNome(rs.getString("nome"));
 				venda.setValor(rs.getDouble("total"));
 
@@ -360,7 +360,7 @@ public class VendaDAO {
 		return valor;
 	}
 
-	public List<VendaBean> listarValorAReceber() {
+	public List<Venda> listarValorAReceber() {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -373,14 +373,14 @@ public class VendaDAO {
 				+ "HAVING COALESCE(v.valor - sum(p.valor_pago), v.valor) > 0 AND v.usuario = ? "
 				+ "ORDER BY em_aberto DESC ";
 
-		List<VendaBean> lista = new ArrayList<>();
+		List<Venda> lista = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				VendaBean venda = new VendaBean();
+				Venda venda = new Venda();
 				venda.getCliente().setNome(rs.getString("nome"));
 				venda.setEmAberto(rs.getDouble("em_aberto"));
 				venda.setData(rs.getDate("data"));
