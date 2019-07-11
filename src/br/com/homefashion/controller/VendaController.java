@@ -11,12 +11,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.com.homefashion.shared.Dialogs;
+import static br.com.homefashion.shared.Dialogs.*;
 import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
 @ManagedBean
-public class VendaController extends Dialogs {
+public class VendaController {
 
 	private VendaBean venda;
 	private List<VendaBean> listaVendas;

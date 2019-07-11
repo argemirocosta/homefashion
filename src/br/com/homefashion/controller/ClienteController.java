@@ -8,12 +8,13 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.com.homefashion.shared.Dialogs;
 import br.com.homefashion.util.JSFUtil;
+
+import static br.com.homefashion.shared.Dialogs.*;
 
 @ViewScoped
 @ManagedBean
-public class ClienteController extends Dialogs {
+public class ClienteController {
 
     private Cliente cliente;
     private List<Cliente> listaCliente;

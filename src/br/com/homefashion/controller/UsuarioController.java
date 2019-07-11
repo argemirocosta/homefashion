@@ -2,20 +2,21 @@ package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.shared.Dialogs;
 import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessionUtil;
 
 import java.io.IOException;
 
+import static br.com.homefashion.shared.Dialogs.*;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 
-@SessionScoped
+@ViewScoped
 @ManagedBean
-public class UsuarioController extends Dialogs {
+public class UsuarioController {
 
 	private Usuario usuario;
 	private Usuario usuarioLogado;
