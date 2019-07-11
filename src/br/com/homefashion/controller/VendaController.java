@@ -22,14 +22,14 @@ public class VendaController {
 	private List<VendaBean> listaVendas;
 	private Pagamento pagamento;
 	private List<Pagamento> listaPagamentos;
-	private Double emAberto;
+	private Double valorEmAberto;
 	private List<VendaBean> listaVendasPorCliente;
 	private List<VendaBean> listaVendasEmAberto;
 	private BuscaRelatorio busca;
 	private Double somaGeral;
-	private Double receberGeral;
-	private Double receberGeralTotal;
-	private VendaDAO vDao = new VendaDAO();
+	private Double valorReceberGeral;
+	private Double valorReceberGeralTotal;
+	private VendaDAO vendaDAO = new VendaDAO();
 
 	public VendaController() {
 		venda = new VendaBean();
@@ -37,7 +37,7 @@ public class VendaController {
 		listaVendas = new ArrayList<VendaBean>();
 		venda.getCliente().setId(0);
 		venda.setId(0);
-		emAberto = 0.0;
+		valorEmAberto = 0.0;
 		listaVendasPorCliente = new ArrayList<VendaBean>();
 		busca = new BuscaRelatorio();
 		busca.setPeriodoinicial(new java.util.Date(System.currentTimeMillis()));
@@ -67,8 +67,8 @@ public class VendaController {
 	}
 
 	public void verificarVendaPaga() {	
-		emAberto = vDao.valorEmAberto(venda.getId());
-		if (emAberto > 0) {
+		valorEmAberto = vendaDAO.calcularValorEmAberto(venda.getId());
+		if (valorEmAberto > 0) {
 			JSFUtil.abrirDialog(DIALOG_PAGAMENTOS);
 		} else {
 			JSFUtil.adicionarMensagemAdvertencia("Essa venda já foi paga!", "Aviso");
@@ -76,7 +76,7 @@ public class VendaController {
 	}
 
 	public void inserirVenda() {
-		boolean cadastrou = vDao.insereVenda(venda);
+		boolean cadastrou = vendaDAO.inserirVenda(venda);
 
 		if (cadastrou) {
 			limparCampos();
@@ -89,13 +89,13 @@ public class VendaController {
 	}
 
 	public void inserirPagamento() {
-		int pagamentoVenda = vDao.semPagamentos(venda.getId());
-		emAberto = vDao.valorEmAberto(venda.getId());
+		int pagamentoVenda = vendaDAO.verificarSemPagamentos(venda.getId());
+		valorEmAberto = vendaDAO.calcularValorEmAberto(venda.getId());
 
-		if (pagamento.getValor() > emAberto) {
+		if (pagamento.getValor() > valorEmAberto) {
 			JSFUtil.adicionarMensagemAdvertencia("Pagamento maior que a venda não é permitido!", "Aviso");
-		} else if (emAberto > 0 || pagamentoVenda == 0) {
-			boolean cadastrou = vDao.inserePagamento(venda, pagamento);
+		} else if (valorEmAberto > 0 || pagamentoVenda == 0) {
+			boolean cadastrou = vendaDAO.inserirPagamento(venda, pagamento);
 
 			if (cadastrou) {
 				listaPagamentos = null;
@@ -117,16 +117,16 @@ public class VendaController {
 	}
 
 	public void somaGeral() {
-		somaGeral = vDao.vendasPorPeriodo(busca);
+		somaGeral = vendaDAO.consultarVendasPorPeriodo(busca);
 	}
 
 	public void somarGeralTotal() {
-		somaGeral = vDao.vendasTotal();
-		receberGeralTotal = somaGeral - receberGeral;
+		somaGeral = vendaDAO.calcularVendasTotal();
+		valorReceberGeralTotal = somaGeral - valorReceberGeral;
 	}
 
 	public void calcularRecebidoGeral() {
-		receberGeral = vDao.receberGeral();
+		valorReceberGeral = vendaDAO.calcularValorReceberGeral();
 		somarGeralTotal();
 	}
 
@@ -140,7 +140,7 @@ public class VendaController {
 
 	public List<VendaBean> getListaVendas() {
 		if (listaVendas == null) {
-			listaVendas = vDao.listarVendas(venda);
+			listaVendas = vendaDAO.listarVendas(venda);
 		}
 		return listaVendas;
 	}
@@ -159,7 +159,7 @@ public class VendaController {
 
 	public List<Pagamento> getListaPagamentos() {
 		if (listaPagamentos == null) {
-			listaPagamentos = vDao.listarPagamentos(venda.getId());
+			listaPagamentos = vendaDAO.listarPagamentos(venda.getId());
 		}
 		return listaPagamentos;
 	}
@@ -168,17 +168,17 @@ public class VendaController {
 		this.listaPagamentos = listaPagamentos;
 	}
 
-	public Double getEmAberto() {
-		return emAberto;
+	public Double getValorEmAberto() {
+		return valorEmAberto;
 	}
 
-	public void setEmAberto(Double emAberto) {
-		this.emAberto = emAberto;
+	public void setValorEmAberto(Double valorEmAberto) {
+		this.valorEmAberto = valorEmAberto;
 	}
 
 	public List<VendaBean> getListaVendasPorCliente() {
 		if (listaVendasPorCliente == null) {
-			listaVendasPorCliente = vDao.vendasPorCliente();
+			listaVendasPorCliente = vendaDAO.listarVendasPorCliente();
 		}
 		return listaVendasPorCliente;
 	}
@@ -205,7 +205,7 @@ public class VendaController {
 
 	public List<VendaBean> getListaVendasEmAberto() {
 		if (listaVendasEmAberto == null) {
-			listaVendasEmAberto = vDao.aReceber();
+			listaVendasEmAberto = vendaDAO.listarValorAReceber();
 
 		}
 		return listaVendasEmAberto;
@@ -215,19 +215,20 @@ public class VendaController {
 		this.listaVendasEmAberto = listaVendasEmAberto;
 	}
 
-	public Double getReceberGeral() {
-		return receberGeral;
+
+	public Double getValorReceberGeral() {
+		return valorReceberGeral;
 	}
 
-	public void setReceberGeral(Double receberGeral) {
-		this.receberGeral = receberGeral;
+	public void setValorReceberGeral(Double valorReceberGeral) {
+		this.valorReceberGeral = valorReceberGeral;
 	}
 
-	public Double getReceberGeralTotal() {
-		return receberGeralTotal;
+	public Double getValorReceberGeralTotal() {
+		return valorReceberGeralTotal;
 	}
 
-	public void setReceberGeralTotal(Double receberGeralTotal) {
-		this.receberGeralTotal = receberGeralTotal;
+	public void setValorReceberGeralTotal(Double valorReceberGeralTotal) {
+		this.valorReceberGeralTotal = valorReceberGeralTotal;
 	}
 }

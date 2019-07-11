@@ -6,8 +6,6 @@ import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessionUtil;
 
-import java.io.IOException;
-
 import static br.com.homefashion.shared.Dialogs.*;
 
 import javax.faces.bean.ManagedBean;
@@ -21,7 +19,7 @@ public class UsuarioController {
 	private Usuario usuario;
 	private Usuario usuarioLogado;
 	private String sessaoExpirada;
-	private UsuarioDAO uDao = new UsuarioDAO();
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	public UsuarioController() {
 		usuario = new Usuario();
@@ -30,7 +28,7 @@ public class UsuarioController {
 	}
 
 	public String login() {
-		usuarioLogado = uDao.login(usuario);
+		usuarioLogado = usuarioDAO.login(usuario);
 
 		if (usuarioLogado != null) {
 			SessionUtil.adicionarNaSessao(usuarioLogado, "usuario_session");
@@ -41,7 +39,7 @@ public class UsuarioController {
 		}
 	}
 
-	public static void timeOut() throws IOException {
+	public static void timeOut() {
 		if (SessionUtil.getSession() != null) {
 			SessionUtil.getSession().invalidate();
 			SessionUtil.adicionarNaSessao("S", "sessaoExpirada");
@@ -55,8 +53,8 @@ public class UsuarioController {
 		return RedirecionarUtil.redirectPagina("/index.faces");
 	}
 
-	public void insereUsuario() {
-		boolean cadastrou = uDao.insereUsuario(usuario);
+	public void inserirUsuario() {
+		boolean cadastrou = usuarioDAO.inserirUsuario(usuario);
 
 		if (cadastrou) {
 			JSFUtil.adicionarMensagemSucesso("Usuário cadastrado com sucesso!", "Sucesso");

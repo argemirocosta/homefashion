@@ -17,31 +17,30 @@ import static br.com.homefashion.shared.Dialogs.*;
 public class ClienteController {
 
     private Cliente cliente;
-    private List<Cliente> listaCliente;
+    private List<Cliente> listaClientes;
     private String campoBusca;
-    private ClienteDAO cDao = new ClienteDAO();
+    private ClienteDAO clienteDAO = new ClienteDAO();
 
     public ClienteController() {
         cliente = new Cliente();
-        campoBusca = "";
     }
 
     public void limparBusca() {
-        listaCliente = null;
+        listaClientes = null;
         listarClientes();
     }
 
     private void limparCampos() {
-        listaCliente = null;
+        listaClientes = null;
         cliente = new Cliente();
     }
 
     public void buscarClientePorNome() {
-        listaCliente = cDao.buscaClientePorNome(campoBusca);
+        listaClientes = clienteDAO.buscarClientePorNome(campoBusca);
     }
 
     public void deletarCliente() {
-        Boolean deletou = cDao.deletarCliente(cliente);
+        Boolean deletou = clienteDAO.deletarCliente(cliente);
 
         if (deletou) {
             limparCampos();
@@ -53,7 +52,7 @@ public class ClienteController {
     }
 
     public void alterarCliente() {
-        Boolean alterou = cDao.alterarCliente(cliente);
+        Boolean alterou = clienteDAO.alterarCliente(cliente);
 
         if (alterou) {
             limparCampos();
@@ -65,7 +64,7 @@ public class ClienteController {
     }
 
     public void inserirCliente() {
-        Boolean cadastrou = cDao.inserirCliente(cliente);
+        Boolean cadastrou = clienteDAO.inserirCliente(cliente);
 
         if (cadastrou) {
             limparCampos();
@@ -77,7 +76,7 @@ public class ClienteController {
     }
 
     public void listarClientes() {
-        listaCliente = cDao.listarClientes();
+        listaClientes = clienteDAO.listarClientes();
     }
 
     //GETTERS E SETTERS
@@ -91,12 +90,12 @@ public class ClienteController {
         this.cliente = cliente;
     }
 
-    public List<Cliente> getListaCliente() {
-        return listaCliente;
+    public List<Cliente> getListaClientes() {
+        return listaClientes;
     }
 
-    public void setListaCliente(List<Cliente> listaCliente) {
-        this.listaCliente = listaCliente;
+    public void setListaClientes(List<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
     }
 
     public String getCampoBusca() {

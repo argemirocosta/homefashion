@@ -20,7 +20,7 @@ public class VendaDAO {
 
 	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
-	public Boolean insereVenda(VendaBean venda) {
+	public Boolean inserirVenda(VendaBean venda) {
 
 		Boolean retorno = false;
 
@@ -102,7 +102,7 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public Boolean inserePagamento(VendaBean venda, Pagamento pagamento) {
+	public Boolean inserirPagamento(VendaBean venda, Pagamento pagamento) {
 
 		Boolean retorno = false;
 
@@ -170,7 +170,7 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public Double valorEmAberto(Integer codvenda) {
+	public Double calcularValorEmAberto(Integer codvenda) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -202,7 +202,7 @@ public class VendaDAO {
 		return valor;
 	}
 
-	public Integer semPagamentos(Integer codvenda) {
+	public Integer verificarSemPagamentos(Integer codvenda) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -230,7 +230,7 @@ public class VendaDAO {
 		return valor;
 	}
 
-	public List<VendaBean> vendasPorCliente() {
+	public List<VendaBean> listarVendasPorCliente() {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -267,7 +267,7 @@ public class VendaDAO {
 		return lista;
 	}
 
-	public Double vendasPorPeriodo(BuscaRelatorio busca) {
+	public Double consultarVendasPorPeriodo(BuscaRelatorio busca) {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -300,7 +300,7 @@ public class VendaDAO {
 		return valor;
 	}
 
-	public Double vendasTotal() {
+	public Double calcularVendasTotal() {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -330,7 +330,7 @@ public class VendaDAO {
 		return valor;
 	}
 
-	public Double receberGeral() {
+	public Double calcularValorReceberGeral() {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -360,7 +360,7 @@ public class VendaDAO {
 		return valor;
 	}
 
-	public List<VendaBean> aReceber() {
+	public List<VendaBean> listarValorAReceber() {
 
 		conexao = ConnectionFactory.getConnection();
 

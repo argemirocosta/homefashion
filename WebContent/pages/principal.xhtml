@@ -62,7 +62,7 @@
 
             <br/>
 
-            <p:dataTable id="tab" value="#{clienteController.listaCliente}"
+            <p:dataTable id="tab" value="#{clienteController.listaClientes}"
                          var="tabela" emptyMessage="Nenhum Cliente encontrado" rows="20"
                          paginator="true" paginatorPosition="bottom">
                 <p:column headerText="Código" width="15%">
@@ -589,7 +589,7 @@
                     <h:outputLabel value="TOTAL RECEBIDO ATÉ HOJE: "
                                    style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-                    <h:outputLabel value="#{vendaController.receberGeral}"
+                    <h:outputLabel value="#{vendaController.valorReceberGeral}"
                                    style="font-size: 14px;color:red;margin-left:10px">
                         <f:convertNumber type="currency" currencySymbol="R$"/>
                     </h:outputLabel>
@@ -597,7 +597,7 @@
                     <h:outputLabel value="VALOR TOTAL A RECEBER: "
                                    style="font-size: 20px;margin-left:20px"></h:outputLabel>
 
-                    <h:outputLabel value="#{vendaController.receberGeralTotal}"
+                    <h:outputLabel value="#{vendaController.valorReceberGeralTotal}"
                                    style="font-size: 20px;color:red;margin-left:10px">
                         <f:convertNumber type="currency" currencySymbol="R$"/>
                     </h:outputLabel>

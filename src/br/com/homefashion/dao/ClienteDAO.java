@@ -20,7 +20,7 @@ public class ClienteDAO {
 
 	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
-	public List<Cliente> buscaClientePorNome(String nome) {
+	public List<Cliente> buscarClientePorNome(String nome) {
 
 		conexao = ConnectionFactory.getConnection();
 

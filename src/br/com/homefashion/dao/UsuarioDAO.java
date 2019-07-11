@@ -53,7 +53,7 @@ public class UsuarioDAO {
 		return u;
 	}
 	
-	public Boolean insereUsuario(Usuario usuario) {
+	public Boolean inserirUsuario(Usuario usuario) {
 
 		conexao = ConnectionFactory.getConnection();
 
