@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.homefashion.shared.Queries.*;
+
 public class VendaDAO {
 
 	private Connection conexao = null;
@@ -22,14 +24,12 @@ public class VendaDAO {
 
 	public Boolean inserirVenda(Venda venda) {
 
-		Boolean retorno = false;
+		boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "INSERT INTO vendas.venda (id_cliente, valor, qtd, data, usuario) VALUES (?,?,?,?,?)";
-
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(INSERIR_VENDA);
 			ps.setInt(1, venda.getCliente().getId());
 			ps.setDouble(2, venda.getValor());
 			ps.setInt(3, venda.getQtd());
@@ -56,22 +56,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "SELECT v.id, v.id_cliente, c.nome, v.data, v.valor, v.qtd, "
-				+ "COALESCE(sum(p.valor_pago),0) AS total_pago, COALESCE((v.valor - sum(p.valor_pago)),v.valor) AS em_aberto, "
-				+ "CASE WHEN COALESCE((v.valor - sum(p.valor_pago)),v.valor) = 0 THEN 'PAGO' "
-				+ "WHEN COALESCE((v.valor - sum(p.valor_pago)),v.valor) > 0 THEN 'ABERTO' "
-				+ "END AS situacao "
-				+ "FROM vendas.venda v "
-				+ "LEFT JOIN vendas.clientes c ON (v.id_cliente = c.id) "
-				+ "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
-				+ "WHERE v.id_cliente = ? "
-				+ "GROUP BY v.id, v.id_cliente, c.nome, v.valor, v.qtd, v.data "
-				+ "ORDER BY v.data DESC";
-
 		List<Venda> lista = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_VENDAS);
 
 			ps.setInt(1, vendaB.getCliente().getId());
 			ResultSet rs = ps.executeQuery();
@@ -104,14 +92,12 @@ public class VendaDAO {
 
 	public Boolean inserirPagamento(Venda venda, Pagamento pagamento) {
 
-		Boolean retorno = false;
+		boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "INSERT INTO vendas.pagamentos (id_venda, valor_pago, data_pagamento, usuario) VALUES (?,?,?,?)";
-
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(INSERIR_PAGAMENTOS);
 			ps.setInt(1, venda.getId());
 			ps.setDouble(2, pagamento.getValor());
 			ps.setDate(3, new java.sql.Date(pagamento.getData().getTime()));
@@ -136,16 +122,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "SELECT p.id_venda, p.valor_pago, p.data_pagamento, v.data "
-				+ "FROM vendas.pagamentos p "
-				+ "LEFT JOIN vendas.venda v ON (p.id_venda = v.id) "
-				+ "WHERE v.id = ? "
-				+ "ORDER BY v.data DESC, p.data_pagamento DESC";
-
 		List<Pagamento> lista = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_PAGAMENTOS);
 			ps.setInt(1, codcliente);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -174,15 +154,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		Double valor = 0.0;
-
-		String sql = "SELECT v.id, (v.valor - sum(COALESCE(p.valor_pago, 0))) AS em_aberto "
-				+ "FROM vendas.venda v "
-				+ "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
-				+ "WHERE v.id = ? AND v.usuario = ? GROUP BY v.id ";
+		double valor = 0.0;
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_CALCULAR_VALOR_EM_ABERTO);
 			ps.setInt(1, codvenda);
 			ps.setInt(2, us.getId());
 			ResultSet rs = ps.executeQuery();
@@ -206,12 +181,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		Integer valor = 0;
-
-		String sql = "SELECT count(id_venda) AS qtd FROM vendas.pagamentos WHERE id_venda = ?";
+		int valor = 0;
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_VERIFICAR_SEM_PAGAMENTOS);
 			ps.setInt(1, codvenda);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -234,17 +207,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "SELECT v.id_cliente, c.nome, sum(v.valor) AS total "
-				+ "FROM vendas.venda v "
-				+ "LEFT JOIN vendas.clientes c ON (v.id_cliente = c.id) "
-				+ "WHERE v.usuario = ?"
-				+ "GROUP BY v.id_cliente, c.nome "
-				+ "ORDER BY total DESC";
-
 		List<Venda> lista = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_VENDAS_POR_CLIENTE);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -271,12 +237,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		Double valor = 0.0;
-
-		String sql = "SELECT sum(valor) AS soma FROM vendas.venda WHERE DATA BETWEEN ? AND ? AND usuario = ?";
+		double valor = 0.0;
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_CONSULTAR_VENDAS_POR_PERIODO);
 			ps.setDate(1,
 					new java.sql.Date(busca.getPeriodoinicial().getTime()));
 			ps.setDate(2, new java.sql.Date(busca.getPeriodofinal().getTime()));
@@ -304,12 +268,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		Double valor = 0.0;
-
-		String sql = "SELECT sum(valor) AS soma FROM vendas.venda WHERE usuario = ?";
+		double valor = 0.0;
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_CALCULAR_VENDAS_TOTAL);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -334,12 +296,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		Double valor = 0.0;
-
-		String sql = "SELECT sum(valor_pago) AS valor FROM vendas.pagamentos WHERE usuario = ?";
+		double valor = 0.0;
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_CALCULAR_VALOR_RECEBER_GERAL);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -364,19 +324,10 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "SELECT v.id, v.data, v.id_cliente, c.nome, v.valor, "
-				+ "COALESCE((v.valor - sum(p.valor_pago)), v.valor) AS em_aberto "
-				+ "FROM vendas.venda v "
-				+ "LEFT JOIN vendas.clientes c ON (v.id_cliente = c.id) "
-				+ "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
-				+ "GROUP BY v.id, v.id_cliente, c.nome, v.valor, v.data "
-				+ "HAVING COALESCE(v.valor - sum(p.valor_pago), v.valor) > 0 AND v.usuario = ? "
-				+ "ORDER BY em_aberto DESC ";
-
 		List<Venda> lista = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_VALOR_A_RECEBER);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

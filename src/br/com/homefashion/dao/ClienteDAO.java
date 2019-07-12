@@ -13,6 +13,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.homefashion.shared.Queries.*;
 
 public class ClienteDAO {
 
@@ -24,12 +25,10 @@ public class ClienteDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE usuario = ? ORDER BY nome";
-
 		List<Cliente> lista = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_CLIENTES);
 			ps.setInt(1, us.getId());
 			ResultSet rs = ps.executeQuery();
 
@@ -51,12 +50,10 @@ public class ClienteDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE upper(nome) LIKE upper(?) AND usuario = ? ORDER BY nome";
-
 		List<Cliente> lista = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_BUSCAR_CLIENTE_POR_NOME);
 			ps.setString(1, "%" + nome + "%");
 			ps.setInt(2, us.getId());
 			ResultSet rs = ps.executeQuery();
@@ -98,14 +95,12 @@ public class ClienteDAO {
 
 	public Boolean inserirCliente(Cliente cliente) {
 
-		Boolean retorno = false;
+		boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "INSERT INTO vendas.clientes (nome, telefone1, telefone2, usuario) VALUES (?,?,?,?)";
-
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(INSERIR_CLIENTE);
 			ps.setString(1, cliente.getNome().toUpperCase());
 
 			if (cliente.getTelefone1() == null) {
@@ -140,14 +135,12 @@ public class ClienteDAO {
 
 	public Boolean alterarCliente(Cliente cliente) {
 
-		Boolean retorno = false;
+		boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "UPDATE vendas.clientes SET nome=?, telefone1=?, telefone2=? WHERE id=?";
-
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(ALTERAR_CLIENTE);
 			ps.setString(1, cliente.getNome().toUpperCase());
 			ps.setInt(2, cliente.getTelefone1());
 			ps.setInt(3, cliente.getTelefone2());
@@ -171,14 +164,12 @@ public class ClienteDAO {
 
 	public Boolean deletarCliente(Cliente cliente) {
 
-		Boolean retorno = false;
+		boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "DELETE FROM vendas.clientes WHERE id=?";
-
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(DELETAR_CLIENTE);
 
 			ps.setInt(1, cliente.getId());
 

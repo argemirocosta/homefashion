@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static br.com.homefashion.shared.Queries.*;
+
 public class UsuarioDAO {
 
 	private Connection conexao;
@@ -16,13 +18,11 @@ public class UsuarioDAO {
 	public Usuario login(Usuario usuario) {
 
 		conexao = ConnectionFactory.getConnection();
-		
-		String sql = "SELECT id, nome, login, senha, ativo FROM vendas.usuario WHERE login = ? AND senha = ?";
 
 		Usuario u = null;
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(SELECT_LOGIN);
 			ps.setString(1, usuario.getLogin().toUpperCase());
 			ps.setString(2, usuario.getSenha());
 			ResultSet rs = ps.executeQuery();
@@ -59,10 +59,8 @@ public class UsuarioDAO {
 
 		boolean retorno = false;
 
-		String sql = "INSERT INTO vendas.usuario (nome, login, senha, ativo) VALUES (?,?,?,TRUE)";
-
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			PreparedStatement ps = conexao.prepareStatement(INSERIR_USUARIO);
 			ps.setString(1, usuario.getNome().toUpperCase());
 			ps.setString(2, usuario.getLogin().toUpperCase());
 			ps.setString(3, usuario.getSenha().toUpperCase());
