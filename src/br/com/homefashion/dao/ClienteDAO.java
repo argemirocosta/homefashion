@@ -16,9 +16,36 @@ import java.util.List;
 
 public class ClienteDAO {
 
-	Connection conexao = null;
+	private Connection conexao = null;
 
-	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
+	private Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
+
+	public List<Cliente> listarClientes() {
+
+		conexao = ConnectionFactory.getConnection();
+
+		String sql = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE usuario = ? ORDER BY nome";
+
+		List<Cliente> lista = new ArrayList<>();
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+			ps.setInt(1, us.getId());
+			ResultSet rs = ps.executeQuery();
+
+			lista = mapearResultSetIniciarListaClientes(rs);
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return lista;
+	}
 
 	public List<Cliente> buscarClientePorNome(String nome) {
 
@@ -33,15 +60,8 @@ public class ClienteDAO {
 			ps.setString(1, "%" + nome + "%");
 			ps.setInt(2, us.getId());
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				Cliente cliente = new Cliente();
-				cliente.setId(rs.getInt("id"));
-				cliente.setNome(rs.getString("nome").toUpperCase());
-				cliente.setTelefone1(rs.getInt("telefone1"));
-				cliente.setTelefone2(rs.getInt("telefone2"));
 
-				lista.add(cliente);
-			}
+			lista = mapearResultSetIniciarListaClientes(rs);
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -55,63 +75,25 @@ public class ClienteDAO {
 		return lista;
 	}
 
-	public Boolean deletarCliente(Cliente cliente) {
+	private ArrayList<Cliente> mapearResultSetIniciarListaClientes(ResultSet rs) {
 
-		Boolean retorno = false;
-
-		conexao = ConnectionFactory.getConnection();
-
-		String sql = "DELETE FROM vendas.clientes WHERE id=?";
+		ArrayList<Cliente> listaClientes = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
+			while (rs.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setId(rs.getInt("id"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setTelefone1(rs.getInt("telefone1"));
+				cliente.setTelefone2(rs.getInt("telefone2"));
 
-			ps.setInt(1, cliente.getId());
-
-			ps.execute();
-
-			retorno = true;
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				conexao.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+				listaClientes.add(cliente);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return retorno;
-	}
 
-	public Boolean alterarCliente(Cliente cliente) {
-
-		Boolean retorno = false;
-
-		conexao = ConnectionFactory.getConnection();
-
-		String sql = "UPDATE vendas.clientes SET nome=?, telefone1=?, telefone2=? WHERE id=?";
-
-		try {
-			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, cliente.getNome().toUpperCase());
-			ps.setInt(2, cliente.getTelefone1());
-			ps.setInt(3, cliente.getTelefone2());
-			ps.setInt(4, cliente.getId());
-
-			ps.executeUpdate();
-
-			retorno = true;
-
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				conexao.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		return retorno;
+		return listaClientes;
 	}
 
 	public Boolean inserirCliente(Cliente cliente) {
@@ -156,27 +138,24 @@ public class ClienteDAO {
 		return retorno;
 	}
 
-	public List<Cliente> listarClientes() {
+	public Boolean alterarCliente(Cliente cliente) {
+
+		Boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
-		String sql = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE usuario = ? ORDER BY nome";
-
-		List<Cliente> lista = new ArrayList<>();
+		String sql = "UPDATE vendas.clientes SET nome=?, telefone1=?, telefone2=? WHERE id=?";
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setInt(1, us.getId());
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				Cliente cliente = new Cliente();
-				cliente.setId(rs.getInt("id"));
-				cliente.setNome(rs.getString("nome"));
-				cliente.setTelefone1(rs.getInt("telefone1"));
-				cliente.setTelefone2(rs.getInt("telefone2"));
+			ps.setString(1, cliente.getNome().toUpperCase());
+			ps.setInt(2, cliente.getTelefone1());
+			ps.setInt(3, cliente.getTelefone2());
+			ps.setInt(4, cliente.getId());
 
-				lista.add(cliente);
-			}
+			ps.executeUpdate();
+
+			retorno = true;
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -187,7 +166,35 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return lista;
+		return retorno;
+	}
+
+	public Boolean deletarCliente(Cliente cliente) {
+
+		Boolean retorno = false;
+
+		conexao = ConnectionFactory.getConnection();
+
+		String sql = "DELETE FROM vendas.clientes WHERE id=?";
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(sql);
+
+			ps.setInt(1, cliente.getId());
+
+			ps.execute();
+
+			retorno = true;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return retorno;
 	}
 
 }

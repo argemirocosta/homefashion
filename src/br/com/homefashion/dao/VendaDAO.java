@@ -16,9 +16,9 @@ import java.util.List;
 
 public class VendaDAO {
 
-	Connection conexao = null;
+	private Connection conexao = null;
 
-	Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
+	private Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
 
 	public Boolean inserirVenda(Venda venda) {
 

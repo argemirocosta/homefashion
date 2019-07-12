@@ -57,7 +57,7 @@ public class UsuarioDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		Boolean retorno = false;
+		boolean retorno = false;
 
 		String sql = "INSERT INTO vendas.usuario (nome, login, senha, ativo) VALUES (?,?,?,TRUE)";
 
