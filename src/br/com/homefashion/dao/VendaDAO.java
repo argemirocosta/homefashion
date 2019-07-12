@@ -5,8 +5,10 @@ import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.model.Venda;
+import br.com.homefashion.util.DataUtil;
 import br.com.homefashion.util.SessionUtil;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +35,7 @@ public class VendaDAO {
 			ps.setInt(1, venda.getCliente().getId());
 			ps.setDouble(2, venda.getValor());
 			ps.setInt(3, venda.getQtd());
-			ps.setDate(4, new java.sql.Date(venda.getData().getTime()));
+			ps.setDate(4, DataUtil.converterDateUtilParaDateSql(venda.getData()));
 			ps.setInt(5, us.getId());
 
 			ps.execute();
@@ -100,7 +102,7 @@ public class VendaDAO {
 			PreparedStatement ps = conexao.prepareStatement(INSERIR_PAGAMENTOS);
 			ps.setInt(1, venda.getId());
 			ps.setDouble(2, pagamento.getValor());
-			ps.setDate(3, new java.sql.Date(pagamento.getData().getTime()));
+			ps.setDate(3, DataUtil.converterDateUtilParaDateSql(pagamento.getData()));
 			ps.setInt(4, us.getId());
 
 			ps.execute();
@@ -243,7 +245,7 @@ public class VendaDAO {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_CONSULTAR_VENDAS_POR_PERIODO);
 			ps.setDate(1,
 					new java.sql.Date(busca.getPeriodoinicial().getTime()));
-			ps.setDate(2, new java.sql.Date(busca.getPeriodofinal().getTime()));
+			ps.setDate(2, DataUtil.converterDateUtilParaDateSql(busca.getPeriodofinal()));
 			ps.setInt(3, us.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
