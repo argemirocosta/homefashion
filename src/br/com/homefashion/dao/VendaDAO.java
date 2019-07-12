@@ -6,7 +6,7 @@ import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.model.Venda;
 import br.com.homefashion.util.DataUtil;
-import br.com.homefashion.util.SessionUtil;
+import br.com.homefashion.util.SessaoUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.homefashion.shared.Queries.*;
+import static br.com.homefashion.shared.Sessao.*;
 
 public class VendaDAO {
 
 	private Connection conexao = null;
 
-	private Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
+	private Usuario us = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
 
 	public Boolean inserirVenda(Venda venda) {
 

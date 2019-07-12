@@ -2,7 +2,7 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.util.SessionUtil;
+import br.com.homefashion.util.SessaoUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static br.com.homefashion.shared.Queries.*;
+import static br.com.homefashion.shared.Sessao.*;
 
 public class UsuarioDAO {
 
@@ -38,7 +39,7 @@ public class UsuarioDAO {
 			}
 			
 			if(u != null){
-				SessionUtil.adicionarNaSessao(u.getId(), "usuario");
+				SessaoUtil.adicionarNaSessao(u, USUARIO_SESSAO);
 			}
 			
 		} catch (SQLException ex) {

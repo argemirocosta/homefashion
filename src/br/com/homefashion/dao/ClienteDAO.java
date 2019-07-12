@@ -3,7 +3,7 @@ package br.com.homefashion.dao;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.util.SessionUtil;
+import br.com.homefashion.util.SessaoUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.homefashion.shared.Queries.*;
+import static br.com.homefashion.shared.Sessao.*;
 
 public class ClienteDAO {
 
 	private Connection conexao = null;
 
-	private Usuario us = (Usuario) SessionUtil.resgatarDaSessao("usuario_session");
+	private Usuario us = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
 
 	public List<Cliente> listarClientes() {
 

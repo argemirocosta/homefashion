@@ -33,7 +33,6 @@ public class ClienteController {
     }
 
     private void limparCampos() {
-        listaClientes = null;
         cliente = new Cliente();
     }
 

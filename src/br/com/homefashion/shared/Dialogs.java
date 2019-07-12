@@ -8,7 +8,7 @@ public class Dialogs {
 
     public static final String DIALOG_DELETAR_CLIENTE = "dlgDeleteCliente";
 
-    public static final String DIALOG_ALTERAR_CLIENTE = "dlgDeleteCliente";
+    public static final String DIALOG_ALTERAR_CLIENTE = "dlgAltCliente";
 
     public static final String DIALOG_VENDER = "dlgVender";
 
