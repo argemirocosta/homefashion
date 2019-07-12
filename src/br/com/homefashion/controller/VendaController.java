@@ -67,15 +67,6 @@ public class VendaController {
 
 	}
 
-	public void verificarVendaPaga() {	
-		valorEmAberto = vendaDAO.calcularValorEmAberto(venda.getId());
-		if (valorEmAberto > 0) {
-			JSFUtil.abrirDialog(DIALOG_PAGAMENTOS);
-		} else {
-			JSFUtil.adicionarMensagemAdvertencia(VENDA_JA_PAGA, AVISO);
-		}
-	}
-
 	public void inserirVenda() {
 		boolean cadastrou = vendaDAO.inserirVenda(venda);
 
@@ -121,7 +112,7 @@ public class VendaController {
 		somaGeral = vendaDAO.consultarVendasPorPeriodo(busca);
 	}
 
-	public void somarGeralTotal() {
+	private void somarGeralTotal() {
 		somaGeral = vendaDAO.calcularVendasTotal();
 		valorReceberGeralTotal = somaGeral - valorReceberGeral;
 	}
@@ -167,14 +158,6 @@ public class VendaController {
 
 	public void setListaPagamentos(List<Pagamento> listaPagamentos) {
 		this.listaPagamentos = listaPagamentos;
-	}
-
-	public Double getValorEmAberto() {
-		return valorEmAberto;
-	}
-
-	public void setValorEmAberto(Double valorEmAberto) {
-		this.valorEmAberto = valorEmAberto;
 	}
 
 	public List<Venda> getListaVendasPorCliente() {

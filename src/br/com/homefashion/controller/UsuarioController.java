@@ -19,13 +19,11 @@ public class UsuarioController {
 
 	private Usuario usuario;
 	private Usuario usuarioLogado;
-	private String sessaoExpirada;
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	public UsuarioController() {
 		usuario = new Usuario();
 		usuarioLogado = null;
-		sessaoExpirada = "N";
 	}
 
 	public String login() {
@@ -78,16 +76,4 @@ public class UsuarioController {
 		this.usuario = usuario;
 	}
 
-	public Usuario getUsuarioLogado() {
-		return usuarioLogado;
-	}
-
-	public void setUsuarioLogado(Usuario usuarioLogado) {
-		this.usuarioLogado = usuarioLogado;
-	}
-
-	public String getSessaoExpirada() {
-		sessaoExpirada = (String) SessionUtil.resgatarDaSessao("sessaoExpirada");
-		return sessaoExpirada;
-	}
 }
