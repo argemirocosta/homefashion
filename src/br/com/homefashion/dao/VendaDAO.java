@@ -8,7 +8,6 @@ import br.com.homefashion.model.Venda;
 import br.com.homefashion.util.DataUtil;
 import br.com.homefashion.util.SessionUtil;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

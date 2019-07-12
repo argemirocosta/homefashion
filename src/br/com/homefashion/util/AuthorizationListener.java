@@ -3,8 +3,6 @@ package br.com.homefashion.util;
 import br.com.homefashion.controller.UsuarioController;
 import br.com.homefashion.model.Usuario;
 
-import java.io.IOException;
-
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;

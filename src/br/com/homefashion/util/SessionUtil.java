@@ -17,9 +17,8 @@ public class SessionUtil {
 	}
 
 	public static Object resgatarDaSessao(String nomeObjetoSessao){
-		Object objeto = (Object) FacesContext.getCurrentInstance().getExternalContext()
-				.getSessionMap().get(nomeObjetoSessao);
 
-		return objeto;
+		return FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get(nomeObjetoSessao);
 	}
 }

@@ -10,8 +10,6 @@ public class Dialogs {
 
     public static final String DIALOG_ALTERAR_CLIENTE = "dlgDeleteCliente";
 
-    public static final String DIALOG_PAGAMENTOS = "dlgPagamentos";
-
     public static final String DIALOG_VENDER = "dlgVender";
 
     public static final String DIALOG_CADASTRO_USUARIO = "dlgCadastro";
