@@ -8,6 +8,7 @@ import br.com.homefashion.util.SessionUtil;
 
 import static br.com.homefashion.shared.Dialogs.*;
 import static br.com.homefashion.shared.Mensagens.*;
+import static br.com.homefashion.shared.Paginas.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -31,7 +32,7 @@ public class UsuarioController {
 
 		if (usuarioLogado != null) {
 			SessionUtil.adicionarNaSessao(usuarioLogado, "usuario_session");
-			return RedirecionarUtil.redirectPagina("/pages/principal.faces");
+			return RedirecionarUtil.redirectPagina(PRINCIPAL);
 		} else {
 			JSFUtil.adicionarMensagemAdvertencia(LOGIN_SENHA_INVALIDO, AVISO);
 			return "";
@@ -43,13 +44,13 @@ public class UsuarioController {
 			SessionUtil.getSession().invalidate();
 			SessionUtil.adicionarNaSessao("S", "sessaoExpirada");
 		} else {
-			RedirecionarUtil.redirectPagina("/index.faces");
+			RedirecionarUtil.redirectPagina(INDEX);
 		}
 	}
 
 	public String logout() {
 		SessionUtil.getSession().invalidate();
-		return RedirecionarUtil.redirectPagina("/index.faces");
+		return RedirecionarUtil.redirectPagina(INDEX);
 	}
 
 	public void inserirUsuario() {
