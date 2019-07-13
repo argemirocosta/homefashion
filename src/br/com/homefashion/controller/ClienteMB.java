@@ -85,7 +85,6 @@ public class ClienteMB {
 
     //GETTERS E SETTERS
 
-
     public Cliente getCliente() {
         return cliente;
     }

@@ -61,6 +61,8 @@ public class UsuarioMB {
         usuario = new Usuario();
     }
 
+    //GETTERS E SETTERS
+
     public Usuario getUsuario() {
         return usuario;
     }
