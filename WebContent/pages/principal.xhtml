@@ -399,7 +399,7 @@
         </p:dialog>
 
 
-        <p:dialog widgetVar="dlgRelatorios" header="Tela de Relatórios"
+        <p:dialog widgetVar="dlgRelatorios" header="Relatórios"
                   height="auto" width="auto" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formRel">
@@ -410,7 +410,7 @@
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber por Pessoa"
-                                     action="#{vendaMB.listarValorAReceber()}"
+                                     action="#{vendaMB.listarValorAReceberPorPessoa()}"
                                      update=":formRel2:tabRel2" oncomplete="PF('dlgRelatorio2').show();"
                                      icon="confirmar"/>
 

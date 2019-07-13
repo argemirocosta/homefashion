@@ -25,7 +25,6 @@ public class VendaMB {
     private List<Venda> listaVendas;
     private Pagamento pagamento;
     private List<Pagamento> listaPagamentos;
-    private Double valorEmAberto;
     private List<Venda> listaVendasPorCliente;
     private List<Venda> listaVendasEmAberto;
     private BuscaRelatorio busca;
@@ -38,7 +37,6 @@ public class VendaMB {
         venda = new Venda();
         pagamento = new Pagamento();
         listaVendas = new ArrayList<>();
-
         listaVendasPorCliente = new ArrayList<>();
         busca = new BuscaRelatorio();
         busca.setPeriodoinicial(DataUtil.retornarDataAtual());
@@ -47,11 +45,10 @@ public class VendaMB {
         listaVendasEmAberto = new ArrayList<>();
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         venda.setQtd(null);
         venda.setValor(null);
         listaVendas = null;
-        getListaVendas();
     }
 
     public void inserirVenda() {
@@ -69,7 +66,7 @@ public class VendaMB {
 
     public void inserirPagamento() {
         int pagamentoVenda = vendaDAO.verificarSemPagamentos(venda.getId());
-        valorEmAberto = vendaDAO.calcularValorEmAberto(venda.getId());
+        Double valorEmAberto = vendaDAO.calcularValorEmAberto(venda.getId());
 
         if (pagamento.getValor() > valorEmAberto) {
             JSFUtil.adicionarMensagemAdvertencia(PAGAMENTO_MAIOR_QUE_VENDA, AVISO);
@@ -115,7 +112,7 @@ public class VendaMB {
         listaPagamentos = vendaDAO.listarPagamentos(venda.getId());
     }
 
-    public void listarValorAReceber() {
+    public void listarValorAReceberPorPessoa() {
         listaVendasEmAberto = vendaDAO.listarValorAReceber();
     }
 
