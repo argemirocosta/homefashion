@@ -9,4 +9,8 @@ public final class DataUtil {
         return new java.sql.Date(dataUtil.getTime());
     }
 
+    public static Date retornarDataAtual(){
+        return new java.util.Date(System.currentTimeMillis());
+    }
+
 }

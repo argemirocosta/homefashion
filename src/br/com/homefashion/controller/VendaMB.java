@@ -14,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 import static br.com.homefashion.shared.Dialogs.*;
 import static br.com.homefashion.shared.Mensagens.*;
 
+import br.com.homefashion.util.DataUtil;
 import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
@@ -40,8 +41,8 @@ public class VendaMB {
 
         listaVendasPorCliente = new ArrayList<>();
         busca = new BuscaRelatorio();
-        busca.setPeriodoinicial(new java.util.Date(System.currentTimeMillis()));
-        busca.setPeriodofinal(new java.util.Date(System.currentTimeMillis()));
+        busca.setPeriodoinicial(DataUtil.retornarDataAtual());
+        busca.setPeriodofinal(DataUtil.retornarDataAtual());
         totalVendidoNoPeriodo = 0.0;
         listaVendasEmAberto = new ArrayList<>();
     }
