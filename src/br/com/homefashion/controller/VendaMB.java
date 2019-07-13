@@ -119,6 +119,10 @@ public class VendaMB {
         listaVendasEmAberto = vendaDAO.listarValorAReceber();
     }
 
+    public void listarVendas(){
+        listaVendas = vendaDAO.listarVendas(venda);
+    }
+
     //GETTERS E SETTERS
 
     public Venda getVenda() {
@@ -130,9 +134,6 @@ public class VendaMB {
     }
 
     public List<Venda> getListaVendas() {
-        if (listaVendas == null) {
-            listaVendas = vendaDAO.listarVendas(venda);
-        }
         return listaVendas;
     }
 

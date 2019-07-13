@@ -104,7 +104,7 @@
                         </p:commandButton>
 
                         <p:commandButton oncomplete="PF('dlgVender').show();" icon="sifrao"
-                                         action="#{vendaMB.limparCampos}"
+                                         action="#{vendaMB.listarVendas()}"
                                          update=":formVender:tabVendas">
                             <f:setPropertyActionListener value="#{tabela}"
                                                          target="#{vendaMB.venda.cliente}"/>
