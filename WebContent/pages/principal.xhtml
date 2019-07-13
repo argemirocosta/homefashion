@@ -7,10 +7,6 @@
 
     <ui:define name="content">
 
-        <p:idleMonitor timeout="600000">
-            <p:ajax event="idle" listener="#{usuarioMB.timeOut}"/>
-        </p:idleMonitor>
-
         <f:metadata>
             <f:viewAction
                     action="#{clienteMB.listarClientes()}"/>
