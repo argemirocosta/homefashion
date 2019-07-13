@@ -20,20 +20,20 @@ public class ClienteDAO {
 
 	private Connection conexao = null;
 
-	private Usuario us = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
+	private Usuario usuarioSessao = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
 
 	public List<Cliente> listarClientes() {
 
 		conexao = ConnectionFactory.getConnection();
 
-		List<Cliente> lista = new ArrayList<>();
+		List<Cliente> listaClientes = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_CLIENTES);
-			ps.setInt(1, us.getId());
+			ps.setInt(1, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
 
-			lista = mapearResultSetIniciarListaClientes(rs);
+			listaClientes = mapearResultSetIniciarListaClientes(rs);
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -44,22 +44,22 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return lista;
+		return listaClientes;
 	}
 
-	public List<Cliente> buscarClientePorNome(String nome) {
+	public List<Cliente> buscarClientePorNome(String nomeCliente) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		List<Cliente> lista = new ArrayList<>();
+		List<Cliente> listaClientes = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_BUSCAR_CLIENTE_POR_NOME);
-			ps.setString(1, "%" + nome + "%");
-			ps.setInt(2, us.getId());
+			ps.setString(1, "%" + nomeCliente + "%");
+			ps.setInt(2, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
 
-			lista = mapearResultSetIniciarListaClientes(rs);
+			listaClientes = mapearResultSetIniciarListaClientes(rs);
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -70,7 +70,7 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return lista;
+		return listaClientes;
 	}
 
 	private ArrayList<Cliente> mapearResultSetIniciarListaClientes(ResultSet rs) {
@@ -116,7 +116,7 @@ public class ClienteDAO {
 				ps.setInt(3, cliente.getTelefone2());
 			}
 
-			ps.setInt(4, us.getId());
+			ps.setInt(4, usuarioSessao.getId());
 
 			ps.execute();
 

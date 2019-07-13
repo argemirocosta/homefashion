@@ -16,30 +16,30 @@ public class UsuarioDAO {
 
 	private Connection conexao;
 
-	public Usuario login(Usuario usuario) {
+	public Usuario login(Usuario usuarioLogin) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		Usuario u = null;
+		Usuario usuarioRetorno = null;
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_LOGIN);
-			ps.setString(1, usuario.getLogin().toUpperCase());
-			ps.setString(2, usuario.getSenha());
+			ps.setString(1, usuarioLogin.getLogin().toUpperCase());
+			ps.setString(2, usuarioLogin.getSenha());
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				u = new Usuario();
-				u.setId(rs.getInt("id"));
-				u.setNome(rs.getString("nome"));
-				u.setLogin(rs.getString("login"));
-				u.setSenha(rs.getString("senha"));
-				u.setAtivo(rs.getBoolean("ativo"));
+				usuarioRetorno = new Usuario();
+				usuarioRetorno.setId(rs.getInt("id"));
+				usuarioRetorno.setNome(rs.getString("nome"));
+				usuarioRetorno.setLogin(rs.getString("login"));
+				usuarioRetorno.setSenha(rs.getString("senha"));
+				usuarioRetorno.setAtivo(rs.getBoolean("ativo"));
 				
 			}
 			
-			if(u != null){
-				SessaoUtil.adicionarNaSessao(u, USUARIO_SESSAO);
+			if(usuarioRetorno != null){
+				SessaoUtil.adicionarNaSessao(usuarioRetorno, USUARIO_SESSAO);
 			}
 			
 		} catch (SQLException ex) {
@@ -51,7 +51,7 @@ public class UsuarioDAO {
 				ex.printStackTrace();
 			}
 		}
-		return u;
+		return usuarioRetorno;
 	}
 	
 	public Boolean inserirUsuario(Usuario usuario) {

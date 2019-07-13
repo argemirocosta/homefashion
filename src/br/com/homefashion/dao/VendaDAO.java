@@ -22,7 +22,7 @@ public class VendaDAO {
 
 	private Connection conexao = null;
 
-	private Usuario us = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
+	private Usuario usuarioSessao = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
 
 	public Boolean inserirVenda(Venda venda) {
 
@@ -36,7 +36,7 @@ public class VendaDAO {
 			ps.setDouble(2, venda.getValor());
 			ps.setInt(3, venda.getQtd());
 			ps.setDate(4, DataUtil.converterDateUtilParaDateSql(venda.getData()));
-			ps.setInt(5, us.getId());
+			ps.setInt(5, usuarioSessao.getId());
 
 			ps.execute();
 
@@ -54,17 +54,18 @@ public class VendaDAO {
 		return retorno;
 	}
 
-	public List<Venda> listarVendas(Venda vendaB) {
+	public List<Venda> listarVendas(Venda vendaParametro) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		List<Venda> lista = new ArrayList<>();
+		List<Venda> listaVendas = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_VENDAS);
 
-			ps.setInt(1, vendaB.getCliente().getId());
+			ps.setInt(1, vendaParametro.getCliente().getId());
 			ResultSet rs = ps.executeQuery();
+
 			while (rs.next()) {
 				Venda venda = new Venda();
 				venda.setId(rs.getInt("id"));
@@ -77,7 +78,7 @@ public class VendaDAO {
 				venda.setEmAberto(rs.getDouble("em_aberto"));
 				venda.setSituacao(rs.getString("situacao"));
 
-				lista.add(venda);
+				listaVendas.add(venda);
 			}
 
 		} catch (SQLException ex) {
@@ -89,7 +90,7 @@ public class VendaDAO {
 				ex.printStackTrace();
 			}
 		}
-		return lista;
+		return listaVendas;
 	}
 
 	public Boolean inserirPagamento(Venda venda, Pagamento pagamento) {
@@ -103,11 +104,12 @@ public class VendaDAO {
 			ps.setInt(1, venda.getId());
 			ps.setDouble(2, pagamento.getValor());
 			ps.setDate(3, DataUtil.converterDateUtilParaDateSql(pagamento.getData()));
-			ps.setInt(4, us.getId());
+			ps.setInt(4, usuarioSessao.getId());
 
 			ps.execute();
 
 			retorno = true;
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -124,20 +126,21 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		List<Pagamento> lista = new ArrayList<>();
+		List<Pagamento> listaPagamentos = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_PAGAMENTOS);
 			ps.setInt(1, codcliente);
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				Pagamento p = new Pagamento();
-				p.getVenda().setId(rs.getInt("id_venda"));
-				p.setData(rs.getDate("data_pagamento"));
-				p.setValor(rs.getDouble("valor_pago"));
-				p.getVenda().setData(rs.getDate("data"));
 
-				lista.add(p);
+			while (rs.next()) {
+				Pagamento pagamento = new Pagamento();
+				pagamento.getVenda().setId(rs.getInt("id_venda"));
+				pagamento.setData(rs.getDate("data_pagamento"));
+				pagamento.setValor(rs.getDouble("valor_pago"));
+				pagamento.getVenda().setData(rs.getDate("data"));
+
+				listaPagamentos.add(pagamento);
 			}
 
 		} catch (SQLException ex) {
@@ -149,22 +152,22 @@ public class VendaDAO {
 				ex.printStackTrace();
 			}
 		}
-		return lista;
+		return listaPagamentos;
 	}
 
 	public Double calcularValorEmAberto(Integer codvenda) {
 
 		conexao = ConnectionFactory.getConnection();
 
-		double valor = 0.0;
+		double valorEmAberto = 0.0;
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_CALCULAR_VALOR_EM_ABERTO);
 			ps.setInt(1, codvenda);
-			ps.setInt(2, us.getId());
+			ps.setInt(2, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				valor = rs.getDouble("em_aberto");
+				valorEmAberto = rs.getDouble("em_aberto");
 			}
 
 		} catch (SQLException ex) {
@@ -176,7 +179,7 @@ public class VendaDAO {
 				ex.printStackTrace();
 			}
 		}
-		return valor;
+		return valorEmAberto;
 	}
 
 	public Integer verificarSemPagamentos(Integer codvenda) {
@@ -209,18 +212,19 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		List<Venda> lista = new ArrayList<>();
+		List<Venda> listaVendasPorCliente = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_VENDAS_POR_CLIENTE);
-			ps.setInt(1, us.getId());
+			ps.setInt(1, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
+
 			while (rs.next()) {
 				Venda venda = new Venda();
 				venda.getCliente().setNome(rs.getString("nome"));
 				venda.setValor(rs.getDouble("total"));
 
-				lista.add(venda);
+				listaVendasPorCliente.add(venda);
 			}
 
 		} catch (SQLException ex) {
@@ -232,7 +236,7 @@ public class VendaDAO {
 				ex.printStackTrace();
 			}
 		}
-		return lista;
+		return listaVendasPorCliente;
 	}
 
 	public Double consultarVendasPorPeriodo(BuscaRelatorio busca) {
@@ -246,7 +250,7 @@ public class VendaDAO {
 			ps.setDate(1,
 					new java.sql.Date(busca.getPeriodoinicial().getTime()));
 			ps.setDate(2, DataUtil.converterDateUtilParaDateSql(busca.getPeriodofinal()));
-			ps.setInt(3, us.getId());
+			ps.setInt(3, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -274,7 +278,7 @@ public class VendaDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_CALCULAR_VENDAS_TOTAL);
-			ps.setInt(1, us.getId());
+			ps.setInt(1, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -302,7 +306,7 @@ public class VendaDAO {
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_CALCULAR_VALOR_RECEBER_GERAL);
-			ps.setInt(1, us.getId());
+			ps.setInt(1, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 
@@ -326,12 +330,13 @@ public class VendaDAO {
 
 		conexao = ConnectionFactory.getConnection();
 
-		List<Venda> lista = new ArrayList<>();
+		List<Venda> listaValoresAReceber = new ArrayList<>();
 
 		try {
 			PreparedStatement ps = conexao.prepareStatement(SELECT_LISTAR_VALOR_A_RECEBER);
-			ps.setInt(1, us.getId());
+			ps.setInt(1, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
+
 			while (rs.next()) {
 				Venda venda = new Venda();
 				venda.getCliente().setNome(rs.getString("nome"));
@@ -339,7 +344,7 @@ public class VendaDAO {
 				venda.setData(rs.getDate("data"));
 				venda.setValor(rs.getDouble("valor"));
 
-				lista.add(venda);
+				listaValoresAReceber.add(venda);
 			}
 
 		} catch (SQLException ex) {
@@ -351,7 +356,7 @@ public class VendaDAO {
 				ex.printStackTrace();
 			}
 		}
-		return lista;
+		return listaValoresAReceber;
 	}
 
 }

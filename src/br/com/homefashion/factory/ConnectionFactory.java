@@ -24,7 +24,7 @@ public class ConnectionFactory {
 
 		try {
 			conexao = DriverManager.getConnection(URL, USER, PASS);
-			conexao.setAutoCommit(true);
+			conexao.setAutoCommit(false);
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
