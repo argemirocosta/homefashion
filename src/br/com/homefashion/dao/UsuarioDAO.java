@@ -3,6 +3,7 @@ package br.com.homefashion.dao;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.util.SessaoUtil;
+import br.com.homefashion.util.VerificadorUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,7 +39,7 @@ public class UsuarioDAO {
 				
 			}
 			
-			if(usuarioRetorno != null){
+			if(!VerificadorUtil.verificarSeObjetoNulo(usuarioRetorno)){
 				SessaoUtil.adicionarNaSessao(usuarioRetorno, USUARIO_SESSAO);
 			}
 			
@@ -67,6 +68,8 @@ public class UsuarioDAO {
 			ps.setString(3, usuario.getSenha().toUpperCase());
 
 			ps.execute();
+
+			conexao.commit();
 
 			retorno = true;
 

@@ -4,6 +4,7 @@ import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.util.SessaoUtil;
+import br.com.homefashion.util.VerificadorUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,13 +105,13 @@ public class ClienteDAO {
 			PreparedStatement ps = conexao.prepareStatement(INSERIR_CLIENTE);
 			ps.setString(1, cliente.getNome().toUpperCase());
 
-			if (cliente.getTelefone1() == null) {
+			if (VerificadorUtil.verificarSeObjetoNulo(cliente.getTelefone1())) {
 				ps.setNull(2, Types.NULL);
 			} else {
 				ps.setInt(2, cliente.getTelefone1());
 			}
 
-			if (cliente.getTelefone2() == null) {
+			if (VerificadorUtil.verificarSeObjetoNulo(cliente.getTelefone2())) {
 				ps.setNull(3, Types.NULL);
 			} else {
 				ps.setInt(3, cliente.getTelefone2());
@@ -119,6 +120,8 @@ public class ClienteDAO {
 			ps.setInt(4, usuarioSessao.getId());
 
 			ps.execute();
+
+			conexao.commit();
 
 			retorno = true;
 
@@ -151,6 +154,8 @@ public class ClienteDAO {
 
 			retorno = true;
 
+			conexao.commit();
+
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -175,6 +180,8 @@ public class ClienteDAO {
 			ps.setInt(1, cliente.getId());
 
 			ps.execute();
+
+			conexao.commit();
 
 			retorno = true;
 		} catch (SQLException ex) {

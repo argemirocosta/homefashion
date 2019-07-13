@@ -40,6 +40,8 @@ public class VendaDAO {
 
 			ps.execute();
 
+			conexao.commit();
+
 			retorno =  true;
 
 		} catch (SQLException ex) {
@@ -107,6 +109,8 @@ public class VendaDAO {
 			ps.setInt(4, usuarioSessao.getId());
 
 			ps.execute();
+
+			conexao.commit();
 
 			retorno = true;
 
