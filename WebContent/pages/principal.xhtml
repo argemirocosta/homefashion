@@ -61,7 +61,7 @@
 
             <br/>
 
-            <p:dataTable id="tab" value="#{clienteMB.listaClientes}"
+            <p:dataTable id="tabClientes" value="#{clienteMB.listaClientes}"
                          var="tabela" emptyMessage="Nenhum Cliente encontrado" rows="20"
                          paginator="true" paginatorPosition="bottom">
                 <p:column headerText="Código" width="15%">
@@ -459,7 +459,8 @@
 
                 </p:dataTable>
 
-                <p:panelGrid columns="3">
+                <p:panelGrid columns="4">
+
                     <div align="center">
                         <h3>Opções para Exportar:</h3>
 
@@ -471,6 +472,11 @@
                         <h:commandLink>
                             <p:graphicImage title="PDF" value="../imgs/pdf.png" width="24"/>
                             <p:dataExporter type="pdf" target="tabRel1" fileName="Ranking"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage title="Excel" value="../imgs/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="tabRel1" fileName="Ranking"/>
                         </h:commandLink>
 
                     </div>
@@ -515,7 +521,7 @@
 
                 </p:dataTable>
 
-                <p:panelGrid columns="3">
+                <p:panelGrid columns="4">
 
                     <div align="center">
                         <h3>Opções para Exportar:</h3>
@@ -528,6 +534,11 @@
                         <h:commandLink>
                             <p:graphicImage title="PDF" value="../imgs/pdf.png" width="24"/>
                             <p:dataExporter type="pdf" target="tabRel2" fileName="ReceberPorPessoa"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage title="Excel" value="../imgs/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="tabRel2" fileName="ReceberPorPessoa"/>
                         </h:commandLink>
 
                     </div>
