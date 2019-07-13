@@ -8,10 +8,10 @@
 <h:head>
 
 	<title>Home Fashion - Sistema de Vendas</title>
-	<center>
+	<div align="center">
 		<p:outputLabel value="Home Fashion"
 			style="font-size: 60px;font-family:Arial;font-weight: bold" />
-	</center>
+	</div>
 
 	<link href="css/style.css" type="text/css" rel="stylesheet" />
 
@@ -23,7 +23,7 @@
 
 		<p:growl id="growl" showDetail="true" />
 
-		<center>
+		<div align="center">
 
 			<p:graphicImage style="margin-top:40px; margin-bottom:20px;"
 				value="imgs/moda.png" width="12%" height="12%" />
@@ -44,7 +44,7 @@
                                  action="#{usuarioMB.login()}" update="growl" />
 			</p:panel>
 
-		</center>
+		</div>
 	</h:form>
 
 	<br></br>
@@ -53,15 +53,15 @@
 
 	<h:form id="formBtnCadastro">
 
-		<center>
+		<div align="center">
 			<h3>Não é cadastrado? Clique abaixo!</h3>
 			<p:commandButton value="Cadastrar" icon="pessoa"
-				onclick="PF('dlgCadastro').show();" />
-		</center>
+				oncomplete="PF('dlgCadastroUsuario').show();" />
+		</div>
 
 	</h:form>
 
-	<p:dialog widgetVar="dlgCadastro" header="Cadastro de Usuário"
+	<p:dialog widgetVar="dlgCadastroUsuario" header="Cadastro de Usuário"
 		height="auto" width="auto" resizable="false" modal="true">
 		<h:form id="formCadastro">
 
@@ -85,14 +85,14 @@
 
 			<br></br>
 
-			<center>
+			<div align="center">
 				<p:commandButton value="Cadastrar" icon="confirmar"
 					action="#{usuarioMB.inserirUsuario()}"
 					update=":form:growl, :formCadastro" />
 
 				<p:commandButton value="Fechar" icon="cancelar"
-					style="margin-left:10px" onclick="PF('dlgCadastro').hide();" />
-			</center>
+					style="margin-left:10px" oncomplete="PF('dlgCadastroUsuario').hide();" />
+			</div>
 
 			<br></br>
 

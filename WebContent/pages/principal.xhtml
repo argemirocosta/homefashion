@@ -54,7 +54,7 @@
                                  icon="limpar"/>
 
                 <p:commandButton value="Novo Cliente"
-                                 oncomplete="PF('dlgCadCliente').show();" icon="novo"/>
+                                 oncomplete="PF('dlgCadastrarCliente').show();" icon="novo"/>
 
 
             </p:panelGrid>
@@ -91,13 +91,13 @@
 
                     <div align="center">
 
-                        <p:commandButton oncomplete="PF('dlgAltCliente').show();"
+                        <p:commandButton oncomplete="PF('dlgAlterarCliente').show();"
                                          update=":formTab2, :formAlt" icon="alterar">
                             <f:setPropertyActionListener value="#{tabela}"
                                                          target="#{clienteMB.cliente}"/>
                         </p:commandButton>
 
-                        <p:commandButton oncomplete="PF('dlgDeleteCliente').show();"
+                        <p:commandButton oncomplete="PF('dlgDeletarCliente').show();"
                                          update=":formTab2" icon="cancelar">
                             <f:setPropertyActionListener value="#{tabela}"
                                                          target="#{clienteMB.cliente}"/>
@@ -118,7 +118,7 @@
 
         </h:form>
 
-        <p:dialog widgetVar="dlgCadCliente" header="Cadastrar Cliente"
+        <p:dialog widgetVar="dlgCadastrarCliente" header="Cadastrar Cliente"
                   height="auto" width="auto" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formCad">
@@ -148,7 +148,7 @@
                                          action="#{clienteMB.inserirCliente()}"
                                          update=":formCad, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
-                                         oncomplete="PF('dlgCadCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgCadastrarCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
                 </div>
 
@@ -156,7 +156,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="dlgAltCliente" header="Alterar Cliente"
+        <p:dialog widgetVar="dlgAlterarCliente" header="Alterar Cliente"
                   height="auto" width="auto" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formAlt">
@@ -186,7 +186,7 @@
                                          action="#{clienteMB.alterarCliente()}"
                                          update=":formAlt, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
-                                         oncomplete="PF('dlgAltCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgAlterarCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
                 </div>
 
@@ -194,7 +194,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="dlgDeleteCliente" header="Deletar Cliente"
+        <p:dialog widgetVar="dlgDeletarCliente" header="Deletar Cliente"
                   height="auto" width="auto" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formDel">
@@ -211,7 +211,7 @@
                                          action="#{clienteMB.deletarCliente()}"
                                          update=":formAlt, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
-                                         oncomplete="PF('dlgDeleteCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgDeletarCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
                 </div>
 
@@ -406,20 +406,20 @@
                 <p:panelGrid columns="4" styleClass="semBorda">
                     <p:commandButton value="Ranking por Cliente"
                                      action="#{vendaMB.listarRankingDosClientes()}"
-                                     update=":formRel1:tabRel1" oncomplete="PF('dlgRelatorio1').show();"
+                                     update=":formRel1:tabRel1" oncomplete="PF('dlgRelatorioRanking').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber por Pessoa"
                                      action="#{vendaMB.listarValorAReceberPorPessoa()}"
-                                     update=":formRel2:tabRel2" oncomplete="PF('dlgRelatorio2').show();"
+                                     update=":formRel2:tabRel2" oncomplete="PF('dlgRelatorioReceberPorPessoa').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber Geral"
                                      action="#{vendaMB.calcularRecebidoGeral()}" update=":formRel4"
-                                     oncomplete="PF('dlgRelatorio4').show();" icon="confirmar"/>
+                                     oncomplete="PF('dlgRelatorioReceberGeral').show();" icon="confirmar"/>
 
                     <p:commandButton value="Venda por Período"
-                                     oncomplete="PF('dlgRelatorio3').show();" icon="confirmar"/>
+                                     oncomplete="PF('dlgRelatorioVendaPorPeriodo').show();" icon="confirmar"/>
 
                 </p:panelGrid>
 
@@ -435,7 +435,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="dlgRelatorio1"
+        <p:dialog widgetVar="dlgRelatorioRanking"
                   header="Ranking de Vendas por Cliente" position="top" height="auto"
                   width="auto" draggable="true" resizable="false" modal="true">
             <h:form id="formRel1">
@@ -480,7 +480,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="dlgRelatorio2" header="Em Aberto" height="auto"
+        <p:dialog widgetVar="dlgRelatorioReceberPorPessoa" header="Em Aberto" height="auto"
                   position="top" width="auto" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formRel2">
@@ -537,7 +537,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="dlgRelatorio3" header="Vendas no Período"
+        <p:dialog widgetVar="dlgRelatorioVendaPorPeriodo" header="Vendas no Período"
                   height="140" width="460" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formRel3">
@@ -573,7 +573,7 @@
         </p:dialog>
 
 
-        <p:dialog widgetVar="dlgRelatorio4" header="Total a Receber"
+        <p:dialog widgetVar="dlgRelatorioReceberGeral" header="Total a Receber"
                   height="140" width="500" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formRel4">
