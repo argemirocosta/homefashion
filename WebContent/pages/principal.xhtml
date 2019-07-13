@@ -8,12 +8,12 @@
     <ui:define name="content">
 
         <p:idleMonitor timeout="600000">
-            <p:ajax event="idle" listener="#{usuarioController.timeOut}"/>
+            <p:ajax event="idle" listener="#{usuarioMB.timeOut}"/>
         </p:idleMonitor>
 
         <f:metadata>
             <f:viewAction
-                    action="#{clienteController.listarClientes()}"/>
+                    action="#{clienteMB.listarClientes()}"/>
         </f:metadata>
 
         <h:form id="formTab">
@@ -21,7 +21,7 @@
             <p:growl id="msg"/>
 
             <p:commandButton value="Sair do Sistema" icon="sair"
-                             action="#{usuarioController.logout()}" style="float:right;"/>
+                             action="#{usuarioMB.logout()}" style="float:right;"/>
 
             <p:commandButton value="Relatórios" icon="relatorios"
                              onclick="PF('dlgRelatorios').show();"
@@ -41,16 +41,16 @@
 
                 <p:outputLabel value="Buscar: "/>
 
-                <p:inputText id="cpBuscaNome" value="#{clienteController.campoBusca}"
+                <p:inputText id="cpBuscaNome" value="#{clienteMB.campoBusca}"
                              maxlength="30" size="25">
                     <p:watermark for="cpBuscaNome" value="Digite o nome do cliente"/>
                 </p:inputText>
 
                 <p:commandButton value="Pesquisar"
-                                 action="#{clienteController.buscarClientePorNome()}" update=":formTab2"
+                                 action="#{clienteMB.buscarClientePorNome()}" update=":formTab2"
                                  icon="buscar"/>
                 <p:commandButton value="Limpar"
-                                 action="#{clienteController.limparBusca()}" update=":formTab2"
+                                 action="#{clienteMB.limparBusca()}" update=":formTab2"
                                  icon="limpar"/>
 
                 <p:commandButton value="Novo Cliente"
@@ -61,7 +61,7 @@
 
             <br/>
 
-            <p:dataTable id="tab" value="#{clienteController.listaClientes}"
+            <p:dataTable id="tab" value="#{clienteMB.listaClientes}"
                          var="tabela" emptyMessage="Nenhum Cliente encontrado" rows="20"
                          paginator="true" paginatorPosition="bottom">
                 <p:column headerText="Código" width="15%">
@@ -94,20 +94,20 @@
                         <p:commandButton onclick="PF('dlgAltCliente').show();"
                                          update=":formTab2, :formAlt" icon="alterar">
                             <f:setPropertyActionListener value="#{tabela}"
-                                                         target="#{clienteController.cliente}"/>
+                                                         target="#{clienteMB.cliente}"/>
                         </p:commandButton>
 
                         <p:commandButton onclick="PF('dlgDeleteCliente').show();"
                                          update=":formTab2" icon="cancelar">
                             <f:setPropertyActionListener value="#{tabela}"
-                                                         target="#{clienteController.cliente}"/>
+                                                         target="#{clienteMB.cliente}"/>
                         </p:commandButton>
 
                         <p:commandButton onclick="PF('dlgVender').show();" icon="sifrao"
-                                         action="#{vendaController.limparCampos}"
+                                         action="#{vendaMB.limparCampos}"
                                          update=":formVender:tabVendas">
                             <f:setPropertyActionListener value="#{tabela}"
-                                                         target="#{vendaController.venda.cliente}"/>
+                                                         target="#{vendaMB.venda.cliente}"/>
                         </p:commandButton>
 
                     </div>
@@ -124,17 +124,17 @@
             <h:form id="formCad">
                 <p:panelGrid columns="2" styleClass="semBorda">
                     <p:outputLabel value="Nome: "/>
-                    <p:inputText value="#{clienteController.cliente.nome}"
+                    <p:inputText value="#{clienteMB.cliente.nome}"
                                  maxlength="30" size="25" required="true"
                                  requiredMessage="Insira o nome"/>
 
                     <p:outputLabel value="Telefone 1: "/>
-                    <p:inputText value="#{clienteController.cliente.telefone1}"
+                    <p:inputText value="#{clienteMB.cliente.telefone1}"
                                  maxlength="30" size="25" required="false"
                                  requiredMessage="Insira ao menos 1 telefone"/>
 
                     <p:outputLabel value="Telefone 2: "/>
-                    <p:inputText value="#{clienteController.cliente.telefone2}"
+                    <p:inputText value="#{clienteMB.cliente.telefone2}"
                                  maxlength="30" size="25" required="false"
                                  requiredMessage="insira o nome"/>
 
@@ -145,7 +145,7 @@
                 <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Cadastrar"
-                                         action="#{clienteController.inserirCliente()}"
+                                         action="#{clienteMB.inserirCliente()}"
                                          update=":formCad, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
                                          onclick="PF('dlgCadCliente').hide();" icon="cancelar"/>
@@ -162,17 +162,17 @@
             <h:form id="formAlt">
                 <p:panelGrid columns="2" styleClass="semBorda">
                     <p:outputLabel value="Nome: "/>
-                    <p:inputText value="#{clienteController.cliente.nome}"
+                    <p:inputText value="#{clienteMB.cliente.nome}"
                                  maxlength="30" size="25" required="true"
                                  requiredMessage="insira o nome"/>
 
                     <p:outputLabel value="Telefone 1: "/>
-                    <p:inputText value="#{clienteController.cliente.telefone1}"
+                    <p:inputText value="#{clienteMB.cliente.telefone1}"
                                  maxlength="30" size="25" required="true"
                                  requiredMessage="Insira ao menos 1 telefone"/>
 
                     <p:outputLabel value="Telefone 2: "/>
-                    <p:inputText value="#{clienteController.cliente.telefone2}"
+                    <p:inputText value="#{clienteMB.cliente.telefone2}"
                                  maxlength="30" size="25" required="false"
                                  requiredMessage="Insira ao menos 1 telefone"/>
 
@@ -183,7 +183,7 @@
                 <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Alterar"
-                                         action="#{clienteController.alterarCliente()}"
+                                         action="#{clienteMB.alterarCliente()}"
                                          update=":formAlt, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
                                          onclick="PF('dlgAltCliente').hide();" icon="cancelar"/>
@@ -208,7 +208,7 @@
                 <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Sim"
-                                         action="#{clienteController.deletarCliente()}"
+                                         action="#{clienteMB.deletarCliente()}"
                                          update=":formAlt, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
                                          onclick="PF('dlgDeleteCliente').hide();" icon="cancelar"/>
@@ -224,15 +224,15 @@
             <h:form id="formVender">
                 <p:panelGrid columns="2" styleClass="semBorda" id="pnlgridVender">
                     <p:outputLabel value="Valor: "/>
-                    <p:inputText value="#{vendaController.venda.valor}" maxlength="30"
+                    <p:inputText value="#{vendaMB.venda.valor}" maxlength="30"
                                  size="15" required="true" requiredMessage="Insira o valor"/>
 
                     <p:outputLabel value="Data: "/>
-                    <p:calendar value="#{vendaController.venda.data}" showOn="button"
+                    <p:calendar value="#{vendaMB.venda.data}" showOn="button"
                                 required="true" requiredMessage="Insira a Data" size="15"></p:calendar>
 
                     <p:outputLabel value="Quantidade: "/>
-                    <p:inputText value="#{vendaController.venda.qtd}" maxlength="30"
+                    <p:inputText value="#{vendaMB.venda.qtd}" maxlength="30"
                                  size="15" required="false" requiredMessage="Insira a quantidade"/>
 
                 </p:panelGrid>
@@ -242,7 +242,7 @@
                 <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Vender"
-                                         action="#{vendaController.inserirVenda()}"
+                                         action="#{vendaMB.inserirVenda()}"
                                          update=":formCad, :formTab2, :formVender:pnlgridVender"
                                          icon="carrinho"/>
                         <p:commandButton value="Fechar" onclick="PF('dlgVender').hide();"
@@ -254,7 +254,7 @@
 
                 <br></br>
 
-                <p:dataTable id="tabVendas" value="#{vendaController.listaVendas}"
+                <p:dataTable id="tabVendas" value="#{vendaMB.listaVendas}"
                              var="tabela"
                              emptyMessage="Nenhuma venda realizada para esse cliente" rows="10"
                              paginator="true" paginatorPosition="bottom"
@@ -315,11 +315,11 @@
                         <div align="center">
                             <p:commandButton icon="calculadora" process="@this"
                                              immediate="true"
-                                             action="#{vendaController.limparListaPagamentos}"
+                                             action="#{vendaMB.limparListaPagamentos}"
                                              onclick="PF('dlgPagamentos').show();"
                                              update=":formPagamentos:tabPagamentos">
                                 <f:setPropertyActionListener value="#{tabela}"
-                                                             target="#{vendaController.venda}"/>
+                                                             target="#{vendaMB.venda}"/>
                             </p:commandButton>
                         </div>
                     </p:column>
@@ -336,12 +336,12 @@
                 <p:growl id="msg3"/>
                 <p:panelGrid columns="2" styleClass="semBorda" id="pnlgridPagamentos">
                     <p:outputLabel value="Valor: "/>
-                    <p:inputText value="#{vendaController.pagamento.valor}"
+                    <p:inputText value="#{vendaMB.pagamento.valor}"
                                  maxlength="30" size="15" required="true"
                                  requiredMessage="Insira o valor"/>
 
                     <p:outputLabel value="Data: "/>
-                    <p:calendar value="#{vendaController.pagamento.data}"
+                    <p:calendar value="#{vendaMB.pagamento.data}"
                                 showOn="button" required="true" requiredMessage="Insira a Data"
                                 size="15"></p:calendar>
 
@@ -352,7 +352,7 @@
                 <div align="center">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Pagar"
-                                         action="#{vendaController.inserirPagamento()}"
+                                         action="#{vendaMB.inserirPagamento()}"
                                          update=":formPagamentos:tabPagamentos, msg3, :formVender:tabVendas, :formPagamentos:pnlgridPagamentos"
                                          icon="calculadorasifrao"/>
                         <p:commandButton value="Fechar"
@@ -365,7 +365,7 @@
                 <br></br>
                 <p:outputPanel autoUpdate="true">
                     <p:dataTable id="tabPagamentos"
-                                 value="#{vendaController.listaPagamentos}" var="tabela"
+                                 value="#{vendaMB.listaPagamentos}" var="tabela"
                                  emptyMessage="Nenhum Pagamento efetuado" rows="10" paginator="true"
                                  paginatorPosition="bottom">
                         <p:column headerText="Valor">
@@ -405,17 +405,17 @@
             <h:form id="formRel">
                 <p:panelGrid columns="4" styleClass="semBorda">
                     <p:commandButton value="Ranking por Cliente"
-                                     action="#{vendaController.limparRelatorios}"
+                                     action="#{vendaMB.limparRelatorios}"
                                      update=":formRel1:tabRel1" onclick="PF('dlgRelatorio1').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber por Pessoa"
-                                     action="#{vendaController.limparRelatorios}"
+                                     action="#{vendaMB.limparRelatorios}"
                                      update=":formRel2:tabRel2" onclick="PF('dlgRelatorio2').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber Geral"
-                                     action="#{vendaController.calcularRecebidoGeral}" update=":formRel4"
+                                     action="#{vendaMB.calcularRecebidoGeral}" update=":formRel4"
                                      onclick="PF('dlgRelatorio4').show();" icon="confirmar"/>
 
                     <p:commandButton value="Venda por Período"
@@ -441,7 +441,7 @@
             <h:form id="formRel1">
 
                 <p:dataTable id="tabRel1"
-                             value="#{vendaController.listaVendasPorCliente}" var="tabela"
+                             value="#{vendaMB.listaVendasPorCliente}" var="tabela"
                              emptyMessage="Nenhuma venda registrada" rows="18" paginator="true"
                              paginatorPosition="bottom">
                     <div align="center">
@@ -486,7 +486,7 @@
             <h:form id="formRel2">
 
                 <p:dataTable id="tabRel2"
-                             value="#{vendaController.listaVendasEmAberto}" var="tabela"
+                             value="#{vendaMB.listaVendasEmAberto}" var="tabela"
                              emptyMessage="Nenhuma venda registrada" rows="18" paginator="true"
                              paginatorPosition="bottom">
 
@@ -544,12 +544,12 @@
                 <p:panelGrid columns="3" styleClass="semBorda">
 
                     <p:calendar id="button"
-                                value="#{vendaController.busca.periodoinicial}" size="12"
+                                value="#{vendaMB.busca.periodoinicial}" size="12"
                                 pattern="dd/MM/yyyy" showOn="button"/>
 
                     <h:outputText value="a" style="margin-left: 5px"/>
 
-                    <p:calendar value="#{vendaController.busca.periodofinal}"
+                    <p:calendar value="#{vendaMB.busca.periodofinal}"
                                 style="margin-left: 5px" size="12" pattern="dd/MM/yyyy"
                                 showOn="button"/>
 
@@ -558,13 +558,13 @@
                     <br></br>
                 </p:panelGrid>
 
-                <p:commandButton value="Buscar" action="#{vendaController.somaGeral}"
+                <p:commandButton value="Buscar" action="#{vendaMB.somaGeral}"
                                  update=":formRel3" icon="buscar"/>
 
                 <h:outputLabel value="TOTAL VENDIDO NO PERÍODO: "
                                style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-                <h:outputLabel value="#{vendaController.somaGeral}"
+                <h:outputLabel value="#{vendaMB.somaGeral}"
                                style="font-size: 14px;color:red;margin-left:10px">
                     <f:convertNumber type="currency" currencySymbol="R$"/>
                 </h:outputLabel>
@@ -582,7 +582,7 @@
                     <h:outputLabel value="TOTAL VENDIDO ATÉ HOJE: "
                                    style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-                    <h:outputLabel value="#{vendaController.somaGeral}"
+                    <h:outputLabel value="#{vendaMB.somaGeral}"
                                    style="font-size: 14px;color:red;margin-left:10px">
                         <f:convertNumber type="currency" currencySymbol="R$"/>
                     </h:outputLabel>
@@ -590,7 +590,7 @@
                     <h:outputLabel value="TOTAL RECEBIDO ATÉ HOJE: "
                                    style="font-size: 14px;margin-left:20px"></h:outputLabel>
 
-                    <h:outputLabel value="#{vendaController.valorReceberGeral}"
+                    <h:outputLabel value="#{vendaMB.valorReceberGeral}"
                                    style="font-size: 14px;color:red;margin-left:10px">
                         <f:convertNumber type="currency" currencySymbol="R$"/>
                     </h:outputLabel>
@@ -598,7 +598,7 @@
                     <h:outputLabel value="VALOR TOTAL A RECEBER: "
                                    style="font-size: 20px;margin-left:20px"></h:outputLabel>
 
-                    <h:outputLabel value="#{vendaController.valorReceberGeralTotal}"
+                    <h:outputLabel value="#{vendaMB.valorReceberGeralTotal}"
                                    style="font-size: 20px;color:red;margin-left:10px">
                         <f:convertNumber type="currency" currencySymbol="R$"/>
                     </h:outputLabel>

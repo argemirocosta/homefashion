@@ -17,13 +17,13 @@ import javax.faces.bean.ViewScoped;
 
 @ViewScoped
 @ManagedBean
-public class UsuarioController {
+public class UsuarioMB {
 
     private Usuario usuario;
     private Usuario usuarioLogado;
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    public UsuarioController() {
+    public UsuarioMB() {
         usuario = new Usuario();
         usuarioLogado = null;
     }

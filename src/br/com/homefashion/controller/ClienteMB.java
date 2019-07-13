@@ -15,14 +15,14 @@ import static br.com.homefashion.shared.Mensagens.*;
 
 @ViewScoped
 @ManagedBean
-public class ClienteController {
+public class ClienteMB {
 
     private Cliente cliente;
     private List<Cliente> listaClientes;
     private String campoBusca;
     private ClienteDAO clienteDAO = new ClienteDAO();
 
-    public ClienteController() {
+    public ClienteMB() {
         cliente = new Cliente();
     }
 

@@ -17,7 +17,7 @@ import br.com.homefashion.util.JSFUtil;
 
 @ViewScoped
 @ManagedBean
-public class VendaController {
+public class VendaMB {
 
 	private Venda venda;
 	private List<Venda> listaVendas;
@@ -32,7 +32,7 @@ public class VendaController {
 	private Double valorReceberGeralTotal;
 	private VendaDAO vendaDAO = new VendaDAO();
 
-	public VendaController() {
+	public VendaMB() {
 		venda = new Venda();
 		pagamento = new Pagamento();
 		listaVendas = new ArrayList<>();

@@ -32,16 +32,16 @@
 
 				<p:panelGrid columns="2" styleClass="semBorda">
 					<p:outputLabel value="Usuário:" />
-					<p:inputText value="#{usuarioController.usuario.login}"
+					<p:inputText value="#{usuarioMB.usuario.login}"
 						required="true" requiredMessage="Informe o usuário." />
 					<p:outputLabel value="Senha:" />
-					<p:password value="#{usuarioController.usuario.senha}"
+					<p:password value="#{usuarioMB.usuario.senha}"
 						required="true" requiredMessage="Informe a senha." />
 				</p:panelGrid>
 
 				<p:separator />
 				<p:commandButton value="Entrar" icon="confirmar"
-                                 action="#{usuarioController.login()}" update="growl" />
+                                 action="#{usuarioMB.login()}" update="growl" />
 			</p:panel>
 
 		</center>
@@ -67,15 +67,15 @@
 
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Nome:" />
-				<p:inputText value="#{usuarioController.usuario.nome}"
+				<p:inputText value="#{usuarioMB.usuario.nome}"
 					required="true" requiredMessage="Informe o usuário." />
 
 				<p:outputLabel value="Login:" />
-				<p:inputText value="#{usuarioController.usuario.login}"
+				<p:inputText value="#{usuarioMB.usuario.login}"
 					required="true" requiredMessage="Informe o usuário." />
 
 				<p:outputLabel value="Senha:" />
-				<p:password value="#{usuarioController.usuario.senha}"
+				<p:password value="#{usuarioMB.usuario.senha}"
 					required="true" requiredMessage="Informe a senha." />
 			</p:panelGrid>
 
@@ -87,7 +87,7 @@
 
 			<center>
 				<p:commandButton value="Cadastrar" icon="confirmar"
-					action="#{usuarioController.inserirUsuario()}"
+					action="#{usuarioMB.inserirUsuario()}"
 					update=":form:growl, :formCadastro" />
 
 				<p:commandButton value="Fechar" icon="cancelar"
