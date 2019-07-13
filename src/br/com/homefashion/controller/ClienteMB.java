@@ -45,6 +45,7 @@ public class ClienteMB {
 
         if (cadastrou) {
             limparCampos();
+            listarClientes();
             JSFUtil.fecharDialog(DIALOG_CADASTRAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso(CLIENTE_CADASTRADO_SUCESSO, SUCESSO);
         } else {
@@ -57,6 +58,7 @@ public class ClienteMB {
 
         if (alterou) {
             limparCampos();
+            listarClientes();
             JSFUtil.fecharDialog(DIALOG_ALTERAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso(CLIENTE_ALTERADO_SUCESSO, SUCESSO);
         } else {
@@ -69,6 +71,7 @@ public class ClienteMB {
 
         if (deletou) {
             limparCampos();
+            listarClientes();
             JSFUtil.fecharDialog(DIALOG_DELETAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso(CLIENTE_EXCLUIDO_SUCESSO, SUCESSO);
         } else {
