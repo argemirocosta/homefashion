@@ -442,7 +442,7 @@
 
                 <p:dataTable id="tabRel1"
                              value="#{vendaMB.listaVendasPorCliente}" var="tabela"
-                             emptyMessage="Nenhuma venda registrada" rows="18" paginator="true"
+                             emptyMessage="Nenhuma venda registrada" rows="15" paginator="true"
                              paginatorPosition="bottom">
                     <div align="center">
                         <p:column headerText="Cliente">
@@ -464,13 +464,13 @@
                         <h3>Opções para Exportar:</h3>
 
                         <h:commandLink>
-                            <p:graphicImage value="imgs/csv.png" width="24"/>
-                            <p:dataExporter type="csv" target="tabRel1" fileName="ranking"/>
+                            <p:graphicImage title="CSV" value="../imgs/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="tabRel1" fileName="Ranking"/>
                         </h:commandLink>
 
                         <h:commandLink>
-                            <p:graphicImage value="imgs/pdf.png" width="24"/>
-                            <p:dataExporter type="pdf" target="tabRel1" fileName="ranking"/>
+                            <p:graphicImage title="PDF" value="../imgs/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="tabRel1" fileName="Ranking"/>
                         </h:commandLink>
 
                     </div>
@@ -487,7 +487,7 @@
 
                 <p:dataTable id="tabRel2"
                              value="#{vendaMB.listaVendasEmAberto}" var="tabela"
-                             emptyMessage="Nenhuma venda registrada" rows="18" paginator="true"
+                             emptyMessage="Nenhuma venda registrada" rows="15" paginator="true"
                              paginatorPosition="bottom">
 
                     <p:column headerText="Cliente" sortBy="#{tabela.cliente.nome}"
@@ -521,13 +521,13 @@
                         <h3>Opções para Exportar:</h3>
 
                         <h:commandLink>
-                            <p:graphicImage value="imgs/csv.png" width="24"/>
-                            <p:dataExporter type="csv" target="tabRel2" fileName="pendentes"/>
+                            <p:graphicImage title="CSV" value="../imgs/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="tabRel2" fileName="ReceberPorPessoa"/>
                         </h:commandLink>
 
                         <h:commandLink>
-                            <p:graphicImage value="imgs/pdf.png" width="24"/>
-                            <p:dataExporter type="pdf" target="tabRel2" fileName="pendentes"/>
+                            <p:graphicImage title="PDF" value="../imgs/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="tabRel2" fileName="ReceberPorPessoa"/>
                         </h:commandLink>
 
                     </div>
