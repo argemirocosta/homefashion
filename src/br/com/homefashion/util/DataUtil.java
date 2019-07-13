@@ -10,7 +10,7 @@ public final class DataUtil {
     }
 
     public static Date retornarDataAtual(){
-        return new java.util.Date(System.currentTimeMillis());
+        return new Date(System.currentTimeMillis());
     }
 
 }
