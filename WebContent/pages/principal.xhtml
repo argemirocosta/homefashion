@@ -24,7 +24,7 @@
                              action="#{usuarioMB.logout()}" style="float:right;"/>
 
             <p:commandButton value="Relatórios" icon="relatorios"
-                             onclick="PF('dlgRelatorios').show();"
+                             o="PF('dlgRelatorios').show();"
                              style="float:right;margin-left:10px;margin-right:20px"/>
 
             <p:outputLabel value="Home Fashion"
@@ -54,7 +54,7 @@
                                  icon="limpar"/>
 
                 <p:commandButton value="Novo Cliente"
-                                 onclick="PF('dlgCadCliente').show();" icon="novo"/>
+                                 oncomplete="PF('dlgCadCliente').show();" icon="novo"/>
 
 
             </p:panelGrid>
@@ -91,19 +91,19 @@
 
                     <div align="center">
 
-                        <p:commandButton onclick="PF('dlgAltCliente').show();"
+                        <p:commandButton oncomplete="PF('dlgAltCliente').show();"
                                          update=":formTab2, :formAlt" icon="alterar">
                             <f:setPropertyActionListener value="#{tabela}"
                                                          target="#{clienteMB.cliente}"/>
                         </p:commandButton>
 
-                        <p:commandButton onclick="PF('dlgDeleteCliente').show();"
+                        <p:commandButton oncomplete="PF('dlgDeleteCliente').show();"
                                          update=":formTab2" icon="cancelar">
                             <f:setPropertyActionListener value="#{tabela}"
                                                          target="#{clienteMB.cliente}"/>
                         </p:commandButton>
 
-                        <p:commandButton onclick="PF('dlgVender').show();" icon="sifrao"
+                        <p:commandButton oncomplete="PF('dlgVender').show();" icon="sifrao"
                                          action="#{vendaMB.limparCampos}"
                                          update=":formVender:tabVendas">
                             <f:setPropertyActionListener value="#{tabela}"
@@ -148,7 +148,7 @@
                                          action="#{clienteMB.inserirCliente()}"
                                          update=":formCad, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
-                                         onclick="PF('dlgCadCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgCadCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
                 </div>
 
@@ -186,7 +186,7 @@
                                          action="#{clienteMB.alterarCliente()}"
                                          update=":formAlt, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
-                                         onclick="PF('dlgAltCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgAltCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
                 </div>
 
@@ -211,7 +211,7 @@
                                          action="#{clienteMB.deletarCliente()}"
                                          update=":formAlt, :formTab2" icon="confirmar"/>
                         <p:commandButton value="Fechar"
-                                         onclick="PF('dlgDeleteCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgDeleteCliente').hide();" icon="cancelar"/>
                     </p:panelGrid>
                 </div>
 
@@ -245,7 +245,7 @@
                                          action="#{vendaMB.inserirVenda()}"
                                          update=":formCad, :formTab2, :formVender:pnlgridVender"
                                          icon="carrinho"/>
-                        <p:commandButton value="Fechar" onclick="PF('dlgVender').hide();"
+                        <p:commandButton value="Fechar" oncomplete="PF('dlgVender').hide();"
                                          icon="cancelar"/>
                     </p:panelGrid>
                 </div>
@@ -316,7 +316,7 @@
                             <p:commandButton icon="calculadora" process="@this"
                                              immediate="true"
                                              action="#{vendaMB.limparListaPagamentos}"
-                                             onclick="PF('dlgPagamentos').show();"
+                                             oncomplete="PF('dlgPagamentos').show();"
                                              update=":formPagamentos:tabPagamentos">
                                 <f:setPropertyActionListener value="#{tabela}"
                                                              target="#{vendaMB.venda}"/>
@@ -356,7 +356,7 @@
                                          update=":formPagamentos:tabPagamentos, msg3, :formVender:tabVendas, :formPagamentos:pnlgridPagamentos"
                                          icon="calculadorasifrao"/>
                         <p:commandButton value="Fechar"
-                                         onclick="PF('dlgPagamentos').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgPagamentos').hide();" icon="cancelar"/>
                     </p:panelGrid>
                 </div>
 
@@ -406,20 +406,20 @@
                 <p:panelGrid columns="4" styleClass="semBorda">
                     <p:commandButton value="Ranking por Cliente"
                                      action="#{vendaMB.limparRelatorios}"
-                                     update=":formRel1:tabRel1" onclick="PF('dlgRelatorio1').show();"
+                                     update=":formRel1:tabRel1" oncomplete="PF('dlgRelatorio1').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber por Pessoa"
                                      action="#{vendaMB.limparRelatorios}"
-                                     update=":formRel2:tabRel2" onclick="PF('dlgRelatorio2').show();"
+                                     update=":formRel2:tabRel2" oncomplete="PF('dlgRelatorio2').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber Geral"
                                      action="#{vendaMB.calcularRecebidoGeral}" update=":formRel4"
-                                     onclick="PF('dlgRelatorio4').show();" icon="confirmar"/>
+                                     oncomplete="PF('dlgRelatorio4').show();" icon="confirmar"/>
 
                     <p:commandButton value="Venda por Período"
-                                     onclick="PF('dlgRelatorio3').show();" icon="confirmar"/>
+                                     oncomplete="PF('dlgRelatorio3').show();" icon="confirmar"/>
 
                 </p:panelGrid>
 
@@ -427,7 +427,7 @@
 
                 <div align="center">
                     <p:commandButton value="Fechar"
-                                     onclick="PF('dlgRelatorios').hide();" icon="cancelar"/>
+                                     oncomplete="PF('dlgRelatorios').hide();" icon="cancelar"/>
                 </div>
 
                 <br></br>
