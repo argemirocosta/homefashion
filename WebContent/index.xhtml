@@ -2,15 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 
 	<title>Home Fashion - Sistema de Vendas</title>
 	<div align="center">
-		<p:outputLabel value="Home Fashion"
-			style="font-size: 60px;font-family:Arial;font-weight: bold" />
+		<p:outputLabel value="Home Fashion" styleClass="nomePrincipal" />
 	</div>
 
 	<link href="css/style.css" type="text/css" rel="stylesheet" />
@@ -25,8 +23,8 @@
 
 		<div align="center">
 
-			<p:graphicImage style="margin-top:40px; margin-bottom:20px;"
-				value="imgs/moda.png" width="12%" height="12%" />
+			<p:graphicImage styleClass="imagemPrincipal"
+				value="imgs/moda.png"  />
 
 			<p:panel header="Login" style="width:300px;">
 
@@ -47,11 +45,7 @@
 		</div>
 	</h:form>
 
-	<br></br>
-	<br></br>
-	<br></br>
-
-	<h:form id="formBtnCadastro">
+	<h:form id="formBtnCadastro" styleClass="altura50px">
 
 		<div align="center">
 			<h3>Não é cadastrado? Clique abaixo!</h3>
@@ -79,11 +73,7 @@
 					required="true" requiredMessage="Informe a senha." />
 			</p:panelGrid>
 
-			<br></br>
-
-			<p:separator />
-
-			<br></br>
+			<p:separator styleClass="altura10px"/>
 
 			<div align="center">
 				<p:commandButton value="Cadastrar" icon="confirmar"
@@ -93,8 +83,6 @@
 				<p:commandButton value="Fechar" icon="cancelar"
 					style="margin-left:10px" oncomplete="PF('dlgCadastroUsuario').hide();" />
 			</div>
-
-			<br></br>
 
 		</h:form>
 
