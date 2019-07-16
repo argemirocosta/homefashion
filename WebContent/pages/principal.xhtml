@@ -347,7 +347,7 @@
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Pagar"
                                          action="#{vendaMB.inserirPagamento()}"
-                                         update=":formPagamentos:tabPagamentos, msgPagamentos, :formVender:tabVendas, :formPagamentos:pnlgridPagamentos"
+                                         update=":formVender:tabVendas, :formPagamentos:tabPagamentos, msgPagamentos, :formPagamentos:pnlgridPagamentos"
                                          icon="calculadorasifrao"/>
                         <p:commandButton value="Fechar"
                                          oncomplete="PF('dlgPagamentos').hide();" icon="cancelar"/>

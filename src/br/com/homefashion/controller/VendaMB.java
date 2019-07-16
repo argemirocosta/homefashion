@@ -48,7 +48,6 @@ public class VendaMB {
     private void limparCampos() {
         venda.setQtd(null);
         venda.setValor(null);
-        listaVendas = null;
     }
 
     public void inserirVenda() {
@@ -74,9 +73,9 @@ public class VendaMB {
             boolean cadastrou = vendaDAO.inserirPagamento(venda, pagamento);
 
             if (cadastrou) {
-                listaPagamentos = null;
-                listaVendas = null;
-
+                listarPagamentos();
+                listarVendas();
+                limparCampos();
                 JSFUtil.adicionarMensagemSucesso(PAGAMENTO_SUCESSO, SUCESSO);
                 pagamento.setValor(null);
             } else {
