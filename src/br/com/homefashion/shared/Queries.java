@@ -31,7 +31,7 @@ public class Queries {
             + "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
             + "WHERE v.id_cliente = ? "
             + "GROUP BY v.id, v.id_cliente, c.nome, v.valor, v.qtd, v.data "
-            + "ORDER BY v.data DESC";
+            + "ORDER BY v.data DESC, v.id DESC";
 
     public static final String INSERIR_PAGAMENTOS = "INSERT INTO vendas.pagamentos (id_venda, valor_pago, data_pagamento, usuario) VALUES (?,?,?,?)";
 
