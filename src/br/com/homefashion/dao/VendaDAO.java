@@ -363,4 +363,59 @@ public class VendaDAO {
 		return listaValoresAReceber;
 	}
 
+	public Boolean verificarSeExistePagamentoParaVenda(Integer idVenda) {
+
+		conexao = ConnectionFactory.getConnection();
+
+		boolean retorno = false;
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(SELECT_VERIFICAR_SE_EXISTE_PAGAMENTO_PARA_VENDA);
+			ps.setInt(1, idVenda);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				retorno = true;
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return retorno;
+	}
+
+	public Boolean cancelarVenda(Integer idVenda) {
+
+		boolean retorno = false;
+
+		conexao = ConnectionFactory.getConnection();
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(ALTERAR_CANCELAR_VENDA);
+			ps.setInt(1, idVenda);
+
+			ps.execute();
+
+			conexao.commit();
+
+			retorno =  true;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return retorno;
+	}
+
 }

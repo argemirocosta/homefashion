@@ -115,8 +115,46 @@ public class VendaMB {
         listaVendasEmAberto = vendaDAO.listarValorAReceber();
     }
 
-    public void listarVendas(){
+    public void listarVendas() {
         listaVendas = vendaDAO.listarVendas(venda);
+    }
+
+    public void cancelarVenda() {
+
+        if (verificarSeCancelamentoPodeSerRealizado()) {
+            Boolean cancelou = vendaDAO.cancelarVenda(venda.getId());
+
+            if (cancelou) {
+                listarVendas();
+                JSFUtil.fecharDialog(DIALOG_CANCELAR_VENDA);
+                JSFUtil.adicionarMensagemSucesso(VENDA_CANCELADA_SUCESSO, SUCESSO);
+            } else {
+                JSFUtil.adicionarMensagemErro(VENDA_CANCELADA_ERRO, ERRO);
+            }
+        }
+
+    }
+
+    private Boolean verificarSeExistePagamentoParaVenda() {
+
+        return vendaDAO.verificarSeExistePagamentoParaVenda(venda.getId());
+
+    }
+
+    private Boolean verificarSeCancelamentoPodeSerRealizado() {
+        boolean retorno = true;
+
+        if (venda.getSituacao().equals("PAGO")) {
+            JSFUtil.adicionarMensagemAdvertencia(VENDA_JA_PAGA, AVISO);
+            JSFUtil.fecharDialog(DIALOG_CANCELAR_VENDA);
+            retorno = false;
+        } else if (verificarSeExistePagamentoParaVenda()) {
+            JSFUtil.adicionarMensagemAdvertencia(VENDA_JA_TEM_PAGAMENTO, AVISO);
+            JSFUtil.fecharDialog(DIALOG_CANCELAR_VENDA);
+            retorno = false;
+        }
+
+        return retorno;
     }
 
     //GETTERS E SETTERS

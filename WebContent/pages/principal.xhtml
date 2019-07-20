@@ -315,6 +315,13 @@
                                 <f:setPropertyActionListener value="#{var}"
                                                              target="#{vendaMB.venda}"/>
                             </p:commandButton>
+
+                            <p:commandButton oncomplete="PF('dlgCancelarVenda').show();"
+                                             icon="cancelar" process="@this" update=":formPagamentos:tabPagamentos"
+                                             immediate="true">
+                                <f:setPropertyActionListener value="#{var}"
+                                                             target="#{vendaMB.venda}"/>
+                            </p:commandButton>
                         </div>
                     </p:column>
 
@@ -400,12 +407,14 @@
                 <p:panelGrid columns="4" styleClass="semBorda">
                     <p:commandButton value="Ranking por Cliente"
                                      action="#{vendaMB.listarRankingDosClientes()}"
-                                     update=":formRelatorioRanking:tabRelatorioRanking" oncomplete="PF('dlgRelatorioRanking').show();"
+                                     update=":formRelatorioRanking:tabRelatorioRanking"
+                                     oncomplete="PF('dlgRelatorioRanking').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber por Pessoa"
                                      action="#{vendaMB.listarValorAReceberPorPessoa()}"
-                                     update=":formRelatorioReceberPorPessoa:tabRelatorioReceberPorPessoa" oncomplete="PF('dlgRelatorioReceberPorPessoa').show();"
+                                     update=":formRelatorioReceberPorPessoa:tabRelatorioReceberPorPessoa"
+                                     oncomplete="PF('dlgRelatorioReceberPorPessoa').show();"
                                      icon="confirmar"/>
 
                     <p:commandButton value="A receber Geral"
@@ -522,17 +531,20 @@
 
                         <h:commandLink>
                             <p:graphicImage title="CSV" value="../imgs/csv.png" width="24"/>
-                            <p:dataExporter type="csv" target="tabRelatorioReceberPorPessoa" fileName="ReceberPorPessoa"/>
+                            <p:dataExporter type="csv" target="tabRelatorioReceberPorPessoa"
+                                            fileName="ReceberPorPessoa"/>
                         </h:commandLink>
 
                         <h:commandLink>
                             <p:graphicImage title="PDF" value="../imgs/pdf.png" width="24"/>
-                            <p:dataExporter type="pdf" target="tabRelatorioReceberPorPessoa" fileName="ReceberPorPessoa"/>
+                            <p:dataExporter type="pdf" target="tabRelatorioReceberPorPessoa"
+                                            fileName="ReceberPorPessoa"/>
                         </h:commandLink>
 
                         <h:commandLink>
                             <p:graphicImage title="Excel" value="../imgs/excel.png" width="24"/>
-                            <p:dataExporter type="xls" target="tabRelatorioReceberPorPessoa" fileName="ReceberPorPessoa"/>
+                            <p:dataExporter type="xls" target="tabRelatorioReceberPorPessoa"
+                                            fileName="ReceberPorPessoa"/>
                         </h:commandLink>
 
                     </div>
@@ -609,6 +621,30 @@
                     </h:outputLabel>
 
                 </p:panelGrid>
+
+            </h:form>
+        </p:dialog>
+
+        <p:dialog widgetVar="dlgCancelarVenda" header="Cancelar Venda"
+                  height="auto" width="auto" draggable="true" resizable="false"
+                  modal="true">
+            <h:form id="formCancelarVenda">
+                <p:panelGrid columns="2" styleClass="semBorda">
+                    <p:outputLabel value="Deseja realmente cancelar essa venda? "/>
+
+                </p:panelGrid>
+
+                <p:separator/>
+
+                <div align="center">
+                    <p:panelGrid columns="2" styleClass="semBorda">
+                        <p:commandButton value="Sim"
+                                         action="#{vendaMB.cancelarVenda()}"
+                                         update=":formVender:tabVendas, :formClientes" icon="confirmar"/>
+                        <p:commandButton value="Não"
+                                         oncomplete="PF('dlgCancelarVenda').hide();" icon="cancelar"/>
+                    </p:panelGrid>
+                </div>
 
             </h:form>
         </p:dialog>
