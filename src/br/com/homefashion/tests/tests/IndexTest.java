@@ -17,7 +17,7 @@ public class IndexTest {
     @BeforeClass
     public static void inicializa() {
         driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/homefashion/");
+        driver.get("http://localhost:8080/home_fashion/");
         indexPage = new IndexPage(driver);
     }
 
