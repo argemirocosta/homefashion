@@ -1,6 +1,6 @@
-package br.com.homefashion.tests.bdd.tests;
+package br.com.homefashion.tests.tests;
 
-import br.com.homefashion.tests.bdd.pages.IndexPage;
+import br.com.homefashion.tests.pages.IndexPage;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
