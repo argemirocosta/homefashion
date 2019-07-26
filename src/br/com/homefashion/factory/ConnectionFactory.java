@@ -8,7 +8,7 @@ public class ConnectionFactory {
 
 	private static final String DRIVER_CLASS = "org.postgresql.Driver";
 
-	private static final String URL = "jdbc:postgresql://localhost:5432/vendasEmCasa";
+	private static final String URL = "jdbc:postgresql://localhost:5432/home_fashion";
 	private static final String USER = "postgres";
 	private static final String PASS = "post";
 
