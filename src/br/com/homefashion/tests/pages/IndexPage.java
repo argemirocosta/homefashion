@@ -1,6 +1,6 @@
 package br.com.homefashion.tests.pages;
 
-import org.openqa.selenium.By;
+import br.com.homefashion.tests.util.TesteUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -17,9 +17,9 @@ public class IndexPage {
 
     public void realizarLogin(String login, String senha) {
 
-        WebElement campoLogin = driver.findElement(By.name(INDEX_INPUT_LOGIN_USUARIO));
-        WebElement campoSenha = driver.findElement(By.name(INDEX_INPUT_LOGIN_SENHA));
-        WebElement botaoLogin = driver.findElement(By.name(INDEX_BOTAO_LOGIN));
+        WebElement campoLogin = TesteUtil.buscarComponentePorNome(INDEX_INPUT_LOGIN_USUARIO, driver);
+        WebElement campoSenha = TesteUtil.buscarComponentePorNome(INDEX_INPUT_LOGIN_SENHA, driver);
+        WebElement botaoLogin = TesteUtil.buscarComponentePorNome(INDEX_BOTAO_LOGIN, driver);
 
         campoLogin.sendKeys(login);
         campoSenha.sendKeys(senha);
@@ -29,20 +29,20 @@ public class IndexPage {
     }
 
     public void abrirDialogCadastro(){
-        WebElement botaoCadastro = driver.findElement(By.name(INDEX_BOTAO_ABRIR_DIALOG_CADASTRO_USUARIO));
+        WebElement botaoCadastro = TesteUtil.buscarComponentePorNome(INDEX_BOTAO_ABRIR_DIALOG_CADASTRO_USUARIO, driver);
         botaoCadastro.click();
     }
 
     public void fecharDialogCadastro(){
-        WebElement botaoFecharDialogCadastro = driver.findElement(By.name(INDEX_BOTAO_FECHAR_DIALOG_CADASTRO_USUARIO));
+        WebElement botaoFecharDialogCadastro = TesteUtil.buscarComponentePorNome(INDEX_BOTAO_FECHAR_DIALOG_CADASTRO_USUARIO, driver);
         botaoFecharDialogCadastro.click();
     }
 
     public void realizarCadastro(String nome, String login, String senha){
-        WebElement campoNome = driver.findElement(By.name(INDEX_INPUT_CADASTRO_USUARIO_NOME));
-        WebElement campoLogin = driver.findElement(By.name(INDEX_INPUT_CADASTRO_USUARIO_LOGIN));
-        WebElement campoSenha = driver.findElement(By.name(INDEX_INPUT_CADASTRO_USUARIO_SENHA));
-        WebElement botaoCadastrar = driver.findElement(By.name(INDEX_BOTAO_CADASTRAR_USUARIO));
+        WebElement campoNome = TesteUtil.buscarComponentePorNome(INDEX_INPUT_CADASTRO_USUARIO_NOME, driver);
+        WebElement campoLogin = TesteUtil.buscarComponentePorNome(INDEX_INPUT_CADASTRO_USUARIO_LOGIN, driver);
+        WebElement campoSenha = TesteUtil.buscarComponentePorNome(INDEX_INPUT_CADASTRO_USUARIO_SENHA, driver);
+        WebElement botaoCadastrar = TesteUtil.buscarComponentePorNome(INDEX_BOTAO_CADASTRAR_USUARIO, driver);
 
         campoNome.sendKeys(nome);
         campoLogin.sendKeys(login);

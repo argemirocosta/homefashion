@@ -1,7 +1,7 @@
 package br.com.homefashion.tests.tests;
 
 import br.com.homefashion.tests.pages.IndexPage;
-import br.com.homefashion.tests.util.ComumUtil;
+import br.com.homefashion.tests.util.TesteUtil;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class IndexTest {
 
         indexPage.realizarCadastro("João", "joao", "2");
 
-        Boolean resultadoTeste = ComumUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
+        boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
 
         if (!resultadoTeste) {
             indexPage.fecharDialogCadastro();
@@ -45,15 +45,15 @@ public class IndexTest {
     @Test
     public void deveRealizarLogin() {
 
-        indexPage.realizarLogin("argemiro", "1");
+        indexPage.realizarLogin("joao", "2");
 
-        assertTrue(ComumUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
+        assertTrue(TesteUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
 
     }
 
     @AfterClass
     public static void finaliza() {
-        ComumUtil.finalizarDriver(driver);
+        TesteUtil.finalizarDriver(driver);
     }
 
 }

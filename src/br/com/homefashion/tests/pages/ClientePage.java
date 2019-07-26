@@ -1,6 +1,6 @@
 package br.com.homefashion.tests.pages;
 
-import org.openqa.selenium.By;
+import br.com.homefashion.tests.util.TesteUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -16,20 +16,20 @@ public class ClientePage {
     }
 
     public void abrirDialogNovoCliente(){
-        WebElement botaoCadastro = driver.findElement(By.name(CLIENTE_BOTAO_ABRIR_DIALOG_CADASTRO_CLIENTE));
+        WebElement botaoCadastro = TesteUtil.buscarComponentePorNome(CLIENTE_BOTAO_ABRIR_DIALOG_CADASTRO_CLIENTE, driver);
         botaoCadastro.click();
     }
 
     public void fecharDialogCadastro(){
-        WebElement botaoFecharDialogCadastro = driver.findElement(By.name(CLIENTE_BOTAO_ABRIR_DIALOG_CADASTRO_CLIENTE));
+        WebElement botaoFecharDialogCadastro = TesteUtil.buscarComponentePorNome(CLIENTE_BOTAO_ABRIR_DIALOG_CADASTRO_CLIENTE, driver);
         botaoFecharDialogCadastro.click();
     }
 
     public void realizarCadastroCliente(String nome, Integer telefone1, Integer telefone2){
-        WebElement campoNome = driver.findElement(By.name(CLIENTE_INPUT_NOME));
-        WebElement campoTelefone1 = driver.findElement(By.name(CLIENTE_INPUT_TELEFONE1));
-        WebElement campoTelefone2 = driver.findElement(By.name(CLIENTE_INPUT_TELEFONE2));
-        WebElement botaoCadastrar = driver.findElement(By.name(CLIENTE_BOTAO_CADASTRAR_CLIENTE));
+        WebElement campoNome = TesteUtil.buscarComponentePorNome(CLIENTE_INPUT_NOME, driver);
+        WebElement campoTelefone1 = TesteUtil.buscarComponentePorNome(CLIENTE_INPUT_TELEFONE1, driver);
+        WebElement campoTelefone2 = TesteUtil.buscarComponentePorNome(CLIENTE_INPUT_TELEFONE2, driver);
+        WebElement botaoCadastrar = TesteUtil.buscarComponentePorNome(CLIENTE_BOTAO_CADASTRAR_CLIENTE, driver);
 
         campoNome.sendKeys(nome);
         campoTelefone1.sendKeys(String.valueOf(telefone1));

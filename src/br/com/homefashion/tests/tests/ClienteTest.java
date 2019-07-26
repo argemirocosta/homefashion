@@ -2,7 +2,7 @@ package br.com.homefashion.tests.tests;
 
 import br.com.homefashion.tests.pages.ClientePage;
 import br.com.homefashion.tests.pages.IndexPage;
-import br.com.homefashion.tests.util.ComumUtil;
+import br.com.homefashion.tests.util.TesteUtil;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class ClienteTest {
 
         clientePage.realizarCadastroCliente("Jose", 1, 2);
 
-        Boolean resultadoTeste = ComumUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_CLIENTE, driver);
+        boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_CLIENTE, driver);
 
         if (!resultadoTeste) {
             clientePage.fecharDialogCadastro();
@@ -49,7 +49,7 @@ public class ClienteTest {
 
     @AfterClass
     public static void finaliza() {
-        ComumUtil.finalizarDriver(driver);
+        TesteUtil.finalizarDriver(driver);
     }
 
 }
