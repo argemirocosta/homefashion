@@ -73,6 +73,6 @@ public class Queries {
 
     public static final String SELECT_VERIFICAR_SE_EXISTE_PAGAMENTO_PARA_VENDA = "SELECT id FROM vendas.pagamentos WHERE id_venda = ?";
 
-    public static final String ALTERAR_CANCELAR_VENDA = "UPDATE vendas.venda SET cancelada = TRUE WHERE id=?";
+    public static final String ALTERAR_CANCELAR_VENDA = "UPDATE vendas.venda SET cancelada = TRUE, data_hora_cancelamento = CURRENT_TIMESTAMP WHERE id=?";
 
 }
