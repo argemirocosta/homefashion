@@ -21,8 +21,7 @@
                              oncomplete="PF('dlgRelatorios').show();"
                              style="float:right;margin-left:10px;margin-right:20px"/>
 
-            <p:outputLabel value="Home Fashion"
-                           style="font-size: 30px;font-family:Arial;font-weight: bold"/>
+            <p:outputLabel value="Home Fashion" styleClass="nomePrincipalParteSuperior"/>
 
             <p:separator/>
 
@@ -223,7 +222,7 @@
 
                     <p:outputLabel value="Data: "/>
                     <p:calendar value="#{vendaMB.venda.data}" showOn="button"
-                                required="true" requiredMessage="Insira a Data" size="15"></p:calendar>
+                                required="true" requiredMessage="Insira a Data" size="15"/>
 
                     <p:outputLabel value="Quantidade: "/>
                     <p:inputText value="#{vendaMB.venda.qtd}" maxlength="30"
@@ -246,10 +245,8 @@
 
                 <p:separator/>
 
-                <br></br>
-
                 <p:dataTable id="tabVendas" value="#{vendaMB.listaVendas}"
-                             var="var"
+                             var="var" styleClass="altura10px"
                              emptyMessage="Nenhuma venda realizada para esse cliente" rows="10"
                              paginator="true" paginatorPosition="bottom"
                              rowStyleClass="#{var.situacao == 'ABERTO' ? 'rowRed' : null} ">
@@ -348,7 +345,7 @@
                     <p:outputLabel value="Data: "/>
                     <p:calendar value="#{vendaMB.pagamento.data}"
                                 showOn="button" required="true" requiredMessage="Insira a Data"
-                                size="15"></p:calendar>
+                                size="15"/>
 
                 </p:panelGrid>
 
@@ -441,14 +438,10 @@
 
                 </p:panelGrid>
 
-                <br></br>
-
-                <div align="center">
+                <div align="center" class="altura30px">
                     <p:commandButton value="Fechar"
                                      oncomplete="PF('dlgRelatorios').hide();" icon="cancelar"/>
                 </div>
-
-                <br></br>
 
             </h:form>
         </p:dialog>
@@ -585,16 +578,13 @@
                                 style="margin-left: 5px" size="12" pattern="dd/MM/yyyy"
                                 showOn="button"/>
 
-
-                    <br></br>
-                    <br></br>
                 </p:panelGrid>
 
-                <p:commandButton value="Buscar" action="#{vendaMB.totalVendidoPeriodo()}"
+                <p:commandButton value="Buscar" action="#{vendaMB.totalVendidoPeriodo()}" styleClass="altura10px"
                                  update=":formRelatorioVendaPorPeriodo" icon="buscar"/>
 
                 <h:outputLabel value="TOTAL VENDIDO NO PERÍODO: "
-                               style="font-size: 14px;margin-left:20px"></h:outputLabel>
+                               style="font-size: 14px;margin-left:20px"/>
 
                 <h:outputLabel value="#{vendaMB.totalVendidoNoPeriodo}"
                                style="font-size: 14px;color:red;margin-left:10px">
@@ -612,7 +602,7 @@
                 <p:panelGrid columns="2" styleClass="semBorda">
 
                     <h:outputLabel value="TOTAL VENDIDO ATÉ HOJE: "
-                                   style="font-size: 14px;margin-left:20px"></h:outputLabel>
+                                   style="font-size: 14px;margin-left:20px"/>
 
                     <h:outputLabel value="#{vendaMB.totalVendidoNoPeriodo}"
                                    style="font-size: 14px;color:red;margin-left:10px">
@@ -620,7 +610,7 @@
                     </h:outputLabel>
 
                     <h:outputLabel value="TOTAL RECEBIDO ATÉ HOJE: "
-                                   style="font-size: 14px;margin-left:20px"></h:outputLabel>
+                                   style="font-size: 14px;margin-left:20px"/>
 
                     <h:outputLabel value="#{vendaMB.valorReceberGeral}"
                                    style="font-size: 14px;color:red;margin-left:10px">
@@ -628,7 +618,7 @@
                     </h:outputLabel>
 
                     <h:outputLabel value="VALOR TOTAL A RECEBER: "
-                                   style="font-size: 20px;margin-left:20px"></h:outputLabel>
+                                   style="font-size: 20px;margin-left:20px"/>
 
                     <h:outputLabel value="#{vendaMB.valorReceberGeralTotal}"
                                    style="font-size: 20px;color:red;margin-left:10px">
