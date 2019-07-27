@@ -139,6 +139,7 @@ public class VendaDAO {
 
 			while (rs.next()) {
 				Pagamento pagamento = new Pagamento();
+				pagamento.setId(rs.getInt("id"));
 				pagamento.getVenda().setId(rs.getInt("id_venda"));
 				pagamento.setData(rs.getDate("data_pagamento"));
 				pagamento.setValor(rs.getDouble("valor_pago"));
@@ -392,13 +393,22 @@ public class VendaDAO {
 
 	public Boolean cancelarVenda(Integer idVenda) {
 
+		return realizarCancelamento(idVenda, ALTERAR_CANCELAR_VENDA);
+	}
+
+	public Boolean cancelarPagamento(Integer idPagamento) {
+
+		return realizarCancelamento(idPagamento, ALTERAR_CANCELAR_PAGAMENTO);
+	}
+
+	private Boolean realizarCancelamento(Integer idParaCancelar, String sqlCancelamento) {
 		boolean retorno = false;
 
 		conexao = ConnectionFactory.getConnection();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(ALTERAR_CANCELAR_VENDA);
-			ps.setInt(1, idVenda);
+			PreparedStatement ps = conexao.prepareStatement(sqlCancelamento);
+			ps.setInt(1, idParaCancelar);
 
 			ps.execute();
 

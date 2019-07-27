@@ -135,6 +135,20 @@ public class VendaMB {
 
     }
 
+    public void cancelarPagamento() {
+
+        Boolean cancelou = vendaDAO.cancelarPagamento(pagamento.getId());
+
+        if (cancelou) {
+            listarVendas();
+            JSFUtil.fecharDialog(DIALOG_CANCELAR_PAGAMENTO);
+            JSFUtil.adicionarMensagemSucesso(PAGAMENTO_CANCELADO_SUCESSO, SUCESSO);
+            listarPagamentos();
+        } else {
+            JSFUtil.adicionarMensagemErro(PAGAMENTO_CANCELADO_ERRO, ERRO);
+        }
+    }
+
     private Boolean verificarSeExistePagamentoParaVenda() {
 
         return vendaDAO.verificarSeExistePagamentoParaVenda(venda.getId());

@@ -46,5 +46,9 @@ public class Mensagens {
 
     public static final String VENDA_JA_TEM_PAGAMENTO= "Essa venda tem pagamento e não pode ser cancelada!";
 
+    public static final String PAGAMENTO_CANCELADO_SUCESSO = "Pagamento cancelado com sucesso!";
+
+    public static final String PAGAMENTO_CANCELADO_ERRO= "Erro ao cancelar pagamento!";
+
 
 }
