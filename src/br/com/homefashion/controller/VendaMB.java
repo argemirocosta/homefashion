@@ -31,6 +31,7 @@ public class VendaMB {
     private Double totalVendidoNoPeriodo;
     private Double valorReceberGeral;
     private Double valorReceberGeralTotal;
+    private Double valorEmAbertoDaVenda;
     private VendaDAO vendaDAO = new VendaDAO();
 
     public VendaMB() {
@@ -43,6 +44,7 @@ public class VendaMB {
         busca.setPeriodofinal(DataUtil.retornarDataAtual());
         totalVendidoNoPeriodo = 0.0;
         listaVendasEmAberto = new ArrayList<>();
+        valorEmAbertoDaVenda = 0.0;
     }
 
     private void limparCampos() {
@@ -107,7 +109,13 @@ public class VendaMB {
         listaVendasPorCliente = vendaDAO.listarVendasPorCliente();
     }
 
-    public void listarPagamentos() {
+    public void abrirTelaDePagamento(){
+        listarPagamentos();
+        calcularValorEmAbertoDaVenda();
+        JSFUtil.abrirDialog("dlgPagamentos");
+    }
+
+    private void listarPagamentos() {
         listaPagamentos = vendaDAO.listarPagamentos(venda.getId());
     }
 
@@ -171,6 +179,10 @@ public class VendaMB {
         return retorno;
     }
 
+    private void calcularValorEmAbertoDaVenda(){
+        valorEmAbertoDaVenda = vendaDAO.calcularValorEmAberto(venda.getId());
+    }
+
     //GETTERS E SETTERS
 
     public Venda getVenda() {
@@ -221,7 +233,6 @@ public class VendaMB {
         this.busca = busca;
     }
 
-
     public List<Venda> getListaVendasEmAberto() {
         return listaVendasEmAberto;
     }
@@ -252,5 +263,13 @@ public class VendaMB {
 
     public void setTotalVendidoNoPeriodo(Double totalVendidoNoPeriodo) {
         this.totalVendidoNoPeriodo = totalVendidoNoPeriodo;
+    }
+
+    public Double getValorEmAbertoDaVenda() {
+        return valorEmAbertoDaVenda;
+    }
+
+    public void setValorEmAbertoDaVenda(Double valorEmAbertoDaVenda) {
+        this.valorEmAbertoDaVenda = valorEmAbertoDaVenda;
     }
 }

@@ -30,4 +30,8 @@ public final class JSFUtil {
 		RequestContext.getCurrentInstance().execute("PF('" + dialog + "').hide();");
 	}
 
+	public static void abrirDialog(String dialog) {
+		RequestContext.getCurrentInstance().execute("PF('" + dialog + "').show();");
+	}
+
 }

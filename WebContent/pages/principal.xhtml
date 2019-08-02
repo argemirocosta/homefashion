@@ -251,6 +251,12 @@
                              paginator="true" paginatorPosition="bottom"
                              rowStyleClass="#{var.situacao == 'ABERTO' ? 'rowRed' : null} ">
 
+                    <p:column headerText="Número" width="8%">
+                        <div align="center">
+                            <p:outputLabel value="#{var.id}"/>
+                        </div>
+                    </p:column>
+
                     <p:column headerText="Cliente" width="26%">
                         <div align="center">
                             <p:outputLabel value="#{var.cliente.nome}"/>
@@ -265,7 +271,7 @@
                         </div>
                     </p:column>
 
-                    <p:column headerText="Valor Venda" width="10%">
+                    <p:column headerText="Valor Venda" width="9%">
                         <div align="center">
                             <p:outputLabel value="#{var.valor}">
                                 <f:convertNumber type="currency" currencySymbol="R$"/>
@@ -273,7 +279,7 @@
                         </div>
                     </p:column>
 
-                    <p:column headerText="Total Pago" width="10%">
+                    <p:column headerText="Total Pago" width="9%">
                         <div align="center">
                             <p:outputLabel value="#{var.totalPago}">
                                 <f:convertNumber type="currency" currencySymbol="R$"/>
@@ -281,7 +287,7 @@
                         </div>
                     </p:column>
 
-                    <p:column headerText="Em Aberto" width="10%">
+                    <p:column headerText="Em Aberto" width="9%">
                         <div align="center">
                             <p:outputLabel value="#{var.emAberto}">
                                 <f:convertNumber type="currency" currencySymbol="R$"/>
@@ -289,36 +295,36 @@
                         </div>
                     </p:column>
 
-                    <p:column headerText="Situação" width="10%">
+                    <p:column headerText="Situação" width="9%">
                         <div align="center">
                             <p:outputLabel value="#{var.situacao}">
                             </p:outputLabel>
                         </div>
                     </p:column>
 
-                    <p:column headerText="Quantidade" width="10%">
+                    <p:column headerText="Quantidade" width="8%">
                         <div align="center">
                             <p:outputLabel value="#{var.qtd}"/>
                         </div>
                     </p:column>
 
-                    <p:column headerText="Pagar" width="7%">
+                    <p:column headerText="Pagar" width="6%">
                         <div align="center">
                             <p:commandButton icon="calculadora" process="@this"
                                              immediate="true"
-                                             action="#{vendaMB.listarPagamentos()}"
-                                             oncomplete="PF('dlgPagamentos').show();"
-                                             update=":formPagamentos:tabPagamentos">
+                                             action="#{vendaMB.abrirTelaDePagamento()}"
+                                             update=":formPagamentos:tabPagamentos, :formPagamentos:outValorAberto">
                                 <f:setPropertyActionListener value="#{var}"
                                                              target="#{vendaMB.venda}"/>
                             </p:commandButton>
                         </div>
                     </p:column>
 
-                    <p:column headerText="Excluir" width="7%">
+                    <p:column headerText="Excluir" width="6%">
                         <div align="center">
                             <p:commandButton oncomplete="PF('dlgCancelarVenda').show();"
-                                             icon="cancelar" process="@this" update=":formPagamentos:tabPagamentos"
+                                             icon="cancelar" process="@this"
+                                             update=":formPagamentos:tabPagamentos"
                                              immediate="true">
                                 <f:setPropertyActionListener value="#{var}"
                                                              target="#{vendaMB.venda}"/>
@@ -351,7 +357,23 @@
 
                 <p:separator/>
 
-                <div align="center">
+                <p:outputPanel id="outValorAberto">
+
+                    <div align="center">
+
+                        <h:outputLabel value="VALOR EM ABERTO: "
+                                       style="font-size: 20px;margin-left:20px"/>
+
+                        <p:outputLabel value="#{vendaMB.valorEmAbertoDaVenda}"
+                                       style="font-size: 20px;color:red;margin-left:10px">
+                            <f:convertNumber type="currency" currencySymbol="R$"/>
+                        </p:outputLabel>
+
+                    </div>
+
+                </p:outputPanel>
+
+                <div align="center" class="altura30px">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Pagar"
                                          action="#{vendaMB.inserirPagamento()}"
@@ -364,9 +386,8 @@
 
                 <p:separator/>
 
-                <br></br>
                 <p:outputPanel autoUpdate="true">
-                    <p:dataTable id="tabPagamentos"
+                    <p:dataTable id="tabPagamentos" styleClass="altura30px"
                                  value="#{vendaMB.listaPagamentos}" var="var"
                                  emptyMessage="Nenhum Pagamento efetuado" rows="10" paginator="true"
                                  paginatorPosition="bottom">
