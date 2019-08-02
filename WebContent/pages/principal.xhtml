@@ -115,10 +115,28 @@
                   height="auto" width="auto" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formCadastroCliente">
-                <p:panelGrid columns="2" styleClass="semBorda">
+                <p:panelGrid columns="4" styleClass="semBorda">
                     <p:outputLabel value="Nome: "/>
                     <p:inputText value="#{clienteMB.cliente.nome}"
                                  maxlength="30" size="25" required="true"
+                                 requiredMessage="Insira o nome"/>
+
+                    <p:outputLabel value="Data Nascimento: "/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true" navigator="true"
+                                yearRange="-111:+39" pages="1" showOn="button" size="15"
+                                value="#{clienteMB.cliente.dataNascimento}"
+                                locale="pt" class="select-agendaEquipe2"/>
+
+                    <p:outputLabel value="CPF: "/>
+                    <p:inputMask mask="999.999.999-99"
+                                 value="#{clienteMB.cliente.cpf}"
+                                 class="form-control select-agendaEquipe2" id="cpf"
+                                 required="false" validator="CPFValidator"
+                                 requiredMessage="CPF do Paciente: Campo obrigatório!"/>
+
+                    <p:outputLabel value="RG: "/>
+                    <p:inputText value="#{clienteMB.cliente.rg}"
+                                 maxlength="30" size="25" required="false"
                                  requiredMessage="Insira o nome"/>
 
                     <p:outputLabel value="Telefone 1: "/>
@@ -153,21 +171,39 @@
                   height="auto" width="auto" draggable="true" resizable="false"
                   modal="true">
             <h:form id="formAlterarCliente">
-                <p:panelGrid columns="2" styleClass="semBorda">
+                <p:panelGrid columns="4" styleClass="semBorda">
                     <p:outputLabel value="Nome: "/>
                     <p:inputText value="#{clienteMB.cliente.nome}"
                                  maxlength="30" size="25" required="true"
-                                 requiredMessage="insira o nome"/>
+                                 requiredMessage="Insira o nome"/>
+
+                    <p:outputLabel value="Data Nascimento: "/>
+                    <p:calendar pattern="dd/MM/yyyy" mask="true" navigator="true"
+                                yearRange="-111:+39" pages="1" showOn="button" size="15"
+                                value="#{clienteMB.cliente.dataNascimento}"
+                                locale="pt" class="select-agendaEquipe2"/>
+
+                    <p:outputLabel value="CPF: "/>
+                    <p:inputMask mask="999.999.999-99"
+                                 value="#{clienteMB.cliente.cpf}"
+                                 class="form-control select-agendaEquipe2" id="cpf"
+                                 required="false" validator="CPFValidator"
+                                 requiredMessage="CPF do Paciente: Campo obrigatório!"/>
+
+                    <p:outputLabel value="RG: "/>
+                    <p:inputText value="#{clienteMB.cliente.rg}"
+                                 maxlength="30" size="25" required="false"
+                                 requiredMessage="Insira o nome"/>
 
                     <p:outputLabel value="Telefone 1: "/>
                     <p:inputText value="#{clienteMB.cliente.telefone1}"
-                                 maxlength="30" size="25" required="true"
+                                 maxlength="30" size="25" required="false"
                                  requiredMessage="Insira ao menos 1 telefone"/>
 
                     <p:outputLabel value="Telefone 2: "/>
                     <p:inputText value="#{clienteMB.cliente.telefone2}"
                                  maxlength="30" size="25" required="false"
-                                 requiredMessage="Insira ao menos 1 telefone"/>
+                                 requiredMessage="insira o nome"/>
 
                 </p:panelGrid>
 

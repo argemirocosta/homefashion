@@ -5,13 +5,17 @@ public class Queries {
     private Queries() {
     }
 
-    public static final String SELECT_LISTAR_CLIENTES = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE usuario = ? ORDER BY nome";
+    public static final String SELECT_LISTAR_CLIENTES = "SELECT id, nome, data_nascimento, cpf, rg, telefone1, telefone2 FROM vendas.clientes "
+            + "WHERE usuario = ? ORDER BY nome";
 
-    public static final String SELECT_BUSCAR_CLIENTE_POR_NOME = "SELECT id, nome, telefone1, telefone2 FROM vendas.clientes WHERE upper(nome) LIKE upper(?) AND usuario = ? ORDER BY nome";
+    public static final String SELECT_BUSCAR_CLIENTE_POR_NOME = "SELECT id, nome, data_nascimento, cpf, rg, telefone1, telefone2 FROM vendas.clientes "
+            + "WHERE upper(nome) LIKE upper(?) AND usuario = ? ORDER BY nome";
 
-    public static final String INSERIR_CLIENTE = "INSERT INTO vendas.clientes (nome, telefone1, telefone2, usuario) VALUES (?,?,?,?)";
+    public static final String INSERIR_CLIENTE = "INSERT INTO vendas.clientes (nome, telefone1, telefone2, usuario, data_nascimento, cpf, rg) "
+            + "VALUES (?,?,?,?,?,?,?)";
 
-    public static final String ALTERAR_CLIENTE = "UPDATE vendas.clientes SET nome=?, telefone1=?, telefone2=? WHERE id=?";
+    public static final String ALTERAR_CLIENTE = "UPDATE vendas.clientes SET nome=?, telefone1=?, telefone2=?, data_nascimento=?, cpf=?, rg=? "
+            + "WHERE id=?";
 
     public static final String DELETAR_CLIENTE = "DELETE FROM vendas.clientes WHERE id=?";
 

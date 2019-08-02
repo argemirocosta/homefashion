@@ -3,6 +3,7 @@ package br.com.homefashion.dao;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.util.DataUtil;
 import br.com.homefashion.util.SessaoUtil;
 import br.com.homefashion.util.VerificadorUtil;
 
@@ -85,6 +86,9 @@ public class ClienteDAO {
 				cliente.setNome(rs.getString("nome"));
 				cliente.setTelefone1(rs.getInt("telefone1"));
 				cliente.setTelefone2(rs.getInt("telefone2"));
+				cliente.setDataNascimento(rs.getDate("data_nascimento"));
+				cliente.setCpf(rs.getString("cpf"));
+				cliente.setRg(rs.getString("rg"));
 
 				listaClientes.add(cliente);
 			}
@@ -119,6 +123,27 @@ public class ClienteDAO {
 
 			ps.setInt(4, usuarioSessao.getId());
 
+			if(VerificadorUtil.verificarSeObjetoNulo(cliente.getDataNascimento())){
+				ps.setNull(5, Types.NULL);
+			}
+			else {
+				ps.setDate(5, DataUtil.converterDateUtilParaDateSql(cliente.getDataNascimento()));
+			}
+
+			if(VerificadorUtil.verificarSeObjetoNuloOuVazio(cliente.getCpf())){
+				ps.setNull(6, Types.CHAR);
+			}
+			else {
+				ps.setString(6, cliente.getCpf().replaceAll("[^0-9]", ""));
+			}
+
+			if(VerificadorUtil.verificarSeObjetoNuloOuVazio(cliente.getRg())){
+				ps.setNull(7, Types.CHAR);
+			}
+			else {
+				ps.setString(7, cliente.getRg());
+			}
+
 			ps.execute();
 
 			conexao.commit();
@@ -148,7 +173,28 @@ public class ClienteDAO {
 			ps.setString(1, cliente.getNome().toUpperCase());
 			ps.setInt(2, cliente.getTelefone1());
 			ps.setInt(3, cliente.getTelefone2());
-			ps.setInt(4, cliente.getId());
+
+			if(VerificadorUtil.verificarSeObjetoNulo(cliente.getDataNascimento())){
+				ps.setNull(4, Types.NULL);
+			}
+			else {
+				ps.setDate(4, DataUtil.converterDateUtilParaDateSql(cliente.getDataNascimento()));
+			}
+
+			if(VerificadorUtil.verificarSeObjetoNuloOuVazio(cliente.getCpf())){
+				ps.setNull(5, Types.CHAR);
+			}
+			else {
+				ps.setString(5, cliente.getCpf().replaceAll("[^0-9]", ""));
+			}
+
+			if(VerificadorUtil.verificarSeObjetoNuloOuVazio(cliente.getRg())){
+				ps.setNull(6, Types.CHAR);
+			}
+			else {
+				ps.setString(6, cliente.getRg());
+			}
+			ps.setInt(7, cliente.getId());
 
 			ps.executeUpdate();
 

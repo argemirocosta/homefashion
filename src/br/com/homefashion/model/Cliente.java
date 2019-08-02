@@ -1,9 +1,14 @@
 package br.com.homefashion.model;
 
+import java.util.Date;
+
 public class Cliente {
 
     private Integer id;
     private String nome;
+    private Date dataNascimento;
+    private String cpf;
+    private String rg;
     private Integer telefone1;
     private Integer telefone2;
 
@@ -42,4 +47,27 @@ public class Cliente {
         this.telefone2 = telefone2;
     }
 
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
 }
