@@ -3,10 +3,7 @@ package br.com.homefashion.dao;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.util.DataUtil;
-import br.com.homefashion.util.SessaoUtil;
-import br.com.homefashion.util.StringUtil;
-import br.com.homefashion.util.VerificadorUtil;
+import br.com.homefashion.util.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -85,8 +82,8 @@ public class ClienteDAO {
 				Cliente cliente = new Cliente();
 				cliente.setId(rs.getInt("id"));
 				cliente.setNome(rs.getString("nome"));
-				cliente.setTelefone1(rs.getInt("telefone1"));
-				cliente.setTelefone2(rs.getInt("telefone2"));
+				cliente.setTelefone1(IntegerUtil.tratarValorVindoZero(rs.getString("telefone1")));
+				cliente.setTelefone2(IntegerUtil.tratarValorVindoZero(rs.getString("telefone2")));
 				cliente.setDataNascimento(rs.getDate("data_nascimento"));
 				cliente.setCpf(rs.getString("cpf"));
 				cliente.setRg(rs.getString("rg"));
@@ -95,8 +92,8 @@ public class ClienteDAO {
 				cliente.getEndereco().setCidade(rs.getString("cidade"));
 				cliente.getEndereco().setBairro(rs.getString("bairro"));
 				cliente.getEndereco().setLogradouro(rs.getString("logradouro"));
-				cliente.getEndereco().setNumero(rs.getInt("numero"));
-				cliente.getEndereco().setCodIBGE(rs.getInt("cod_ibge"));
+				cliente.getEndereco().setNumero(IntegerUtil.tratarValorVindoZero(rs.getString("numero")));
+				cliente.getEndereco().setCodIBGE(IntegerUtil.tratarValorVindoZero(rs.getString("cod_ibge")));
 
 				listaClientes.add(cliente);
 			}
@@ -228,8 +225,20 @@ public class ClienteDAO {
 		try {
 			PreparedStatement ps = conexao.prepareStatement(ALTERAR_CLIENTE);
 			ps.setString(1, cliente.getNome().toUpperCase());
-			ps.setInt(2, cliente.getTelefone1());
-			ps.setInt(3, cliente.getTelefone2());
+
+			if(VerificadorUtil.verificarSeObjetoNuloOuVazio(cliente.getTelefone1())){
+				ps.setNull(2, Types.NULL);
+			}
+			else {
+				ps.setInt(2, cliente.getTelefone1());
+			}
+
+			if(VerificadorUtil.verificarSeObjetoNuloOuVazio(cliente.getTelefone2())){
+				ps.setNull(3, Types.NULL);
+			}
+			else {
+				ps.setInt(3, cliente.getTelefone2());
+			}
 
 			if(VerificadorUtil.verificarSeObjetoNulo(cliente.getDataNascimento())){
 				ps.setNull(4, Types.NULL);
