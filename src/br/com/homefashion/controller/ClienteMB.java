@@ -8,6 +8,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.homefashion.util.CEPUtil;
 import br.com.homefashion.util.JSFUtil;
 
 import static br.com.homefashion.shared.Dialogs.*;
@@ -81,6 +82,10 @@ public class ClienteMB {
 
     public void listarClientes() {
         listaClientes = clienteDAO.listarClientes();
+    }
+
+    public void buscarEnderecoClientePorCEP(){
+        cliente.setEndereco(CEPUtil.buscarEnderecoPorCEP(cliente.getEndereco().getCep()));
     }
 
     //GETTERS E SETTERS

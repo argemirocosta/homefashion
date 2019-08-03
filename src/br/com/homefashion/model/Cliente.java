@@ -11,8 +11,10 @@ public class Cliente {
     private String rg;
     private Integer telefone1;
     private Integer telefone2;
+    private Endereco endereco;
 
     public Cliente() {
+        endereco = new Endereco();
     }
 
     public Integer getId() {
@@ -69,5 +71,13 @@ public class Cliente {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
