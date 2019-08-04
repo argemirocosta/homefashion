@@ -1,11 +1,12 @@
 package br.com.homefashion.tests.tests;
 
+import br.com.homefashion.tests.factory.FactoryDriver;
 import br.com.homefashion.tests.pages.IndexPage;
 import br.com.homefashion.tests.util.TesteUtil;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
+import static br.com.homefashion.tests.elements.IndexElements.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -19,7 +20,7 @@ public class IndexTest {
 
     @Before
     public void inicializa() {
-        driver = new FirefoxDriver();
+        driver = FactoryDriver.createDriver(NOME_DO_NAVEGADOR);
         driver.get(PAGINA_PARA_TESTE);
         indexPage = new IndexPage(driver);
     }
@@ -32,10 +33,6 @@ public class IndexTest {
         indexPage.realizarCadastro("João", "joao", "2");
 
         boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
-
-        if (!resultadoTeste) {
-            indexPage.fecharDialogCadastro();
-        }
 
         assertTrue(resultadoTeste);
 

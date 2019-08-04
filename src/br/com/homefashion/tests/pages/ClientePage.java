@@ -4,7 +4,7 @@ import br.com.homefashion.tests.util.TesteUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static br.com.homefashion.tests.util.Constantes.*;
+import static br.com.homefashion.tests.elements.ClienteElements.*;
 
 public class ClientePage {
 
