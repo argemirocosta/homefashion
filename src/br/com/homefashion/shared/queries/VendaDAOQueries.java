@@ -1,37 +1,9 @@
-package br.com.homefashion.shared;
+package br.com.homefashion.shared.queries;
 
-public class Queries {
+public class VendaDAOQueries {
 
-    private Queries() {
+    private VendaDAOQueries() {
     }
-
-    public static final String SELECT_LISTAR_CLIENTES = "SELECT id, nome, data_nascimento, cpf, rg, telefone1, telefone2, "
-            + "cep, estado, cidade, bairro, logradouro, numero, cod_ibge "
-            + "FROM vendas.clientes "
-            + "WHERE usuario = ? ORDER BY nome";
-
-    public static final String SELECT_BUSCAR_CLIENTE_POR_NOME = "SELECT id, nome, data_nascimento, cpf, rg, telefone1, telefone2, "
-            + "cep, estado, cidade, bairro, logradouro, numero, cod_ibge "
-            + "FROM vendas.clientes "
-            + "WHERE upper(nome) LIKE upper(?) AND usuario = ? ORDER BY nome";
-
-    public static final String INSERIR_CLIENTE = "INSERT INTO vendas.clientes (nome, telefone1, telefone2, usuario, data_nascimento, cpf, rg, "
-            + "cep, estado, cidade, bairro, logradouro, numero, cod_ibge) "
-            + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-    public static final String ALTERAR_CLIENTE = "UPDATE vendas.clientes SET nome=?, telefone1=?, telefone2=?, data_nascimento=?, cpf=?, rg=?, "
-            + "cep=?, estado=?, cidade=?, bairro=?, logradouro=?, numero=?, cod_ibge=? "
-            + "WHERE id=?";
-
-    public static final String DELETAR_CLIENTE = "DELETE FROM vendas.clientes WHERE id=?";
-
-    public static final String SELECT_LOGIN = "SELECT id, nome, login, senha, ativo FROM vendas.usuario WHERE login = ? AND senha = ?";
-
-    public static final String SELECT_ALTERAR_SENHA = "SELECT id FROM vendas.usuario WHERE id = ? AND senha = ?";
-
-    public static final String INSERIR_USUARIO = "INSERT INTO vendas.usuario (nome, login, senha, ativo) VALUES (?,?,?,TRUE)";
-
-    public static final String ALTERAR_USUARIO = "UPDATE vendas.usuario SET nome = ?, login = ?, senha = ? WHERE id = ?";
 
     public static final String INSERIR_VENDA = "INSERT INTO vendas.venda (id_cliente, valor, qtd, data, usuario) VALUES (?,?,?,?,?)";
 

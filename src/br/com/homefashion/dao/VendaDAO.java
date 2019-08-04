@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static br.com.homefashion.shared.Queries.*;
+import static br.com.homefashion.shared.queries.VendaDAOQueries.*;
 import static br.com.homefashion.shared.Sessao.*;
 
 public class VendaDAO {

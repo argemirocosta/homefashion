@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static br.com.homefashion.shared.Queries.*;
+import static br.com.homefashion.shared.queries.UsuarioDAOQueries.*;
 import static br.com.homefashion.shared.Sessao.*;
 
 public class UsuarioDAO {
