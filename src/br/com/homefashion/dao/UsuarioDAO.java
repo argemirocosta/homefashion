@@ -2,6 +2,7 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.model.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.util.SessaoUtil;
 import br.com.homefashion.util.VerificadorUtil;
 
@@ -72,6 +73,68 @@ public class UsuarioDAO {
 			conexao.commit();
 
 			retorno = true;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return retorno;
+	}
+
+	public Boolean alterarUsuario(Usuario usuario) {
+
+		conexao = ConnectionFactory.getConnection();
+
+		boolean retorno = false;
+
+		try {
+
+			Usuario usuarioSessao = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
+
+			PreparedStatement ps = conexao.prepareStatement(ALTERAR_USUARIO);
+			ps.setString(1, usuario.getNome().toUpperCase());
+			ps.setString(2, usuario.getLogin().toUpperCase());
+			ps.setString(3, usuario.getSenha().toUpperCase());
+			ps.setInt(4, usuarioSessao.getId());
+
+			ps.execute();
+
+			conexao.commit();
+
+			retorno = true;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conexao.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return retorno;
+	}
+
+	public Boolean verificarSenhaUsuario(ParametrosVerificarSenhaUsuarioDTO parametrosVerificarSenhaUsuarioDTO) {
+
+		boolean retorno = false;
+
+		conexao = ConnectionFactory.getConnection();
+
+		try {
+			PreparedStatement ps = conexao.prepareStatement(SELECT_ALTERAR_SENHA);
+			ps.setInt(1, parametrosVerificarSenhaUsuarioDTO.getIdUsuario());
+			ps.setString(2, parametrosVerificarSenhaUsuarioDTO.getSenhaAtual());
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				retorno = true;
+			}
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();

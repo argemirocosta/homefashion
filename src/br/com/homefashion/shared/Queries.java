@@ -27,7 +27,11 @@ public class Queries {
 
     public static final String SELECT_LOGIN = "SELECT id, nome, login, senha, ativo FROM vendas.usuario WHERE login = ? AND senha = ?";
 
+    public static final String SELECT_ALTERAR_SENHA = "SELECT id FROM vendas.usuario WHERE id = ? AND senha = ?";
+
     public static final String INSERIR_USUARIO = "INSERT INTO vendas.usuario (nome, login, senha, ativo) VALUES (?,?,?,TRUE)";
+
+    public static final String ALTERAR_USUARIO = "UPDATE vendas.usuario SET nome = ?, login = ?, senha = ? WHERE id = ?";
 
     public static final String INSERIR_VENDA = "INSERT INTO vendas.venda (id_cliente, valor, qtd, data, usuario) VALUES (?,?,?,?,?)";
 

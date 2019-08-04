@@ -2,6 +2,7 @@ package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.model.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessaoUtil;
@@ -22,6 +23,7 @@ public class UsuarioMB {
     private Usuario usuario;
     private Usuario usuarioLogado;
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private String senhaAtual;
 
     public UsuarioMB() {
         usuario = new Usuario();
@@ -57,6 +59,36 @@ public class UsuarioMB {
         }
     }
 
+    public void carregarDadosUsuario(){
+        usuario = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
+    }
+
+    public void verificarSePodeAlterarUsuario(){
+
+        ParametrosVerificarSenhaUsuarioDTO parametrosVerificarSenhaUsuarioDTO = new ParametrosVerificarSenhaUsuarioDTO(usuario.getId(), senhaAtual);
+
+        if(usuarioDAO.verificarSenhaUsuario(parametrosVerificarSenhaUsuarioDTO)){
+            alterarUsuario();
+        }
+        else{
+            JSFUtil.adicionarMensagemErro(SENHA_INVALIDA, ERRO);
+        }
+
+    }
+
+    private void alterarUsuario() {
+        boolean alterou = usuarioDAO.alterarUsuario(usuario);
+
+        if (alterou) {
+            JSFUtil.adicionarMensagemSucesso(USUARIO_ALTERADO_SUCESSO, SUCESSO);
+            JSFUtil.fecharDialog(DIALOG_ALTERAR_USUARIO);
+            limparUsuario();
+
+        } else {
+            JSFUtil.adicionarMensagemErro(USUARIO_ALTERADO_ERRO, ERRO);
+        }
+    }
+
     private void limparUsuario() {
         usuario = new Usuario();
     }
@@ -71,4 +103,11 @@ public class UsuarioMB {
         this.usuario = usuario;
     }
 
+    public String getSenhaAtual() {
+        return senhaAtual;
+    }
+
+    public void setSenhaAtual(String senhaAtual) {
+        this.senhaAtual = senhaAtual;
+    }
 }

@@ -28,6 +28,10 @@ public class Mensagens {
 
     public static final String USUARIO_CADASTRADO_ERRO = "Erro ao cadastrar o usuário!";
 
+    public static final String USUARIO_ALTERADO_SUCESSO = "Usuário alterado com sucesso!";
+
+    public static final String USUARIO_ALTERADO_ERRO = "Erro ao alterar o usuário!";
+
     public static final String VENDA_SUCESSO = "Venda realizada com sucesso!";
 
     public static final String VENDA_ERRO = "Erro ao realizar Venda";
@@ -49,6 +53,8 @@ public class Mensagens {
     public static final String PAGAMENTO_CANCELADO_SUCESSO = "Pagamento cancelado com sucesso!";
 
     public static final String PAGAMENTO_CANCELADO_ERRO= "Erro ao cancelar pagamento!";
+
+    public static final String SENHA_INVALIDA = "Senha inválida!";
 
 
 }

@@ -14,6 +14,8 @@ public class Dialogs {
 
     public static final String DIALOG_CADASTRO_USUARIO = "dlgCadastroUsuario";
 
+    public static final String DIALOG_ALTERAR_USUARIO = "dlgAlterarUsuario";
+
     public static final String DIALOG_CANCELAR_VENDA = "dlgCancelarVenda";
 
     public static final String DIALOG_CANCELAR_PAGAMENTO = "dlgCancelarPagamento";

@@ -17,6 +17,12 @@
             <p:commandButton value="Sair do Sistema" icon="sair"
                              action="#{usuarioMB.logout()}" style="float:right;"/>
 
+            <p:commandButton value="Dados Usuário" icon="pessoa"
+                             action="#{usuarioMB.carregarDadosUsuario()}"
+                             update=":formAlterarUsuario"
+                             oncomplete="PF('dlgAlterarUsuario').show();"
+                             style="float:right;margin-left:10px;margin-right:20px"/>
+
             <p:commandButton value="Relatórios" icon="relatorios"
                              oncomplete="PF('dlgRelatorios').show();"
                              style="float:right;margin-left:10px;margin-right:20px"/>
@@ -779,6 +785,43 @@
                 </div>
 
             </h:form>
+        </p:dialog>
+
+        <p:dialog widgetVar="dlgAlterarUsuario" header="Alterar Usuário"
+                  height="auto" width="auto" resizable="false" modal="true">
+            <h:form id="formAlterarUsuario">
+
+                <p:panelGrid columns="2" styleClass="semBorda">
+                    <p:outputLabel value="Nome:" />
+                    <p:inputText value="#{usuarioMB.usuario.nome}"
+                                 required="true" requiredMessage="Usuário: Campo obrigatório!" />
+
+                    <p:outputLabel value="Login:" />
+                    <p:inputText value="#{usuarioMB.usuario.login}"
+                                 required="true" requiredMessage="Login: Campo obrigatório!" />
+
+                    <p:outputLabel value="Senha Antiga:" />
+                    <p:password value="#{usuarioMB.senhaAtual}"
+                                required="true" requiredMessage="Senha Antiga: Campo obrigatório" />
+
+                    <p:outputLabel value="Senha Nova:" />
+                    <p:password value="#{usuarioMB.usuario.senha}"
+                                required="true" requiredMessage="Senha Nova: Campo obrigatório!" />
+                </p:panelGrid>
+
+                <p:separator styleClass="altura10px"/>
+
+                <div align="center">
+                    <p:commandButton value="Alterar" icon="confirmar"
+                                     action="#{usuarioMB.verificarSePodeAlterarUsuario()}"
+                                     update=":formClientes:msgClientes" />
+
+                    <p:commandButton value="Fechar" icon="cancelar"
+                                     style="margin-left:10px" oncomplete="PF('dlgAlterarUsuario').hide();" />
+                </div>
+
+            </h:form>
+
         </p:dialog>
 
     </ui:define>
