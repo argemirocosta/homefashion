@@ -164,7 +164,10 @@
                     </p:inputMask>
 
                     <p:outputLabel value="Estado: "/>
-                    <p:inputText value="#{clienteMB.cliente.endereco.estado}" id="estadoCadastro"/>
+                    <p:selectOneMenu value="#{clienteMB.cliente.endereco.estado}" id="estadoCadastro">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItems value="#{clienteMB.cliente.endereco.listaEstados}"/>
+                    </p:selectOneMenu>
 
                     <p:outputLabel value="Cidade: "/>
                     <p:inputText value="#{clienteMB.cliente.endereco.cidade}" id="cidadeCadastro"/>
@@ -243,7 +246,10 @@
                     </p:inputMask>
 
                     <p:outputLabel value="Estado: "/>
-                    <p:inputText value="#{clienteMB.cliente.endereco.estado}" id="estadoAlteracao"/>
+                    <p:selectOneMenu value="#{clienteMB.cliente.endereco.estado}" id="estadoAlteracao">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItems value="#{clienteMB.cliente.endereco.listaEstados}"/>
+                    </p:selectOneMenu>
 
                     <p:outputLabel value="Cidade: "/>
                     <p:inputText value="#{clienteMB.cliente.endereco.cidade}" id="cidadeAlteracao"/>
@@ -465,7 +471,8 @@
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Pagar"
                                          action="#{vendaMB.inserirPagamento()}"
-                                         update=":formVender:tabVendas, :formPagamentos:tabPagamentos, msgPagamentos, :formPagamentos:pnlgridPagamentos"
+                                         update=":formVender:tabVendas, :formPagamentos:tabPagamentos, msgPagamentos,
+                                         :formPagamentos:pnlgridPagamentos, outValorAberto"
                                          icon="calculadorasifrao"/>
                         <p:commandButton value="Fechar"
                                          oncomplete="PF('dlgPagamentos').hide();" icon="cancelar"/>

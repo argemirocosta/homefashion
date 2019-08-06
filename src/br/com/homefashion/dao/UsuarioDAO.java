@@ -2,7 +2,7 @@ package br.com.homefashion.dao;
 
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.model.dto.ParametrosVerificarSenhaUsuarioDTO;
+import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.util.SessaoUtil;
 import br.com.homefashion.util.VerificadorUtil;
 

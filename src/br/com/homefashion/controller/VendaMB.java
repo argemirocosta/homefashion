@@ -79,6 +79,7 @@ public class VendaMB {
                 listarVendas();
                 limparCampos();
                 JSFUtil.adicionarMensagemSucesso(PAGAMENTO_SUCESSO, SUCESSO);
+                calcularValorEmAbertoDaVenda();
                 pagamento.setValor(null);
             } else {
                 JSFUtil.adicionarMensagemErro(PAGAMENTO_ERRO, ERRO);

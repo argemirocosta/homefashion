@@ -1,5 +1,7 @@
 package br.com.homefashion.model;
 
+import java.util.ArrayList;
+
 public class Endereco {
 
     private String cep;
@@ -9,8 +11,37 @@ public class Endereco {
     private String logradouro;
     private Integer numero;
     private Integer codIBGE;
+    private ArrayList<String> listaEstados;
 
     public Endereco() {
+        listaEstados = new ArrayList<>();
+        listaEstados.add("AC");
+        listaEstados.add("AL");
+        listaEstados.add("AM");
+        listaEstados.add("AP");
+        listaEstados.add("BA");
+        listaEstados.add("CE");
+        listaEstados.add("DF");
+        listaEstados.add("ES");
+        listaEstados.add("GO");
+        listaEstados.add("MA");
+        listaEstados.add("MG");
+        listaEstados.add("MS");
+        listaEstados.add("MT");
+        listaEstados.add("PA");
+        listaEstados.add("PB");
+        listaEstados.add("PE");
+        listaEstados.add("PI");
+        listaEstados.add("PR");
+        listaEstados.add("RJ");
+        listaEstados.add("RN");
+        listaEstados.add("RO");
+        listaEstados.add("RR");
+        listaEstados.add("RS");
+        listaEstados.add("SC");
+        listaEstados.add("SE");
+        listaEstados.add("SP");
+        listaEstados.add("TO");
     }
 
     public String getEstado() {
@@ -67,5 +98,13 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public ArrayList<String> getListaEstados() {
+        return listaEstados;
+    }
+
+    public void setListaEstados(ArrayList<String> listaEstados) {
+        this.listaEstados = listaEstados;
     }
 }

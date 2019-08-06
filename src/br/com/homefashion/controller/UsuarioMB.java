@@ -2,7 +2,7 @@ package br.com.homefashion.controller;
 
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.model.dto.ParametrosVerificarSenhaUsuarioDTO;
+import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessaoUtil;

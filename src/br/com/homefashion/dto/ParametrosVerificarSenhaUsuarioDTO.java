@@ -1,4 +1,4 @@
-package br.com.homefashion.model.dto;
+package br.com.homefashion.dto;
 
 public class ParametrosVerificarSenhaUsuarioDTO {
 
