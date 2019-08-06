@@ -14,6 +14,10 @@ public class Endereco {
     private ArrayList<String> listaEstados;
 
     public Endereco() {
+        popularListaDeEstados();
+    }
+
+    private void popularListaDeEstados(){
         listaEstados = new ArrayList<>();
         listaEstados.add("AC");
         listaEstados.add("AL");
