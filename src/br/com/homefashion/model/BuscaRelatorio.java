@@ -1,8 +1,10 @@
 package br.com.homefashion.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class BuscaRelatorio {
+public class BuscaRelatorio implements Serializable {
 
 	private Date periodoinicial;
 	private Date periodofinal;
@@ -23,4 +25,25 @@ public class BuscaRelatorio {
 		this.periodofinal = periodofinal;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		BuscaRelatorio that = (BuscaRelatorio) o;
+		return Objects.equals(periodoinicial, that.periodoinicial) &&
+				Objects.equals(periodofinal, that.periodofinal);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(periodoinicial, periodofinal);
+	}
+
+	@Override
+	public String toString() {
+		return "BuscaRelatorio{" +
+				"periodoinicial=" + periodoinicial +
+				", periodofinal=" + periodofinal +
+				'}';
+	}
 }

@@ -1,6 +1,9 @@
 package br.com.homefashion.model;
 
-public class Usuario {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Usuario implements Serializable {
 
     private Integer id;
     private String nome;
@@ -46,5 +49,33 @@ public class Usuario {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) &&
+                Objects.equals(nome, usuario.nome) &&
+                Objects.equals(login, usuario.login) &&
+                Objects.equals(senha, usuario.senha) &&
+                Objects.equals(ativo, usuario.ativo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, login, senha, ativo);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", ativo=" + ativo +
+                '}';
     }
 }

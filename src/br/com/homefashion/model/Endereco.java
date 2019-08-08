@@ -1,8 +1,10 @@
 package br.com.homefashion.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Endereco {
+public class Endereco implements Serializable {
 
     private String cep;
     private String estado;
@@ -110,5 +112,39 @@ public class Endereco {
 
     public void setListaEstados(ArrayList<String> listaEstados) {
         this.listaEstados = listaEstados;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Endereco endereco = (Endereco) o;
+        return Objects.equals(cep, endereco.cep) &&
+                Objects.equals(estado, endereco.estado) &&
+                Objects.equals(cidade, endereco.cidade) &&
+                Objects.equals(bairro, endereco.bairro) &&
+                Objects.equals(logradouro, endereco.logradouro) &&
+                Objects.equals(numero, endereco.numero) &&
+                Objects.equals(codIBGE, endereco.codIBGE) &&
+                Objects.equals(listaEstados, endereco.listaEstados);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cep, estado, cidade, bairro, logradouro, numero, codIBGE, listaEstados);
+    }
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "cep='" + cep + '\'' +
+                ", estado='" + estado + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", numero=" + numero +
+                ", codIBGE=" + codIBGE +
+                ", listaEstados=" + listaEstados +
+                '}';
     }
 }

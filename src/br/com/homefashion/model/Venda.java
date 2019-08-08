@@ -1,8 +1,10 @@
 package br.com.homefashion.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Venda {
+public class Venda implements Serializable {
 
 	private Integer id;
 	private Double valor;
@@ -81,4 +83,37 @@ public class Venda {
 		this.situacao = situacao;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Venda venda = (Venda) o;
+		return Objects.equals(id, venda.id) &&
+				Objects.equals(valor, venda.valor) &&
+				Objects.equals(data, venda.data) &&
+				Objects.equals(qtd, venda.qtd) &&
+				Objects.equals(cliente, venda.cliente) &&
+				Objects.equals(totalPago, venda.totalPago) &&
+				Objects.equals(emAberto, venda.emAberto) &&
+				Objects.equals(situacao, venda.situacao);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, valor, data, qtd, cliente, totalPago, emAberto, situacao);
+	}
+
+	@Override
+	public String toString() {
+		return "Venda{" +
+				"id=" + id +
+				", valor=" + valor +
+				", data=" + data +
+				", qtd=" + qtd +
+				", cliente=" + cliente +
+				", totalPago=" + totalPago +
+				", emAberto=" + emAberto +
+				", situacao='" + situacao + '\'' +
+				'}';
+	}
 }

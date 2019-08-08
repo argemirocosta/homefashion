@@ -1,8 +1,10 @@
 package br.com.homefashion.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Pagamento {
+public class Pagamento implements Serializable {
 
     private Integer id;
     private Double valor;
@@ -45,4 +47,29 @@ public class Pagamento {
         this.venda = venda;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pagamento pagamento = (Pagamento) o;
+        return Objects.equals(id, pagamento.id) &&
+                Objects.equals(valor, pagamento.valor) &&
+                Objects.equals(data, pagamento.data) &&
+                Objects.equals(venda, pagamento.venda);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, valor, data, venda);
+    }
+
+    @Override
+    public String toString() {
+        return "Pagamento{" +
+                "id=" + id +
+                ", valor=" + valor +
+                ", data=" + data +
+                ", venda=" + venda +
+                '}';
+    }
 }

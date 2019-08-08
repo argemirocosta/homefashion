@@ -1,8 +1,10 @@
 package br.com.homefashion.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Cliente {
+public class Cliente implements Serializable {
 
     private Integer id;
     private String nome;
@@ -79,5 +81,39 @@ public class Cliente {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id) &&
+                Objects.equals(nome, cliente.nome) &&
+                Objects.equals(dataNascimento, cliente.dataNascimento) &&
+                Objects.equals(cpf, cliente.cpf) &&
+                Objects.equals(rg, cliente.rg) &&
+                Objects.equals(telefone1, cliente.telefone1) &&
+                Objects.equals(telefone2, cliente.telefone2) &&
+                Objects.equals(endereco, cliente.endereco);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, dataNascimento, cpf, rg, telefone1, telefone2, endereco);
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", cpf='" + cpf + '\'' +
+                ", rg='" + rg + '\'' +
+                ", telefone1=" + telefone1 +
+                ", telefone2=" + telefone2 +
+                ", endereco=" + endereco +
+                '}';
     }
 }
