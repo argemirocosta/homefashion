@@ -97,3 +97,27 @@ body {
 .rowRed td:hover {
 	background-color: rgba(218, 79, 73, 0.8);;
 }
+
+.ui-dialog.ui-widget-content .ui-dialog-titlebar {
+	padding: 7px 15px;
+	border-bottom: 1px solid #eee;
+	border: none !important;
+	background-color: #6bb9f1;
+	color: black
+}
+
+.ui-widget-header {
+	color: #ffffff;
+	font-weight: normal;
+}
+
+.ui-dialog.ui-widget-content
+.ui-dialog-title {
+	font-size: 1.5em;
+	border: none !important;
+}
+
+.ui-dialog.ui-widget-content
+.ui-dialog-titlebar-close {
+	margin-top: 0px;
+}
