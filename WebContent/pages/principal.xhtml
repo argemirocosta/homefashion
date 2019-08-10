@@ -510,6 +510,16 @@
                             </div>
                         </p:column>
 
+                        <p:column headerText="Recibo" width="25%">
+                            <div align="center">
+                                <p:commandButton icon="relatorios" id="btnRecibo" ajax="false" immediate="true"
+                                actionListener="#{relatorioUtil.reciboReport(var.id)}">
+                                    <f:setPropertyActionListener value="#{var}"
+                                                                 target="#{vendaMB.pagamento}"/>
+                                </p:commandButton>
+                            </div>
+                        </p:column>
+
                         <p:column headerText="Excluir" width="25%">
                             <div align="center">
                                 <p:commandButton oncomplete="PF('dlgCancelarPagamento').show();"
