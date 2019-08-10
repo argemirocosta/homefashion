@@ -513,7 +513,7 @@
                         <p:column headerText="Recibo" width="25%">
                             <div align="center">
                                 <p:commandButton icon="relatorios" id="btnRecibo" ajax="false" immediate="true"
-                                actionListener="#{relatorioUtil.reciboReport(var.id)}">
+                                actionListener="#{reportJasperMB.gerarRecibo(var.id)}">
                                     <f:setPropertyActionListener value="#{var}"
                                                                  target="#{vendaMB.pagamento}"/>
                                 </p:commandButton>
