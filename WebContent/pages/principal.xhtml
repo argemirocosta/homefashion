@@ -547,20 +547,20 @@
                                      action="#{vendaMB.listarRankingDosClientes()}"
                                      update=":formRelatorioRanking:tabRelatorioRanking"
                                      oncomplete="PF('dlgRelatorioRanking').show();"
-                                     icon="confirmar"/>
+                                     icon="ui-icon-star"/>
 
                     <p:commandButton value="A receber por Pessoa"
                                      action="#{vendaMB.listarValorAReceberPorPessoa()}"
                                      update=":formRelatorioReceberPorPessoa:tabRelatorioReceberPorPessoa"
                                      oncomplete="PF('dlgRelatorioReceberPorPessoa').show();"
-                                     icon="confirmar"/>
+                                     icon="ui-icon-person"/>
 
                     <p:commandButton value="A receber Geral"
                                      action="#{vendaMB.calcularRecebidoGeral()}" update=":formRelatorioReceberGeral"
-                                     oncomplete="PF('dlgRelatorioReceberGeral').show();" icon="confirmar"/>
+                                     oncomplete="PF('dlgRelatorioReceberGeral').show();" icon="ui-icon-arrow-4-diag"/>
 
                     <p:commandButton value="Venda por Período"
-                                     oncomplete="PF('dlgRelatorioVendaPorPeriodo').show();" icon="confirmar"/>
+                                     oncomplete="PF('dlgRelatorioVendaPorPeriodo').show();" icon="ui-icon-calendar"/>
 
                 </p:panelGrid>
 
