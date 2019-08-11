@@ -47,16 +47,17 @@ public class ClienteDAO {
 		return listaClientes;
 	}
 
-	public List<Cliente> buscarClientePorNome(String nomeCliente) {
+	public List<Cliente> buscarClientePorNome(String campoBusca) {
 
 		conexao = ConnectionFactory.getConnection();
 
 		List<Cliente> listaClientes = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = conexao.prepareStatement(SELECT_BUSCAR_CLIENTE_POR_NOME);
-			ps.setString(1, "%" + nomeCliente + "%");
-			ps.setInt(2, usuarioSessao.getId());
+			PreparedStatement ps = conexao.prepareStatement(SELECT_BUSCAR_CLIENTE_POR_NOME_OU_CPF);
+			ps.setString(1, "%" + campoBusca + "%");
+			ps.setString(2, "%" + campoBusca + "%");
+			ps.setInt(3, usuarioSessao.getId());
 			ResultSet rs = ps.executeQuery();
 
 			listaClientes = mapearResultSetIniciarListaClientes(rs);
