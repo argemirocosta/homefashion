@@ -2,6 +2,7 @@ package br.com.homefashion.tests.tests;
 
 import br.com.homefashion.tests.factory.FactoryDriver;
 import br.com.homefashion.tests.pages.IndexPage;
+import br.com.homefashion.tests.util.FakerUtil;
 import br.com.homefashion.tests.util.TesteUtil;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ import static br.com.homefashion.tests.elements.IndexElements.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import static br.com.homefashion.tests.util.Constantes.*;
+import static br.com.homefashion.tests.shared.Constantes.*;
 
 
 public class IndexTest {
@@ -30,7 +31,7 @@ public class IndexTest {
 
         indexPage.abrirDialogCadastro();
 
-        indexPage.realizarCadastro("João", "joao", "2");
+        indexPage.realizarCadastro(FakerUtil.gerarNome(), FakerUtil.gerarLogin(), FakerUtil.gerarSenha());
 
         boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
 
@@ -60,7 +61,7 @@ public class IndexTest {
 
         indexPage.abrirDialogCadastro();
 
-        indexPage.realizarCadastro("João", "joao", "");
+        indexPage.realizarCadastro(FakerUtil.gerarNome(), FakerUtil.gerarLogin(), "");
 
         boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
 
@@ -77,7 +78,7 @@ public class IndexTest {
 
         indexPage.abrirDialogCadastro();
 
-        indexPage.realizarCadastro("João", "", "");
+        indexPage.realizarCadastro(FakerUtil.gerarNome(), "", "");
 
         boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
 
@@ -94,7 +95,7 @@ public class IndexTest {
 
         indexPage.abrirDialogCadastro();
 
-        indexPage.realizarCadastro("", "joao", "2");
+        indexPage.realizarCadastro("", FakerUtil.gerarLogin(), FakerUtil.gerarSenha());
 
         boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
 
@@ -111,7 +112,7 @@ public class IndexTest {
 
         indexPage.abrirDialogCadastro();
 
-        indexPage.realizarCadastro("", "joao", "");
+        indexPage.realizarCadastro("", FakerUtil.gerarLogin(), "");
 
         boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
 
@@ -128,7 +129,7 @@ public class IndexTest {
 
         indexPage.abrirDialogCadastro();
 
-        indexPage.realizarCadastro("", "", "1");
+        indexPage.realizarCadastro("", "", FakerUtil.gerarSenha());
 
         boolean resultadoTeste = TesteUtil.encontrouTexto(TEXTO_SUCESSO_CADASTRO_USUARIO, driver);
 
@@ -143,7 +144,7 @@ public class IndexTest {
     @Test
     public void deveRealizarLoginComLoginComSenha() {
 
-        indexPage.realizarLogin("joao", "2");
+        indexPage.realizarLogin(USUARIO_TESTE_LOGIN, SENHA_TESTE_LOGIN);
 
         assertTrue(TesteUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
 
@@ -161,7 +162,7 @@ public class IndexTest {
     @Test
     public void naoDeveRealizarLoginComLoginSemSenha() {
 
-        indexPage.realizarLogin("joao", "");
+        indexPage.realizarLogin(USUARIO_TESTE_LOGIN, "");
 
         assertFalse(TesteUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
 
@@ -170,7 +171,7 @@ public class IndexTest {
     @Test
     public void naoDeveRealizarLoginSemLoginComSenha() {
 
-        indexPage.realizarLogin("", "2");
+        indexPage.realizarLogin("", SENHA_TESTE_LOGIN);
 
         assertFalse(TesteUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
 

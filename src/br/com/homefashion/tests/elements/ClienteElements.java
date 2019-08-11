@@ -6,7 +6,7 @@ public class ClienteElements {
 
     //Cadastro de cliente - Inputs e Botões
 
-    public static final String CLIENTE_BOTAO_ABRIR_DIALOG_CADASTRO_CLIENTE = "formClientes:j_idt24";
+    public static final String CLIENTE_BOTAO_ABRIR_DIALOG_CADASTRO_CLIENTE = "formClientes:j_idt25";
 
     public static final String CLIENTE_INPUT_NOME = "formCadastroCliente:nomeCadastro";
 
@@ -14,7 +14,7 @@ public class ClienteElements {
 
     public static final String CLIENTE_INPUT_TELEFONE2 = "formCadastroCliente:telefone2Cadastro";
 
-    public static final String CLIENTE_BOTAO_CADASTRAR_CLIENTE = "formCadastroCliente:j_idt63";
+    public static final String CLIENTE_BOTAO_CADASTRAR_CLIENTE = "formCadastroCliente:j_idt68";
 
 
     //Texto sucesso do teste
