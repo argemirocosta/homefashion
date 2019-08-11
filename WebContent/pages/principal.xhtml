@@ -63,23 +63,27 @@
             <p:dataTable id="tabClientes" value="#{clienteMB.listaClientes}"
                          var="var" emptyMessage="Nenhum Cliente encontrado" rows="20"
                          paginator="true" paginatorPosition="bottom">
-                <p:column headerText="Código" width="15%">
+                <p:column headerText="Código" width="9%">
                     <div align="center">
                         <p:outputLabel value="#{var.id}"/>
                     </div>
                 </p:column>
 
-                <p:column headerText="Cliente" width="40%">
+                <p:column headerText="Cliente" width="41%">
                     <p:outputLabel value="#{var.nome}"/>
                 </p:column>
 
-                <p:column headerText="Telefone 1" width="15%">
+                <p:column headerText="CPF" width="15%">
+                    <p:outputLabel value="#{var.cpf}"/>
+                </p:column>
+
+                <p:column headerText="Telefone 1" width="10%">
                     <div align="center">
                         <p:outputLabel value="#{var.telefone1}"/>
                     </div>
                 </p:column>
 
-                <p:column headerText="Telefone 2" width="15%">
+                <p:column headerText="Telefone 2" width="10%">
                     <div align="center">
                         <p:outputLabel value="#{var.telefone2}"/>
                     </div>
