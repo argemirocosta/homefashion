@@ -121,3 +121,9 @@ body {
 .ui-dialog-titlebar-close {
 	margin-top: 0px;
 }
+
+.ui-widget-header {
+	color: black;
+	font-weight: normal;
+	font-weight: bolder;
+}
