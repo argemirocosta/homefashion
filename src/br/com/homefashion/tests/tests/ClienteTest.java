@@ -1,10 +1,13 @@
 package br.com.homefashion.tests.tests;
 
+import br.com.homefashion.tests.categories.PositiveTest;
+import br.com.homefashion.tests.categories.SmokeTest;
 import br.com.homefashion.tests.factory.FactoryDriver;
 import br.com.homefashion.tests.pages.ClientePage;
 import br.com.homefashion.tests.pages.IndexPage;
 import br.com.homefashion.tests.util.FakerUtil;
 import br.com.homefashion.tests.util.TesteUtil;
+import org.junit.experimental.categories.Category;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +26,6 @@ public class ClienteTest {
     private static IndexPage indexPage;
 
     public ClienteTest() {
-        ClientePage page = PageFactory.initElements(driver, ClientePage.class);
     }
 
     @Before
@@ -34,6 +36,7 @@ public class ClienteTest {
     }
 
     @Test
+    @Category({PositiveTest.class, SmokeTest.class})
     public void deveCadastrarCliente() {
         ClientePage page = PageFactory.initElements(driver, ClientePage.class);
 

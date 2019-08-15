@@ -1,10 +1,14 @@
 package br.com.homefashion.tests.tests;
 
+import br.com.homefashion.tests.categories.NegativeTest;
+import br.com.homefashion.tests.categories.PositiveTest;
+import br.com.homefashion.tests.categories.SmokeTest;
 import br.com.homefashion.tests.factory.FactoryDriver;
 import br.com.homefashion.tests.pages.IndexPage;
 import br.com.homefashion.tests.util.FakerUtil;
 import br.com.homefashion.tests.util.TesteUtil;
 import org.junit.*;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 
 import static br.com.homefashion.tests.elements.IndexElements.*;
@@ -27,6 +31,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category({PositiveTest.class, SmokeTest.class})
     public void deveCadastrarUsuarioComNomeComLoginComSenha() {
 
         indexPage.abrirDialogCadastro();
@@ -40,6 +45,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category({NegativeTest.class, SmokeTest.class})
     public void naoDeveCadastrarUsuarioSemNomeSemLoginSemSenha() {
 
         indexPage.abrirDialogCadastro();
@@ -57,6 +63,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveCadastrarUsuarioComNomeComLoginSemSenha() {
 
         indexPage.abrirDialogCadastro();
@@ -74,6 +81,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveCadastrarUsuarioComNomeSemLoginSemSenha() {
 
         indexPage.abrirDialogCadastro();
@@ -91,6 +99,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveCadastrarUsuarioSemNomeComLoginComSenha() {
 
         indexPage.abrirDialogCadastro();
@@ -108,6 +117,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveCadastrarUsuarioSemNomeComLoginSemSenha() {
 
         indexPage.abrirDialogCadastro();
@@ -125,6 +135,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveCadastrarUsuarioSemNomeSemLoginComSenha() {
 
         indexPage.abrirDialogCadastro();
@@ -142,6 +153,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category({PositiveTest.class, SmokeTest.class})
     public void deveRealizarLoginComLoginComSenha() {
 
         indexPage.realizarLogin(USUARIO_TESTE_LOGIN, SENHA_TESTE_LOGIN);
@@ -151,6 +163,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveRealizarLoginSemLoginSemSenha() {
 
         indexPage.realizarLogin("", "");
@@ -160,6 +173,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveRealizarLoginComLoginSemSenha() {
 
         indexPage.realizarLogin(USUARIO_TESTE_LOGIN, "");
@@ -169,6 +183,7 @@ public class IndexTest {
     }
 
     @Test
+    @Category(NegativeTest.class)
     public void naoDeveRealizarLoginSemLoginComSenha() {
 
         indexPage.realizarLogin("", SENHA_TESTE_LOGIN);
