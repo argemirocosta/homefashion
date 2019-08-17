@@ -1,6 +1,6 @@
-package br.com.homefashion.tests.util;
+package br.com.tests.bdd.util;
 
-import static br.com.homefashion.tests.shared.Constantes.*;
+import static br.com.tests.bdd.shared.Constantes.*;
 
 import com.github.javafaker.Faker;
 

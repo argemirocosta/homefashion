@@ -1,10 +1,10 @@
-package br.com.homefashion.tests.pages;
+package br.com.tests.bdd.pages;
 
-import br.com.homefashion.tests.util.TesteUtil;
+import br.com.tests.bdd.util.TesteUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static br.com.homefashion.tests.elements.IndexElements.*;
+import static br.com.tests.bdd.elements.IndexElements.*;
 
 public class IndexPage {
 

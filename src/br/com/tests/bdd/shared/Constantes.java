@@ -1,4 +1,4 @@
-package br.com.homefashion.tests.shared;
+package br.com.tests.bdd.shared;
 
 public class Constantes {
 

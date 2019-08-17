@@ -1,12 +1,12 @@
-package br.com.homefashion.tests.tests;
+package br.com.tests.bdd.tests;
 
-import br.com.homefashion.tests.categories.PositiveTest;
-import br.com.homefashion.tests.categories.SmokeTest;
-import br.com.homefashion.tests.factory.FactoryDriver;
-import br.com.homefashion.tests.pages.ClientePage;
-import br.com.homefashion.tests.pages.IndexPage;
-import br.com.homefashion.tests.util.FakerUtil;
-import br.com.homefashion.tests.util.TesteUtil;
+import br.com.tests.bdd.categories.PositiveTest;
+import br.com.tests.bdd.categories.SmokeTest;
+import br.com.tests.bdd.factory.FactoryDriver;
+import br.com.tests.bdd.pages.ClientePage;
+import br.com.tests.bdd.pages.IndexPage;
+import br.com.tests.bdd.util.FakerUtil;
+import br.com.tests.bdd.util.TesteUtil;
 import org.junit.experimental.categories.Category;
 import org.junit.After;
 import org.junit.Before;
@@ -14,10 +14,10 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import static br.com.homefashion.tests.elements.ClienteElements.*;
+import static br.com.tests.bdd.elements.ClienteElements.*;
 import static org.junit.Assert.assertTrue;
 
-import static br.com.homefashion.tests.shared.Constantes.*;
+import static br.com.tests.bdd.shared.Constantes.*;
 
 
 public class ClienteTest {

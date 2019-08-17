@@ -1,4 +1,4 @@
-package br.com.homefashion.tests.util;
+package br.com.tests.bdd.util;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

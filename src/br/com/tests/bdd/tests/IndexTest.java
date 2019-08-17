@@ -1,21 +1,20 @@
-package br.com.homefashion.tests.tests;
+package br.com.tests.bdd.tests;
 
-import br.com.homefashion.tests.categories.NegativeTest;
-import br.com.homefashion.tests.categories.PositiveTest;
-import br.com.homefashion.tests.categories.SmokeTest;
-import br.com.homefashion.tests.factory.FactoryDriver;
-import br.com.homefashion.tests.pages.IndexPage;
-import br.com.homefashion.tests.util.FakerUtil;
-import br.com.homefashion.tests.util.TesteUtil;
+import br.com.tests.bdd.categories.NegativeTest;
+import br.com.tests.bdd.categories.PositiveTest;
+import br.com.tests.bdd.categories.SmokeTest;
+import br.com.tests.bdd.factory.FactoryDriver;
+import br.com.tests.bdd.pages.IndexPage;
+import br.com.tests.bdd.util.FakerUtil;
+import br.com.tests.bdd.util.TesteUtil;
+import br.com.tests.bdd.shared.Constantes;
 import org.junit.*;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 
-import static br.com.homefashion.tests.elements.IndexElements.*;
+import static br.com.tests.bdd.elements.IndexElements.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import static br.com.homefashion.tests.shared.Constantes.*;
 
 
 public class IndexTest {
@@ -25,8 +24,8 @@ public class IndexTest {
 
     @Before
     public void inicializa() {
-        driver = FactoryDriver.createDriver(NOME_DO_NAVEGADOR);
-        driver.get(PAGINA_PARA_TESTE);
+        driver = FactoryDriver.createDriver(Constantes.NOME_DO_NAVEGADOR);
+        driver.get(Constantes.PAGINA_PARA_TESTE);
         indexPage = new IndexPage(driver);
     }
 
@@ -156,7 +155,7 @@ public class IndexTest {
     @Category({PositiveTest.class, SmokeTest.class})
     public void deveRealizarLoginComLoginComSenha() {
 
-        indexPage.realizarLogin(USUARIO_TESTE_LOGIN, SENHA_TESTE_LOGIN);
+        indexPage.realizarLogin(Constantes.USUARIO_TESTE_LOGIN, Constantes.SENHA_TESTE_LOGIN);
 
         assertTrue(TesteUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
 
@@ -176,7 +175,7 @@ public class IndexTest {
     @Category(NegativeTest.class)
     public void naoDeveRealizarLoginComLoginSemSenha() {
 
-        indexPage.realizarLogin(USUARIO_TESTE_LOGIN, "");
+        indexPage.realizarLogin(Constantes.USUARIO_TESTE_LOGIN, "");
 
         assertFalse(TesteUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
 
@@ -186,7 +185,7 @@ public class IndexTest {
     @Category(NegativeTest.class)
     public void naoDeveRealizarLoginSemLoginComSenha() {
 
-        indexPage.realizarLogin("", SENHA_TESTE_LOGIN);
+        indexPage.realizarLogin("", Constantes.SENHA_TESTE_LOGIN);
 
         assertFalse(TesteUtil.encontrouTexto(TEXTO_SUCESSO_LOGIN, driver));
 

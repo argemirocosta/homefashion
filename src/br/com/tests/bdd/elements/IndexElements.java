@@ -1,4 +1,4 @@
-package br.com.homefashion.tests.elements;
+package br.com.tests.bdd.elements;
 
 public class IndexElements {
 

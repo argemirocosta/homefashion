@@ -1,9 +1,9 @@
-package br.com.homefashion.tests.pages;
+package br.com.tests.bdd.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static br.com.homefashion.tests.elements.ClienteElements.*;
+import static br.com.tests.bdd.elements.ClienteElements.*;
 
 public class ClientePage {
 
