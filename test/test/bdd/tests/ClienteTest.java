@@ -1,12 +1,12 @@
-package br.com.tests.bdd.tests;
+package test.bdd.tests;
 
-import br.com.tests.bdd.categories.PositiveTest;
-import br.com.tests.bdd.categories.SmokeTest;
-import br.com.tests.bdd.factory.FactoryDriver;
-import br.com.tests.bdd.pages.ClientePage;
-import br.com.tests.bdd.pages.IndexPage;
-import br.com.tests.bdd.util.FakerUtil;
-import br.com.tests.bdd.util.TesteUtil;
+import test.bdd.categories.PositiveTest;
+import test.bdd.categories.SmokeTest;
+import test.bdd.factory.FactoryDriver;
+import test.bdd.pages.ClientePage;
+import test.bdd.pages.IndexPage;
+import test.bdd.util.FakerUtil;
+import test.bdd.util.TesteUtil;
 import org.junit.experimental.categories.Category;
 import org.junit.After;
 import org.junit.Before;
@@ -14,10 +14,10 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import static br.com.tests.bdd.elements.ClienteElements.*;
+import static test.bdd.elements.ClienteElements.*;
 import static org.junit.Assert.assertTrue;
 
-import static br.com.tests.bdd.shared.Constantes.*;
+import static test.bdd.shared.Constantes.*;
 
 
 public class ClienteTest {

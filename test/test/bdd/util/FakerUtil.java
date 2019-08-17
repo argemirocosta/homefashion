@@ -1,6 +1,6 @@
-package br.com.tests.bdd.util;
+package test.bdd.util;
 
-import static br.com.tests.bdd.shared.Constantes.*;
+import static test.bdd.shared.Constantes.*;
 
 import com.github.javafaker.Faker;
 

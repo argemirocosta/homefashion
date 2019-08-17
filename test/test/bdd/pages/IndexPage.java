@@ -1,10 +1,10 @@
-package br.com.tests.bdd.pages;
+package test.bdd.pages;
 
-import br.com.tests.bdd.util.TesteUtil;
+import test.bdd.util.TesteUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static br.com.tests.bdd.elements.IndexElements.*;
+import static test.bdd.elements.IndexElements.*;
 
 public class IndexPage {
 

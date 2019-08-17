@@ -1,4 +1,4 @@
-package br.com.tests.bdd.elements;
+package test.bdd.elements;
 
 public class ClienteElements {
 

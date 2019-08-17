@@ -1,18 +1,18 @@
-package br.com.tests.bdd.tests;
+package test.bdd.tests;
 
-import br.com.tests.bdd.categories.NegativeTest;
-import br.com.tests.bdd.categories.PositiveTest;
-import br.com.tests.bdd.categories.SmokeTest;
-import br.com.tests.bdd.factory.FactoryDriver;
-import br.com.tests.bdd.pages.IndexPage;
-import br.com.tests.bdd.util.FakerUtil;
-import br.com.tests.bdd.util.TesteUtil;
-import br.com.tests.bdd.shared.Constantes;
+import test.bdd.categories.NegativeTest;
+import test.bdd.categories.PositiveTest;
+import test.bdd.categories.SmokeTest;
+import test.bdd.factory.FactoryDriver;
+import test.bdd.pages.IndexPage;
+import test.bdd.util.FakerUtil;
+import test.bdd.util.TesteUtil;
+import test.bdd.shared.Constantes;
 import org.junit.*;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 
-import static br.com.tests.bdd.elements.IndexElements.*;
+import static test.bdd.elements.IndexElements.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

@@ -1,8 +1,8 @@
-package br.com.tests.bdd.suites;
+package test.bdd.suites;
 
-import br.com.tests.bdd.categories.SmokeTest;
-import br.com.tests.bdd.tests.ClienteTest;
-import br.com.tests.bdd.tests.IndexTest;
+import test.bdd.categories.SmokeTest;
+import test.bdd.tests.ClienteTest;
+import test.bdd.tests.IndexTest;
 import org.junit.experimental.categories.Categories;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

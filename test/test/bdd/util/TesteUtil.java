@@ -1,4 +1,4 @@
-package br.com.tests.bdd.util;
+package test.bdd.util;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

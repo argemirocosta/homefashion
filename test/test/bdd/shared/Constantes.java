@@ -1,4 +1,4 @@
-package br.com.tests.bdd.shared;
+package test.bdd.shared;
 
 public class Constantes {
 
