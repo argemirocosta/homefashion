@@ -3,6 +3,7 @@ package br.com.homefashion.dao;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
+import br.com.homefashion.model.builder.UsuarioBuilder;
 import br.com.homefashion.util.SessaoUtil;
 import br.com.homefashion.util.VerificadorUtil;
 
@@ -16,135 +17,129 @@ import static br.com.homefashion.shared.Sessao.*;
 
 public class UsuarioDAO {
 
-	private Connection conexao;
+    private Connection conexao;
 
-	public Usuario login(Usuario usuarioLogin) {
+    public Usuario login(Usuario usuarioLogin) {
 
-		conexao = ConnectionFactory.getConnection();
+        conexao = ConnectionFactory.getConnection();
 
-		Usuario usuarioRetorno = null;
+        Usuario usuarioRetorno = null;
 
-		try {
-			PreparedStatement ps = conexao.prepareStatement(SELECT_LOGIN);
-			ps.setString(1, usuarioLogin.getLogin().toUpperCase());
-			ps.setString(2, usuarioLogin.getSenha());
-			ResultSet rs = ps.executeQuery();
+        try {
+            PreparedStatement ps = conexao.prepareStatement(SELECT_LOGIN);
+            ps.setString(1, usuarioLogin.getLogin().toUpperCase());
+            ps.setString(2, usuarioLogin.getSenha());
+            ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
-				usuarioRetorno = new Usuario();
-				usuarioRetorno.setId(rs.getInt("id"));
-				usuarioRetorno.setNome(rs.getString("nome"));
-				usuarioRetorno.setLogin(rs.getString("login"));
-				usuarioRetorno.setSenha(rs.getString("senha"));
-				usuarioRetorno.setAtivo(rs.getBoolean("ativo"));
-				
-			}
-			
-			if(!VerificadorUtil.verificarSeObjetoNulo(usuarioRetorno)){
-				SessaoUtil.adicionarNaSessao(usuarioRetorno, USUARIO_SESSAO);
-			}
-			
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				conexao.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		return usuarioRetorno;
-	}
-	
-	public Boolean inserirUsuario(Usuario usuario) {
+            while (rs.next()) {
+                usuarioRetorno = new UsuarioBuilder().mapear(rs);
+            }
 
-		conexao = ConnectionFactory.getConnection();
+            if (!VerificadorUtil.verificarSeObjetoNulo(usuarioRetorno)) {
+                SessaoUtil.adicionarNaSessao(usuarioRetorno, USUARIO_SESSAO);
+            }
 
-		boolean retorno = false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return usuarioRetorno;
+    }
 
-		try {
-			PreparedStatement ps = conexao.prepareStatement(INSERIR_USUARIO);
-			ps.setString(1, usuario.getNome().toUpperCase());
-			ps.setString(2, usuario.getLogin().toUpperCase());
-			ps.setString(3, usuario.getSenha().toUpperCase());
+    public Boolean inserirUsuario(Usuario usuario) {
 
-			ps.execute();
+        conexao = ConnectionFactory.getConnection();
 
-			conexao.commit();
+        boolean retorno = false;
 
-			retorno = true;
+        try {
+            PreparedStatement ps = conexao.prepareStatement(INSERIR_USUARIO);
+            ps.setString(1, usuario.getNome().toUpperCase());
+            ps.setString(2, usuario.getLogin().toUpperCase());
+            ps.setString(3, usuario.getSenha().toUpperCase());
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				conexao.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		return retorno;
-	}
+            ps.execute();
 
-	public Boolean alterarUsuario(Usuario usuario) {
+            conexao.commit();
 
-		conexao = ConnectionFactory.getConnection();
+            retorno = true;
 
-		boolean retorno = false;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return retorno;
+    }
 
-		try {
+    public Boolean alterarUsuario(Usuario usuario) {
 
-			Usuario usuarioSessao = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
+        conexao = ConnectionFactory.getConnection();
 
-			PreparedStatement ps = conexao.prepareStatement(ALTERAR_USUARIO);
-			ps.setString(1, usuario.getNome().toUpperCase());
-			ps.setString(2, usuario.getLogin().toUpperCase());
-			ps.setString(3, usuario.getSenha().toUpperCase());
-			ps.setInt(4, usuarioSessao.getId());
+        boolean retorno = false;
 
-			ps.execute();
+        try {
 
-			conexao.commit();
+            Usuario usuarioSessao = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
 
-			retorno = true;
+            PreparedStatement ps = conexao.prepareStatement(ALTERAR_USUARIO);
+            ps.setString(1, usuario.getNome().toUpperCase());
+            ps.setString(2, usuario.getLogin().toUpperCase());
+            ps.setString(3, usuario.getSenha().toUpperCase());
+            ps.setInt(4, usuarioSessao.getId());
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				conexao.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		return retorno;
-	}
+            ps.execute();
 
-	public Boolean verificarSenhaUsuario(ParametrosVerificarSenhaUsuarioDTO parametrosVerificarSenhaUsuarioDTO) {
+            conexao.commit();
 
-		boolean retorno = false;
+            retorno = true;
 
-		conexao = ConnectionFactory.getConnection();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return retorno;
+    }
 
-		try {
-			PreparedStatement ps = conexao.prepareStatement(SELECT_ALTERAR_SENHA);
-			ps.setInt(1, parametrosVerificarSenhaUsuarioDTO.getIdUsuario());
-			ps.setString(2, parametrosVerificarSenhaUsuarioDTO.getSenhaAtual());
-			ResultSet rs = ps.executeQuery();
+    public Boolean verificarSenhaUsuario(ParametrosVerificarSenhaUsuarioDTO parametrosVerificarSenhaUsuarioDTO) {
 
-			while (rs.next()) {
-				retorno = true;
-			}
+        boolean retorno = false;
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				conexao.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-		return retorno;
-	}
+        conexao = ConnectionFactory.getConnection();
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(SELECT_ALTERAR_SENHA);
+            ps.setInt(1, parametrosVerificarSenhaUsuarioDTO.getIdUsuario());
+            ps.setString(2, parametrosVerificarSenhaUsuarioDTO.getSenhaAtual());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                retorno = true;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return retorno;
+    }
 }

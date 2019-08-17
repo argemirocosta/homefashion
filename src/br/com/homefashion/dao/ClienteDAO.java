@@ -3,6 +3,7 @@ package br.com.homefashion.dao;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
+import br.com.homefashion.model.builder.ClienteBuilder;
 import br.com.homefashion.util.*;
 
 import java.sql.Connection;
@@ -80,23 +81,8 @@ public class ClienteDAO {
 
 		try {
 			while (rs.next()) {
-				Cliente cliente = new Cliente();
-				cliente.setId(rs.getInt("id"));
-				cliente.setNome(rs.getString("nome"));
-				cliente.setTelefone1(IntegerUtil.tratarValorVindoZero(rs.getString("telefone1")));
-				cliente.setTelefone2(IntegerUtil.tratarValorVindoZero(rs.getString("telefone2")));
-				cliente.setDataNascimento(rs.getDate("data_nascimento"));
-				cliente.setCpf(rs.getString("cpf"));
-				cliente.setRg(rs.getString("rg"));
-				cliente.getEndereco().setCep(rs.getString("cep"));
-				cliente.getEndereco().setEstado(rs.getString("estado"));
-				cliente.getEndereco().setCidade(rs.getString("cidade"));
-				cliente.getEndereco().setBairro(rs.getString("bairro"));
-				cliente.getEndereco().setLogradouro(rs.getString("logradouro"));
-				cliente.getEndereco().setNumero(IntegerUtil.tratarValorVindoZero(rs.getString("numero")));
-				cliente.getEndereco().setCodIBGE(IntegerUtil.tratarValorVindoZero(rs.getString("cod_ibge")));
-
-				listaClientes.add(cliente);
+				ClienteBuilder clienteBuilder = new ClienteBuilder();
+				listaClientes.add(clienteBuilder.mapear(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
