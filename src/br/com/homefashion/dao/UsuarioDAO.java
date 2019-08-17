@@ -61,7 +61,7 @@ public class UsuarioDAO {
             PreparedStatement ps = conexao.prepareStatement(INSERIR_USUARIO);
             ps.setString(1, usuario.getNome().toUpperCase());
             ps.setString(2, usuario.getLogin().toUpperCase());
-            ps.setString(3, usuario.getSenha().toUpperCase());
+            ps.setString(3, usuario.getSenha());
 
             ps.execute();
 
@@ -94,7 +94,7 @@ public class UsuarioDAO {
             PreparedStatement ps = conexao.prepareStatement(ALTERAR_USUARIO);
             ps.setString(1, usuario.getNome().toUpperCase());
             ps.setString(2, usuario.getLogin().toUpperCase());
-            ps.setString(3, usuario.getSenha().toUpperCase());
+            ps.setString(3, usuario.getSenha());
             ps.setInt(4, usuarioSessao.getId());
 
             ps.execute();

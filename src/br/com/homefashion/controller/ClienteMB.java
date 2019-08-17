@@ -1,6 +1,5 @@
 package br.com.homefashion.controller;
 
-import br.com.homefashion.dao.ClienteDAO;
 import br.com.homefashion.model.Cliente;
 
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.homefashion.service.ClienteService;
 import br.com.homefashion.util.CEPUtil;
 import br.com.homefashion.util.JSFUtil;
 
@@ -21,10 +21,11 @@ public class ClienteMB {
     private Cliente cliente;
     private List<Cliente> listaClientes;
     private String campoBusca;
-    private ClienteDAO clienteDAO = new ClienteDAO();
+    private ClienteService clienteService;
 
     public ClienteMB() {
         cliente = new Cliente();
+        clienteService = new ClienteService();
     }
 
     public void limparBusca() {
@@ -38,11 +39,11 @@ public class ClienteMB {
     }
 
     public void buscarClientePorNome() {
-        listaClientes = clienteDAO.buscarClientePorNome(campoBusca);
+        listaClientes = clienteService.buscarClientePorNome(campoBusca);
     }
 
     public void inserirCliente() {
-        Boolean cadastrou = clienteDAO.inserirCliente(cliente);
+        Boolean cadastrou = clienteService.inserirCliente(cliente);
 
         if (cadastrou) {
             limparCampos();
@@ -55,7 +56,7 @@ public class ClienteMB {
     }
 
     public void alterarCliente() {
-        Boolean alterou = clienteDAO.alterarCliente(cliente);
+        Boolean alterou =  clienteService.alterarCliente(cliente);
 
         if (alterou) {
             limparCampos();
@@ -68,7 +69,7 @@ public class ClienteMB {
     }
 
     public void deletarCliente() {
-        Boolean deletou = clienteDAO.deletarCliente(cliente);
+        Boolean deletou = clienteService.deletarCliente(cliente);
 
         if (deletou) {
             limparCampos();
@@ -81,7 +82,7 @@ public class ClienteMB {
     }
 
     public void listarClientes() {
-        listaClientes = clienteDAO.listarClientes();
+        listaClientes = clienteService.listarClientes();
     }
 
     public void buscarEnderecoClientePorCEP(){

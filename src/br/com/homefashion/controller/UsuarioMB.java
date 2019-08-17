@@ -1,8 +1,8 @@
 package br.com.homefashion.controller;
 
-import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
+import br.com.homefashion.service.UsuarioService;
 import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessaoUtil;
@@ -15,14 +15,13 @@ import static br.com.homefashion.shared.Sessao.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-
 @ViewScoped
 @ManagedBean
 public class UsuarioMB {
 
     private Usuario usuario;
     private Usuario usuarioLogado;
-    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private UsuarioService usuarioService = new UsuarioService();
     private String senhaAtual;
 
     public UsuarioMB() {
@@ -31,7 +30,7 @@ public class UsuarioMB {
     }
 
     public String login() {
-        usuarioLogado = usuarioDAO.login(usuario);
+        usuarioLogado = usuarioService.login(usuario);
 
         if (usuarioLogado != null) {
             return RedirecionarUtil.redirectPagina(PRINCIPAL);
@@ -47,7 +46,7 @@ public class UsuarioMB {
     }
 
     public void inserirUsuario() {
-        boolean cadastrou = usuarioDAO.inserirUsuario(usuario);
+        boolean cadastrou = usuarioService.inserirUsuario(usuario);
 
         if (cadastrou) {
             JSFUtil.adicionarMensagemSucesso(USUARIO_CADASTRADO_SUCESSO, SUCESSO);
@@ -67,7 +66,7 @@ public class UsuarioMB {
 
         ParametrosVerificarSenhaUsuarioDTO parametrosVerificarSenhaUsuarioDTO = new ParametrosVerificarSenhaUsuarioDTO(usuario.getId(), senhaAtual);
 
-        if(usuarioDAO.verificarSenhaUsuario(parametrosVerificarSenhaUsuarioDTO)){
+        if(usuarioService.verificarSenhaUsuario(parametrosVerificarSenhaUsuarioDTO)){
             alterarUsuario();
         }
         else{
@@ -77,7 +76,7 @@ public class UsuarioMB {
     }
 
     private void alterarUsuario() {
-        boolean alterou = usuarioDAO.alterarUsuario(usuario);
+        boolean alterou = usuarioService.alterarUsuario(usuario);
 
         if (alterou) {
             JSFUtil.adicionarMensagemSucesso(USUARIO_ALTERADO_SUCESSO, SUCESSO);

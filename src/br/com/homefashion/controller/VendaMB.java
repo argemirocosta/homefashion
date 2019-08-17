@@ -1,6 +1,5 @@
 package br.com.homefashion.controller;
 
-import br.com.homefashion.dao.VendaDAO;
 import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Venda;
@@ -14,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import static br.com.homefashion.shared.Dialogs.*;
 import static br.com.homefashion.shared.Mensagens.*;
 
+import br.com.homefashion.service.VendaService;
 import br.com.homefashion.util.DataUtil;
 import br.com.homefashion.util.JSFUtil;
 
@@ -32,7 +32,7 @@ public class VendaMB {
     private Double valorReceberGeral;
     private Double valorReceberGeralTotal;
     private Double valorEmAbertoDaVenda;
-    private VendaDAO vendaDAO = new VendaDAO();
+    private VendaService vendaService;
 
     public VendaMB() {
         venda = new Venda();
@@ -45,6 +45,7 @@ public class VendaMB {
         totalVendidoNoPeriodo = 0.0;
         listaVendasEmAberto = new ArrayList<>();
         valorEmAbertoDaVenda = 0.0;
+        vendaService = new VendaService();
     }
 
     private void limparCampos() {
@@ -53,7 +54,7 @@ public class VendaMB {
     }
 
     public void inserirVenda() {
-        boolean cadastrou = vendaDAO.inserirVenda(venda);
+        boolean cadastrou = vendaService.inserirVenda(venda);
 
         if (cadastrou) {
             limparCampos();
@@ -65,25 +66,15 @@ public class VendaMB {
 
     }
 
-    public void inserirPagamento() {
-        int pagamentoVenda = vendaDAO.verificarSemPagamentos(venda.getId());
-        Double valorEmAberto = vendaDAO.calcularValorEmAberto(venda.getId());
+    public void verificarParaInserirPagamento() {
+        int pagamentoVenda = vendaService.verificarSemPagamentos(venda.getId());
+
+        Double valorEmAberto = vendaService.calcularValorEmAbertoDaVenda(venda.getId());
 
         if (pagamento.getValor() > valorEmAberto) {
             JSFUtil.adicionarMensagemAdvertencia(PAGAMENTO_MAIOR_QUE_VENDA, AVISO);
         } else if (valorEmAberto > 0 || pagamentoVenda == 0) {
-            boolean cadastrou = vendaDAO.inserirPagamento(venda, pagamento);
-
-            if (cadastrou) {
-                listarPagamentos();
-                listarVendas();
-                limparCampos();
-                JSFUtil.adicionarMensagemSucesso(PAGAMENTO_SUCESSO, SUCESSO);
-                calcularValorEmAbertoDaVenda();
-                pagamento.setValor(null);
-            } else {
-                JSFUtil.adicionarMensagemErro(PAGAMENTO_ERRO, ERRO);
-            }
+            inserirPagamento();
 
         } else {
             JSFUtil.adicionarMensagemAdvertencia(VENDA_JA_PAGA, AVISO);
@@ -92,22 +83,37 @@ public class VendaMB {
 
     }
 
+    private void inserirPagamento() {
+        boolean cadastrou = vendaService.inserirPagamento(venda, pagamento);
+
+        if (cadastrou) {
+            listarPagamentos();
+            listarVendas();
+            limparCampos();
+            JSFUtil.adicionarMensagemSucesso(PAGAMENTO_SUCESSO, SUCESSO);
+            calcularValorEmAbertoDaVenda();
+            pagamento.setValor(null);
+        } else {
+            JSFUtil.adicionarMensagemErro(PAGAMENTO_ERRO, ERRO);
+        }
+    }
+
     public void totalVendidoPeriodo() {
-        totalVendidoNoPeriodo = vendaDAO.consultarVendasPorPeriodo(busca);
+        totalVendidoNoPeriodo = vendaService.consultarVendasPorPeriodo(busca);
     }
 
     private void somarGeralTotal() {
-        totalVendidoNoPeriodo = vendaDAO.calcularVendasTotal();
+        totalVendidoNoPeriodo = vendaService.calcularVendasTotal();
         valorReceberGeralTotal = totalVendidoNoPeriodo - valorReceberGeral;
     }
 
     public void calcularRecebidoGeral() {
-        valorReceberGeral = vendaDAO.calcularValorReceberGeral();
+        valorReceberGeral = vendaService.calcularValorReceberGeral();
         somarGeralTotal();
     }
 
     public void listarRankingDosClientes() {
-        listaVendasPorCliente = vendaDAO.listarVendasPorCliente();
+        listaVendasPorCliente = vendaService.listarRankingDosClientes();
     }
 
     public void abrirTelaDePagamento(){
@@ -117,21 +123,21 @@ public class VendaMB {
     }
 
     private void listarPagamentos() {
-        listaPagamentos = vendaDAO.listarPagamentos(venda.getId());
+        listaPagamentos = vendaService.listarPagamentos(venda.getId());
     }
 
     public void listarValorAReceberPorPessoa() {
-        listaVendasEmAberto = vendaDAO.listarValorAReceber();
+        listaVendasEmAberto = vendaService.listarValorAReceberPorPessoa();
     }
 
     public void listarVendas() {
-        listaVendas = vendaDAO.listarVendas(venda);
+        listaVendas = vendaService.listarVendas(venda);
     }
 
     public void cancelarVenda() {
 
         if (verificarSeCancelamentoPodeSerRealizado()) {
-            Boolean cancelou = vendaDAO.cancelarVenda(venda.getId());
+            Boolean cancelou = vendaService.cancelarVenda(venda.getId());
 
             if (cancelou) {
                 listarVendas();
@@ -146,7 +152,7 @@ public class VendaMB {
 
     public void cancelarPagamento() {
 
-        Boolean cancelou = vendaDAO.cancelarPagamento(pagamento.getId());
+        Boolean cancelou = vendaService.cancelarPagamento(pagamento.getId());
 
         if (cancelou) {
             listarVendas();
@@ -159,9 +165,7 @@ public class VendaMB {
     }
 
     private Boolean verificarSeExistePagamentoParaVenda() {
-
-        return vendaDAO.verificarSeExistePagamentoParaVenda(venda.getId());
-
+        return vendaService.verificarSeExistePagamentoParaVenda(venda.getId());
     }
 
     private Boolean verificarSeCancelamentoPodeSerRealizado() {
@@ -181,7 +185,7 @@ public class VendaMB {
     }
 
     private void calcularValorEmAbertoDaVenda(){
-        valorEmAbertoDaVenda = vendaDAO.calcularValorEmAberto(venda.getId());
+        valorEmAbertoDaVenda = vendaService.calcularValorEmAberto(venda.getId());
     }
 
     //GETTERS E SETTERS
