@@ -1,5 +1,6 @@
 package br.com.homefashion.dao;
 
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
@@ -91,9 +92,7 @@ public class ClienteDAO {
 		return listaClientes;
 	}
 
-	public Boolean inserirCliente(Cliente cliente) {
-
-		boolean retorno = false;
+	public void inserirCliente(Cliente cliente) throws ProjetoException {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -189,10 +188,8 @@ public class ClienteDAO {
 
 			conexao.commit();
 
-			retorno = true;
-
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			throw  new ProjetoException(ex);
 		} finally {
 			try {
 				conexao.close();
@@ -200,12 +197,9 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return retorno;
 	}
 
-	public Boolean alterarCliente(Cliente cliente) {
-
-		boolean retorno = false;
+	public void alterarCliente(Cliente cliente) throws ProjetoException {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -301,12 +295,10 @@ public class ClienteDAO {
 
 			ps.executeUpdate();
 
-			retorno = true;
-
 			conexao.commit();
 
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			throw new ProjetoException(ex);
 		} finally {
 			try {
 				conexao.close();
@@ -314,12 +306,9 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return retorno;
 	}
 
-	public Boolean deletarCliente(Cliente cliente) {
-
-		boolean retorno = false;
+	public void deletarCliente(Cliente cliente) throws ProjetoException {
 
 		conexao = ConnectionFactory.getConnection();
 
@@ -332,9 +321,8 @@ public class ClienteDAO {
 
 			conexao.commit();
 
-			retorno = true;
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			throw new ProjetoException(ex);
 		} finally {
 			try {
 				conexao.close();
@@ -342,7 +330,6 @@ public class ClienteDAO {
 				ex.printStackTrace();
 			}
 		}
-		return retorno;
 	}
 
 }

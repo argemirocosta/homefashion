@@ -1,5 +1,6 @@
 package br.com.homefashion.controller;
 
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.Cliente;
 
 import java.util.List;
@@ -43,40 +44,35 @@ public class ClienteMB {
     }
 
     public void inserirCliente() {
-        Boolean cadastrou = clienteService.inserirCliente(cliente);
-
-        if (cadastrou) {
+        try {
+            clienteService.inserirCliente(cliente);
             limparCampos();
             listarClientes();
             JSFUtil.fecharDialog(DIALOG_CADASTRAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso(CLIENTE_CADASTRADO_SUCESSO, SUCESSO);
-        } else {
+        } catch (ProjetoException e) {
             JSFUtil.adicionarMensagemErro(CLIENTE_CADASTRADO_ERRO, ERRO);
         }
     }
 
     public void alterarCliente() {
-        Boolean alterou =  clienteService.alterarCliente(cliente);
-
-        if (alterou) {
+        try {
+            clienteService.alterarCliente(cliente);
             limparCampos();
             listarClientes();
             JSFUtil.fecharDialog(DIALOG_ALTERAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso(CLIENTE_ALTERADO_SUCESSO, SUCESSO);
-        } else {
+        } catch (ProjetoException e) {
             JSFUtil.adicionarMensagemErro(CLIENTE_ALTERADO_ERRO, ERRO);
         }
     }
 
     public void deletarCliente() {
-        Boolean deletou = clienteService.deletarCliente(cliente);
-
-        if (deletou) {
-            limparCampos();
-            listarClientes();
+        try {
+            clienteService.deletarCliente(cliente);
             JSFUtil.fecharDialog(DIALOG_DELETAR_CLIENTE);
             JSFUtil.adicionarMensagemSucesso(CLIENTE_EXCLUIDO_SUCESSO, SUCESSO);
-        } else {
+        } catch (ProjetoException e) {
             JSFUtil.adicionarMensagemErro(CLIENTE_EXCLUIDO_ERRO, ERRO);
         }
     }

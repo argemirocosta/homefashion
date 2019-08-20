@@ -1,6 +1,7 @@
 package br.com.homefashion.service;
 
 import br.com.homefashion.dao.ClienteDAO;
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.Cliente;
 
 import java.util.List;
@@ -17,16 +18,16 @@ public class ClienteService {
         return clienteDAO.buscarClientePorNome(campoBusca);
     }
 
-    public Boolean inserirCliente(Cliente cliente) {
-        return clienteDAO.inserirCliente(cliente);
+    public void inserirCliente(Cliente cliente) throws ProjetoException {
+        clienteDAO.inserirCliente(cliente);
     }
 
-    public Boolean alterarCliente(Cliente cliente) {
-        return clienteDAO.alterarCliente(cliente);
+    public void alterarCliente(Cliente cliente) throws ProjetoException {
+        clienteDAO.alterarCliente(cliente);
     }
 
-    public Boolean deletarCliente(Cliente cliente) {
-        return clienteDAO.deletarCliente(cliente);
+    public void deletarCliente(Cliente cliente) throws ProjetoException {
+        clienteDAO.deletarCliente(cliente);
     }
 
     public List<Cliente> listarClientes() {
