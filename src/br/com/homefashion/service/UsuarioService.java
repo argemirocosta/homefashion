@@ -2,6 +2,7 @@ package br.com.homefashion.service;
 
 import br.com.homefashion.dao.UsuarioDAO;
 import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.Usuario;
 
 public class UsuarioService {
@@ -16,15 +17,15 @@ public class UsuarioService {
         return usuarioDAO.login(usuario);
     }
 
-    public Boolean inserirUsuario(Usuario usuario) {
-        return usuarioDAO.inserirUsuario(usuario);
+    public void inserirUsuario(Usuario usuario) throws ProjetoException {
+        usuarioDAO.inserirUsuario(usuario);
     }
 
     public Boolean verificarSenhaUsuario(ParametrosVerificarSenhaUsuarioDTO parametrosVerificarSenhaUsuarioDTO) {
         return usuarioDAO.verificarSenhaUsuario(parametrosVerificarSenhaUsuarioDTO);
     }
 
-    public Boolean alterarUsuario(Usuario usuario) {
-        return usuarioDAO.alterarUsuario(usuario);
+    public void alterarUsuario(Usuario usuario) throws ProjetoException {
+        usuarioDAO.alterarUsuario(usuario);
     }
 }

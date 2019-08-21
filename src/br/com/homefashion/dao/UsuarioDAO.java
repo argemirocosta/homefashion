@@ -1,5 +1,6 @@
 package br.com.homefashion.dao;
 
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
@@ -51,11 +52,9 @@ public class UsuarioDAO {
         return usuarioRetorno;
     }
 
-    public Boolean inserirUsuario(Usuario usuario) {
+    public void inserirUsuario(Usuario usuario) throws ProjetoException {
 
         conexao = ConnectionFactory.getConnection();
-
-        boolean retorno = false;
 
         try {
             PreparedStatement ps = conexao.prepareStatement(INSERIR_USUARIO);
@@ -67,10 +66,8 @@ public class UsuarioDAO {
 
             conexao.commit();
 
-            retorno = true;
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new ProjetoException(ex);
         } finally {
             try {
                 conexao.close();
@@ -78,14 +75,11 @@ public class UsuarioDAO {
                 ex.printStackTrace();
             }
         }
-        return retorno;
     }
 
-    public Boolean alterarUsuario(Usuario usuario) {
+    public void alterarUsuario(Usuario usuario) throws ProjetoException {
 
         conexao = ConnectionFactory.getConnection();
-
-        boolean retorno = false;
 
         try {
 
@@ -101,10 +95,8 @@ public class UsuarioDAO {
 
             conexao.commit();
 
-            retorno = true;
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new ProjetoException(ex);
         } finally {
             try {
                 conexao.close();
@@ -112,7 +104,6 @@ public class UsuarioDAO {
                 ex.printStackTrace();
             }
         }
-        return retorno;
     }
 
     public Boolean verificarSenhaUsuario(ParametrosVerificarSenhaUsuarioDTO parametrosVerificarSenhaUsuarioDTO) {

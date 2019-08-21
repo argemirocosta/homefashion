@@ -1,5 +1,6 @@
 package br.com.homefashion.controller;
 
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.service.UsuarioService;
@@ -46,15 +47,14 @@ public class UsuarioMB {
     }
 
     public void inserirUsuario() {
-        boolean cadastrou = usuarioService.inserirUsuario(usuario);
-
-        if (cadastrou) {
+        try {
+            usuarioService.inserirUsuario(usuario);
             JSFUtil.adicionarMensagemSucesso(USUARIO_CADASTRADO_SUCESSO, SUCESSO);
             JSFUtil.fecharDialog(DIALOG_CADASTRO_USUARIO);
             limparUsuario();
-
-        } else {
+        } catch (ProjetoException e) {
             JSFUtil.adicionarMensagemErro(USUARIO_CADASTRADO_ERRO, ERRO);
+
         }
     }
 
@@ -76,14 +76,12 @@ public class UsuarioMB {
     }
 
     private void alterarUsuario() {
-        boolean alterou = usuarioService.alterarUsuario(usuario);
-
-        if (alterou) {
+        try {
+            usuarioService.alterarUsuario(usuario);
             JSFUtil.adicionarMensagemSucesso(USUARIO_ALTERADO_SUCESSO, SUCESSO);
             JSFUtil.fecharDialog(DIALOG_ALTERAR_USUARIO);
             limparUsuario();
-
-        } else {
+        } catch (ProjetoException e) {
             JSFUtil.adicionarMensagemErro(USUARIO_ALTERADO_ERRO, ERRO);
         }
     }
