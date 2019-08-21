@@ -1,6 +1,7 @@
 package br.com.homefashion.service;
 
 import br.com.homefashion.dao.VendaDAO;
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Venda;
@@ -9,14 +10,13 @@ import java.util.List;
 
 public class VendaService {
 
-    private VendaDAO vendaDAO;
+    private VendaDAO vendaDAO = new VendaDAO();
 
     public VendaService() {
-        vendaDAO = new VendaDAO();
     }
 
-    public Boolean inserirVenda(Venda venda) {
-        return vendaDAO.inserirVenda(venda);
+    public void inserirVenda(Venda venda) throws ProjetoException {
+        vendaDAO.inserirVenda(venda);
     }
 
     public Integer verificarSemPagamentos(Integer codVenda) {
@@ -27,8 +27,8 @@ public class VendaService {
         return vendaDAO.calcularValorEmAberto(codVenda);
     }
 
-    public Boolean inserirPagamento(Venda venda, Pagamento pagamento) {
-        return vendaDAO.inserirPagamento(venda, pagamento);
+    public void inserirPagamento(Venda venda, Pagamento pagamento) throws ProjetoException {
+        vendaDAO.inserirPagamento(venda, pagamento);
     }
 
     public Double consultarVendasPorPeriodo(BuscaRelatorio busca) {
@@ -59,12 +59,12 @@ public class VendaService {
         return vendaDAO.listarVendas(venda);
     }
 
-    public Boolean cancelarVenda(Integer codVenda) {
-        return vendaDAO.cancelarVenda(codVenda);
+    public void cancelarVenda(Integer codVenda) {
+        vendaDAO.cancelarVenda(codVenda);
     }
 
-    public Boolean cancelarPagamento(Integer codPagamento) {
-        return vendaDAO.cancelarPagamento(codPagamento);
+    public void cancelarPagamento(Integer codPagamento) {
+        vendaDAO.cancelarPagamento(codPagamento);
     }
 
     public Boolean verificarSeExistePagamentoParaVenda(Integer codVenda) {

@@ -1,5 +1,6 @@
 package br.com.homefashion.controller;
 
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Venda;
@@ -54,16 +55,14 @@ public class VendaMB {
     }
 
     public void inserirVenda() {
-        boolean cadastrou = vendaService.inserirVenda(venda);
-
-        if (cadastrou) {
+        try {
+            vendaService.inserirVenda(venda);
             limparCampos();
             JSFUtil.fecharDialog(DIALOG_VENDER);
             JSFUtil.adicionarMensagemSucesso(VENDA_SUCESSO, SUCESSO);
-        } else {
+        } catch (ProjetoException e) {
             JSFUtil.adicionarMensagemErro(VENDA_ERRO, ERRO);
         }
-
     }
 
     public void verificarParaInserirPagamento() {
@@ -84,16 +83,15 @@ public class VendaMB {
     }
 
     private void inserirPagamento() {
-        boolean cadastrou = vendaService.inserirPagamento(venda, pagamento);
-
-        if (cadastrou) {
+        try {
+            vendaService.inserirPagamento(venda, pagamento);
             listarPagamentos();
             listarVendas();
             limparCampos();
             JSFUtil.adicionarMensagemSucesso(PAGAMENTO_SUCESSO, SUCESSO);
             calcularValorEmAbertoDaVenda();
             pagamento.setValor(null);
-        } else {
+        } catch (ProjetoException e) {
             JSFUtil.adicionarMensagemErro(PAGAMENTO_ERRO, ERRO);
         }
     }
@@ -116,7 +114,7 @@ public class VendaMB {
         listaVendasPorCliente = vendaService.listarRankingDosClientes();
     }
 
-    public void abrirTelaDePagamento(){
+    public void abrirTelaDePagamento() {
         listarPagamentos();
         calcularValorEmAbertoDaVenda();
         JSFUtil.abrirDialog("dlgPagamentos");
@@ -137,13 +135,12 @@ public class VendaMB {
     public void cancelarVenda() {
 
         if (verificarSeCancelamentoPodeSerRealizado()) {
-            Boolean cancelou = vendaService.cancelarVenda(venda.getId());
-
-            if (cancelou) {
+            try {
+                vendaService.cancelarVenda(venda.getId());
                 listarVendas();
                 JSFUtil.fecharDialog(DIALOG_CANCELAR_VENDA);
                 JSFUtil.adicionarMensagemSucesso(VENDA_CANCELADA_SUCESSO, SUCESSO);
-            } else {
+            } catch (Exception ex) {
                 JSFUtil.adicionarMensagemErro(VENDA_CANCELADA_ERRO, ERRO);
             }
         }
@@ -151,15 +148,13 @@ public class VendaMB {
     }
 
     public void cancelarPagamento() {
-
-        Boolean cancelou = vendaService.cancelarPagamento(pagamento.getId());
-
-        if (cancelou) {
+        try {
+            vendaService.cancelarPagamento(pagamento.getId());
             listarVendas();
             JSFUtil.fecharDialog(DIALOG_CANCELAR_PAGAMENTO);
             JSFUtil.adicionarMensagemSucesso(PAGAMENTO_CANCELADO_SUCESSO, SUCESSO);
             listarPagamentos();
-        } else {
+        } catch (Exception ex) {
             JSFUtil.adicionarMensagemErro(PAGAMENTO_CANCELADO_ERRO, ERRO);
         }
     }
@@ -184,7 +179,7 @@ public class VendaMB {
         return retorno;
     }
 
-    private void calcularValorEmAbertoDaVenda(){
+    private void calcularValorEmAbertoDaVenda() {
         valorEmAbertoDaVenda = vendaService.calcularValorEmAberto(venda.getId());
     }
 

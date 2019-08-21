@@ -1,5 +1,6 @@
 package br.com.homefashion.dao;
 
+import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
@@ -27,9 +28,7 @@ public class VendaDAO {
 
     private Usuario usuarioSessao = (Usuario) SessaoUtil.resgatarDaSessao(USUARIO_SESSAO);
 
-    public Boolean inserirVenda(Venda venda) {
-
-        boolean retorno = false;
+    public void inserirVenda(Venda venda) throws ProjetoException {
 
         conexao = ConnectionFactory.getConnection();
 
@@ -45,10 +44,8 @@ public class VendaDAO {
 
             conexao.commit();
 
-            retorno = true;
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new ProjetoException(ex);
         } finally {
             try {
                 conexao.close();
@@ -56,7 +53,6 @@ public class VendaDAO {
                 ex.printStackTrace();
             }
         }
-        return retorno;
     }
 
     public List<Venda> listarVendas(Venda vendaParametro) {
@@ -109,9 +105,7 @@ public class VendaDAO {
         return listaVendas;
     }
 
-    public Boolean inserirPagamento(Venda venda, Pagamento pagamento) {
-
-        boolean retorno = false;
+    public void inserirPagamento(Venda venda, Pagamento pagamento) throws ProjetoException {
 
         conexao = ConnectionFactory.getConnection();
 
@@ -126,10 +120,8 @@ public class VendaDAO {
 
             conexao.commit();
 
-            retorno = true;
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new ProjetoException(ex);
         } finally {
             try {
                 conexao.close();
@@ -137,7 +129,6 @@ public class VendaDAO {
                 ex.printStackTrace();
             }
         }
-        return retorno;
     }
 
     public List<Pagamento> listarPagamentos(Integer codcliente) {
@@ -417,18 +408,23 @@ public class VendaDAO {
         return retorno;
     }
 
-    public Boolean cancelarVenda(Integer idVenda) {
-
-        return realizarCancelamento(idVenda, ALTERAR_CANCELAR_VENDA);
+    public void cancelarVenda(Integer idVenda) {
+        try {
+            realizarCancelamento(idVenda, ALTERAR_CANCELAR_VENDA);
+        } catch (ProjetoException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Boolean cancelarPagamento(Integer idPagamento) {
-
-        return realizarCancelamento(idPagamento, ALTERAR_CANCELAR_PAGAMENTO);
+    public void cancelarPagamento(Integer idPagamento) {
+        try {
+            realizarCancelamento(idPagamento, ALTERAR_CANCELAR_PAGAMENTO);
+        } catch (ProjetoException e) {
+            e.printStackTrace();
+        }
     }
 
-    private Boolean realizarCancelamento(Integer idParaCancelar, String sqlCancelamento) {
-        boolean retorno = false;
+    private void realizarCancelamento(Integer idParaCancelar, String sqlCancelamento) throws ProjetoException {
 
         conexao = ConnectionFactory.getConnection();
 
@@ -440,10 +436,8 @@ public class VendaDAO {
 
             conexao.commit();
 
-            retorno = true;
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new ProjetoException(ex);
         } finally {
             try {
                 conexao.close();
@@ -451,7 +445,6 @@ public class VendaDAO {
                 ex.printStackTrace();
             }
         }
-        return retorno;
     }
 
 }
