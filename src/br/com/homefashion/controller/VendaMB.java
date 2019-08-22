@@ -151,6 +151,7 @@ public class VendaMB {
         try {
             vendaService.cancelarPagamento(pagamento.getId());
             listarVendas();
+            calcularValorEmAbertoDaVenda();
             JSFUtil.fecharDialog(DIALOG_CANCELAR_PAGAMENTO);
             JSFUtil.adicionarMensagemSucesso(PAGAMENTO_CANCELADO_SUCESSO, SUCESSO);
             listarPagamentos();

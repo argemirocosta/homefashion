@@ -14,8 +14,8 @@ public class VendaDAOQueries {
             + "END AS situacao "
             + "FROM vendas.venda v "
             + "LEFT JOIN vendas.clientes c ON (v.id_cliente = c.id) "
-            + "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
-            + "WHERE v.id_cliente = ? AND v.cancelada IS NOT TRUE AND p.cancelada IS NOT TRUE "
+            + "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda AND p.cancelada IS NOT TRUE) "
+            + "WHERE v.id_cliente = ? AND v.cancelada IS NOT TRUE  "
             + "GROUP BY v.id, v.id_cliente, c.nome, v.valor, v.qtd, v.data "
             + "ORDER BY v.data DESC, v.id DESC";
 
@@ -29,7 +29,7 @@ public class VendaDAOQueries {
 
     public static final String SELECT_CALCULAR_VALOR_EM_ABERTO = "SELECT v.id, (v.valor - sum(COALESCE(p.valor_pago, 0))) AS em_aberto "
             + "FROM vendas.venda v "
-            + "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda) "
+            + "LEFT JOIN vendas.pagamentos p ON (v.id = p.id_venda AND p.cancelada IS NOT TRUE) "
             + "WHERE v.id = ? AND v.usuario = ? AND v.cancelada IS NOT TRUE AND p.cancelada IS NOT TRUE "
             + "GROUP BY v.id ";
 

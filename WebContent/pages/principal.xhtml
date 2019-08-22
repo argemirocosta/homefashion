@@ -799,7 +799,8 @@
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Sim"
                                          action="#{vendaMB.cancelarPagamento()}"
-                                         update=":formPagamentos:tabPagamentos, :formClientes" icon="confirmar"/>
+                                         update=":formVender:tabVendas, :formPagamentos:tabPagamentos, :formPagamentos:msgPagamentos,
+                                         :formPagamentos:pnlgridPagamentos, :formPagamentos:outValorAberto" icon="confirmar"/>
                         <p:commandButton value="Não"
                                          oncomplete="PF('dlgCancelarPagamento').hide();" icon="cancelar"/>
                     </p:panelGrid>
