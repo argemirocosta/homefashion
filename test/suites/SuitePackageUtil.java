@@ -13,7 +13,7 @@ import org.junit.runners.Suite;
         DocumentosUtilTeste.class
 })
 
-public class SuitesUtil {
+public class SuitePackageUtil {
 
     @BeforeClass
     public static void iniciarSuiteDeTeste(){
