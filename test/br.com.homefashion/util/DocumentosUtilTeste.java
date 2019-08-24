@@ -7,8 +7,8 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class DocumentosUtilTeste {
@@ -36,8 +36,8 @@ public class DocumentosUtilTeste {
     @Test
     public void testarSeCpfEhValido() {
         if(cenario.contains("Correto"))
-            assertTrue(DocumentosUtil.validaCPF(cpf));
+            assertThat(DocumentosUtil.validaCPF(cpf), is(true));
         else
-            assertFalse(DocumentosUtil.validaCPF(cpf));
+            assertThat(DocumentosUtil.validaCPF(cpf), is(false));
     }
 }
