@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import java.sql.Date;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class DataUtilTeste {
 
@@ -19,6 +21,6 @@ public class DataUtilTeste {
 
     @Test
     public void retornarDataAtual(){
-        assertEquals(DataUtil.retornarDataAtual().toString(), new java.util.Date().toString() );
+        assertThat(DataUtil.retornarDataAtual(), is(new java.util.Date()));
     }
 }
