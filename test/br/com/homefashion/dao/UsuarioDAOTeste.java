@@ -17,7 +17,7 @@ public class UsuarioDAOTeste {
     @Before
     public void inicializarClasse(){
         usuarioDAO = new UsuarioDAO();
-        usuario1 = UsuarioBuilderTest.umUsuarioTeste1().agora();
+        usuario1 = UsuarioBuilderTest.usuarioTesteInserir().agora();
     }
 
     @Test

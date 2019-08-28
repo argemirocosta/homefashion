@@ -10,6 +10,11 @@ public class Usuario implements Serializable {
     private String login;
     private String senha;
     private Boolean ativo;
+    private Boolean teste;
+
+    public Usuario() {
+        teste = false;
+    }
 
     public Integer getId() {
         return id;
@@ -51,6 +56,14 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
+    public Boolean getTeste() {
+        return teste;
+    }
+
+    public void setTeste(Boolean teste) {
+        this.teste = teste;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,12 +73,13 @@ public class Usuario implements Serializable {
                 Objects.equals(nome, usuario.nome) &&
                 Objects.equals(login, usuario.login) &&
                 Objects.equals(senha, usuario.senha) &&
-                Objects.equals(ativo, usuario.ativo);
+                Objects.equals(ativo, usuario.ativo) &&
+                Objects.equals(teste, usuario.teste);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, login, senha, ativo);
+        return Objects.hash(id, nome, login, senha, ativo, teste);
     }
 
     @Override
@@ -76,6 +90,8 @@ public class Usuario implements Serializable {
                 ", login='" + login + '\'' +
                 ", senha='" + senha + '\'' +
                 ", ativo=" + ativo +
+                ", teste=" + teste +
                 '}';
     }
+
 }
