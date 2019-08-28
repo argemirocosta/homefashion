@@ -1,0 +1,27 @@
+package br.com.homefashion.builders;
+
+import br.com.homefashion.model.Usuario;
+
+public class UsuarioBuilderTest {
+
+    private Usuario usuario;
+
+    private UsuarioBuilderTest(){
+
+    }
+
+    public static UsuarioBuilderTest umUsuarioTeste1(){
+        UsuarioBuilderTest builderTest = new UsuarioBuilderTest();
+        builderTest.usuario = new Usuario();
+        builderTest.usuario.setNome("Usuario teste 1");
+        builderTest.usuario.setLogin("usuario.teste1");
+        builderTest.usuario.setSenha("123456");
+        builderTest.usuario.setAtivo(true);
+        return builderTest;
+    }
+
+    public Usuario agora(){
+        return usuario;
+    }
+
+}
