@@ -64,11 +64,7 @@ public class UsuarioDAO {
 
             ps.execute();
 
-            if(!usuario.getTeste()) {
-                conexao.commit();
-            }else{
-                conexao.rollback();
-            }
+            conexao.commit();
 
         } catch (SQLException ex) {
             throw new ProjetoException(ex);

@@ -17,7 +17,6 @@ public class UsuarioBuilderTest {
         builderTest.usuario.setLogin("usuario.teste1");
         builderTest.usuario.setSenha("123456");
         builderTest.usuario.setAtivo(true);
-        builderTest.usuario.setTeste(true);
         return builderTest;
     }
 
