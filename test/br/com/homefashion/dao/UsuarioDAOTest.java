@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 
-public class UsuarioDAOTeste {
+public class UsuarioDAOTest {
 
     private UsuarioDAO usuarioDAOFake;
     private Usuario usuario1;

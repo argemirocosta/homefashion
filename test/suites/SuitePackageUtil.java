@@ -1,7 +1,7 @@
 package suites;
 
-import br.com.homefashion.util.DataUtilTeste;
-import br.com.homefashion.util.DocumentosUtilTeste;
+import br.com.homefashion.util.DataUtilTest;
+import br.com.homefashion.util.DocumentosUtilTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -9,8 +9,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        DataUtilTeste.class,
-        DocumentosUtilTeste.class
+        DataUtilTest.class,
+        DocumentosUtilTest.class
 })
 
 public class SuitePackageUtil {

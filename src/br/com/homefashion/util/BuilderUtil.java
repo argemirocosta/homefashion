@@ -1,5 +1,5 @@
 package br.com.homefashion.util;
-
+/*
 import buildermaster.BuilderMaster;
 
 public final class BuilderUtil {
@@ -9,3 +9,5 @@ public final class BuilderUtil {
 	}
 
 }
+
+ */

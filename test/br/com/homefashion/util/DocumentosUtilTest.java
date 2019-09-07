@@ -11,7 +11,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
-public class DocumentosUtilTeste {
+public class DocumentosUtilTest {
 
     @Parameterized.Parameter
     public String cpf;
