@@ -1,5 +1,6 @@
 package br.com.homefashion.factory;
 
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,10 +8,6 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
 	private static final String DRIVER_CLASS = "org.postgresql.Driver";
-
-	private static final String URL = "jdbc:postgresql://localhost:5432/home_fashion";
-	private static final String USER = "postgres";
-	private static final String PASS = "post";
 
 	public static Connection getConnection() {
 
@@ -23,9 +20,10 @@ public class ConnectionFactory {
 		}
 
 		try {
-			conexao = DriverManager.getConnection(URL, USER, PASS);
+			Conexoes conexoes = ConexaoBuilder.carregarDadosConexao();
+			conexao = DriverManager.getConnection(conexoes.getUrlBanco(), conexoes.getUsuario(), conexoes.getSenha());
 			conexao.setAutoCommit(false);
-		} catch (SQLException ex) {
+		} catch (SQLException | URISyntaxException ex) {
 			ex.printStackTrace();
 		}
 		return conexao;
