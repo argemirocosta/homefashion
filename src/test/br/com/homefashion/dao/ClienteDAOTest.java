@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 public class ClienteDAOTest {
 
-    private ClienteDAO clienteDAOFake;
+    private ClienteDAO clienteDaoFake;
     private Cliente cliente1;
     private Cliente cliente2;
 
@@ -26,7 +26,7 @@ public class ClienteDAOTest {
 
     @Before
     public void inicializarClasse(){
-        clienteDAOFake = mock(ClienteDAO.class);
+        clienteDaoFake = mock(ClienteDAO.class);
         cliente1 = ClienteBuilderTest.umClienteTeste1().agora();
         cliente2 = ClienteBuilderTest.umClienteTeste2().agora();
     }
@@ -36,7 +36,7 @@ public class ClienteDAOTest {
 
         List<Cliente> listaClientes = Arrays.asList(cliente1, cliente2);
 
-        when(clienteDAOFake.listarClientes()).thenReturn(listaClientes);
+        when(clienteDaoFake.listarClientes()).thenReturn(listaClientes);
 
         assertEquals(2, listaClientes.size());
     }
@@ -46,30 +46,30 @@ public class ClienteDAOTest {
 
         List<Cliente> buscarClientes = Arrays.asList(cliente1);
 
-        when(clienteDAOFake.buscarClientePorNome("1")).thenReturn(buscarClientes);
+        when(clienteDaoFake.buscarClientePorNome("1")).thenReturn(buscarClientes);
 
         assertEquals(1, buscarClientes.size());
     }
 
     @Test
     public void inserirCliente() throws ProjetoException {
-        clienteDAOFake.inserirCliente(cliente1);
+        clienteDaoFake.inserirCliente(cliente1);
 
-        verify(clienteDAOFake, times(1)).inserirCliente(cliente1);
+        verify(clienteDaoFake, times(1)).inserirCliente(cliente1);
     }
 
     @Test
     public void alterarCliente() throws ProjetoException {
-        clienteDAOFake.alterarCliente(cliente1);
+        clienteDaoFake.alterarCliente(cliente1);
 
-        verify(clienteDAOFake, times(1)).alterarCliente(cliente1);
+        verify(clienteDaoFake, times(1)).alterarCliente(cliente1);
     }
 
     @Test
     public void deletarCliente() throws ProjetoException {
-        clienteDAOFake.deletarCliente(cliente1);
+        clienteDaoFake.deletarCliente(cliente1);
 
-        verify(clienteDAOFake, times(1)).deletarCliente(cliente1);
+        verify(clienteDaoFake, times(1)).deletarCliente(cliente1);
     }
 
 }

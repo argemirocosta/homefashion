@@ -1,4 +1,4 @@
-package suites;
+package br.com.homefashion.suites;
 
 import br.com.homefashion.util.DataUtilTest;
 import br.com.homefashion.util.DocumentosUtilTest;
