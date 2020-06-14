@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="home_fashion-1.0-SNAPSHOT.war">
+    <root id="archive" name="home_fashion-1.1-202006132113.war">
       <element id="artifact" artifact-name="home_fashion:war exploded" />
     </root>
   </artifact>
