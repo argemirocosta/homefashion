@@ -136,12 +136,12 @@
                     <p:calendar pattern="dd/MM/yyyy" mask="true" navigator="true" id="dataCadastro"
                                 yearRange="-111:+39" pages="1" showOn="button" size="15"
                                 value="#{clienteMB.cliente.dataNascimento}"
-                                locale="pt" class="select-agendaEquipe2"/>
+                                locale="pt" styleClass="select-agendaEquipe2"/>
 
                     <p:outputLabel value="CPF: "/>
                     <p:inputMask mask="999.999.999-99"
                                  value="#{clienteMB.cliente.cpf}"
-                                 class="form-control select-agendaEquipe2" id="cpfCadastro"
+                                 styleClass="form-control select-agendaEquipe2" id="cpfCadastro"
                                  required="false" validator="CPFValidator"
                                  requiredMessage="CPF do Paciente: Campo obrigatório!"/>
 
@@ -218,12 +218,12 @@
                     <p:calendar pattern="dd/MM/yyyy" mask="true" navigator="true"
                                 yearRange="-111:+39" pages="1" showOn="button" size="15"
                                 value="#{clienteMB.cliente.dataNascimento}"
-                                locale="pt" class="select-agendaEquipe2"/>
+                                locale="pt" styleClass="select-agendaEquipe2"/>
 
                     <p:outputLabel value="CPF: "/>
                     <p:inputMask mask="999.999.999-99"
                                  value="#{clienteMB.cliente.cpf}"
-                                 class="form-control select-agendaEquipe2" id="cpf"
+                                 styleClass="form-control select-agendaEquipe2" id="cpf"
                                  required="false" validator="CPFValidator"
                                  requiredMessage="CPF do Paciente: Campo obrigatório!"/>
 
