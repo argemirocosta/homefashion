@@ -7,14 +7,14 @@ Sales system for independent salespeople.
 Clone the project:
 
 ```shell
-git clone https://github.com/argemirocosta/homefasion_api_test_httparty_rspec_cucumber.git
+git clone https://github.com/argemirocosta/homefashion
 ```
 
 ## Description
 
 Software developed in Java, JSF, JDBC, Maven, design patterns ,clean code and unit tests with JUnit and Mock.
 
-To use the system, it is necessary to create a database in Postgres, use the database.sql file for this.
+To use the system, it is necessary to create a database home_fashion in Postgres, use the database.sql file for this.
 
 ## Related projects
 
