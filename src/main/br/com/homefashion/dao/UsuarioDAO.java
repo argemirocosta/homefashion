@@ -28,7 +28,7 @@ public class UsuarioDAO {
 
         try {
             PreparedStatement ps = conexao.prepareStatement(SELECT_LOGIN);
-            ps.setString(1, usuarioLogin.getLogin().toUpperCase());
+            ps.setString(1, usuarioLogin.getLogin());
             ps.setString(2, usuarioLogin.getSenha());
             ResultSet rs = ps.executeQuery();
 
