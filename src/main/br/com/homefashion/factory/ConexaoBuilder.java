@@ -17,7 +17,7 @@ public class ConexaoBuilder {
         }
         else if(propriedades.Conexao.equals(Propriedades.Conexoes.PRODUCAO)){
             URI dbUri = new URI(System.getenv("DATABASE_URL"));
-            conexoes.setUrlBanco("jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require");
+            conexoes.setUrlBanco("jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath());
             conexoes.setUsuario(dbUri.getUserInfo().split(":")[0]);
             conexoes.setSenha(dbUri.getUserInfo().split(":")[1]);
         }
