@@ -82,7 +82,7 @@ public class ClienteMB {
     }
 
     public void buscarEnderecoClientePorCEP(){
-        cliente.setEndereco(CEPUtil.buscarEnderecoPorCEP(cliente.getEndereco().getCep()));
+        cliente.setEndereco(CEPUtil.buscarCep(cliente.getEndereco().getCep()));
     }
 
     //GETTERS E SETTERS

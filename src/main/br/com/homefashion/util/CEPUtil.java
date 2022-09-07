@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class CEPWebService {
+public final class CEPUtil {
 
-	private static String pesquisarCepNaViaCep(String cep) {
+	private static Map<String, String> pesquisarCepNaViaCep(String cep) {
 		String json;
 
 		try {
@@ -33,12 +33,6 @@ public final class CEPWebService {
 			throw new RuntimeException(e);
 		}
 
-		return json;
-	}
-
-	public static Endereco buscarCep(String cep) {
-		String json = pesquisarCepNaViaCep(cep);
-
 		Map<String,String> mapa = new HashMap<>();
 
 		Matcher matcher = Pattern.compile("\"\\D.*?\": \".*?\"").matcher(json);
@@ -47,14 +41,24 @@ public final class CEPWebService {
 			mapa.put(group[0].replaceAll("\"", "").trim(), group[1].replaceAll("\"", "").trim());
 		}
 
+		return mapa;
+
+	}
+
+	public static Endereco buscarCep(String cep) {
+
+		Map<String,String> mapaCEP = pesquisarCepNaViaCep(cep);
+
 		Endereco endereco = new Endereco();
-		endereco.setEstado(mapa.get("uf"));
-		endereco.setCidade(mapa.get("localidade"));
-		endereco.setBairro(mapa.get("bairro"));
-		endereco.setLogradouro(mapa.get("logradouro"));
-		endereco.setCodIBGE(Integer.parseInt(mapa.get("ibge")));
+		endereco.setEstado(mapaCEP.get("uf"));
+		endereco.setCidade(mapaCEP.get("localidade"));
+		endereco.setBairro(mapaCEP.get("bairro"));
+		endereco.setLogradouro(mapaCEP.get("logradouro"));
+		endereco.setCodIBGE(Integer.parseInt(mapaCEP.get("ibge")));
 
 		return endereco;
 	}
+
+
 
 }
