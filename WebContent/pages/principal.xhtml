@@ -15,16 +15,16 @@
 
         <h:form id="formInicio">
 
-            <p:commandButton value="Sair do Sistema" icon="sair"
+            <p:commandButton value="Sair do Sistema" icon="pi pi-power-off"
                              action="#{usuarioMB.logout()}" style="float:right;"/>
 
-            <p:commandButton value="Dados Usuário" icon="pessoa"
+            <p:commandButton value="Dados Usuário" icon="pi pi-user"
                              action="#{usuarioMB.carregarDadosUsuario()}"
                              update=":formAlterarUsuario"
                              oncomplete="PF('dlgAlterarUsuario').show();"
                              style="float:right;margin-left:10px;margin-right:20px"/>
 
-            <p:commandButton value="Relatórios" icon="relatorios"
+            <p:commandButton value="Relatórios" icon="pi pi-print"
                              oncomplete="PF('dlgRelatorios').show();"
                              style="float:right;margin-left:10px;margin-right:20px"/>
 
@@ -48,13 +48,13 @@
 
                 <p:commandButton value="Pesquisar"
                                  action="#{clienteMB.buscarClientePorNome()}" update=":formClientes"
-                                 icon="buscar"/>
+                                 icon="pi pi-search"/>
                 <p:commandButton value="Limpar"
                                  action="#{clienteMB.limparBusca()}" update=":formClientes"
-                                 icon="limpar"/>
+                                 icon="pi pi-home"/>
 
                 <p:commandButton value="Novo Cliente"
-                                 oncomplete="PF('dlgCadastrarCliente').show();" icon="novo"/>
+                                 oncomplete="PF('dlgCadastrarCliente').show();" icon="pi pi-user-plus"/>
 
 
             </p:panelGrid>
@@ -90,33 +90,34 @@
                     </div>
                 </p:column>
 
+                <div align="center">
 
-                <p:column headerText="Ações" width="15%">
+                    <p:column headerText="Ações" width="15%">
 
-                    <div align="center">
 
                         <p:commandButton oncomplete="PF('dlgAlterarCliente').show();"
-                                         update=":formClientes, :formAlterarCliente" icon="alterar">
+                                         update=":formClientes, :formAlterarCliente" icon="pi pi-pencil">
                             <f:setPropertyActionListener value="#{var}"
                                                          target="#{clienteMB.cliente}"/>
                         </p:commandButton>
 
                         <p:commandButton oncomplete="PF('dlgDeletarCliente').show();"
-                                         update=":formClientes" icon="cancelar">
+                                         update=":formClientes" icon="pi pi-trash">
                             <f:setPropertyActionListener value="#{var}"
                                                          target="#{clienteMB.cliente}"/>
                         </p:commandButton>
 
-                        <p:commandButton oncomplete="PF('dlgVender').show();" icon="sifrao"
+                        <p:commandButton oncomplete="PF('dlgVender').show();" icon="pi pi-money-bill"
                                          action="#{vendaMB.listarVendas()}"
                                          update=":formVender:tabVendas">
                             <f:setPropertyActionListener value="#{var}"
                                                          target="#{vendaMB.venda.cliente}"/>
                         </p:commandButton>
 
-                    </div>
 
-                </p:column>
+                    </p:column>
+
+                </div>
 
             </p:dataTable>
 
@@ -160,7 +161,7 @@
                                  maxlength="30" size="25" required="false"
                                  requiredMessage="insira o nome"/>
 
-                    <p:outputLabel value="CEP:" />
+                    <p:outputLabel value="CEP:"/>
                     <p:inputMask mask="99999-999" id="cepCadastro"
                                  value="#{clienteMB.cliente.endereco.cep}">
                         <p:ajax listener="#{clienteMB.buscarEnderecoClientePorCEP()}"
@@ -170,7 +171,7 @@
 
                     <p:outputLabel value="Estado: "/>
                     <p:selectOneMenu value="#{clienteMB.cliente.endereco.estado}" id="estadoCadastro">
-                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
                         <f:selectItems value="#{clienteMB.cliente.endereco.listaEstados}"/>
                     </p:selectOneMenu>
 
@@ -194,9 +195,9 @@
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Cadastrar"
                                          action="#{clienteMB.inserirCliente()}"
-                                         update=":formCadastroCliente, :formClientes" icon="confirmar"/>
+                                         update=":formCadastroCliente, :formClientes" icon="pi pi-check"/>
                         <p:commandButton value="Fechar"
-                                         oncomplete="PF('dlgCadastrarCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgCadastrarCliente').hide();" icon="pi pi-times"/>
                     </p:panelGrid>
                 </div>
 
@@ -242,7 +243,7 @@
                                  maxlength="30" size="25" required="false"
                                  requiredMessage="insira o nome"/>
 
-                    <p:outputLabel value="CEP:" />
+                    <p:outputLabel value="CEP:"/>
                     <p:inputMask mask="99999-999" id="cepAlteracao"
                                  value="#{clienteMB.cliente.endereco.cep}">
                         <p:ajax listener="#{clienteMB.buscarEnderecoClientePorCEP()}"
@@ -252,7 +253,7 @@
 
                     <p:outputLabel value="Estado: "/>
                     <p:selectOneMenu value="#{clienteMB.cliente.endereco.estado}" id="estadoAlteracao">
-                        <f:selectItem itemLabel="Selecione" itemValue="" />
+                        <f:selectItem itemLabel="Selecione" itemValue=""/>
                         <f:selectItems value="#{clienteMB.cliente.endereco.listaEstados}"/>
                     </p:selectOneMenu>
 
@@ -276,9 +277,9 @@
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Alterar"
                                          action="#{clienteMB.alterarCliente()}"
-                                         update=":formAlterarCliente, :formClientes" icon="confirmar"/>
+                                         update=":formAlterarCliente, :formClientes" icon="pi pi pi-check"/>
                         <p:commandButton value="Fechar"
-                                         oncomplete="PF('dlgAlterarCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgAlterarCliente').hide();" icon="pi pi pi-times"/>
                     </p:panelGrid>
                 </div>
 
@@ -301,9 +302,9 @@
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Sim"
                                          action="#{clienteMB.deletarCliente()}"
-                                         update=":formAlterarCliente, :formClientes" icon="confirmar"/>
+                                         update=":formAlterarCliente, :formClientes" icon="pi pi-check"/>
                         <p:commandButton value="Fechar"
-                                         oncomplete="PF('dlgDeletarCliente').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgDeletarCliente').hide();" icon="pi pi-times"/>
                     </p:panelGrid>
                 </div>
 
@@ -336,9 +337,9 @@
                         <p:commandButton value="Vender"
                                          action="#{vendaMB.inserirVenda()}"
                                          update=":formCadastroCliente, :formClientes, :formVender:pnlgridVender"
-                                         icon="carrinho"/>
+                                         icon="pi pi-wallet"/>
                         <p:commandButton value="Fechar" oncomplete="PF('dlgVender').hide();"
-                                         icon="cancelar"/>
+                                         icon="pi pi-times"/>
                     </p:panelGrid>
                 </div>
 
@@ -409,7 +410,7 @@
 
                     <p:column headerText="Pagar" width="6%">
                         <div align="center">
-                            <p:commandButton icon="calculadora" process="@this"
+                            <p:commandButton icon="pi pi-wallet" process="@this"
                                              immediate="true"
                                              action="#{vendaMB.abrirTelaDePagamento()}"
                                              update=":formPagamentos:tabPagamentos, :formPagamentos:outValorAberto">
@@ -422,7 +423,7 @@
                     <p:column headerText="Excluir" width="6%">
                         <div align="center">
                             <p:commandButton oncomplete="PF('dlgCancelarVenda').show();"
-                                             icon="cancelar" process="@this"
+                                             icon="pi pi-times" process="@this"
                                              update=":formPagamentos:tabPagamentos"
                                              immediate="true">
                                 <f:setPropertyActionListener value="#{var}"
@@ -478,9 +479,9 @@
                                          action="#{vendaMB.verificarParaInserirPagamento()}"
                                          update=":formVender:tabVendas, :formPagamentos:tabPagamentos, msgPagamentos,
                                          :formPagamentos:pnlgridPagamentos, outValorAberto"
-                                         icon="calculadorasifrao"/>
+                                         icon="pi pi-wallet"/>
                         <p:commandButton value="Fechar"
-                                         oncomplete="PF('dlgPagamentos').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgPagamentos').hide();" icon="pi pi-times"/>
                     </p:panelGrid>
                 </div>
 
@@ -515,26 +516,30 @@
                             </div>
                         </p:column>
 
-                        <p:column headerText="Recibo" width="25%">
-                            <div align="center">
-                                <p:commandButton icon="relatorios" id="btnRecibo" ajax="false" immediate="true"
-                                actionListener="#{reportJasperMB.gerarRecibo(var.id)}">
+                        <div align="center">
+                            <p:column headerText="Recibo" width="25%">
+
+                                <p:commandButton icon="pi pi-print" id="btnRecibo" ajax="false" immediate="true"
+                                                 actionListener="#{reportJasperMB.gerarRecibo(var.id)}">
                                     <f:setPropertyActionListener value="#{var}"
                                                                  target="#{vendaMB.pagamento}"/>
                                 </p:commandButton>
-                            </div>
-                        </p:column>
 
-                        <p:column headerText="Excluir" width="25%">
-                            <div align="center">
+                            </p:column>
+                        </div>
+
+                        <div align="center">
+                            <p:column headerText="Excluir" width="25%">
+
                                 <p:commandButton oncomplete="PF('dlgCancelarPagamento').show();"
-                                                 icon="cancelar" process="@this" update=":formPagamentos:tabPagamentos"
+                                                 icon="pi pi-times" process="@this"
+                                                 update=":formPagamentos:tabPagamentos"
                                                  immediate="true">
                                     <f:setPropertyActionListener value="#{var}"
                                                                  target="#{vendaMB.pagamento}"/>
                                 </p:commandButton>
-                            </div>
-                        </p:column>
+                            </p:column>
+                        </div>
 
                     </p:dataTable>
                 </p:outputPanel>
@@ -552,26 +557,26 @@
                                      action="#{vendaMB.listarRankingDosClientes()}"
                                      update=":formRelatorioRanking:tabRelatorioRanking"
                                      oncomplete="PF('dlgRelatorioRanking').show();"
-                                     icon="ui-icon-star"/>
+                                     icon="pi pi-users"/>
 
                     <p:commandButton value="A receber por Pessoa"
                                      action="#{vendaMB.listarValorAReceberPorPessoa()}"
                                      update=":formRelatorioReceberPorPessoa:tabRelatorioReceberPorPessoa"
                                      oncomplete="PF('dlgRelatorioReceberPorPessoa').show();"
-                                     icon="ui-icon-person"/>
+                                     icon="pi pi-user"/>
 
                     <p:commandButton value="A receber Geral"
                                      action="#{vendaMB.calcularRecebidoGeral()}" update=":formRelatorioReceberGeral"
-                                     oncomplete="PF('dlgRelatorioReceberGeral').show();" icon="ui-icon-arrow-4-diag"/>
+                                     oncomplete="PF('dlgRelatorioReceberGeral').show();" icon="pi pi-dollar"/>
 
                     <p:commandButton value="Venda por Período"
-                                     oncomplete="PF('dlgRelatorioVendaPorPeriodo').show();" icon="ui-icon-calendar"/>
+                                     oncomplete="PF('dlgRelatorioVendaPorPeriodo').show();" icon="pi pi-calendar-plus"/>
 
                 </p:panelGrid>
 
                 <div align="center" class="altura30px">
                     <p:commandButton value="Fechar"
-                                     oncomplete="PF('dlgRelatorios').hide();" icon="cancelar"/>
+                                     oncomplete="PF('dlgRelatorios').hide();" icon="pi pi-times"/>
                 </div>
 
             </h:form>
@@ -712,7 +717,7 @@
                 </p:panelGrid>
 
                 <p:commandButton value="Buscar" action="#{vendaMB.totalVendidoPeriodo()}" styleClass="altura10px"
-                                 update=":formRelatorioVendaPorPeriodo" icon="buscar"/>
+                                 update=":formRelatorioVendaPorPeriodo" icon="pi pi-search"/>
 
                 <h:outputLabel value="TOTAL VENDIDO NO PERÍODO: "
                                style="font-size: 14px;margin-left:20px"/>
@@ -776,9 +781,9 @@
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:commandButton value="Sim"
                                          action="#{vendaMB.cancelarVenda()}"
-                                         update=":formVender:tabVendas, :formClientes" icon="confirmar"/>
+                                         update=":formVender:tabVendas, :formClientes" icon="pi pi-check"/>
                         <p:commandButton value="Não"
-                                         oncomplete="PF('dlgCancelarVenda').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgCancelarVenda').hide();" icon="pi pi-times"/>
                     </p:panelGrid>
                 </div>
 
@@ -801,9 +806,10 @@
                         <p:commandButton value="Sim"
                                          action="#{vendaMB.cancelarPagamento()}"
                                          update=":formVender:tabVendas, :formPagamentos:tabPagamentos, :formPagamentos:msgPagamentos,
-                                         :formPagamentos:pnlgridPagamentos, :formPagamentos:outValorAberto" icon="confirmar"/>
+                                         :formPagamentos:pnlgridPagamentos, :formPagamentos:outValorAberto"
+                                         icon="pi pi-check"/>
                         <p:commandButton value="Não"
-                                         oncomplete="PF('dlgCancelarPagamento').hide();" icon="cancelar"/>
+                                         oncomplete="PF('dlgCancelarPagamento').hide();" icon="pi pi-times"/>
                     </p:panelGrid>
                 </div>
 
@@ -815,32 +821,32 @@
             <h:form id="formAlterarUsuario">
 
                 <p:panelGrid columns="2" styleClass="semBorda">
-                    <p:outputLabel value="Nome:" />
+                    <p:outputLabel value="Nome:"/>
                     <p:inputText value="#{usuarioMB.usuario.nome}"
-                                 required="true" requiredMessage="Usuário: Campo obrigatório!" />
+                                 required="true" requiredMessage="Usuário: Campo obrigatório!"/>
 
-                    <p:outputLabel value="Login:" />
+                    <p:outputLabel value="Login:"/>
                     <p:inputText value="#{usuarioMB.usuario.login}"
-                                 required="true" requiredMessage="Login: Campo obrigatório!" />
+                                 required="true" requiredMessage="Login: Campo obrigatório!"/>
 
-                    <p:outputLabel value="Senha Antiga:" />
+                    <p:outputLabel value="Senha Antiga:"/>
                     <p:password value="#{usuarioMB.senhaAtual}"
-                                required="true" requiredMessage="Senha Antiga: Campo obrigatório" />
+                                required="true" requiredMessage="Senha Antiga: Campo obrigatório"/>
 
-                    <p:outputLabel value="Senha Nova:" />
+                    <p:outputLabel value="Senha Nova:"/>
                     <p:password value="#{usuarioMB.usuario.senha}"
-                                required="true" requiredMessage="Senha Nova: Campo obrigatório!" />
+                                required="true" requiredMessage="Senha Nova: Campo obrigatório!"/>
                 </p:panelGrid>
 
                 <p:separator styleClass="altura10px"/>
 
                 <div align="center">
-                    <p:commandButton value="Alterar" icon="confirmar"
+                    <p:commandButton value="Alterar" icon="pi pi pi-check"
                                      action="#{usuarioMB.verificarSePodeAlterarUsuario()}"
-                                     update=":formClientes:msgClientes" />
+                                     update=":formClientes:msgClientes"/>
 
-                    <p:commandButton value="Fechar" icon="cancelar"
-                                     style="margin-left:10px" oncomplete="PF('dlgAlterarUsuario').hide();" />
+                    <p:commandButton value="Fechar" icon="pi pi pi-times"
+                                     style="margin-left:10px" oncomplete="PF('dlgAlterarUsuario').hide();"/>
                 </div>
 
             </h:form>

@@ -1,9 +1,9 @@
 package br.com.homefashion.util;
 
-import org.primefaces.context.RequestContext;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.PrimeFaces;
 
 
 public final class JSFUtil {
@@ -26,12 +26,13 @@ public final class JSFUtil {
 		contexto.addMessage(null, msg);
 	}
 
-	public static void fecharDialog(String dialog) {
-		RequestContext.getCurrentInstance().execute("PF('" + dialog + "').hide();");
+	public static void abrirDialog(String dialog) {
+		PrimeFaces.current().executeScript("PF('" + dialog + "').show();");
 	}
 
-	public static void abrirDialog(String dialog) {
-		RequestContext.getCurrentInstance().execute("PF('" + dialog + "').show();");
+	public static void fecharDialog(String dialog) {
+		PrimeFaces.current().executeScript("PF('" + dialog + "').hide();");
 	}
 
 }
+
