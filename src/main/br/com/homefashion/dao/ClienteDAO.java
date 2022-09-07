@@ -5,18 +5,17 @@ import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Cliente;
 import br.com.homefashion.model.Usuario;
 import br.com.homefashion.model.builder.ClienteBuilder;
-import br.com.homefashion.util.*;
+import br.com.homefashion.util.DataUtil;
+import br.com.homefashion.util.SessaoUtil;
+import br.com.homefashion.util.StringUtil;
+import br.com.homefashion.util.VerificadorUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.homefashion.shared.Sessao.USUARIO_SESSAO;
 import static br.com.homefashion.shared.queries.ClienteDAOQueries.*;
-import static br.com.homefashion.shared.Sessao.*;
 
 public class ClienteDAO {
 

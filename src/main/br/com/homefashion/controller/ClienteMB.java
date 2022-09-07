@@ -2,15 +2,13 @@ package br.com.homefashion.controller;
 
 import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.Cliente;
-
-import java.util.List;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-
 import br.com.homefashion.service.ClienteService;
 import br.com.homefashion.util.CEPUtil;
 import br.com.homefashion.util.JSFUtil;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import java.util.List;
 
 import static br.com.homefashion.shared.Dialogs.*;
 import static br.com.homefashion.shared.Mensagens.*;

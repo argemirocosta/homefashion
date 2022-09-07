@@ -1,9 +1,9 @@
 package br.com.homefashion.util;
 
+import org.primefaces.PrimeFaces;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.PrimeFaces;
 
 
 public final class JSFUtil {

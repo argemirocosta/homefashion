@@ -4,19 +4,17 @@ import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.BuscaRelatorio;
 import br.com.homefashion.model.Pagamento;
 import br.com.homefashion.model.Venda;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-
-import static br.com.homefashion.shared.Dialogs.*;
-import static br.com.homefashion.shared.Mensagens.*;
-
 import br.com.homefashion.service.VendaService;
 import br.com.homefashion.util.DataUtil;
 import br.com.homefashion.util.JSFUtil;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import java.util.ArrayList;
+import java.util.List;
+
+import static br.com.homefashion.shared.Dialogs.*;
+import static br.com.homefashion.shared.Mensagens.*;
 
 @ViewScoped
 @ManagedBean

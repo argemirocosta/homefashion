@@ -1,9 +1,9 @@
 package br.com.homefashion.dao;
 
+import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.factory.ConnectionFactory;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.model.builder.UsuarioBuilder;
 import br.com.homefashion.util.SessaoUtil;
 import br.com.homefashion.util.VerificadorUtil;
@@ -13,8 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static br.com.homefashion.shared.Sessao.USUARIO_SESSAO;
 import static br.com.homefashion.shared.queries.UsuarioDAOQueries.*;
-import static br.com.homefashion.shared.Sessao.*;
 
 public class UsuarioDAO {
 

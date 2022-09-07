@@ -1,20 +1,22 @@
 package br.com.homefashion.controller;
 
+import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.exception.ProjetoException;
 import br.com.homefashion.model.Usuario;
-import br.com.homefashion.dto.ParametrosVerificarSenhaUsuarioDTO;
 import br.com.homefashion.service.UsuarioService;
 import br.com.homefashion.util.JSFUtil;
 import br.com.homefashion.util.RedirecionarUtil;
 import br.com.homefashion.util.SessaoUtil;
 
-import static br.com.homefashion.shared.Dialogs.*;
-import static br.com.homefashion.shared.Mensagens.*;
-import static br.com.homefashion.shared.Paginas.*;
-import static br.com.homefashion.shared.Sessao.*;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
+import static br.com.homefashion.shared.Dialogs.DIALOG_ALTERAR_USUARIO;
+import static br.com.homefashion.shared.Dialogs.DIALOG_CADASTRO_USUARIO;
+import static br.com.homefashion.shared.Mensagens.*;
+import static br.com.homefashion.shared.Paginas.INDEX;
+import static br.com.homefashion.shared.Paginas.PRINCIPAL;
+import static br.com.homefashion.shared.Sessao.USUARIO_SESSAO;
 
 @ViewScoped
 @ManagedBean
